@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Prisma } from 'src/generated/client';
-import { PrismaService } from 'src/prisma.service';
-import { cloudinaryUpload, deleteImage } from 'src/utils/cloudinary';
+import { Prisma } from '../generated/client';
+import { PrismaService } from '../prisma.service';
+import { cloudinaryUpload, deleteImage } from '../utils/cloudinary';
 import {
   GetUsersFilterInput,
   UpdateProfileTypeDTO,
