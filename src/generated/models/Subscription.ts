@@ -514,14 +514,6 @@ export type SubscriptionUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.SubscriptionScalarWhereInput | Prisma.SubscriptionScalarWhereInput[]
 }
 
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type EnumSubscriptionPlanEnumFieldUpdateOperationsInput = {
   set?: $Enums.SubscriptionPlanEnum
 }

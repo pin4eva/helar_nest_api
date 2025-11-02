@@ -44,7 +44,7 @@ export type UserMinAggregateOutputType = {
   status: $Enums.UserStatusEnum | null
   updatedAt: Date | null
   objectId: string | null
-  password: string | null
+  passwordUpdateToken: string | null
   gender: $Enums.GenderEnum | null
   emailToken: string | null
   isEmailVerified: boolean | null
@@ -75,7 +75,7 @@ export type UserMaxAggregateOutputType = {
   status: $Enums.UserStatusEnum | null
   updatedAt: Date | null
   objectId: string | null
-  password: string | null
+  passwordUpdateToken: string | null
   gender: $Enums.GenderEnum | null
   emailToken: string | null
   isEmailVerified: boolean | null
@@ -106,7 +106,7 @@ export type UserCountAggregateOutputType = {
   status: number
   updatedAt: number
   objectId: number
-  password: number
+  passwordUpdateToken: number
   gender: number
   emailToken: number
   isEmailVerified: number
@@ -139,7 +139,7 @@ export type UserMinAggregateInputType = {
   status?: true
   updatedAt?: true
   objectId?: true
-  password?: true
+  passwordUpdateToken?: true
   gender?: true
   emailToken?: true
   isEmailVerified?: true
@@ -170,7 +170,7 @@ export type UserMaxAggregateInputType = {
   status?: true
   updatedAt?: true
   objectId?: true
-  password?: true
+  passwordUpdateToken?: true
   gender?: true
   emailToken?: true
   isEmailVerified?: true
@@ -201,7 +201,7 @@ export type UserCountAggregateInputType = {
   status?: true
   updatedAt?: true
   objectId?: true
-  password?: true
+  passwordUpdateToken?: true
   gender?: true
   emailToken?: true
   isEmailVerified?: true
@@ -305,7 +305,7 @@ export type UserGroupByOutputType = {
   status: $Enums.UserStatusEnum
   updatedAt: Date
   objectId: string | null
-  password: string
+  passwordUpdateToken: string | null
   gender: $Enums.GenderEnum | null
   emailToken: string | null
   isEmailVerified: boolean
@@ -357,7 +357,7 @@ export type UserWhereInput = {
   status?: Prisma.EnumUserStatusEnumFilter<"User"> | $Enums.UserStatusEnum
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   objectId?: Prisma.StringNullableFilter<"User"> | string | null
-  password?: Prisma.StringFilter<"User"> | string
+  passwordUpdateToken?: Prisma.StringNullableFilter<"User"> | string | null
   gender?: Prisma.EnumGenderEnumNullableFilter<"User"> | $Enums.GenderEnum | null
   emailToken?: Prisma.StringNullableFilter<"User"> | string | null
   isEmailVerified?: Prisma.BoolFilter<"User"> | boolean
@@ -395,7 +395,7 @@ export type UserOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   objectId?: Prisma.SortOrder
-  password?: Prisma.SortOrder
+  passwordUpdateToken?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   emailToken?: Prisma.SortOrder
   isEmailVerified?: Prisma.SortOrder
@@ -437,7 +437,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.EnumUserStatusEnumFilter<"User"> | $Enums.UserStatusEnum
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   objectId?: Prisma.StringNullableFilter<"User"> | string | null
-  password?: Prisma.StringFilter<"User"> | string
+  passwordUpdateToken?: Prisma.StringNullableFilter<"User"> | string | null
   gender?: Prisma.EnumGenderEnumNullableFilter<"User"> | $Enums.GenderEnum | null
   emailToken?: Prisma.StringNullableFilter<"User"> | string | null
   isEmailVerified?: Prisma.BoolFilter<"User"> | boolean
@@ -474,7 +474,7 @@ export type UserOrderByWithAggregationInput = {
   status?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   objectId?: Prisma.SortOrder
-  password?: Prisma.SortOrder
+  passwordUpdateToken?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   emailToken?: Prisma.SortOrder
   isEmailVerified?: Prisma.SortOrder
@@ -511,7 +511,7 @@ export type UserScalarWhereWithAggregatesInput = {
   status?: Prisma.EnumUserStatusEnumWithAggregatesFilter<"User"> | $Enums.UserStatusEnum
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   objectId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  password?: Prisma.StringWithAggregatesFilter<"User"> | string
+  passwordUpdateToken?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   gender?: Prisma.EnumGenderEnumNullableWithAggregatesFilter<"User"> | $Enums.GenderEnum | null
   emailToken?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   isEmailVerified?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
@@ -542,7 +542,7 @@ export type UserCreateInput = {
   status?: $Enums.UserStatusEnum
   updatedAt?: Date | string
   objectId?: string | null
-  password: string
+  passwordUpdateToken?: string | null
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
@@ -579,7 +579,7 @@ export type UserUncheckedCreateInput = {
   status?: $Enums.UserStatusEnum
   updatedAt?: Date | string
   objectId?: string | null
-  password: string
+  passwordUpdateToken?: string | null
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
@@ -615,7 +615,7 @@ export type UserUpdateInput = {
   status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordUpdateToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -651,7 +651,7 @@ export type UserUncheckedUpdateInput = {
   status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordUpdateToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -688,7 +688,7 @@ export type UserCreateManyInput = {
   status?: $Enums.UserStatusEnum
   updatedAt?: Date | string
   objectId?: string | null
-  password: string
+  passwordUpdateToken?: string | null
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
@@ -718,7 +718,7 @@ export type UserUpdateManyMutationInput = {
   status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordUpdateToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -747,7 +747,7 @@ export type UserUncheckedUpdateManyInput = {
   status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordUpdateToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -778,7 +778,7 @@ export type UserCountOrderByAggregateInput = {
   status?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   objectId?: Prisma.SortOrder
-  password?: Prisma.SortOrder
+  passwordUpdateToken?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   emailToken?: Prisma.SortOrder
   isEmailVerified?: Prisma.SortOrder
@@ -809,7 +809,7 @@ export type UserMaxOrderByAggregateInput = {
   status?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   objectId?: Prisma.SortOrder
-  password?: Prisma.SortOrder
+  passwordUpdateToken?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   emailToken?: Prisma.SortOrder
   isEmailVerified?: Prisma.SortOrder
@@ -840,7 +840,7 @@ export type UserMinOrderByAggregateInput = {
   status?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   objectId?: Prisma.SortOrder
-  password?: Prisma.SortOrder
+  passwordUpdateToken?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   emailToken?: Prisma.SortOrder
   isEmailVerified?: Prisma.SortOrder
@@ -863,14 +863,6 @@ export type UserNullableScalarRelationFilter = {
 export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
   unset?: boolean
-}
-
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
-}
-
-export type StringFieldUpdateOperationsInput = {
-  set?: string
 }
 
 export type NullableBoolFieldUpdateOperationsInput = {
@@ -1038,7 +1030,7 @@ export type UserCreateWithoutSubscriptionsInput = {
   status?: $Enums.UserStatusEnum
   updatedAt?: Date | string
   objectId?: string | null
-  password: string
+  passwordUpdateToken?: string | null
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
@@ -1074,7 +1066,7 @@ export type UserUncheckedCreateWithoutSubscriptionsInput = {
   status?: $Enums.UserStatusEnum
   updatedAt?: Date | string
   objectId?: string | null
-  password: string
+  passwordUpdateToken?: string | null
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
@@ -1115,7 +1107,7 @@ export type UserCreateWithoutCurrentSubscriptionInput = {
   status?: $Enums.UserStatusEnum
   updatedAt?: Date | string
   objectId?: string | null
-  password: string
+  passwordUpdateToken?: string | null
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
@@ -1151,7 +1143,7 @@ export type UserUncheckedCreateWithoutCurrentSubscriptionInput = {
   status?: $Enums.UserStatusEnum
   updatedAt?: Date | string
   objectId?: string | null
-  password: string
+  passwordUpdateToken?: string | null
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
@@ -1202,7 +1194,7 @@ export type UserUpdateWithoutSubscriptionsInput = {
   status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordUpdateToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1237,7 +1229,7 @@ export type UserUncheckedUpdateWithoutSubscriptionsInput = {
   status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordUpdateToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1283,7 +1275,7 @@ export type UserUpdateWithoutCurrentSubscriptionInput = {
   status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordUpdateToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1318,7 +1310,7 @@ export type UserUncheckedUpdateWithoutCurrentSubscriptionInput = {
   status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordUpdateToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1354,7 +1346,7 @@ export type UserCreateWithoutReports_addedInput = {
   status?: $Enums.UserStatusEnum
   updatedAt?: Date | string
   objectId?: string | null
-  password: string
+  passwordUpdateToken?: string | null
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
@@ -1390,7 +1382,7 @@ export type UserUncheckedCreateWithoutReports_addedInput = {
   status?: $Enums.UserStatusEnum
   updatedAt?: Date | string
   objectId?: string | null
-  password: string
+  passwordUpdateToken?: string | null
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
@@ -1431,7 +1423,7 @@ export type UserCreateWithoutReports_updatedInput = {
   status?: $Enums.UserStatusEnum
   updatedAt?: Date | string
   objectId?: string | null
-  password: string
+  passwordUpdateToken?: string | null
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
@@ -1467,7 +1459,7 @@ export type UserUncheckedCreateWithoutReports_updatedInput = {
   status?: $Enums.UserStatusEnum
   updatedAt?: Date | string
   objectId?: string | null
-  password: string
+  passwordUpdateToken?: string | null
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
@@ -1518,7 +1510,7 @@ export type UserUpdateWithoutReports_addedInput = {
   status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordUpdateToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1553,7 +1545,7 @@ export type UserUncheckedUpdateWithoutReports_addedInput = {
   status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordUpdateToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1599,7 +1591,7 @@ export type UserUpdateWithoutReports_updatedInput = {
   status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordUpdateToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1634,7 +1626,7 @@ export type UserUncheckedUpdateWithoutReports_updatedInput = {
   status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordUpdateToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1670,7 +1662,7 @@ export type UserCreateWithoutReport_commentsInput = {
   status?: $Enums.UserStatusEnum
   updatedAt?: Date | string
   objectId?: string | null
-  password: string
+  passwordUpdateToken?: string | null
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
@@ -1706,7 +1698,7 @@ export type UserUncheckedCreateWithoutReport_commentsInput = {
   status?: $Enums.UserStatusEnum
   updatedAt?: Date | string
   objectId?: string | null
-  password: string
+  passwordUpdateToken?: string | null
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
@@ -1757,7 +1749,7 @@ export type UserUpdateWithoutReport_commentsInput = {
   status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordUpdateToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1792,7 +1784,7 @@ export type UserUncheckedUpdateWithoutReport_commentsInput = {
   status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordUpdateToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1828,7 +1820,7 @@ export type UserCreateWithoutReport_likesInput = {
   status?: $Enums.UserStatusEnum
   updatedAt?: Date | string
   objectId?: string | null
-  password: string
+  passwordUpdateToken?: string | null
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
@@ -1864,7 +1856,7 @@ export type UserUncheckedCreateWithoutReport_likesInput = {
   status?: $Enums.UserStatusEnum
   updatedAt?: Date | string
   objectId?: string | null
-  password: string
+  passwordUpdateToken?: string | null
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
@@ -1915,7 +1907,7 @@ export type UserUpdateWithoutReport_likesInput = {
   status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordUpdateToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1950,7 +1942,7 @@ export type UserUncheckedUpdateWithoutReport_likesInput = {
   status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordUpdateToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1986,7 +1978,7 @@ export type UserCreateWithoutBookmarksInput = {
   status?: $Enums.UserStatusEnum
   updatedAt?: Date | string
   objectId?: string | null
-  password: string
+  passwordUpdateToken?: string | null
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
@@ -2022,7 +2014,7 @@ export type UserUncheckedCreateWithoutBookmarksInput = {
   status?: $Enums.UserStatusEnum
   updatedAt?: Date | string
   objectId?: string | null
-  password: string
+  passwordUpdateToken?: string | null
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
@@ -2073,7 +2065,7 @@ export type UserUpdateWithoutBookmarksInput = {
   status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordUpdateToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2108,7 +2100,7 @@ export type UserUncheckedUpdateWithoutBookmarksInput = {
   status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordUpdateToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2220,7 +2212,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   status?: boolean
   updatedAt?: boolean
   objectId?: boolean
-  password?: boolean
+  passwordUpdateToken?: boolean
   gender?: boolean
   emailToken?: boolean
   isEmailVerified?: boolean
@@ -2261,7 +2253,7 @@ export type UserSelectScalar = {
   status?: boolean
   updatedAt?: boolean
   objectId?: boolean
-  password?: boolean
+  passwordUpdateToken?: boolean
   gender?: boolean
   emailToken?: boolean
   isEmailVerified?: boolean
@@ -2271,7 +2263,7 @@ export type UserSelectScalar = {
   currentSubscriptionId?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "bio" | "city" | "contact" | "createdAt" | "email" | "firstName" | "image" | "imagePublicId" | "isContactPublic" | "isPhonePublic" | "lastName" | "lastSeen" | "phone" | "profileType" | "role" | "state" | "status" | "updatedAt" | "objectId" | "password" | "gender" | "emailToken" | "isEmailVerified" | "lawSchoolCampus" | "townState" | "universityCampus" | "currentSubscriptionId", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "bio" | "city" | "contact" | "createdAt" | "email" | "firstName" | "image" | "imagePublicId" | "isContactPublic" | "isPhonePublic" | "lastName" | "lastSeen" | "phone" | "profileType" | "role" | "state" | "status" | "updatedAt" | "objectId" | "passwordUpdateToken" | "gender" | "emailToken" | "isEmailVerified" | "lawSchoolCampus" | "townState" | "universityCampus" | "currentSubscriptionId", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   bookmarks?: boolean | Prisma.User$bookmarksArgs<ExtArgs>
   report_comments?: boolean | Prisma.User$report_commentsArgs<ExtArgs>
@@ -2315,7 +2307,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     status: $Enums.UserStatusEnum
     updatedAt: Date
     objectId: string | null
-    password: string
+    passwordUpdateToken: string | null
     gender: $Enums.GenderEnum | null
     emailToken: string | null
     isEmailVerified: boolean
@@ -2742,7 +2734,7 @@ export interface UserFieldRefs {
   readonly status: Prisma.FieldRef<"User", 'UserStatusEnum'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly objectId: Prisma.FieldRef<"User", 'String'>
-  readonly password: Prisma.FieldRef<"User", 'String'>
+  readonly passwordUpdateToken: Prisma.FieldRef<"User", 'String'>
   readonly gender: Prisma.FieldRef<"User", 'GenderEnum'>
   readonly emailToken: Prisma.FieldRef<"User", 'String'>
   readonly isEmailVerified: Prisma.FieldRef<"User", 'Boolean'>

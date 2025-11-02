@@ -48,6 +48,7 @@ export const AnyNull = runtime.objectEnumValues.instances.AnyNull
 
 
 export const ModelName = {
+  Auth: 'Auth',
   User: 'User',
   Subscription: 'Subscription',
   Report: 'Report',
@@ -74,6 +75,19 @@ export type ModelName = (typeof ModelName)[keyof typeof ModelName]
  * Enums
  */
 
+export const AuthScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  password: 'password',
+  salt: 'salt',
+  iterations: 'iterations',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AuthScalarFieldEnum = (typeof AuthScalarFieldEnum)[keyof typeof AuthScalarFieldEnum]
+
+
 export const UserScalarFieldEnum = {
   id: 'id',
   bio: 'bio',
@@ -95,7 +109,7 @@ export const UserScalarFieldEnum = {
   status: 'status',
   updatedAt: 'updatedAt',
   objectId: 'objectId',
-  password: 'password',
+  passwordUpdateToken: 'passwordUpdateToken',
   gender: 'gender',
   emailToken: 'emailToken',
   isEmailVerified: 'isEmailVerified',

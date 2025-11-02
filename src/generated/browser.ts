@@ -17,6 +17,11 @@ export { Prisma }
 export * as $Enums from './enums'
 export * from './enums';
 /**
+ * Model Auth
+ * 
+ */
+export type Auth = Prisma.AuthModel
+/**
  * Model User
  * 
  */

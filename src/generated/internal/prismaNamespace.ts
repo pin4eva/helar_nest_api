@@ -389,6 +389,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 
 export const ModelName = {
+  Auth: 'Auth',
   User: 'User',
   Subscription: 'Subscription',
   Report: 'Report',
@@ -422,10 +423,84 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "subscription" | "report" | "reportToSubject" | "reportComment" | "reportLike" | "reportTags" | "reportVisits" | "bookmark" | "handbookCase" | "handbook" | "noteItem" | "quote" | "subject" | "facultyNoteSummary" | "nlsNoteSummary" | "textbookCase" | "textbook"
+    modelProps: "auth" | "user" | "subscription" | "report" | "reportToSubject" | "reportComment" | "reportLike" | "reportTags" | "reportVisits" | "bookmark" | "handbookCase" | "handbook" | "noteItem" | "quote" | "subject" | "facultyNoteSummary" | "nlsNoteSummary" | "textbookCase" | "textbook"
     txIsolationLevel: never
   }
   model: {
+    Auth: {
+      payload: Prisma.$AuthPayload<ExtArgs>
+      fields: Prisma.AuthFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AuthFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuthPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AuthFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuthPayload>
+        }
+        findFirst: {
+          args: Prisma.AuthFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuthPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AuthFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuthPayload>
+        }
+        findMany: {
+          args: Prisma.AuthFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuthPayload>[]
+        }
+        create: {
+          args: Prisma.AuthCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuthPayload>
+        }
+        createMany: {
+          args: Prisma.AuthCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.AuthDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuthPayload>
+        }
+        update: {
+          args: Prisma.AuthUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuthPayload>
+        }
+        deleteMany: {
+          args: Prisma.AuthDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AuthUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.AuthUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuthPayload>
+        }
+        aggregate: {
+          args: Prisma.AuthAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAuth>
+        }
+        groupBy: {
+          args: Prisma.AuthGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AuthGroupByOutputType>[]
+        }
+        findRaw: {
+          args: Prisma.AuthFindRawArgs<ExtArgs>
+          result: Prisma.JsonObject
+        }
+        aggregateRaw: {
+          args: Prisma.AuthAggregateRawArgs<ExtArgs>
+          result: Prisma.JsonObject
+        }
+        count: {
+          args: Prisma.AuthCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AuthCountAggregateOutputType> | number
+        }
+      }
+    }
     User: {
       payload: Prisma.$UserPayload<ExtArgs>
       fields: Prisma.UserFieldRefs
@@ -1775,6 +1850,19 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
  * Enums
  */
 
+export const AuthScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  password: 'password',
+  salt: 'salt',
+  iterations: 'iterations',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AuthScalarFieldEnum = (typeof AuthScalarFieldEnum)[keyof typeof AuthScalarFieldEnum]
+
+
 export const UserScalarFieldEnum = {
   id: 'id',
   bio: 'bio',
@@ -1796,7 +1884,7 @@ export const UserScalarFieldEnum = {
   status: 'status',
   updatedAt: 'updatedAt',
   objectId: 'objectId',
-  password: 'password',
+  passwordUpdateToken: 'passwordUpdateToken',
   gender: 'gender',
   emailToken: 'emailToken',
   isEmailVerified: 'isEmailVerified',
@@ -2074,6 +2162,20 @@ export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
 
 
 /**
+ * Reference to a field of type 'Int'
+ */
+export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+/**
+ * Reference to a field of type 'Int[]'
+ */
+export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
  * Reference to a field of type 'DateTime'
  */
 export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -2147,20 +2249,6 @@ export type EnumGenderEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$Prism
  * Reference to a field of type 'GenderEnum[]'
  */
 export type ListEnumGenderEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GenderEnum[]'>
-    
-
-
-/**
- * Reference to a field of type 'Int'
- */
-export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-/**
- * Reference to a field of type 'Int[]'
- */
-export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
 
 
@@ -2291,6 +2379,7 @@ export interface PrismaClientOptions {
   omit?: GlobalOmitConfig
 }
 export type GlobalOmitConfig = {
+  auth?: Prisma.AuthOmit
   user?: Prisma.UserOmit
   subscription?: Prisma.SubscriptionOmit
   report?: Prisma.ReportOmit

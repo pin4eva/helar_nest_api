@@ -15,39 +15,52 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Auth {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String   @unique @db.ObjectId
+  password   String
+  salt       String
+  iterations Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("auths")
+}
+
 model User {
-  id               String              @id @default(auto()) @map("_id") @db.ObjectId
-  bio              String?
-  city             String?
-  contact          String?
-  createdAt        DateTime            @default(now())
-  email            String              @unique
-  firstName        String
-  image            String?
-  imagePublicId    String?
-  isContactPublic  Boolean?
-  isPhonePublic    Boolean?
-  lastName         String
-  lastSeen         DateTime            @default(now())
-  phone            String?
-  profileType      UserProfileTypeEnum @default(Guest)
-  role             UserRoleEnum        @default(User)
-  state            String?
-  status           UserStatusEnum      @default(Active)
-  updatedAt        DateTime            @updatedAt
-  objectId         String?
-  password         String
-  gender           GenderEnum?         @default(Male)
-  emailToken       String?
-  isEmailVerified  Boolean             @default(false)
-  lawSchoolCampus  String?
-  townState        String?
-  universityCampus String?
-  bookmarks        Bookmark[]
-  report_comments  ReportComment[]
-  report_likes     ReportLike[]
-  reports_added    Report[]            @relation("reports_added")
-  reports_updated  Report[]            @relation("reports_updated")
+  id                  String              @id @default(auto()) @map("_id") @db.ObjectId
+  bio                 String?
+  city                String?
+  contact             String?
+  createdAt           DateTime            @default(now())
+  email               String              @unique
+  firstName           String
+  image               String?
+  imagePublicId       String?
+  isContactPublic     Boolean?
+  isPhonePublic       Boolean?
+  lastName            String
+  lastSeen            DateTime            @default(now())
+  phone               String?
+  profileType         UserProfileTypeEnum @default(Guest)
+  role                UserRoleEnum        @default(User)
+  state               String?
+  status              UserStatusEnum      @default(Active)
+  updatedAt           DateTime            @updatedAt
+  objectId            String?
+  passwordUpdateToken String?
+  // password         String
+  gender              GenderEnum?         @default(Male)
+  emailToken          String?
+  isEmailVerified     Boolean             @default(false)
+  lawSchoolCampus     String?
+  townState           String?
+  universityCampus    String?
+  bookmarks           Bookmark[]
+  report_comments     ReportComment[]
+  report_likes        ReportLike[]
+  reports_added       Report[]            @relation("reports_added")
+  reports_updated     Report[]            @relation("reports_updated")
 
   subscriptions         Subscription[] @relation("UserSubscriptions")
   currentSubscriptionId String?        @unique @db.ObjectId
