@@ -6,10 +6,10 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import * as jwt from 'jsonwebtoken';
-import { User } from '@/generated/client';
-import { PrismaService } from '@/prisma.service';
-import { environments } from '@/utils/environments';
-import { parseExpiry } from '@/utils/helpers';
+import { User } from '../generated/client';
+import { PrismaService } from '../prisma.service';
+import { environments } from '../utils/environments';
+import { parseExpiry } from '../utils/helpers';
 import {
   CreatePasswordDTO,
   LoginDTO,
