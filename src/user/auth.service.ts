@@ -6,6 +6,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import * as jwt from 'jsonwebtoken';
+import { User } from 'src/generated/client';
 import { PrismaService } from 'src/prisma.service';
 import { environments } from 'src/utils/environments';
 import { parseExpiry } from 'src/utils/helpers';
@@ -203,6 +204,29 @@ export class AuthService {
 
   // send reset password link
   // reset password
+
+  // decode token
+  async decodeToken(token: string): Promise<User> {
+    try {
+      const decoded = jwt.verify(token, environments.JWT_SECRETS) as {
+        id?: string;
+        tokenType?: string;
+      };
+      if (decoded.tokenType !== 'access') {
+        throw new UnauthorizedException('Invalid token type');
+      }
+      const user = await this.prismaService.user.findUnique({
+        where: { id: decoded.id },
+        omit: { passwordUpdateToken: true },
+      });
+      if (!user) {
+        throw new UnauthorizedException('User not found');
+      }
+      return user as User;
+    } catch (error) {
+      throw error;
+    }
+  }
 
   // generate access and refresh tokens
   private generateTokens(userId: string): {
