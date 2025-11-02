@@ -48,7 +48,24 @@ export const AnyNull = runtime.objectEnumValues.instances.AnyNull
 
 
 export const ModelName = {
-  User: 'User'
+  User: 'User',
+  Subscription: 'Subscription',
+  Report: 'Report',
+  ReportToSubject: 'ReportToSubject',
+  ReportComment: 'ReportComment',
+  ReportLike: 'ReportLike',
+  ReportTags: 'ReportTags',
+  ReportVisits: 'ReportVisits',
+  Bookmark: 'Bookmark',
+  HandbookCase: 'HandbookCase',
+  Handbook: 'Handbook',
+  NoteItem: 'NoteItem',
+  Quote: 'Quote',
+  Subject: 'Subject',
+  FacultyNoteSummary: 'FacultyNoteSummary',
+  NlsNoteSummary: 'NlsNoteSummary',
+  TextbookCase: 'TextbookCase',
+  Textbook: 'Textbook'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -59,12 +76,264 @@ export type ModelName = (typeof ModelName)[keyof typeof ModelName]
 
 export const UserScalarFieldEnum = {
   id: 'id',
+  bio: 'bio',
+  city: 'city',
+  contact: 'contact',
+  createdAt: 'createdAt',
   email: 'email',
-  name: 'name',
-  createdAt: 'createdAt'
+  firstName: 'firstName',
+  image: 'image',
+  imagePublicId: 'imagePublicId',
+  isContactPublic: 'isContactPublic',
+  isPhonePublic: 'isPhonePublic',
+  lastName: 'lastName',
+  lastSeen: 'lastSeen',
+  phone: 'phone',
+  profileType: 'profileType',
+  role: 'role',
+  state: 'state',
+  status: 'status',
+  updatedAt: 'updatedAt',
+  objectId: 'objectId',
+  password: 'password',
+  gender: 'gender',
+  emailToken: 'emailToken',
+  isEmailVerified: 'isEmailVerified',
+  lawSchoolCampus: 'lawSchoolCampus',
+  townState: 'townState',
+  universityCampus: 'universityCampus',
+  currentSubscriptionId: 'currentSubscriptionId'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const SubscriptionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  reference: 'reference',
+  createdAt: 'createdAt',
+  expiresAt: 'expiresAt',
+  amount: 'amount',
+  paymentId: 'paymentId',
+  plan: 'plan',
+  status: 'status'
+} as const
+
+export type SubscriptionScalarFieldEnum = (typeof SubscriptionScalarFieldEnum)[keyof typeof SubscriptionScalarFieldEnum]
+
+
+export const ReportScalarFieldEnum = {
+  id: 'id',
+  body: 'body',
+  court: 'court',
+  createdAt: 'createdAt',
+  date: 'date',
+  isPublished: 'isPublished',
+  issues: 'issues',
+  ratios: 'ratios',
+  reportId: 'reportId',
+  slug: 'slug',
+  suitNo: 'suitNo',
+  summary: 'summary',
+  title: 'title',
+  updatedAt: 'updatedAt',
+  added_by_id: 'added_by_id',
+  updated_by_id: 'updated_by_id',
+  views: 'views',
+  vol: 'vol',
+  objectId: 'objectId'
+} as const
+
+export type ReportScalarFieldEnum = (typeof ReportScalarFieldEnum)[keyof typeof ReportScalarFieldEnum]
+
+
+export const ReportToSubjectScalarFieldEnum = {
+  id: 'id',
+  reportId: 'reportId',
+  subjectId: 'subjectId'
+} as const
+
+export type ReportToSubjectScalarFieldEnum = (typeof ReportToSubjectScalarFieldEnum)[keyof typeof ReportToSubjectScalarFieldEnum]
+
+
+export const ReportCommentScalarFieldEnum = {
+  id: 'id',
+  authorId: 'authorId',
+  objectId: 'objectId',
+  comment: 'comment',
+  createdAt: 'createdAt',
+  reportId: 'reportId',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ReportCommentScalarFieldEnum = (typeof ReportCommentScalarFieldEnum)[keyof typeof ReportCommentScalarFieldEnum]
+
+
+export const ReportLikeScalarFieldEnum = {
+  id: 'id',
+  reportId: 'reportId',
+  userId: 'userId'
+} as const
+
+export type ReportLikeScalarFieldEnum = (typeof ReportLikeScalarFieldEnum)[keyof typeof ReportLikeScalarFieldEnum]
+
+
+export const ReportTagsScalarFieldEnum = {
+  id: 'id',
+  reportId: 'reportId',
+  tag: 'tag'
+} as const
+
+export type ReportTagsScalarFieldEnum = (typeof ReportTagsScalarFieldEnum)[keyof typeof ReportTagsScalarFieldEnum]
+
+
+export const ReportVisitsScalarFieldEnum = {
+  id: 'id',
+  reportId: 'reportId',
+  sessionId: 'sessionId'
+} as const
+
+export type ReportVisitsScalarFieldEnum = (typeof ReportVisitsScalarFieldEnum)[keyof typeof ReportVisitsScalarFieldEnum]
+
+
+export const BookmarkScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  reportId: 'reportId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BookmarkScalarFieldEnum = (typeof BookmarkScalarFieldEnum)[keyof typeof BookmarkScalarFieldEnum]
+
+
+export const HandbookCaseScalarFieldEnum = {
+  id: 'id',
+  body: 'body',
+  byline: 'byline',
+  citation: 'citation',
+  createdAt: 'createdAt',
+  handbookId: 'handbookId',
+  ref: 'ref',
+  slug: 'slug',
+  title: 'title',
+  updatedAt: 'updatedAt',
+  objectId: 'objectId'
+} as const
+
+export type HandbookCaseScalarFieldEnum = (typeof HandbookCaseScalarFieldEnum)[keyof typeof HandbookCaseScalarFieldEnum]
+
+
+export const HandbookScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  slug: 'slug',
+  subjectId: 'subjectId',
+  topic: 'topic',
+  updatedAt: 'updatedAt',
+  objectId: 'objectId'
+} as const
+
+export type HandbookScalarFieldEnum = (typeof HandbookScalarFieldEnum)[keyof typeof HandbookScalarFieldEnum]
+
+
+export const NoteItemScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  slug: 'slug',
+  updatedAt: 'updatedAt',
+  objectId: 'objectId',
+  ref: 'ref',
+  question: 'question',
+  answer: 'answer',
+  facultyNoteSummaryId: 'facultyNoteSummaryId',
+  nlsNoteSummaryId: 'nlsNoteSummaryId'
+} as const
+
+export type NoteItemScalarFieldEnum = (typeof NoteItemScalarFieldEnum)[keyof typeof NoteItemScalarFieldEnum]
+
+
+export const QuoteScalarFieldEnum = {
+  id: 'id',
+  text: 'text',
+  author: 'author',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  objectId: 'objectId'
+} as const
+
+export type QuoteScalarFieldEnum = (typeof QuoteScalarFieldEnum)[keyof typeof QuoteScalarFieldEnum]
+
+
+export const SubjectScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  intro: 'intro',
+  name: 'name',
+  slug: 'slug',
+  updatedAt: 'updatedAt',
+  objectId: 'objectId'
+} as const
+
+export type SubjectScalarFieldEnum = (typeof SubjectScalarFieldEnum)[keyof typeof SubjectScalarFieldEnum]
+
+
+export const FacultyNoteSummaryScalarFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  title: 'title',
+  ref: 'ref',
+  subjectId: 'subjectId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  objectId: 'objectId'
+} as const
+
+export type FacultyNoteSummaryScalarFieldEnum = (typeof FacultyNoteSummaryScalarFieldEnum)[keyof typeof FacultyNoteSummaryScalarFieldEnum]
+
+
+export const NlsNoteSummaryScalarFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  title: 'title',
+  ref: 'ref',
+  subjectId: 'subjectId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  objectId: 'objectId'
+} as const
+
+export type NlsNoteSummaryScalarFieldEnum = (typeof NlsNoteSummaryScalarFieldEnum)[keyof typeof NlsNoteSummaryScalarFieldEnum]
+
+
+export const TextbookCaseScalarFieldEnum = {
+  id: 'id',
+  body: 'body',
+  byline: 'byline',
+  citation: 'citation',
+  createdAt: 'createdAt',
+  ref: 'ref',
+  slug: 'slug',
+  title: 'title',
+  updatedAt: 'updatedAt',
+  textbookId: 'textbookId'
+} as const
+
+export type TextbookCaseScalarFieldEnum = (typeof TextbookCaseScalarFieldEnum)[keyof typeof TextbookCaseScalarFieldEnum]
+
+
+export const TextbookScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  slug: 'slug',
+  subjectId: 'subjectId',
+  topic: 'topic',
+  updatedAt: 'updatedAt',
+  objectId: 'objectId'
+} as const
+
+export type TextbookScalarFieldEnum = (typeof TextbookScalarFieldEnum)[keyof typeof TextbookScalarFieldEnum]
 
 
 export const SortOrder = {

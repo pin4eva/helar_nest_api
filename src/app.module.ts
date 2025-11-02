@@ -10,7 +10,7 @@ import { UserModule } from './user/user.module';
   imports: [
     UserModule,
     ConfigModule.forRoot(),
-    MongooseModule.forRoot(process.env.MONGO_URL || ''),
+    // MongooseModule.forRoot(process.env.MONGO_URL || ''),
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService],

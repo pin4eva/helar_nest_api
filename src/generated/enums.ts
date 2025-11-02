@@ -8,7 +8,54 @@
 * 🟢 You can import this file directly.
 */
 
+export const GenderEnum = {
+  Male: 'Male',
+  Female: 'Female'
+} as const
+
+export type GenderEnum = (typeof GenderEnum)[keyof typeof GenderEnum]
 
 
-// This file is empty because there are no enums in the schema.
-export {}
+export const UserProfileTypeEnum = {
+  Student: 'Student',
+  Lawyer: 'Lawyer',
+  Guest: 'Guest',
+  Staff: 'Staff'
+} as const
+
+export type UserProfileTypeEnum = (typeof UserProfileTypeEnum)[keyof typeof UserProfileTypeEnum]
+
+
+export const UserRoleEnum = {
+  Admin: 'Admin',
+  Editor: 'Editor',
+  User: 'User',
+  Developer: 'Developer'
+} as const
+
+export type UserRoleEnum = (typeof UserRoleEnum)[keyof typeof UserRoleEnum]
+
+
+export const UserStatusEnum = {
+  Active: 'Active',
+  Suspended: 'Suspended',
+  Banned: 'Banned'
+} as const
+
+export type UserStatusEnum = (typeof UserStatusEnum)[keyof typeof UserStatusEnum]
+
+
+export const SubscriptionPlanEnum = {
+  Monthly: 'Monthly',
+  Yearly: 'Yearly'
+} as const
+
+export type SubscriptionPlanEnum = (typeof SubscriptionPlanEnum)[keyof typeof SubscriptionPlanEnum]
+
+
+export const SubscriptionStatusEnum = {
+  Active: 'Active',
+  Expired: 'Expired'
+} as const
+
+export type SubscriptionStatusEnum = (typeof SubscriptionStatusEnum)[keyof typeof SubscriptionStatusEnum]

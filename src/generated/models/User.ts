@@ -25,46 +25,190 @@ export type AggregateUser = {
 
 export type UserMinAggregateOutputType = {
   id: string | null
-  email: string | null
-  name: string | null
+  bio: string | null
+  city: string | null
+  contact: string | null
   createdAt: Date | null
+  email: string | null
+  firstName: string | null
+  image: string | null
+  imagePublicId: string | null
+  isContactPublic: boolean | null
+  isPhonePublic: boolean | null
+  lastName: string | null
+  lastSeen: Date | null
+  phone: string | null
+  profileType: $Enums.UserProfileTypeEnum | null
+  role: $Enums.UserRoleEnum | null
+  state: string | null
+  status: $Enums.UserStatusEnum | null
+  updatedAt: Date | null
+  objectId: string | null
+  password: string | null
+  gender: $Enums.GenderEnum | null
+  emailToken: string | null
+  isEmailVerified: boolean | null
+  lawSchoolCampus: string | null
+  townState: string | null
+  universityCampus: string | null
+  currentSubscriptionId: string | null
 }
 
 export type UserMaxAggregateOutputType = {
   id: string | null
-  email: string | null
-  name: string | null
+  bio: string | null
+  city: string | null
+  contact: string | null
   createdAt: Date | null
+  email: string | null
+  firstName: string | null
+  image: string | null
+  imagePublicId: string | null
+  isContactPublic: boolean | null
+  isPhonePublic: boolean | null
+  lastName: string | null
+  lastSeen: Date | null
+  phone: string | null
+  profileType: $Enums.UserProfileTypeEnum | null
+  role: $Enums.UserRoleEnum | null
+  state: string | null
+  status: $Enums.UserStatusEnum | null
+  updatedAt: Date | null
+  objectId: string | null
+  password: string | null
+  gender: $Enums.GenderEnum | null
+  emailToken: string | null
+  isEmailVerified: boolean | null
+  lawSchoolCampus: string | null
+  townState: string | null
+  universityCampus: string | null
+  currentSubscriptionId: string | null
 }
 
 export type UserCountAggregateOutputType = {
   id: number
-  email: number
-  name: number
+  bio: number
+  city: number
+  contact: number
   createdAt: number
+  email: number
+  firstName: number
+  image: number
+  imagePublicId: number
+  isContactPublic: number
+  isPhonePublic: number
+  lastName: number
+  lastSeen: number
+  phone: number
+  profileType: number
+  role: number
+  state: number
+  status: number
+  updatedAt: number
+  objectId: number
+  password: number
+  gender: number
+  emailToken: number
+  isEmailVerified: number
+  lawSchoolCampus: number
+  townState: number
+  universityCampus: number
+  currentSubscriptionId: number
   _all: number
 }
 
 
 export type UserMinAggregateInputType = {
   id?: true
-  email?: true
-  name?: true
+  bio?: true
+  city?: true
+  contact?: true
   createdAt?: true
+  email?: true
+  firstName?: true
+  image?: true
+  imagePublicId?: true
+  isContactPublic?: true
+  isPhonePublic?: true
+  lastName?: true
+  lastSeen?: true
+  phone?: true
+  profileType?: true
+  role?: true
+  state?: true
+  status?: true
+  updatedAt?: true
+  objectId?: true
+  password?: true
+  gender?: true
+  emailToken?: true
+  isEmailVerified?: true
+  lawSchoolCampus?: true
+  townState?: true
+  universityCampus?: true
+  currentSubscriptionId?: true
 }
 
 export type UserMaxAggregateInputType = {
   id?: true
-  email?: true
-  name?: true
+  bio?: true
+  city?: true
+  contact?: true
   createdAt?: true
+  email?: true
+  firstName?: true
+  image?: true
+  imagePublicId?: true
+  isContactPublic?: true
+  isPhonePublic?: true
+  lastName?: true
+  lastSeen?: true
+  phone?: true
+  profileType?: true
+  role?: true
+  state?: true
+  status?: true
+  updatedAt?: true
+  objectId?: true
+  password?: true
+  gender?: true
+  emailToken?: true
+  isEmailVerified?: true
+  lawSchoolCampus?: true
+  townState?: true
+  universityCampus?: true
+  currentSubscriptionId?: true
 }
 
 export type UserCountAggregateInputType = {
   id?: true
-  email?: true
-  name?: true
+  bio?: true
+  city?: true
+  contact?: true
   createdAt?: true
+  email?: true
+  firstName?: true
+  image?: true
+  imagePublicId?: true
+  isContactPublic?: true
+  isPhonePublic?: true
+  lastName?: true
+  lastSeen?: true
+  phone?: true
+  profileType?: true
+  role?: true
+  state?: true
+  status?: true
+  updatedAt?: true
+  objectId?: true
+  password?: true
+  gender?: true
+  emailToken?: true
+  isEmailVerified?: true
+  lawSchoolCampus?: true
+  townState?: true
+  universityCampus?: true
+  currentSubscriptionId?: true
   _all?: true
 }
 
@@ -142,9 +286,33 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 
 export type UserGroupByOutputType = {
   id: string
-  email: string
-  name: string | null
+  bio: string | null
+  city: string | null
+  contact: string | null
   createdAt: Date
+  email: string
+  firstName: string
+  image: string | null
+  imagePublicId: string | null
+  isContactPublic: boolean | null
+  isPhonePublic: boolean | null
+  lastName: string
+  lastSeen: Date
+  phone: string | null
+  profileType: $Enums.UserProfileTypeEnum
+  role: $Enums.UserRoleEnum
+  state: string | null
+  status: $Enums.UserStatusEnum
+  updatedAt: Date
+  objectId: string | null
+  password: string
+  gender: $Enums.GenderEnum | null
+  emailToken: string | null
+  isEmailVerified: boolean
+  lawSchoolCampus: string | null
+  townState: string | null
+  universityCampus: string | null
+  currentSubscriptionId: string | null
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -170,33 +338,150 @@ export type UserWhereInput = {
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   id?: Prisma.StringFilter<"User"> | string
-  email?: Prisma.StringFilter<"User"> | string
-  name?: Prisma.StringNullableFilter<"User"> | string | null
+  bio?: Prisma.StringNullableFilter<"User"> | string | null
+  city?: Prisma.StringNullableFilter<"User"> | string | null
+  contact?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  email?: Prisma.StringFilter<"User"> | string
+  firstName?: Prisma.StringFilter<"User"> | string
+  image?: Prisma.StringNullableFilter<"User"> | string | null
+  imagePublicId?: Prisma.StringNullableFilter<"User"> | string | null
+  isContactPublic?: Prisma.BoolNullableFilter<"User"> | boolean | null
+  isPhonePublic?: Prisma.BoolNullableFilter<"User"> | boolean | null
+  lastName?: Prisma.StringFilter<"User"> | string
+  lastSeen?: Prisma.DateTimeFilter<"User"> | Date | string
+  phone?: Prisma.StringNullableFilter<"User"> | string | null
+  profileType?: Prisma.EnumUserProfileTypeEnumFilter<"User"> | $Enums.UserProfileTypeEnum
+  role?: Prisma.EnumUserRoleEnumFilter<"User"> | $Enums.UserRoleEnum
+  state?: Prisma.StringNullableFilter<"User"> | string | null
+  status?: Prisma.EnumUserStatusEnumFilter<"User"> | $Enums.UserStatusEnum
+  updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  objectId?: Prisma.StringNullableFilter<"User"> | string | null
+  password?: Prisma.StringFilter<"User"> | string
+  gender?: Prisma.EnumGenderEnumNullableFilter<"User"> | $Enums.GenderEnum | null
+  emailToken?: Prisma.StringNullableFilter<"User"> | string | null
+  isEmailVerified?: Prisma.BoolFilter<"User"> | boolean
+  lawSchoolCampus?: Prisma.StringNullableFilter<"User"> | string | null
+  townState?: Prisma.StringNullableFilter<"User"> | string | null
+  universityCampus?: Prisma.StringNullableFilter<"User"> | string | null
+  currentSubscriptionId?: Prisma.StringNullableFilter<"User"> | string | null
+  bookmarks?: Prisma.BookmarkListRelationFilter
+  report_comments?: Prisma.ReportCommentListRelationFilter
+  report_likes?: Prisma.ReportLikeListRelationFilter
+  reports_added?: Prisma.ReportListRelationFilter
+  reports_updated?: Prisma.ReportListRelationFilter
+  subscriptions?: Prisma.SubscriptionListRelationFilter
+  currentSubscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
 }
 
 export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  name?: Prisma.SortOrder
+  bio?: Prisma.SortOrder
+  city?: Prisma.SortOrder
+  contact?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  firstName?: Prisma.SortOrder
+  image?: Prisma.SortOrder
+  imagePublicId?: Prisma.SortOrder
+  isContactPublic?: Prisma.SortOrder
+  isPhonePublic?: Prisma.SortOrder
+  lastName?: Prisma.SortOrder
+  lastSeen?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  profileType?: Prisma.SortOrder
+  role?: Prisma.SortOrder
+  state?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  objectId?: Prisma.SortOrder
+  password?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
+  emailToken?: Prisma.SortOrder
+  isEmailVerified?: Prisma.SortOrder
+  lawSchoolCampus?: Prisma.SortOrder
+  townState?: Prisma.SortOrder
+  universityCampus?: Prisma.SortOrder
+  currentSubscriptionId?: Prisma.SortOrder
+  bookmarks?: Prisma.BookmarkOrderByRelationAggregateInput
+  report_comments?: Prisma.ReportCommentOrderByRelationAggregateInput
+  report_likes?: Prisma.ReportLikeOrderByRelationAggregateInput
+  reports_added?: Prisma.ReportOrderByRelationAggregateInput
+  reports_updated?: Prisma.ReportOrderByRelationAggregateInput
+  subscriptions?: Prisma.SubscriptionOrderByRelationAggregateInput
+  currentSubscription?: Prisma.SubscriptionOrderByWithRelationInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   email?: string
+  currentSubscriptionId?: string
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
-  name?: Prisma.StringNullableFilter<"User"> | string | null
+  bio?: Prisma.StringNullableFilter<"User"> | string | null
+  city?: Prisma.StringNullableFilter<"User"> | string | null
+  contact?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
-}, "id" | "email">
+  firstName?: Prisma.StringFilter<"User"> | string
+  image?: Prisma.StringNullableFilter<"User"> | string | null
+  imagePublicId?: Prisma.StringNullableFilter<"User"> | string | null
+  isContactPublic?: Prisma.BoolNullableFilter<"User"> | boolean | null
+  isPhonePublic?: Prisma.BoolNullableFilter<"User"> | boolean | null
+  lastName?: Prisma.StringFilter<"User"> | string
+  lastSeen?: Prisma.DateTimeFilter<"User"> | Date | string
+  phone?: Prisma.StringNullableFilter<"User"> | string | null
+  profileType?: Prisma.EnumUserProfileTypeEnumFilter<"User"> | $Enums.UserProfileTypeEnum
+  role?: Prisma.EnumUserRoleEnumFilter<"User"> | $Enums.UserRoleEnum
+  state?: Prisma.StringNullableFilter<"User"> | string | null
+  status?: Prisma.EnumUserStatusEnumFilter<"User"> | $Enums.UserStatusEnum
+  updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  objectId?: Prisma.StringNullableFilter<"User"> | string | null
+  password?: Prisma.StringFilter<"User"> | string
+  gender?: Prisma.EnumGenderEnumNullableFilter<"User"> | $Enums.GenderEnum | null
+  emailToken?: Prisma.StringNullableFilter<"User"> | string | null
+  isEmailVerified?: Prisma.BoolFilter<"User"> | boolean
+  lawSchoolCampus?: Prisma.StringNullableFilter<"User"> | string | null
+  townState?: Prisma.StringNullableFilter<"User"> | string | null
+  universityCampus?: Prisma.StringNullableFilter<"User"> | string | null
+  bookmarks?: Prisma.BookmarkListRelationFilter
+  report_comments?: Prisma.ReportCommentListRelationFilter
+  report_likes?: Prisma.ReportLikeListRelationFilter
+  reports_added?: Prisma.ReportListRelationFilter
+  reports_updated?: Prisma.ReportListRelationFilter
+  subscriptions?: Prisma.SubscriptionListRelationFilter
+  currentSubscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
+}, "id" | "email" | "currentSubscriptionId">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  name?: Prisma.SortOrder
+  bio?: Prisma.SortOrder
+  city?: Prisma.SortOrder
+  contact?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  firstName?: Prisma.SortOrder
+  image?: Prisma.SortOrder
+  imagePublicId?: Prisma.SortOrder
+  isContactPublic?: Prisma.SortOrder
+  isPhonePublic?: Prisma.SortOrder
+  lastName?: Prisma.SortOrder
+  lastSeen?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  profileType?: Prisma.SortOrder
+  role?: Prisma.SortOrder
+  state?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  objectId?: Prisma.SortOrder
+  password?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
+  emailToken?: Prisma.SortOrder
+  isEmailVerified?: Prisma.SortOrder
+  lawSchoolCampus?: Prisma.SortOrder
+  townState?: Prisma.SortOrder
+  universityCampus?: Prisma.SortOrder
+  currentSubscriptionId?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -207,79 +492,372 @@ export type UserScalarWhereWithAggregatesInput = {
   OR?: Prisma.UserScalarWhereWithAggregatesInput[]
   NOT?: Prisma.UserScalarWhereWithAggregatesInput | Prisma.UserScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"User"> | string
-  email?: Prisma.StringWithAggregatesFilter<"User"> | string
-  name?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  bio?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  city?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  contact?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  email?: Prisma.StringWithAggregatesFilter<"User"> | string
+  firstName?: Prisma.StringWithAggregatesFilter<"User"> | string
+  image?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  imagePublicId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  isContactPublic?: Prisma.BoolNullableWithAggregatesFilter<"User"> | boolean | null
+  isPhonePublic?: Prisma.BoolNullableWithAggregatesFilter<"User"> | boolean | null
+  lastName?: Prisma.StringWithAggregatesFilter<"User"> | string
+  lastSeen?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  phone?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  profileType?: Prisma.EnumUserProfileTypeEnumWithAggregatesFilter<"User"> | $Enums.UserProfileTypeEnum
+  role?: Prisma.EnumUserRoleEnumWithAggregatesFilter<"User"> | $Enums.UserRoleEnum
+  state?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  status?: Prisma.EnumUserStatusEnumWithAggregatesFilter<"User"> | $Enums.UserStatusEnum
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  objectId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  password?: Prisma.StringWithAggregatesFilter<"User"> | string
+  gender?: Prisma.EnumGenderEnumNullableWithAggregatesFilter<"User"> | $Enums.GenderEnum | null
+  emailToken?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  isEmailVerified?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  lawSchoolCampus?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  townState?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  universityCampus?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  currentSubscriptionId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
 }
 
 export type UserCreateInput = {
   id?: string
-  email: string
-  name?: string | null
+  bio?: string | null
+  city?: string | null
+  contact?: string | null
   createdAt?: Date | string
+  email: string
+  firstName: string
+  image?: string | null
+  imagePublicId?: string | null
+  isContactPublic?: boolean | null
+  isPhonePublic?: boolean | null
+  lastName: string
+  lastSeen?: Date | string
+  phone?: string | null
+  profileType?: $Enums.UserProfileTypeEnum
+  role?: $Enums.UserRoleEnum
+  state?: string | null
+  status?: $Enums.UserStatusEnum
+  updatedAt?: Date | string
+  objectId?: string | null
+  password: string
+  gender?: $Enums.GenderEnum | null
+  emailToken?: string | null
+  isEmailVerified?: boolean
+  lawSchoolCampus?: string | null
+  townState?: string | null
+  universityCampus?: string | null
+  bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
+  report_comments?: Prisma.ReportCommentCreateNestedManyWithoutUserInput
+  report_likes?: Prisma.ReportLikeCreateNestedManyWithoutUserInput
+  reports_added?: Prisma.ReportCreateNestedManyWithoutAdded_byInput
+  reports_updated?: Prisma.ReportCreateNestedManyWithoutUpdated_byInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  currentSubscription?: Prisma.SubscriptionCreateNestedOneWithoutCurrentUserInput
 }
 
 export type UserUncheckedCreateInput = {
   id?: string
-  email: string
-  name?: string | null
+  bio?: string | null
+  city?: string | null
+  contact?: string | null
   createdAt?: Date | string
+  email: string
+  firstName: string
+  image?: string | null
+  imagePublicId?: string | null
+  isContactPublic?: boolean | null
+  isPhonePublic?: boolean | null
+  lastName: string
+  lastSeen?: Date | string
+  phone?: string | null
+  profileType?: $Enums.UserProfileTypeEnum
+  role?: $Enums.UserRoleEnum
+  state?: string | null
+  status?: $Enums.UserStatusEnum
+  updatedAt?: Date | string
+  objectId?: string | null
+  password: string
+  gender?: $Enums.GenderEnum | null
+  emailToken?: string | null
+  isEmailVerified?: boolean
+  lawSchoolCampus?: string | null
+  townState?: string | null
+  universityCampus?: string | null
+  currentSubscriptionId?: string | null
+  bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
+  report_comments?: Prisma.ReportCommentUncheckedCreateNestedManyWithoutUserInput
+  report_likes?: Prisma.ReportLikeUncheckedCreateNestedManyWithoutUserInput
+  reports_added?: Prisma.ReportUncheckedCreateNestedManyWithoutAdded_byInput
+  reports_updated?: Prisma.ReportUncheckedCreateNestedManyWithoutUpdated_byInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isContactPublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isPhonePublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
+  role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
+  emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
+  report_comments?: Prisma.ReportCommentUpdateManyWithoutUserNestedInput
+  report_likes?: Prisma.ReportLikeUpdateManyWithoutUserNestedInput
+  reports_added?: Prisma.ReportUpdateManyWithoutAdded_byNestedInput
+  reports_updated?: Prisma.ReportUpdateManyWithoutUpdated_byNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  currentSubscription?: Prisma.SubscriptionUpdateOneWithoutCurrentUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isContactPublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isPhonePublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
+  role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
+  emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
+  report_comments?: Prisma.ReportCommentUncheckedUpdateManyWithoutUserNestedInput
+  report_likes?: Prisma.ReportLikeUncheckedUpdateManyWithoutUserNestedInput
+  reports_added?: Prisma.ReportUncheckedUpdateManyWithoutAdded_byNestedInput
+  reports_updated?: Prisma.ReportUncheckedUpdateManyWithoutUpdated_byNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
   id?: string
-  email: string
-  name?: string | null
+  bio?: string | null
+  city?: string | null
+  contact?: string | null
   createdAt?: Date | string
+  email: string
+  firstName: string
+  image?: string | null
+  imagePublicId?: string | null
+  isContactPublic?: boolean | null
+  isPhonePublic?: boolean | null
+  lastName: string
+  lastSeen?: Date | string
+  phone?: string | null
+  profileType?: $Enums.UserProfileTypeEnum
+  role?: $Enums.UserRoleEnum
+  state?: string | null
+  status?: $Enums.UserStatusEnum
+  updatedAt?: Date | string
+  objectId?: string | null
+  password: string
+  gender?: $Enums.GenderEnum | null
+  emailToken?: string | null
+  isEmailVerified?: boolean
+  lawSchoolCampus?: string | null
+  townState?: string | null
+  universityCampus?: string | null
+  currentSubscriptionId?: string | null
 }
 
 export type UserUpdateManyMutationInput = {
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isContactPublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isPhonePublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
+  role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
+  emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserUncheckedUpdateManyInput = {
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isContactPublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isPhonePublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
+  role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
+  emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  name?: Prisma.SortOrder
+  bio?: Prisma.SortOrder
+  city?: Prisma.SortOrder
+  contact?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  firstName?: Prisma.SortOrder
+  image?: Prisma.SortOrder
+  imagePublicId?: Prisma.SortOrder
+  isContactPublic?: Prisma.SortOrder
+  isPhonePublic?: Prisma.SortOrder
+  lastName?: Prisma.SortOrder
+  lastSeen?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  profileType?: Prisma.SortOrder
+  role?: Prisma.SortOrder
+  state?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  objectId?: Prisma.SortOrder
+  password?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
+  emailToken?: Prisma.SortOrder
+  isEmailVerified?: Prisma.SortOrder
+  lawSchoolCampus?: Prisma.SortOrder
+  townState?: Prisma.SortOrder
+  universityCampus?: Prisma.SortOrder
+  currentSubscriptionId?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  name?: Prisma.SortOrder
+  bio?: Prisma.SortOrder
+  city?: Prisma.SortOrder
+  contact?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  firstName?: Prisma.SortOrder
+  image?: Prisma.SortOrder
+  imagePublicId?: Prisma.SortOrder
+  isContactPublic?: Prisma.SortOrder
+  isPhonePublic?: Prisma.SortOrder
+  lastName?: Prisma.SortOrder
+  lastSeen?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  profileType?: Prisma.SortOrder
+  role?: Prisma.SortOrder
+  state?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  objectId?: Prisma.SortOrder
+  password?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
+  emailToken?: Prisma.SortOrder
+  isEmailVerified?: Prisma.SortOrder
+  lawSchoolCampus?: Prisma.SortOrder
+  townState?: Prisma.SortOrder
+  universityCampus?: Prisma.SortOrder
+  currentSubscriptionId?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  name?: Prisma.SortOrder
+  bio?: Prisma.SortOrder
+  city?: Prisma.SortOrder
+  contact?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  firstName?: Prisma.SortOrder
+  image?: Prisma.SortOrder
+  imagePublicId?: Prisma.SortOrder
+  isContactPublic?: Prisma.SortOrder
+  isPhonePublic?: Prisma.SortOrder
+  lastName?: Prisma.SortOrder
+  lastSeen?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  profileType?: Prisma.SortOrder
+  role?: Prisma.SortOrder
+  state?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  objectId?: Prisma.SortOrder
+  password?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
+  emailToken?: Prisma.SortOrder
+  isEmailVerified?: Prisma.SortOrder
+  lawSchoolCampus?: Prisma.SortOrder
+  townState?: Prisma.SortOrder
+  universityCampus?: Prisma.SortOrder
+  currentSubscriptionId?: Prisma.SortOrder
 }
 
-export type StringFieldUpdateOperationsInput = {
-  set?: string
+export type UserScalarRelationFilter = {
+  is?: Prisma.UserWhereInput
+  isNot?: Prisma.UserWhereInput
+}
+
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
 }
 
 export type NullableStringFieldUpdateOperationsInput = {
@@ -291,34 +869,1460 @@ export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
+export type StringFieldUpdateOperationsInput = {
+  set?: string
+}
+
+export type NullableBoolFieldUpdateOperationsInput = {
+  set?: boolean | null
+  unset?: boolean
+}
+
+export type EnumUserProfileTypeEnumFieldUpdateOperationsInput = {
+  set?: $Enums.UserProfileTypeEnum
+}
+
+export type EnumUserRoleEnumFieldUpdateOperationsInput = {
+  set?: $Enums.UserRoleEnum
+}
+
+export type EnumUserStatusEnumFieldUpdateOperationsInput = {
+  set?: $Enums.UserStatusEnum
+}
+
+export type NullableEnumGenderEnumFieldUpdateOperationsInput = {
+  set?: $Enums.GenderEnum | null
+  unset?: boolean
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
+export type UserCreateNestedOneWithoutSubscriptionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSubscriptionsInput, Prisma.UserUncheckedCreateWithoutSubscriptionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSubscriptionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutCurrentSubscriptionInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCurrentSubscriptionInput, Prisma.UserUncheckedCreateWithoutCurrentSubscriptionInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCurrentSubscriptionInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUncheckedCreateNestedOneWithoutCurrentSubscriptionInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCurrentSubscriptionInput, Prisma.UserUncheckedCreateWithoutCurrentSubscriptionInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCurrentSubscriptionInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutSubscriptionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSubscriptionsInput, Prisma.UserUncheckedCreateWithoutSubscriptionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSubscriptionsInput
+  upsert?: Prisma.UserUpsertWithoutSubscriptionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSubscriptionsInput, Prisma.UserUpdateWithoutSubscriptionsInput>, Prisma.UserUncheckedUpdateWithoutSubscriptionsInput>
+}
+
+export type UserUpdateOneWithoutCurrentSubscriptionNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCurrentSubscriptionInput, Prisma.UserUncheckedCreateWithoutCurrentSubscriptionInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCurrentSubscriptionInput
+  upsert?: Prisma.UserUpsertWithoutCurrentSubscriptionInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCurrentSubscriptionInput, Prisma.UserUpdateWithoutCurrentSubscriptionInput>, Prisma.UserUncheckedUpdateWithoutCurrentSubscriptionInput>
+}
+
+export type UserUncheckedUpdateOneWithoutCurrentSubscriptionNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCurrentSubscriptionInput, Prisma.UserUncheckedCreateWithoutCurrentSubscriptionInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCurrentSubscriptionInput
+  upsert?: Prisma.UserUpsertWithoutCurrentSubscriptionInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCurrentSubscriptionInput, Prisma.UserUpdateWithoutCurrentSubscriptionInput>, Prisma.UserUncheckedUpdateWithoutCurrentSubscriptionInput>
+}
+
+export type UserCreateNestedOneWithoutReports_addedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReports_addedInput, Prisma.UserUncheckedCreateWithoutReports_addedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReports_addedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutReports_updatedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReports_updatedInput, Prisma.UserUncheckedCreateWithoutReports_updatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReports_updatedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutReports_addedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReports_addedInput, Prisma.UserUncheckedCreateWithoutReports_addedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReports_addedInput
+  upsert?: Prisma.UserUpsertWithoutReports_addedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReports_addedInput, Prisma.UserUpdateWithoutReports_addedInput>, Prisma.UserUncheckedUpdateWithoutReports_addedInput>
+}
+
+export type UserUpdateOneWithoutReports_updatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReports_updatedInput, Prisma.UserUncheckedCreateWithoutReports_updatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReports_updatedInput
+  upsert?: Prisma.UserUpsertWithoutReports_updatedInput
+  disconnect?: boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReports_updatedInput, Prisma.UserUpdateWithoutReports_updatedInput>, Prisma.UserUncheckedUpdateWithoutReports_updatedInput>
+}
+
+export type UserCreateNestedOneWithoutReport_commentsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReport_commentsInput, Prisma.UserUncheckedCreateWithoutReport_commentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReport_commentsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutReport_commentsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReport_commentsInput, Prisma.UserUncheckedCreateWithoutReport_commentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReport_commentsInput
+  upsert?: Prisma.UserUpsertWithoutReport_commentsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReport_commentsInput, Prisma.UserUpdateWithoutReport_commentsInput>, Prisma.UserUncheckedUpdateWithoutReport_commentsInput>
+}
+
+export type UserCreateNestedOneWithoutReport_likesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReport_likesInput, Prisma.UserUncheckedCreateWithoutReport_likesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReport_likesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutReport_likesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReport_likesInput, Prisma.UserUncheckedCreateWithoutReport_likesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReport_likesInput
+  upsert?: Prisma.UserUpsertWithoutReport_likesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReport_likesInput, Prisma.UserUpdateWithoutReport_likesInput>, Prisma.UserUncheckedUpdateWithoutReport_likesInput>
+}
+
+export type UserCreateNestedOneWithoutBookmarksInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBookmarksInput, Prisma.UserUncheckedCreateWithoutBookmarksInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBookmarksInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutBookmarksNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBookmarksInput, Prisma.UserUncheckedCreateWithoutBookmarksInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBookmarksInput
+  upsert?: Prisma.UserUpsertWithoutBookmarksInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBookmarksInput, Prisma.UserUpdateWithoutBookmarksInput>, Prisma.UserUncheckedUpdateWithoutBookmarksInput>
+}
+
+export type UserCreateWithoutSubscriptionsInput = {
+  id?: string
+  bio?: string | null
+  city?: string | null
+  contact?: string | null
+  createdAt?: Date | string
+  email: string
+  firstName: string
+  image?: string | null
+  imagePublicId?: string | null
+  isContactPublic?: boolean | null
+  isPhonePublic?: boolean | null
+  lastName: string
+  lastSeen?: Date | string
+  phone?: string | null
+  profileType?: $Enums.UserProfileTypeEnum
+  role?: $Enums.UserRoleEnum
+  state?: string | null
+  status?: $Enums.UserStatusEnum
+  updatedAt?: Date | string
+  objectId?: string | null
+  password: string
+  gender?: $Enums.GenderEnum | null
+  emailToken?: string | null
+  isEmailVerified?: boolean
+  lawSchoolCampus?: string | null
+  townState?: string | null
+  universityCampus?: string | null
+  bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
+  report_comments?: Prisma.ReportCommentCreateNestedManyWithoutUserInput
+  report_likes?: Prisma.ReportLikeCreateNestedManyWithoutUserInput
+  reports_added?: Prisma.ReportCreateNestedManyWithoutAdded_byInput
+  reports_updated?: Prisma.ReportCreateNestedManyWithoutUpdated_byInput
+  currentSubscription?: Prisma.SubscriptionCreateNestedOneWithoutCurrentUserInput
+}
+
+export type UserUncheckedCreateWithoutSubscriptionsInput = {
+  id?: string
+  bio?: string | null
+  city?: string | null
+  contact?: string | null
+  createdAt?: Date | string
+  email: string
+  firstName: string
+  image?: string | null
+  imagePublicId?: string | null
+  isContactPublic?: boolean | null
+  isPhonePublic?: boolean | null
+  lastName: string
+  lastSeen?: Date | string
+  phone?: string | null
+  profileType?: $Enums.UserProfileTypeEnum
+  role?: $Enums.UserRoleEnum
+  state?: string | null
+  status?: $Enums.UserStatusEnum
+  updatedAt?: Date | string
+  objectId?: string | null
+  password: string
+  gender?: $Enums.GenderEnum | null
+  emailToken?: string | null
+  isEmailVerified?: boolean
+  lawSchoolCampus?: string | null
+  townState?: string | null
+  universityCampus?: string | null
+  currentSubscriptionId?: string | null
+  bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
+  report_comments?: Prisma.ReportCommentUncheckedCreateNestedManyWithoutUserInput
+  report_likes?: Prisma.ReportLikeUncheckedCreateNestedManyWithoutUserInput
+  reports_added?: Prisma.ReportUncheckedCreateNestedManyWithoutAdded_byInput
+  reports_updated?: Prisma.ReportUncheckedCreateNestedManyWithoutUpdated_byInput
+}
+
+export type UserCreateOrConnectWithoutSubscriptionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSubscriptionsInput, Prisma.UserUncheckedCreateWithoutSubscriptionsInput>
+}
+
+export type UserCreateWithoutCurrentSubscriptionInput = {
+  id?: string
+  bio?: string | null
+  city?: string | null
+  contact?: string | null
+  createdAt?: Date | string
+  email: string
+  firstName: string
+  image?: string | null
+  imagePublicId?: string | null
+  isContactPublic?: boolean | null
+  isPhonePublic?: boolean | null
+  lastName: string
+  lastSeen?: Date | string
+  phone?: string | null
+  profileType?: $Enums.UserProfileTypeEnum
+  role?: $Enums.UserRoleEnum
+  state?: string | null
+  status?: $Enums.UserStatusEnum
+  updatedAt?: Date | string
+  objectId?: string | null
+  password: string
+  gender?: $Enums.GenderEnum | null
+  emailToken?: string | null
+  isEmailVerified?: boolean
+  lawSchoolCampus?: string | null
+  townState?: string | null
+  universityCampus?: string | null
+  bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
+  report_comments?: Prisma.ReportCommentCreateNestedManyWithoutUserInput
+  report_likes?: Prisma.ReportLikeCreateNestedManyWithoutUserInput
+  reports_added?: Prisma.ReportCreateNestedManyWithoutAdded_byInput
+  reports_updated?: Prisma.ReportCreateNestedManyWithoutUpdated_byInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutCurrentSubscriptionInput = {
+  id?: string
+  bio?: string | null
+  city?: string | null
+  contact?: string | null
+  createdAt?: Date | string
+  email: string
+  firstName: string
+  image?: string | null
+  imagePublicId?: string | null
+  isContactPublic?: boolean | null
+  isPhonePublic?: boolean | null
+  lastName: string
+  lastSeen?: Date | string
+  phone?: string | null
+  profileType?: $Enums.UserProfileTypeEnum
+  role?: $Enums.UserRoleEnum
+  state?: string | null
+  status?: $Enums.UserStatusEnum
+  updatedAt?: Date | string
+  objectId?: string | null
+  password: string
+  gender?: $Enums.GenderEnum | null
+  emailToken?: string | null
+  isEmailVerified?: boolean
+  lawSchoolCampus?: string | null
+  townState?: string | null
+  universityCampus?: string | null
+  bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
+  report_comments?: Prisma.ReportCommentUncheckedCreateNestedManyWithoutUserInput
+  report_likes?: Prisma.ReportLikeUncheckedCreateNestedManyWithoutUserInput
+  reports_added?: Prisma.ReportUncheckedCreateNestedManyWithoutAdded_byInput
+  reports_updated?: Prisma.ReportUncheckedCreateNestedManyWithoutUpdated_byInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutCurrentSubscriptionInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCurrentSubscriptionInput, Prisma.UserUncheckedCreateWithoutCurrentSubscriptionInput>
+}
+
+export type UserUpsertWithoutSubscriptionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSubscriptionsInput, Prisma.UserUncheckedUpdateWithoutSubscriptionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSubscriptionsInput, Prisma.UserUncheckedCreateWithoutSubscriptionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSubscriptionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSubscriptionsInput, Prisma.UserUncheckedUpdateWithoutSubscriptionsInput>
+}
+
+export type UserUpdateWithoutSubscriptionsInput = {
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isContactPublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isPhonePublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
+  role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
+  emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
+  report_comments?: Prisma.ReportCommentUpdateManyWithoutUserNestedInput
+  report_likes?: Prisma.ReportLikeUpdateManyWithoutUserNestedInput
+  reports_added?: Prisma.ReportUpdateManyWithoutAdded_byNestedInput
+  reports_updated?: Prisma.ReportUpdateManyWithoutUpdated_byNestedInput
+  currentSubscription?: Prisma.SubscriptionUpdateOneWithoutCurrentUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSubscriptionsInput = {
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isContactPublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isPhonePublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
+  role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
+  emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
+  report_comments?: Prisma.ReportCommentUncheckedUpdateManyWithoutUserNestedInput
+  report_likes?: Prisma.ReportLikeUncheckedUpdateManyWithoutUserNestedInput
+  reports_added?: Prisma.ReportUncheckedUpdateManyWithoutAdded_byNestedInput
+  reports_updated?: Prisma.ReportUncheckedUpdateManyWithoutUpdated_byNestedInput
+}
+
+export type UserUpsertWithoutCurrentSubscriptionInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCurrentSubscriptionInput, Prisma.UserUncheckedUpdateWithoutCurrentSubscriptionInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCurrentSubscriptionInput, Prisma.UserUncheckedCreateWithoutCurrentSubscriptionInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCurrentSubscriptionInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCurrentSubscriptionInput, Prisma.UserUncheckedUpdateWithoutCurrentSubscriptionInput>
+}
+
+export type UserUpdateWithoutCurrentSubscriptionInput = {
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isContactPublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isPhonePublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
+  role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
+  emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
+  report_comments?: Prisma.ReportCommentUpdateManyWithoutUserNestedInput
+  report_likes?: Prisma.ReportLikeUpdateManyWithoutUserNestedInput
+  reports_added?: Prisma.ReportUpdateManyWithoutAdded_byNestedInput
+  reports_updated?: Prisma.ReportUpdateManyWithoutUpdated_byNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCurrentSubscriptionInput = {
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isContactPublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isPhonePublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
+  role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
+  emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
+  report_comments?: Prisma.ReportCommentUncheckedUpdateManyWithoutUserNestedInput
+  report_likes?: Prisma.ReportLikeUncheckedUpdateManyWithoutUserNestedInput
+  reports_added?: Prisma.ReportUncheckedUpdateManyWithoutAdded_byNestedInput
+  reports_updated?: Prisma.ReportUncheckedUpdateManyWithoutUpdated_byNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutReports_addedInput = {
+  id?: string
+  bio?: string | null
+  city?: string | null
+  contact?: string | null
+  createdAt?: Date | string
+  email: string
+  firstName: string
+  image?: string | null
+  imagePublicId?: string | null
+  isContactPublic?: boolean | null
+  isPhonePublic?: boolean | null
+  lastName: string
+  lastSeen?: Date | string
+  phone?: string | null
+  profileType?: $Enums.UserProfileTypeEnum
+  role?: $Enums.UserRoleEnum
+  state?: string | null
+  status?: $Enums.UserStatusEnum
+  updatedAt?: Date | string
+  objectId?: string | null
+  password: string
+  gender?: $Enums.GenderEnum | null
+  emailToken?: string | null
+  isEmailVerified?: boolean
+  lawSchoolCampus?: string | null
+  townState?: string | null
+  universityCampus?: string | null
+  bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
+  report_comments?: Prisma.ReportCommentCreateNestedManyWithoutUserInput
+  report_likes?: Prisma.ReportLikeCreateNestedManyWithoutUserInput
+  reports_updated?: Prisma.ReportCreateNestedManyWithoutUpdated_byInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  currentSubscription?: Prisma.SubscriptionCreateNestedOneWithoutCurrentUserInput
+}
+
+export type UserUncheckedCreateWithoutReports_addedInput = {
+  id?: string
+  bio?: string | null
+  city?: string | null
+  contact?: string | null
+  createdAt?: Date | string
+  email: string
+  firstName: string
+  image?: string | null
+  imagePublicId?: string | null
+  isContactPublic?: boolean | null
+  isPhonePublic?: boolean | null
+  lastName: string
+  lastSeen?: Date | string
+  phone?: string | null
+  profileType?: $Enums.UserProfileTypeEnum
+  role?: $Enums.UserRoleEnum
+  state?: string | null
+  status?: $Enums.UserStatusEnum
+  updatedAt?: Date | string
+  objectId?: string | null
+  password: string
+  gender?: $Enums.GenderEnum | null
+  emailToken?: string | null
+  isEmailVerified?: boolean
+  lawSchoolCampus?: string | null
+  townState?: string | null
+  universityCampus?: string | null
+  currentSubscriptionId?: string | null
+  bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
+  report_comments?: Prisma.ReportCommentUncheckedCreateNestedManyWithoutUserInput
+  report_likes?: Prisma.ReportLikeUncheckedCreateNestedManyWithoutUserInput
+  reports_updated?: Prisma.ReportUncheckedCreateNestedManyWithoutUpdated_byInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutReports_addedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutReports_addedInput, Prisma.UserUncheckedCreateWithoutReports_addedInput>
+}
+
+export type UserCreateWithoutReports_updatedInput = {
+  id?: string
+  bio?: string | null
+  city?: string | null
+  contact?: string | null
+  createdAt?: Date | string
+  email: string
+  firstName: string
+  image?: string | null
+  imagePublicId?: string | null
+  isContactPublic?: boolean | null
+  isPhonePublic?: boolean | null
+  lastName: string
+  lastSeen?: Date | string
+  phone?: string | null
+  profileType?: $Enums.UserProfileTypeEnum
+  role?: $Enums.UserRoleEnum
+  state?: string | null
+  status?: $Enums.UserStatusEnum
+  updatedAt?: Date | string
+  objectId?: string | null
+  password: string
+  gender?: $Enums.GenderEnum | null
+  emailToken?: string | null
+  isEmailVerified?: boolean
+  lawSchoolCampus?: string | null
+  townState?: string | null
+  universityCampus?: string | null
+  bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
+  report_comments?: Prisma.ReportCommentCreateNestedManyWithoutUserInput
+  report_likes?: Prisma.ReportLikeCreateNestedManyWithoutUserInput
+  reports_added?: Prisma.ReportCreateNestedManyWithoutAdded_byInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  currentSubscription?: Prisma.SubscriptionCreateNestedOneWithoutCurrentUserInput
+}
+
+export type UserUncheckedCreateWithoutReports_updatedInput = {
+  id?: string
+  bio?: string | null
+  city?: string | null
+  contact?: string | null
+  createdAt?: Date | string
+  email: string
+  firstName: string
+  image?: string | null
+  imagePublicId?: string | null
+  isContactPublic?: boolean | null
+  isPhonePublic?: boolean | null
+  lastName: string
+  lastSeen?: Date | string
+  phone?: string | null
+  profileType?: $Enums.UserProfileTypeEnum
+  role?: $Enums.UserRoleEnum
+  state?: string | null
+  status?: $Enums.UserStatusEnum
+  updatedAt?: Date | string
+  objectId?: string | null
+  password: string
+  gender?: $Enums.GenderEnum | null
+  emailToken?: string | null
+  isEmailVerified?: boolean
+  lawSchoolCampus?: string | null
+  townState?: string | null
+  universityCampus?: string | null
+  currentSubscriptionId?: string | null
+  bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
+  report_comments?: Prisma.ReportCommentUncheckedCreateNestedManyWithoutUserInput
+  report_likes?: Prisma.ReportLikeUncheckedCreateNestedManyWithoutUserInput
+  reports_added?: Prisma.ReportUncheckedCreateNestedManyWithoutAdded_byInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutReports_updatedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutReports_updatedInput, Prisma.UserUncheckedCreateWithoutReports_updatedInput>
+}
+
+export type UserUpsertWithoutReports_addedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutReports_addedInput, Prisma.UserUncheckedUpdateWithoutReports_addedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutReports_addedInput, Prisma.UserUncheckedCreateWithoutReports_addedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutReports_addedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutReports_addedInput, Prisma.UserUncheckedUpdateWithoutReports_addedInput>
+}
+
+export type UserUpdateWithoutReports_addedInput = {
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isContactPublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isPhonePublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
+  role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
+  emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
+  report_comments?: Prisma.ReportCommentUpdateManyWithoutUserNestedInput
+  report_likes?: Prisma.ReportLikeUpdateManyWithoutUserNestedInput
+  reports_updated?: Prisma.ReportUpdateManyWithoutUpdated_byNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  currentSubscription?: Prisma.SubscriptionUpdateOneWithoutCurrentUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutReports_addedInput = {
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isContactPublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isPhonePublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
+  role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
+  emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
+  report_comments?: Prisma.ReportCommentUncheckedUpdateManyWithoutUserNestedInput
+  report_likes?: Prisma.ReportLikeUncheckedUpdateManyWithoutUserNestedInput
+  reports_updated?: Prisma.ReportUncheckedUpdateManyWithoutUpdated_byNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUpsertWithoutReports_updatedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutReports_updatedInput, Prisma.UserUncheckedUpdateWithoutReports_updatedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutReports_updatedInput, Prisma.UserUncheckedCreateWithoutReports_updatedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutReports_updatedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutReports_updatedInput, Prisma.UserUncheckedUpdateWithoutReports_updatedInput>
+}
+
+export type UserUpdateWithoutReports_updatedInput = {
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isContactPublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isPhonePublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
+  role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
+  emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
+  report_comments?: Prisma.ReportCommentUpdateManyWithoutUserNestedInput
+  report_likes?: Prisma.ReportLikeUpdateManyWithoutUserNestedInput
+  reports_added?: Prisma.ReportUpdateManyWithoutAdded_byNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  currentSubscription?: Prisma.SubscriptionUpdateOneWithoutCurrentUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutReports_updatedInput = {
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isContactPublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isPhonePublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
+  role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
+  emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
+  report_comments?: Prisma.ReportCommentUncheckedUpdateManyWithoutUserNestedInput
+  report_likes?: Prisma.ReportLikeUncheckedUpdateManyWithoutUserNestedInput
+  reports_added?: Prisma.ReportUncheckedUpdateManyWithoutAdded_byNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutReport_commentsInput = {
+  id?: string
+  bio?: string | null
+  city?: string | null
+  contact?: string | null
+  createdAt?: Date | string
+  email: string
+  firstName: string
+  image?: string | null
+  imagePublicId?: string | null
+  isContactPublic?: boolean | null
+  isPhonePublic?: boolean | null
+  lastName: string
+  lastSeen?: Date | string
+  phone?: string | null
+  profileType?: $Enums.UserProfileTypeEnum
+  role?: $Enums.UserRoleEnum
+  state?: string | null
+  status?: $Enums.UserStatusEnum
+  updatedAt?: Date | string
+  objectId?: string | null
+  password: string
+  gender?: $Enums.GenderEnum | null
+  emailToken?: string | null
+  isEmailVerified?: boolean
+  lawSchoolCampus?: string | null
+  townState?: string | null
+  universityCampus?: string | null
+  bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
+  report_likes?: Prisma.ReportLikeCreateNestedManyWithoutUserInput
+  reports_added?: Prisma.ReportCreateNestedManyWithoutAdded_byInput
+  reports_updated?: Prisma.ReportCreateNestedManyWithoutUpdated_byInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  currentSubscription?: Prisma.SubscriptionCreateNestedOneWithoutCurrentUserInput
+}
+
+export type UserUncheckedCreateWithoutReport_commentsInput = {
+  id?: string
+  bio?: string | null
+  city?: string | null
+  contact?: string | null
+  createdAt?: Date | string
+  email: string
+  firstName: string
+  image?: string | null
+  imagePublicId?: string | null
+  isContactPublic?: boolean | null
+  isPhonePublic?: boolean | null
+  lastName: string
+  lastSeen?: Date | string
+  phone?: string | null
+  profileType?: $Enums.UserProfileTypeEnum
+  role?: $Enums.UserRoleEnum
+  state?: string | null
+  status?: $Enums.UserStatusEnum
+  updatedAt?: Date | string
+  objectId?: string | null
+  password: string
+  gender?: $Enums.GenderEnum | null
+  emailToken?: string | null
+  isEmailVerified?: boolean
+  lawSchoolCampus?: string | null
+  townState?: string | null
+  universityCampus?: string | null
+  currentSubscriptionId?: string | null
+  bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
+  report_likes?: Prisma.ReportLikeUncheckedCreateNestedManyWithoutUserInput
+  reports_added?: Prisma.ReportUncheckedCreateNestedManyWithoutAdded_byInput
+  reports_updated?: Prisma.ReportUncheckedCreateNestedManyWithoutUpdated_byInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutReport_commentsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutReport_commentsInput, Prisma.UserUncheckedCreateWithoutReport_commentsInput>
+}
+
+export type UserUpsertWithoutReport_commentsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutReport_commentsInput, Prisma.UserUncheckedUpdateWithoutReport_commentsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutReport_commentsInput, Prisma.UserUncheckedCreateWithoutReport_commentsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutReport_commentsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutReport_commentsInput, Prisma.UserUncheckedUpdateWithoutReport_commentsInput>
+}
+
+export type UserUpdateWithoutReport_commentsInput = {
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isContactPublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isPhonePublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
+  role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
+  emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
+  report_likes?: Prisma.ReportLikeUpdateManyWithoutUserNestedInput
+  reports_added?: Prisma.ReportUpdateManyWithoutAdded_byNestedInput
+  reports_updated?: Prisma.ReportUpdateManyWithoutUpdated_byNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  currentSubscription?: Prisma.SubscriptionUpdateOneWithoutCurrentUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutReport_commentsInput = {
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isContactPublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isPhonePublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
+  role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
+  emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
+  report_likes?: Prisma.ReportLikeUncheckedUpdateManyWithoutUserNestedInput
+  reports_added?: Prisma.ReportUncheckedUpdateManyWithoutAdded_byNestedInput
+  reports_updated?: Prisma.ReportUncheckedUpdateManyWithoutUpdated_byNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutReport_likesInput = {
+  id?: string
+  bio?: string | null
+  city?: string | null
+  contact?: string | null
+  createdAt?: Date | string
+  email: string
+  firstName: string
+  image?: string | null
+  imagePublicId?: string | null
+  isContactPublic?: boolean | null
+  isPhonePublic?: boolean | null
+  lastName: string
+  lastSeen?: Date | string
+  phone?: string | null
+  profileType?: $Enums.UserProfileTypeEnum
+  role?: $Enums.UserRoleEnum
+  state?: string | null
+  status?: $Enums.UserStatusEnum
+  updatedAt?: Date | string
+  objectId?: string | null
+  password: string
+  gender?: $Enums.GenderEnum | null
+  emailToken?: string | null
+  isEmailVerified?: boolean
+  lawSchoolCampus?: string | null
+  townState?: string | null
+  universityCampus?: string | null
+  bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
+  report_comments?: Prisma.ReportCommentCreateNestedManyWithoutUserInput
+  reports_added?: Prisma.ReportCreateNestedManyWithoutAdded_byInput
+  reports_updated?: Prisma.ReportCreateNestedManyWithoutUpdated_byInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  currentSubscription?: Prisma.SubscriptionCreateNestedOneWithoutCurrentUserInput
+}
+
+export type UserUncheckedCreateWithoutReport_likesInput = {
+  id?: string
+  bio?: string | null
+  city?: string | null
+  contact?: string | null
+  createdAt?: Date | string
+  email: string
+  firstName: string
+  image?: string | null
+  imagePublicId?: string | null
+  isContactPublic?: boolean | null
+  isPhonePublic?: boolean | null
+  lastName: string
+  lastSeen?: Date | string
+  phone?: string | null
+  profileType?: $Enums.UserProfileTypeEnum
+  role?: $Enums.UserRoleEnum
+  state?: string | null
+  status?: $Enums.UserStatusEnum
+  updatedAt?: Date | string
+  objectId?: string | null
+  password: string
+  gender?: $Enums.GenderEnum | null
+  emailToken?: string | null
+  isEmailVerified?: boolean
+  lawSchoolCampus?: string | null
+  townState?: string | null
+  universityCampus?: string | null
+  currentSubscriptionId?: string | null
+  bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
+  report_comments?: Prisma.ReportCommentUncheckedCreateNestedManyWithoutUserInput
+  reports_added?: Prisma.ReportUncheckedCreateNestedManyWithoutAdded_byInput
+  reports_updated?: Prisma.ReportUncheckedCreateNestedManyWithoutUpdated_byInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutReport_likesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutReport_likesInput, Prisma.UserUncheckedCreateWithoutReport_likesInput>
+}
+
+export type UserUpsertWithoutReport_likesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutReport_likesInput, Prisma.UserUncheckedUpdateWithoutReport_likesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutReport_likesInput, Prisma.UserUncheckedCreateWithoutReport_likesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutReport_likesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutReport_likesInput, Prisma.UserUncheckedUpdateWithoutReport_likesInput>
+}
+
+export type UserUpdateWithoutReport_likesInput = {
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isContactPublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isPhonePublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
+  role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
+  emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
+  report_comments?: Prisma.ReportCommentUpdateManyWithoutUserNestedInput
+  reports_added?: Prisma.ReportUpdateManyWithoutAdded_byNestedInput
+  reports_updated?: Prisma.ReportUpdateManyWithoutUpdated_byNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  currentSubscription?: Prisma.SubscriptionUpdateOneWithoutCurrentUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutReport_likesInput = {
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isContactPublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isPhonePublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
+  role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
+  emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
+  report_comments?: Prisma.ReportCommentUncheckedUpdateManyWithoutUserNestedInput
+  reports_added?: Prisma.ReportUncheckedUpdateManyWithoutAdded_byNestedInput
+  reports_updated?: Prisma.ReportUncheckedUpdateManyWithoutUpdated_byNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutBookmarksInput = {
+  id?: string
+  bio?: string | null
+  city?: string | null
+  contact?: string | null
+  createdAt?: Date | string
+  email: string
+  firstName: string
+  image?: string | null
+  imagePublicId?: string | null
+  isContactPublic?: boolean | null
+  isPhonePublic?: boolean | null
+  lastName: string
+  lastSeen?: Date | string
+  phone?: string | null
+  profileType?: $Enums.UserProfileTypeEnum
+  role?: $Enums.UserRoleEnum
+  state?: string | null
+  status?: $Enums.UserStatusEnum
+  updatedAt?: Date | string
+  objectId?: string | null
+  password: string
+  gender?: $Enums.GenderEnum | null
+  emailToken?: string | null
+  isEmailVerified?: boolean
+  lawSchoolCampus?: string | null
+  townState?: string | null
+  universityCampus?: string | null
+  report_comments?: Prisma.ReportCommentCreateNestedManyWithoutUserInput
+  report_likes?: Prisma.ReportLikeCreateNestedManyWithoutUserInput
+  reports_added?: Prisma.ReportCreateNestedManyWithoutAdded_byInput
+  reports_updated?: Prisma.ReportCreateNestedManyWithoutUpdated_byInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  currentSubscription?: Prisma.SubscriptionCreateNestedOneWithoutCurrentUserInput
+}
+
+export type UserUncheckedCreateWithoutBookmarksInput = {
+  id?: string
+  bio?: string | null
+  city?: string | null
+  contact?: string | null
+  createdAt?: Date | string
+  email: string
+  firstName: string
+  image?: string | null
+  imagePublicId?: string | null
+  isContactPublic?: boolean | null
+  isPhonePublic?: boolean | null
+  lastName: string
+  lastSeen?: Date | string
+  phone?: string | null
+  profileType?: $Enums.UserProfileTypeEnum
+  role?: $Enums.UserRoleEnum
+  state?: string | null
+  status?: $Enums.UserStatusEnum
+  updatedAt?: Date | string
+  objectId?: string | null
+  password: string
+  gender?: $Enums.GenderEnum | null
+  emailToken?: string | null
+  isEmailVerified?: boolean
+  lawSchoolCampus?: string | null
+  townState?: string | null
+  universityCampus?: string | null
+  currentSubscriptionId?: string | null
+  report_comments?: Prisma.ReportCommentUncheckedCreateNestedManyWithoutUserInput
+  report_likes?: Prisma.ReportLikeUncheckedCreateNestedManyWithoutUserInput
+  reports_added?: Prisma.ReportUncheckedCreateNestedManyWithoutAdded_byInput
+  reports_updated?: Prisma.ReportUncheckedCreateNestedManyWithoutUpdated_byInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutBookmarksInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutBookmarksInput, Prisma.UserUncheckedCreateWithoutBookmarksInput>
+}
+
+export type UserUpsertWithoutBookmarksInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutBookmarksInput, Prisma.UserUncheckedUpdateWithoutBookmarksInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutBookmarksInput, Prisma.UserUncheckedCreateWithoutBookmarksInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutBookmarksInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutBookmarksInput, Prisma.UserUncheckedUpdateWithoutBookmarksInput>
+}
+
+export type UserUpdateWithoutBookmarksInput = {
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isContactPublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isPhonePublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
+  role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
+  emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  report_comments?: Prisma.ReportCommentUpdateManyWithoutUserNestedInput
+  report_likes?: Prisma.ReportLikeUpdateManyWithoutUserNestedInput
+  reports_added?: Prisma.ReportUpdateManyWithoutAdded_byNestedInput
+  reports_updated?: Prisma.ReportUpdateManyWithoutUpdated_byNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  currentSubscription?: Prisma.SubscriptionUpdateOneWithoutCurrentUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutBookmarksInput = {
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isContactPublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isPhonePublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
+  role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
+  emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  report_comments?: Prisma.ReportCommentUncheckedUpdateManyWithoutUserNestedInput
+  report_likes?: Prisma.ReportLikeUncheckedUpdateManyWithoutUserNestedInput
+  reports_added?: Prisma.ReportUncheckedUpdateManyWithoutAdded_byNestedInput
+  reports_updated?: Prisma.ReportUncheckedUpdateManyWithoutUpdated_byNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+
+/**
+ * Count Type UserCountOutputType
+ */
+
+export type UserCountOutputType = {
+  bookmarks: number
+  report_comments: number
+  report_likes: number
+  reports_added: number
+  reports_updated: number
+  subscriptions: number
+}
+
+export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  bookmarks?: boolean | UserCountOutputTypeCountBookmarksArgs
+  report_comments?: boolean | UserCountOutputTypeCountReport_commentsArgs
+  report_likes?: boolean | UserCountOutputTypeCountReport_likesArgs
+  reports_added?: boolean | UserCountOutputTypeCountReports_addedArgs
+  reports_updated?: boolean | UserCountOutputTypeCountReports_updatedArgs
+  subscriptions?: boolean | UserCountOutputTypeCountSubscriptionsArgs
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserCountOutputType
+   */
+  select?: Prisma.UserCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountBookmarksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BookmarkWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountReport_commentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ReportCommentWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountReport_likesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ReportLikeWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountReports_addedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ReportWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountReports_updatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ReportWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSubscriptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SubscriptionWhereInput
+}
 
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  email?: boolean
-  name?: boolean
+  bio?: boolean
+  city?: boolean
+  contact?: boolean
   createdAt?: boolean
+  email?: boolean
+  firstName?: boolean
+  image?: boolean
+  imagePublicId?: boolean
+  isContactPublic?: boolean
+  isPhonePublic?: boolean
+  lastName?: boolean
+  lastSeen?: boolean
+  phone?: boolean
+  profileType?: boolean
+  role?: boolean
+  state?: boolean
+  status?: boolean
+  updatedAt?: boolean
+  objectId?: boolean
+  password?: boolean
+  gender?: boolean
+  emailToken?: boolean
+  isEmailVerified?: boolean
+  lawSchoolCampus?: boolean
+  townState?: boolean
+  universityCampus?: boolean
+  currentSubscriptionId?: boolean
+  bookmarks?: boolean | Prisma.User$bookmarksArgs<ExtArgs>
+  report_comments?: boolean | Prisma.User$report_commentsArgs<ExtArgs>
+  report_likes?: boolean | Prisma.User$report_likesArgs<ExtArgs>
+  reports_added?: boolean | Prisma.User$reports_addedArgs<ExtArgs>
+  reports_updated?: boolean | Prisma.User$reports_updatedArgs<ExtArgs>
+  subscriptions?: boolean | Prisma.User$subscriptionsArgs<ExtArgs>
+  currentSubscription?: boolean | Prisma.User$currentSubscriptionArgs<ExtArgs>
+  _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 
 
 export type UserSelectScalar = {
   id?: boolean
-  email?: boolean
-  name?: boolean
+  bio?: boolean
+  city?: boolean
+  contact?: boolean
   createdAt?: boolean
+  email?: boolean
+  firstName?: boolean
+  image?: boolean
+  imagePublicId?: boolean
+  isContactPublic?: boolean
+  isPhonePublic?: boolean
+  lastName?: boolean
+  lastSeen?: boolean
+  phone?: boolean
+  profileType?: boolean
+  role?: boolean
+  state?: boolean
+  status?: boolean
+  updatedAt?: boolean
+  objectId?: boolean
+  password?: boolean
+  gender?: boolean
+  emailToken?: boolean
+  isEmailVerified?: boolean
+  lawSchoolCampus?: boolean
+  townState?: boolean
+  universityCampus?: boolean
+  currentSubscriptionId?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "name" | "createdAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "bio" | "city" | "contact" | "createdAt" | "email" | "firstName" | "image" | "imagePublicId" | "isContactPublic" | "isPhonePublic" | "lastName" | "lastSeen" | "phone" | "profileType" | "role" | "state" | "status" | "updatedAt" | "objectId" | "password" | "gender" | "emailToken" | "isEmailVerified" | "lawSchoolCampus" | "townState" | "universityCampus" | "currentSubscriptionId", ExtArgs["result"]["user"]>
+export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  bookmarks?: boolean | Prisma.User$bookmarksArgs<ExtArgs>
+  report_comments?: boolean | Prisma.User$report_commentsArgs<ExtArgs>
+  report_likes?: boolean | Prisma.User$report_likesArgs<ExtArgs>
+  reports_added?: boolean | Prisma.User$reports_addedArgs<ExtArgs>
+  reports_updated?: boolean | Prisma.User$reports_updatedArgs<ExtArgs>
+  subscriptions?: boolean | Prisma.User$subscriptionsArgs<ExtArgs>
+  currentSubscription?: boolean | Prisma.User$currentSubscriptionArgs<ExtArgs>
+  _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
+}
 
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
-  objects: {}
+  objects: {
+    bookmarks: Prisma.$BookmarkPayload<ExtArgs>[]
+    report_comments: Prisma.$ReportCommentPayload<ExtArgs>[]
+    report_likes: Prisma.$ReportLikePayload<ExtArgs>[]
+    reports_added: Prisma.$ReportPayload<ExtArgs>[]
+    reports_updated: Prisma.$ReportPayload<ExtArgs>[]
+    subscriptions: Prisma.$SubscriptionPayload<ExtArgs>[]
+    currentSubscription: Prisma.$SubscriptionPayload<ExtArgs> | null
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    email: string
-    name: string | null
+    bio: string | null
+    city: string | null
+    contact: string | null
     createdAt: Date
+    email: string
+    firstName: string
+    image: string | null
+    imagePublicId: string | null
+    isContactPublic: boolean | null
+    isPhonePublic: boolean | null
+    lastName: string
+    lastSeen: Date
+    phone: string | null
+    profileType: $Enums.UserProfileTypeEnum
+    role: $Enums.UserRoleEnum
+    state: string | null
+    status: $Enums.UserStatusEnum
+    updatedAt: Date
+    objectId: string | null
+    password: string
+    gender: $Enums.GenderEnum | null
+    emailToken: string | null
+    isEmailVerified: boolean
+    lawSchoolCampus: string | null
+    townState: string | null
+    universityCampus: string | null
+    currentSubscriptionId: string | null
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -682,6 +2686,13 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  bookmarks<T extends Prisma.User$bookmarksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$bookmarksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BookmarkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  report_comments<T extends Prisma.User$report_commentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$report_commentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReportCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  report_likes<T extends Prisma.User$report_likesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$report_likesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReportLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reports_added<T extends Prisma.User$reports_addedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reports_addedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reports_updated<T extends Prisma.User$reports_updatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reports_updatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  subscriptions<T extends Prisma.User$subscriptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$subscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  currentSubscription<T extends Prisma.User$currentSubscriptionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$currentSubscriptionArgs<ExtArgs>>): Prisma.Prisma__SubscriptionClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -712,9 +2723,33 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
  */
 export interface UserFieldRefs {
   readonly id: Prisma.FieldRef<"User", 'String'>
-  readonly email: Prisma.FieldRef<"User", 'String'>
-  readonly name: Prisma.FieldRef<"User", 'String'>
+  readonly bio: Prisma.FieldRef<"User", 'String'>
+  readonly city: Prisma.FieldRef<"User", 'String'>
+  readonly contact: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly email: Prisma.FieldRef<"User", 'String'>
+  readonly firstName: Prisma.FieldRef<"User", 'String'>
+  readonly image: Prisma.FieldRef<"User", 'String'>
+  readonly imagePublicId: Prisma.FieldRef<"User", 'String'>
+  readonly isContactPublic: Prisma.FieldRef<"User", 'Boolean'>
+  readonly isPhonePublic: Prisma.FieldRef<"User", 'Boolean'>
+  readonly lastName: Prisma.FieldRef<"User", 'String'>
+  readonly lastSeen: Prisma.FieldRef<"User", 'DateTime'>
+  readonly phone: Prisma.FieldRef<"User", 'String'>
+  readonly profileType: Prisma.FieldRef<"User", 'UserProfileTypeEnum'>
+  readonly role: Prisma.FieldRef<"User", 'UserRoleEnum'>
+  readonly state: Prisma.FieldRef<"User", 'String'>
+  readonly status: Prisma.FieldRef<"User", 'UserStatusEnum'>
+  readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly objectId: Prisma.FieldRef<"User", 'String'>
+  readonly password: Prisma.FieldRef<"User", 'String'>
+  readonly gender: Prisma.FieldRef<"User", 'GenderEnum'>
+  readonly emailToken: Prisma.FieldRef<"User", 'String'>
+  readonly isEmailVerified: Prisma.FieldRef<"User", 'Boolean'>
+  readonly lawSchoolCampus: Prisma.FieldRef<"User", 'String'>
+  readonly townState: Prisma.FieldRef<"User", 'String'>
+  readonly universityCampus: Prisma.FieldRef<"User", 'String'>
+  readonly currentSubscriptionId: Prisma.FieldRef<"User", 'String'>
 }
     
 
@@ -731,6 +2766,10 @@ export type UserFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the User
    */
   omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
   /**
    * Filter, which User to fetch.
    */
@@ -750,6 +2789,10 @@ export type UserFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   omit?: Prisma.UserOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  /**
    * Filter, which User to fetch.
    */
   where: Prisma.UserWhereUniqueInput
@@ -767,6 +2810,10 @@ export type UserFindFirstArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Omit specific fields from the User
    */
   omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
   /**
    * Filter, which User to fetch.
    */
@@ -816,6 +2863,10 @@ export type UserFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.In
    */
   omit?: Prisma.UserOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  /**
    * Filter, which User to fetch.
    */
   where?: Prisma.UserWhereInput
@@ -864,6 +2915,10 @@ export type UserFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   omit?: Prisma.UserOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  /**
    * Filter, which Users to fetch.
    */
   where?: Prisma.UserWhereInput
@@ -907,6 +2962,10 @@ export type UserCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
    */
   omit?: Prisma.UserOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  /**
    * The data needed to create a User.
    */
   data: Prisma.XOR<Prisma.UserCreateInput, Prisma.UserUncheckedCreateInput>
@@ -934,6 +2993,10 @@ export type UserUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
    * Omit specific fields from the User
    */
   omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
   /**
    * The data needed to update a User.
    */
@@ -975,6 +3038,10 @@ export type UserUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
    */
   omit?: Prisma.UserOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  /**
    * The filter to search for the User to update in case it exists.
    */
   where: Prisma.UserWhereUniqueInput
@@ -1000,6 +3067,10 @@ export type UserDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
    * Omit specific fields from the User
    */
   omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
   /**
    * Filter which User to delete.
    */
@@ -1049,6 +3120,169 @@ export type UserAggregateRawArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
+ * User.bookmarks
+ */
+export type User$bookmarksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Bookmark
+   */
+  select?: Prisma.BookmarkSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Bookmark
+   */
+  omit?: Prisma.BookmarkOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BookmarkInclude<ExtArgs> | null
+  where?: Prisma.BookmarkWhereInput
+  orderBy?: Prisma.BookmarkOrderByWithRelationInput | Prisma.BookmarkOrderByWithRelationInput[]
+  cursor?: Prisma.BookmarkWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BookmarkScalarFieldEnum | Prisma.BookmarkScalarFieldEnum[]
+}
+
+/**
+ * User.report_comments
+ */
+export type User$report_commentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ReportComment
+   */
+  select?: Prisma.ReportCommentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ReportComment
+   */
+  omit?: Prisma.ReportCommentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReportCommentInclude<ExtArgs> | null
+  where?: Prisma.ReportCommentWhereInput
+  orderBy?: Prisma.ReportCommentOrderByWithRelationInput | Prisma.ReportCommentOrderByWithRelationInput[]
+  cursor?: Prisma.ReportCommentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ReportCommentScalarFieldEnum | Prisma.ReportCommentScalarFieldEnum[]
+}
+
+/**
+ * User.report_likes
+ */
+export type User$report_likesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ReportLike
+   */
+  select?: Prisma.ReportLikeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ReportLike
+   */
+  omit?: Prisma.ReportLikeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReportLikeInclude<ExtArgs> | null
+  where?: Prisma.ReportLikeWhereInput
+  orderBy?: Prisma.ReportLikeOrderByWithRelationInput | Prisma.ReportLikeOrderByWithRelationInput[]
+  cursor?: Prisma.ReportLikeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ReportLikeScalarFieldEnum | Prisma.ReportLikeScalarFieldEnum[]
+}
+
+/**
+ * User.reports_added
+ */
+export type User$reports_addedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Report
+   */
+  select?: Prisma.ReportSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Report
+   */
+  omit?: Prisma.ReportOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReportInclude<ExtArgs> | null
+  where?: Prisma.ReportWhereInput
+  orderBy?: Prisma.ReportOrderByWithRelationInput | Prisma.ReportOrderByWithRelationInput[]
+  cursor?: Prisma.ReportWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ReportScalarFieldEnum | Prisma.ReportScalarFieldEnum[]
+}
+
+/**
+ * User.reports_updated
+ */
+export type User$reports_updatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Report
+   */
+  select?: Prisma.ReportSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Report
+   */
+  omit?: Prisma.ReportOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReportInclude<ExtArgs> | null
+  where?: Prisma.ReportWhereInput
+  orderBy?: Prisma.ReportOrderByWithRelationInput | Prisma.ReportOrderByWithRelationInput[]
+  cursor?: Prisma.ReportWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ReportScalarFieldEnum | Prisma.ReportScalarFieldEnum[]
+}
+
+/**
+ * User.subscriptions
+ */
+export type User$subscriptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Subscription
+   */
+  select?: Prisma.SubscriptionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Subscription
+   */
+  omit?: Prisma.SubscriptionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SubscriptionInclude<ExtArgs> | null
+  where?: Prisma.SubscriptionWhereInput
+  orderBy?: Prisma.SubscriptionOrderByWithRelationInput | Prisma.SubscriptionOrderByWithRelationInput[]
+  cursor?: Prisma.SubscriptionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SubscriptionScalarFieldEnum | Prisma.SubscriptionScalarFieldEnum[]
+}
+
+/**
+ * User.currentSubscription
+ */
+export type User$currentSubscriptionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Subscription
+   */
+  select?: Prisma.SubscriptionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Subscription
+   */
+  omit?: Prisma.SubscriptionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SubscriptionInclude<ExtArgs> | null
+  where?: Prisma.SubscriptionWhereInput
+}
+
+/**
  * User without action
  */
 export type UserDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1060,4 +3294,8 @@ export type UserDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
    * Omit specific fields from the User
    */
   omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
 }

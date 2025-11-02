@@ -21,3 +21,88 @@ export * from './enums';
  * 
  */
 export type User = Prisma.UserModel
+/**
+ * Model Subscription
+ * 
+ */
+export type Subscription = Prisma.SubscriptionModel
+/**
+ * Model Report
+ * 
+ */
+export type Report = Prisma.ReportModel
+/**
+ * Model ReportToSubject
+ * 
+ */
+export type ReportToSubject = Prisma.ReportToSubjectModel
+/**
+ * Model ReportComment
+ * 
+ */
+export type ReportComment = Prisma.ReportCommentModel
+/**
+ * Model ReportLike
+ * 
+ */
+export type ReportLike = Prisma.ReportLikeModel
+/**
+ * Model ReportTags
+ * 
+ */
+export type ReportTags = Prisma.ReportTagsModel
+/**
+ * Model ReportVisits
+ * 
+ */
+export type ReportVisits = Prisma.ReportVisitsModel
+/**
+ * Model Bookmark
+ * 
+ */
+export type Bookmark = Prisma.BookmarkModel
+/**
+ * Model HandbookCase
+ * 
+ */
+export type HandbookCase = Prisma.HandbookCaseModel
+/**
+ * Model Handbook
+ * 
+ */
+export type Handbook = Prisma.HandbookModel
+/**
+ * Model NoteItem
+ * 
+ */
+export type NoteItem = Prisma.NoteItemModel
+/**
+ * Model Quote
+ * 
+ */
+export type Quote = Prisma.QuoteModel
+/**
+ * Model Subject
+ * 
+ */
+export type Subject = Prisma.SubjectModel
+/**
+ * Model FacultyNoteSummary
+ * 
+ */
+export type FacultyNoteSummary = Prisma.FacultyNoteSummaryModel
+/**
+ * Model NlsNoteSummary
+ * 
+ */
+export type NlsNoteSummary = Prisma.NlsNoteSummaryModel
+/**
+ * Model TextbookCase
+ * 
+ */
+export type TextbookCase = Prisma.TextbookCaseModel
+/**
+ * Model Textbook
+ * 
+ */
+export type Textbook = Prisma.TextbookModel
