@@ -262,7 +262,7 @@ export class ReportsService {
       return {
         message: 'Report liked successfully',
         success: true,
-        reportLike: like,
+        data: like,
       };
     } catch (error) {
       throw error;
