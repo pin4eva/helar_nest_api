@@ -15,3 +15,14 @@ export const parseExpiry = (expiry: string): number => {
       throw new Error(`Invalid expiry format: ${expiry}`);
   }
 };
+
+export const slugify = (text: string) => {
+  return text
+    .toLowerCase()
+    .replace(/ /g, '-')
+    .replace(/[^\w-]+/g, '');
+};
+
+export const ISOStringDate = (date: string | Date) => {
+  return new Date(date)?.toISOString()?.substring(0, 10);
+};

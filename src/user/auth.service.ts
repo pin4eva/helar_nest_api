@@ -211,14 +211,11 @@ export class AuthService {
     const bearerToken = token?.split(' ')[1] || token;
     token = bearerToken;
     try {
-      console.log('Decoding token:', token);
-
       const decoded = jwt.verify(token, environments.JWT_SECRETS) as {
         id?: string;
         tokenType?: string;
       };
       if (!decoded) {
-        console.error({ decoded });
         throw new UnauthorizedException('Invalid token');
       }
 

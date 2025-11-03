@@ -92,7 +92,7 @@ model Report {
   id            String            @id @default(auto()) @map("_id") @db.ObjectId
   body          String
   court         String
-  createdAt     DateTime          @default(now())
+  createdAt     DateTime?         @default(now())
   date          DateTime
   isPublished   Boolean           @default(false)
   issues        String?
@@ -102,11 +102,11 @@ model Report {
   suitNo        String
   summary       String
   title         String
-  updatedAt     DateTime          @updatedAt
+  updatedAt     DateTime?         @updatedAt
   added_by_id   String            @db.ObjectId
   updated_by_id String?           @db.ObjectId
-  views         Int               @default(0)
-  vol           Int
+  views         Int?              @default(0)
+  vol           Int?
   objectId      String?
   tags          ReportTags[]
   lawSubjects   ReportToSubject[]

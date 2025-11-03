@@ -274,7 +274,7 @@ export type ReportGroupByOutputType = {
   id: string
   body: string
   court: string
-  createdAt: Date
+  createdAt: Date | null
   date: Date
   isPublished: boolean
   issues: string | null
@@ -284,11 +284,11 @@ export type ReportGroupByOutputType = {
   suitNo: string
   summary: string
   title: string
-  updatedAt: Date
+  updatedAt: Date | null
   added_by_id: string
   updated_by_id: string | null
-  views: number
-  vol: number
+  views: number | null
+  vol: number | null
   objectId: string | null
   _count: ReportCountAggregateOutputType | null
   _avg: ReportAvgAggregateOutputType | null
@@ -319,7 +319,7 @@ export type ReportWhereInput = {
   id?: Prisma.StringFilter<"Report"> | string
   body?: Prisma.StringFilter<"Report"> | string
   court?: Prisma.StringFilter<"Report"> | string
-  createdAt?: Prisma.DateTimeFilter<"Report"> | Date | string
+  createdAt?: Prisma.DateTimeNullableFilter<"Report"> | Date | string | null
   date?: Prisma.DateTimeFilter<"Report"> | Date | string
   isPublished?: Prisma.BoolFilter<"Report"> | boolean
   issues?: Prisma.StringNullableFilter<"Report"> | string | null
@@ -329,11 +329,11 @@ export type ReportWhereInput = {
   suitNo?: Prisma.StringFilter<"Report"> | string
   summary?: Prisma.StringFilter<"Report"> | string
   title?: Prisma.StringFilter<"Report"> | string
-  updatedAt?: Prisma.DateTimeFilter<"Report"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableFilter<"Report"> | Date | string | null
   added_by_id?: Prisma.StringFilter<"Report"> | string
   updated_by_id?: Prisma.StringNullableFilter<"Report"> | string | null
-  views?: Prisma.IntFilter<"Report"> | number
-  vol?: Prisma.IntFilter<"Report"> | number
+  views?: Prisma.IntNullableFilter<"Report"> | number | null
+  vol?: Prisma.IntNullableFilter<"Report"> | number | null
   objectId?: Prisma.StringNullableFilter<"Report"> | string | null
   tags?: Prisma.ReportTagsListRelationFilter
   lawSubjects?: Prisma.ReportToSubjectListRelationFilter
@@ -384,7 +384,7 @@ export type ReportWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ReportWhereInput | Prisma.ReportWhereInput[]
   body?: Prisma.StringFilter<"Report"> | string
   court?: Prisma.StringFilter<"Report"> | string
-  createdAt?: Prisma.DateTimeFilter<"Report"> | Date | string
+  createdAt?: Prisma.DateTimeNullableFilter<"Report"> | Date | string | null
   date?: Prisma.DateTimeFilter<"Report"> | Date | string
   isPublished?: Prisma.BoolFilter<"Report"> | boolean
   issues?: Prisma.StringNullableFilter<"Report"> | string | null
@@ -392,11 +392,11 @@ export type ReportWhereUniqueInput = Prisma.AtLeast<{
   suitNo?: Prisma.StringFilter<"Report"> | string
   summary?: Prisma.StringFilter<"Report"> | string
   title?: Prisma.StringFilter<"Report"> | string
-  updatedAt?: Prisma.DateTimeFilter<"Report"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableFilter<"Report"> | Date | string | null
   added_by_id?: Prisma.StringFilter<"Report"> | string
   updated_by_id?: Prisma.StringNullableFilter<"Report"> | string | null
-  views?: Prisma.IntFilter<"Report"> | number
-  vol?: Prisma.IntFilter<"Report"> | number
+  views?: Prisma.IntNullableFilter<"Report"> | number | null
+  vol?: Prisma.IntNullableFilter<"Report"> | number | null
   objectId?: Prisma.StringNullableFilter<"Report"> | string | null
   tags?: Prisma.ReportTagsListRelationFilter
   lawSubjects?: Prisma.ReportToSubjectListRelationFilter
@@ -442,7 +442,7 @@ export type ReportScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Report"> | string
   body?: Prisma.StringWithAggregatesFilter<"Report"> | string
   court?: Prisma.StringWithAggregatesFilter<"Report"> | string
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Report"> | Date | string
+  createdAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Report"> | Date | string | null
   date?: Prisma.DateTimeWithAggregatesFilter<"Report"> | Date | string
   isPublished?: Prisma.BoolWithAggregatesFilter<"Report"> | boolean
   issues?: Prisma.StringNullableWithAggregatesFilter<"Report"> | string | null
@@ -452,11 +452,11 @@ export type ReportScalarWhereWithAggregatesInput = {
   suitNo?: Prisma.StringWithAggregatesFilter<"Report"> | string
   summary?: Prisma.StringWithAggregatesFilter<"Report"> | string
   title?: Prisma.StringWithAggregatesFilter<"Report"> | string
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Report"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Report"> | Date | string | null
   added_by_id?: Prisma.StringWithAggregatesFilter<"Report"> | string
   updated_by_id?: Prisma.StringNullableWithAggregatesFilter<"Report"> | string | null
-  views?: Prisma.IntWithAggregatesFilter<"Report"> | number
-  vol?: Prisma.IntWithAggregatesFilter<"Report"> | number
+  views?: Prisma.IntNullableWithAggregatesFilter<"Report"> | number | null
+  vol?: Prisma.IntNullableWithAggregatesFilter<"Report"> | number | null
   objectId?: Prisma.StringNullableWithAggregatesFilter<"Report"> | string | null
 }
 
@@ -464,7 +464,7 @@ export type ReportCreateInput = {
   id?: string
   body: string
   court: string
-  createdAt?: Date | string
+  createdAt?: Date | string | null
   date: Date | string
   isPublished?: boolean
   issues?: string | null
@@ -474,9 +474,9 @@ export type ReportCreateInput = {
   suitNo: string
   summary: string
   title: string
-  updatedAt?: Date | string
-  views?: number
-  vol: number
+  updatedAt?: Date | string | null
+  views?: number | null
+  vol?: number | null
   objectId?: string | null
   tags?: Prisma.ReportTagsCreateNestedManyWithoutReportInput
   lawSubjects?: Prisma.ReportToSubjectCreateNestedManyWithoutReportInput
@@ -492,7 +492,7 @@ export type ReportUncheckedCreateInput = {
   id?: string
   body: string
   court: string
-  createdAt?: Date | string
+  createdAt?: Date | string | null
   date: Date | string
   isPublished?: boolean
   issues?: string | null
@@ -502,11 +502,11 @@ export type ReportUncheckedCreateInput = {
   suitNo: string
   summary: string
   title: string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   added_by_id: string
   updated_by_id?: string | null
-  views?: number
-  vol: number
+  views?: number | null
+  vol?: number | null
   objectId?: string | null
   tags?: Prisma.ReportTagsUncheckedCreateNestedManyWithoutReportInput
   lawSubjects?: Prisma.ReportToSubjectUncheckedCreateNestedManyWithoutReportInput
@@ -519,7 +519,7 @@ export type ReportUncheckedCreateInput = {
 export type ReportUpdateInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   court?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   issues?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -529,9 +529,9 @@ export type ReportUpdateInput = {
   suitNo?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  views?: Prisma.IntFieldUpdateOperationsInput | number
-  vol?: Prisma.IntFieldUpdateOperationsInput | number
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  views?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vol?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tags?: Prisma.ReportTagsUpdateManyWithoutReportNestedInput
   lawSubjects?: Prisma.ReportToSubjectUpdateManyWithoutReportNestedInput
@@ -546,7 +546,7 @@ export type ReportUpdateInput = {
 export type ReportUncheckedUpdateInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   court?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   issues?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -556,11 +556,11 @@ export type ReportUncheckedUpdateInput = {
   suitNo?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   added_by_id?: Prisma.StringFieldUpdateOperationsInput | string
   updated_by_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  views?: Prisma.IntFieldUpdateOperationsInput | number
-  vol?: Prisma.IntFieldUpdateOperationsInput | number
+  views?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vol?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tags?: Prisma.ReportTagsUncheckedUpdateManyWithoutReportNestedInput
   lawSubjects?: Prisma.ReportToSubjectUncheckedUpdateManyWithoutReportNestedInput
@@ -574,7 +574,7 @@ export type ReportCreateManyInput = {
   id?: string
   body: string
   court: string
-  createdAt?: Date | string
+  createdAt?: Date | string | null
   date: Date | string
   isPublished?: boolean
   issues?: string | null
@@ -584,18 +584,18 @@ export type ReportCreateManyInput = {
   suitNo: string
   summary: string
   title: string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   added_by_id: string
   updated_by_id?: string | null
-  views?: number
-  vol: number
+  views?: number | null
+  vol?: number | null
   objectId?: string | null
 }
 
 export type ReportUpdateManyMutationInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   court?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   issues?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -605,16 +605,16 @@ export type ReportUpdateManyMutationInput = {
   suitNo?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  views?: Prisma.IntFieldUpdateOperationsInput | number
-  vol?: Prisma.IntFieldUpdateOperationsInput | number
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  views?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vol?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ReportUncheckedUpdateManyInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   court?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   issues?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -624,11 +624,11 @@ export type ReportUncheckedUpdateManyInput = {
   suitNo?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   added_by_id?: Prisma.StringFieldUpdateOperationsInput | string
   updated_by_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  views?: Prisma.IntFieldUpdateOperationsInput | number
-  vol?: Prisma.IntFieldUpdateOperationsInput | number
+  views?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vol?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
@@ -809,6 +809,20 @@ export type ReportUncheckedUpdateManyWithoutUpdated_byNestedInput = {
   deleteMany?: Prisma.ReportScalarWhereInput | Prisma.ReportScalarWhereInput[]
 }
 
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
+  unset?: boolean
+}
+
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+  unset?: boolean
+}
+
 export type ReportCreateNestedOneWithoutLawSubjectsInput = {
   create?: Prisma.XOR<Prisma.ReportCreateWithoutLawSubjectsInput, Prisma.ReportUncheckedCreateWithoutLawSubjectsInput>
   connectOrCreate?: Prisma.ReportCreateOrConnectWithoutLawSubjectsInput
@@ -897,7 +911,7 @@ export type ReportCreateWithoutAdded_byInput = {
   id?: string
   body: string
   court: string
-  createdAt?: Date | string
+  createdAt?: Date | string | null
   date: Date | string
   isPublished?: boolean
   issues?: string | null
@@ -907,9 +921,9 @@ export type ReportCreateWithoutAdded_byInput = {
   suitNo: string
   summary: string
   title: string
-  updatedAt?: Date | string
-  views?: number
-  vol: number
+  updatedAt?: Date | string | null
+  views?: number | null
+  vol?: number | null
   objectId?: string | null
   tags?: Prisma.ReportTagsCreateNestedManyWithoutReportInput
   lawSubjects?: Prisma.ReportToSubjectCreateNestedManyWithoutReportInput
@@ -924,7 +938,7 @@ export type ReportUncheckedCreateWithoutAdded_byInput = {
   id?: string
   body: string
   court: string
-  createdAt?: Date | string
+  createdAt?: Date | string | null
   date: Date | string
   isPublished?: boolean
   issues?: string | null
@@ -934,10 +948,10 @@ export type ReportUncheckedCreateWithoutAdded_byInput = {
   suitNo: string
   summary: string
   title: string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   updated_by_id?: string | null
-  views?: number
-  vol: number
+  views?: number | null
+  vol?: number | null
   objectId?: string | null
   tags?: Prisma.ReportTagsUncheckedCreateNestedManyWithoutReportInput
   lawSubjects?: Prisma.ReportToSubjectUncheckedCreateNestedManyWithoutReportInput
@@ -960,7 +974,7 @@ export type ReportCreateWithoutUpdated_byInput = {
   id?: string
   body: string
   court: string
-  createdAt?: Date | string
+  createdAt?: Date | string | null
   date: Date | string
   isPublished?: boolean
   issues?: string | null
@@ -970,9 +984,9 @@ export type ReportCreateWithoutUpdated_byInput = {
   suitNo: string
   summary: string
   title: string
-  updatedAt?: Date | string
-  views?: number
-  vol: number
+  updatedAt?: Date | string | null
+  views?: number | null
+  vol?: number | null
   objectId?: string | null
   tags?: Prisma.ReportTagsCreateNestedManyWithoutReportInput
   lawSubjects?: Prisma.ReportToSubjectCreateNestedManyWithoutReportInput
@@ -987,7 +1001,7 @@ export type ReportUncheckedCreateWithoutUpdated_byInput = {
   id?: string
   body: string
   court: string
-  createdAt?: Date | string
+  createdAt?: Date | string | null
   date: Date | string
   isPublished?: boolean
   issues?: string | null
@@ -997,10 +1011,10 @@ export type ReportUncheckedCreateWithoutUpdated_byInput = {
   suitNo: string
   summary: string
   title: string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   added_by_id: string
-  views?: number
-  vol: number
+  views?: number | null
+  vol?: number | null
   objectId?: string | null
   tags?: Prisma.ReportTagsUncheckedCreateNestedManyWithoutReportInput
   lawSubjects?: Prisma.ReportToSubjectUncheckedCreateNestedManyWithoutReportInput
@@ -1042,7 +1056,7 @@ export type ReportScalarWhereInput = {
   id?: Prisma.StringFilter<"Report"> | string
   body?: Prisma.StringFilter<"Report"> | string
   court?: Prisma.StringFilter<"Report"> | string
-  createdAt?: Prisma.DateTimeFilter<"Report"> | Date | string
+  createdAt?: Prisma.DateTimeNullableFilter<"Report"> | Date | string | null
   date?: Prisma.DateTimeFilter<"Report"> | Date | string
   isPublished?: Prisma.BoolFilter<"Report"> | boolean
   issues?: Prisma.StringNullableFilter<"Report"> | string | null
@@ -1052,11 +1066,11 @@ export type ReportScalarWhereInput = {
   suitNo?: Prisma.StringFilter<"Report"> | string
   summary?: Prisma.StringFilter<"Report"> | string
   title?: Prisma.StringFilter<"Report"> | string
-  updatedAt?: Prisma.DateTimeFilter<"Report"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableFilter<"Report"> | Date | string | null
   added_by_id?: Prisma.StringFilter<"Report"> | string
   updated_by_id?: Prisma.StringNullableFilter<"Report"> | string | null
-  views?: Prisma.IntFilter<"Report"> | number
-  vol?: Prisma.IntFilter<"Report"> | number
+  views?: Prisma.IntNullableFilter<"Report"> | number | null
+  vol?: Prisma.IntNullableFilter<"Report"> | number | null
   objectId?: Prisma.StringNullableFilter<"Report"> | string | null
 }
 
@@ -1080,7 +1094,7 @@ export type ReportCreateWithoutLawSubjectsInput = {
   id?: string
   body: string
   court: string
-  createdAt?: Date | string
+  createdAt?: Date | string | null
   date: Date | string
   isPublished?: boolean
   issues?: string | null
@@ -1090,9 +1104,9 @@ export type ReportCreateWithoutLawSubjectsInput = {
   suitNo: string
   summary: string
   title: string
-  updatedAt?: Date | string
-  views?: number
-  vol: number
+  updatedAt?: Date | string | null
+  views?: number | null
+  vol?: number | null
   objectId?: string | null
   tags?: Prisma.ReportTagsCreateNestedManyWithoutReportInput
   visits?: Prisma.ReportVisitsCreateNestedManyWithoutReportInput
@@ -1107,7 +1121,7 @@ export type ReportUncheckedCreateWithoutLawSubjectsInput = {
   id?: string
   body: string
   court: string
-  createdAt?: Date | string
+  createdAt?: Date | string | null
   date: Date | string
   isPublished?: boolean
   issues?: string | null
@@ -1117,11 +1131,11 @@ export type ReportUncheckedCreateWithoutLawSubjectsInput = {
   suitNo: string
   summary: string
   title: string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   added_by_id: string
   updated_by_id?: string | null
-  views?: number
-  vol: number
+  views?: number | null
+  vol?: number | null
   objectId?: string | null
   tags?: Prisma.ReportTagsUncheckedCreateNestedManyWithoutReportInput
   visits?: Prisma.ReportVisitsUncheckedCreateNestedManyWithoutReportInput
@@ -1149,7 +1163,7 @@ export type ReportUpdateToOneWithWhereWithoutLawSubjectsInput = {
 export type ReportUpdateWithoutLawSubjectsInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   court?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   issues?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1159,9 +1173,9 @@ export type ReportUpdateWithoutLawSubjectsInput = {
   suitNo?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  views?: Prisma.IntFieldUpdateOperationsInput | number
-  vol?: Prisma.IntFieldUpdateOperationsInput | number
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  views?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vol?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tags?: Prisma.ReportTagsUpdateManyWithoutReportNestedInput
   visits?: Prisma.ReportVisitsUpdateManyWithoutReportNestedInput
@@ -1175,7 +1189,7 @@ export type ReportUpdateWithoutLawSubjectsInput = {
 export type ReportUncheckedUpdateWithoutLawSubjectsInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   court?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   issues?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1185,11 +1199,11 @@ export type ReportUncheckedUpdateWithoutLawSubjectsInput = {
   suitNo?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   added_by_id?: Prisma.StringFieldUpdateOperationsInput | string
   updated_by_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  views?: Prisma.IntFieldUpdateOperationsInput | number
-  vol?: Prisma.IntFieldUpdateOperationsInput | number
+  views?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vol?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tags?: Prisma.ReportTagsUncheckedUpdateManyWithoutReportNestedInput
   visits?: Prisma.ReportVisitsUncheckedUpdateManyWithoutReportNestedInput
@@ -1202,7 +1216,7 @@ export type ReportCreateWithoutCommentsInput = {
   id?: string
   body: string
   court: string
-  createdAt?: Date | string
+  createdAt?: Date | string | null
   date: Date | string
   isPublished?: boolean
   issues?: string | null
@@ -1212,9 +1226,9 @@ export type ReportCreateWithoutCommentsInput = {
   suitNo: string
   summary: string
   title: string
-  updatedAt?: Date | string
-  views?: number
-  vol: number
+  updatedAt?: Date | string | null
+  views?: number | null
+  vol?: number | null
   objectId?: string | null
   tags?: Prisma.ReportTagsCreateNestedManyWithoutReportInput
   lawSubjects?: Prisma.ReportToSubjectCreateNestedManyWithoutReportInput
@@ -1229,7 +1243,7 @@ export type ReportUncheckedCreateWithoutCommentsInput = {
   id?: string
   body: string
   court: string
-  createdAt?: Date | string
+  createdAt?: Date | string | null
   date: Date | string
   isPublished?: boolean
   issues?: string | null
@@ -1239,11 +1253,11 @@ export type ReportUncheckedCreateWithoutCommentsInput = {
   suitNo: string
   summary: string
   title: string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   added_by_id: string
   updated_by_id?: string | null
-  views?: number
-  vol: number
+  views?: number | null
+  vol?: number | null
   objectId?: string | null
   tags?: Prisma.ReportTagsUncheckedCreateNestedManyWithoutReportInput
   lawSubjects?: Prisma.ReportToSubjectUncheckedCreateNestedManyWithoutReportInput
@@ -1271,7 +1285,7 @@ export type ReportUpdateToOneWithWhereWithoutCommentsInput = {
 export type ReportUpdateWithoutCommentsInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   court?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   issues?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1281,9 +1295,9 @@ export type ReportUpdateWithoutCommentsInput = {
   suitNo?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  views?: Prisma.IntFieldUpdateOperationsInput | number
-  vol?: Prisma.IntFieldUpdateOperationsInput | number
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  views?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vol?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tags?: Prisma.ReportTagsUpdateManyWithoutReportNestedInput
   lawSubjects?: Prisma.ReportToSubjectUpdateManyWithoutReportNestedInput
@@ -1297,7 +1311,7 @@ export type ReportUpdateWithoutCommentsInput = {
 export type ReportUncheckedUpdateWithoutCommentsInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   court?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   issues?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1307,11 +1321,11 @@ export type ReportUncheckedUpdateWithoutCommentsInput = {
   suitNo?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   added_by_id?: Prisma.StringFieldUpdateOperationsInput | string
   updated_by_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  views?: Prisma.IntFieldUpdateOperationsInput | number
-  vol?: Prisma.IntFieldUpdateOperationsInput | number
+  views?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vol?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tags?: Prisma.ReportTagsUncheckedUpdateManyWithoutReportNestedInput
   lawSubjects?: Prisma.ReportToSubjectUncheckedUpdateManyWithoutReportNestedInput
@@ -1324,7 +1338,7 @@ export type ReportCreateWithoutLikesInput = {
   id?: string
   body: string
   court: string
-  createdAt?: Date | string
+  createdAt?: Date | string | null
   date: Date | string
   isPublished?: boolean
   issues?: string | null
@@ -1334,9 +1348,9 @@ export type ReportCreateWithoutLikesInput = {
   suitNo: string
   summary: string
   title: string
-  updatedAt?: Date | string
-  views?: number
-  vol: number
+  updatedAt?: Date | string | null
+  views?: number | null
+  vol?: number | null
   objectId?: string | null
   tags?: Prisma.ReportTagsCreateNestedManyWithoutReportInput
   lawSubjects?: Prisma.ReportToSubjectCreateNestedManyWithoutReportInput
@@ -1351,7 +1365,7 @@ export type ReportUncheckedCreateWithoutLikesInput = {
   id?: string
   body: string
   court: string
-  createdAt?: Date | string
+  createdAt?: Date | string | null
   date: Date | string
   isPublished?: boolean
   issues?: string | null
@@ -1361,11 +1375,11 @@ export type ReportUncheckedCreateWithoutLikesInput = {
   suitNo: string
   summary: string
   title: string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   added_by_id: string
   updated_by_id?: string | null
-  views?: number
-  vol: number
+  views?: number | null
+  vol?: number | null
   objectId?: string | null
   tags?: Prisma.ReportTagsUncheckedCreateNestedManyWithoutReportInput
   lawSubjects?: Prisma.ReportToSubjectUncheckedCreateNestedManyWithoutReportInput
@@ -1393,7 +1407,7 @@ export type ReportUpdateToOneWithWhereWithoutLikesInput = {
 export type ReportUpdateWithoutLikesInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   court?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   issues?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1403,9 +1417,9 @@ export type ReportUpdateWithoutLikesInput = {
   suitNo?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  views?: Prisma.IntFieldUpdateOperationsInput | number
-  vol?: Prisma.IntFieldUpdateOperationsInput | number
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  views?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vol?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tags?: Prisma.ReportTagsUpdateManyWithoutReportNestedInput
   lawSubjects?: Prisma.ReportToSubjectUpdateManyWithoutReportNestedInput
@@ -1419,7 +1433,7 @@ export type ReportUpdateWithoutLikesInput = {
 export type ReportUncheckedUpdateWithoutLikesInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   court?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   issues?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1429,11 +1443,11 @@ export type ReportUncheckedUpdateWithoutLikesInput = {
   suitNo?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   added_by_id?: Prisma.StringFieldUpdateOperationsInput | string
   updated_by_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  views?: Prisma.IntFieldUpdateOperationsInput | number
-  vol?: Prisma.IntFieldUpdateOperationsInput | number
+  views?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vol?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tags?: Prisma.ReportTagsUncheckedUpdateManyWithoutReportNestedInput
   lawSubjects?: Prisma.ReportToSubjectUncheckedUpdateManyWithoutReportNestedInput
@@ -1446,7 +1460,7 @@ export type ReportCreateWithoutTagsInput = {
   id?: string
   body: string
   court: string
-  createdAt?: Date | string
+  createdAt?: Date | string | null
   date: Date | string
   isPublished?: boolean
   issues?: string | null
@@ -1456,9 +1470,9 @@ export type ReportCreateWithoutTagsInput = {
   suitNo: string
   summary: string
   title: string
-  updatedAt?: Date | string
-  views?: number
-  vol: number
+  updatedAt?: Date | string | null
+  views?: number | null
+  vol?: number | null
   objectId?: string | null
   lawSubjects?: Prisma.ReportToSubjectCreateNestedManyWithoutReportInput
   visits?: Prisma.ReportVisitsCreateNestedManyWithoutReportInput
@@ -1473,7 +1487,7 @@ export type ReportUncheckedCreateWithoutTagsInput = {
   id?: string
   body: string
   court: string
-  createdAt?: Date | string
+  createdAt?: Date | string | null
   date: Date | string
   isPublished?: boolean
   issues?: string | null
@@ -1483,11 +1497,11 @@ export type ReportUncheckedCreateWithoutTagsInput = {
   suitNo: string
   summary: string
   title: string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   added_by_id: string
   updated_by_id?: string | null
-  views?: number
-  vol: number
+  views?: number | null
+  vol?: number | null
   objectId?: string | null
   lawSubjects?: Prisma.ReportToSubjectUncheckedCreateNestedManyWithoutReportInput
   visits?: Prisma.ReportVisitsUncheckedCreateNestedManyWithoutReportInput
@@ -1515,7 +1529,7 @@ export type ReportUpdateToOneWithWhereWithoutTagsInput = {
 export type ReportUpdateWithoutTagsInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   court?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   issues?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1525,9 +1539,9 @@ export type ReportUpdateWithoutTagsInput = {
   suitNo?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  views?: Prisma.IntFieldUpdateOperationsInput | number
-  vol?: Prisma.IntFieldUpdateOperationsInput | number
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  views?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vol?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lawSubjects?: Prisma.ReportToSubjectUpdateManyWithoutReportNestedInput
   visits?: Prisma.ReportVisitsUpdateManyWithoutReportNestedInput
@@ -1541,7 +1555,7 @@ export type ReportUpdateWithoutTagsInput = {
 export type ReportUncheckedUpdateWithoutTagsInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   court?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   issues?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1551,11 +1565,11 @@ export type ReportUncheckedUpdateWithoutTagsInput = {
   suitNo?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   added_by_id?: Prisma.StringFieldUpdateOperationsInput | string
   updated_by_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  views?: Prisma.IntFieldUpdateOperationsInput | number
-  vol?: Prisma.IntFieldUpdateOperationsInput | number
+  views?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vol?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lawSubjects?: Prisma.ReportToSubjectUncheckedUpdateManyWithoutReportNestedInput
   visits?: Prisma.ReportVisitsUncheckedUpdateManyWithoutReportNestedInput
@@ -1568,7 +1582,7 @@ export type ReportCreateWithoutVisitsInput = {
   id?: string
   body: string
   court: string
-  createdAt?: Date | string
+  createdAt?: Date | string | null
   date: Date | string
   isPublished?: boolean
   issues?: string | null
@@ -1578,9 +1592,9 @@ export type ReportCreateWithoutVisitsInput = {
   suitNo: string
   summary: string
   title: string
-  updatedAt?: Date | string
-  views?: number
-  vol: number
+  updatedAt?: Date | string | null
+  views?: number | null
+  vol?: number | null
   objectId?: string | null
   tags?: Prisma.ReportTagsCreateNestedManyWithoutReportInput
   lawSubjects?: Prisma.ReportToSubjectCreateNestedManyWithoutReportInput
@@ -1595,7 +1609,7 @@ export type ReportUncheckedCreateWithoutVisitsInput = {
   id?: string
   body: string
   court: string
-  createdAt?: Date | string
+  createdAt?: Date | string | null
   date: Date | string
   isPublished?: boolean
   issues?: string | null
@@ -1605,11 +1619,11 @@ export type ReportUncheckedCreateWithoutVisitsInput = {
   suitNo: string
   summary: string
   title: string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   added_by_id: string
   updated_by_id?: string | null
-  views?: number
-  vol: number
+  views?: number | null
+  vol?: number | null
   objectId?: string | null
   tags?: Prisma.ReportTagsUncheckedCreateNestedManyWithoutReportInput
   lawSubjects?: Prisma.ReportToSubjectUncheckedCreateNestedManyWithoutReportInput
@@ -1637,7 +1651,7 @@ export type ReportUpdateToOneWithWhereWithoutVisitsInput = {
 export type ReportUpdateWithoutVisitsInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   court?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   issues?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1647,9 +1661,9 @@ export type ReportUpdateWithoutVisitsInput = {
   suitNo?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  views?: Prisma.IntFieldUpdateOperationsInput | number
-  vol?: Prisma.IntFieldUpdateOperationsInput | number
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  views?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vol?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tags?: Prisma.ReportTagsUpdateManyWithoutReportNestedInput
   lawSubjects?: Prisma.ReportToSubjectUpdateManyWithoutReportNestedInput
@@ -1663,7 +1677,7 @@ export type ReportUpdateWithoutVisitsInput = {
 export type ReportUncheckedUpdateWithoutVisitsInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   court?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   issues?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1673,11 +1687,11 @@ export type ReportUncheckedUpdateWithoutVisitsInput = {
   suitNo?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   added_by_id?: Prisma.StringFieldUpdateOperationsInput | string
   updated_by_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  views?: Prisma.IntFieldUpdateOperationsInput | number
-  vol?: Prisma.IntFieldUpdateOperationsInput | number
+  views?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vol?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tags?: Prisma.ReportTagsUncheckedUpdateManyWithoutReportNestedInput
   lawSubjects?: Prisma.ReportToSubjectUncheckedUpdateManyWithoutReportNestedInput
@@ -1690,7 +1704,7 @@ export type ReportCreateWithoutBookmarksInput = {
   id?: string
   body: string
   court: string
-  createdAt?: Date | string
+  createdAt?: Date | string | null
   date: Date | string
   isPublished?: boolean
   issues?: string | null
@@ -1700,9 +1714,9 @@ export type ReportCreateWithoutBookmarksInput = {
   suitNo: string
   summary: string
   title: string
-  updatedAt?: Date | string
-  views?: number
-  vol: number
+  updatedAt?: Date | string | null
+  views?: number | null
+  vol?: number | null
   objectId?: string | null
   tags?: Prisma.ReportTagsCreateNestedManyWithoutReportInput
   lawSubjects?: Prisma.ReportToSubjectCreateNestedManyWithoutReportInput
@@ -1717,7 +1731,7 @@ export type ReportUncheckedCreateWithoutBookmarksInput = {
   id?: string
   body: string
   court: string
-  createdAt?: Date | string
+  createdAt?: Date | string | null
   date: Date | string
   isPublished?: boolean
   issues?: string | null
@@ -1727,11 +1741,11 @@ export type ReportUncheckedCreateWithoutBookmarksInput = {
   suitNo: string
   summary: string
   title: string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   added_by_id: string
   updated_by_id?: string | null
-  views?: number
-  vol: number
+  views?: number | null
+  vol?: number | null
   objectId?: string | null
   tags?: Prisma.ReportTagsUncheckedCreateNestedManyWithoutReportInput
   lawSubjects?: Prisma.ReportToSubjectUncheckedCreateNestedManyWithoutReportInput
@@ -1759,7 +1773,7 @@ export type ReportUpdateToOneWithWhereWithoutBookmarksInput = {
 export type ReportUpdateWithoutBookmarksInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   court?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   issues?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1769,9 +1783,9 @@ export type ReportUpdateWithoutBookmarksInput = {
   suitNo?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  views?: Prisma.IntFieldUpdateOperationsInput | number
-  vol?: Prisma.IntFieldUpdateOperationsInput | number
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  views?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vol?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tags?: Prisma.ReportTagsUpdateManyWithoutReportNestedInput
   lawSubjects?: Prisma.ReportToSubjectUpdateManyWithoutReportNestedInput
@@ -1785,7 +1799,7 @@ export type ReportUpdateWithoutBookmarksInput = {
 export type ReportUncheckedUpdateWithoutBookmarksInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   court?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   issues?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1795,11 +1809,11 @@ export type ReportUncheckedUpdateWithoutBookmarksInput = {
   suitNo?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   added_by_id?: Prisma.StringFieldUpdateOperationsInput | string
   updated_by_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  views?: Prisma.IntFieldUpdateOperationsInput | number
-  vol?: Prisma.IntFieldUpdateOperationsInput | number
+  views?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vol?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tags?: Prisma.ReportTagsUncheckedUpdateManyWithoutReportNestedInput
   lawSubjects?: Prisma.ReportToSubjectUncheckedUpdateManyWithoutReportNestedInput
@@ -1812,7 +1826,7 @@ export type ReportCreateManyAdded_byInput = {
   id?: string
   body: string
   court: string
-  createdAt?: Date | string
+  createdAt?: Date | string | null
   date: Date | string
   isPublished?: boolean
   issues?: string | null
@@ -1822,10 +1836,10 @@ export type ReportCreateManyAdded_byInput = {
   suitNo: string
   summary: string
   title: string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   updated_by_id?: string | null
-  views?: number
-  vol: number
+  views?: number | null
+  vol?: number | null
   objectId?: string | null
 }
 
@@ -1833,7 +1847,7 @@ export type ReportCreateManyUpdated_byInput = {
   id?: string
   body: string
   court: string
-  createdAt?: Date | string
+  createdAt?: Date | string | null
   date: Date | string
   isPublished?: boolean
   issues?: string | null
@@ -1843,17 +1857,17 @@ export type ReportCreateManyUpdated_byInput = {
   suitNo: string
   summary: string
   title: string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   added_by_id: string
-  views?: number
-  vol: number
+  views?: number | null
+  vol?: number | null
   objectId?: string | null
 }
 
 export type ReportUpdateWithoutAdded_byInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   court?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   issues?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1863,9 +1877,9 @@ export type ReportUpdateWithoutAdded_byInput = {
   suitNo?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  views?: Prisma.IntFieldUpdateOperationsInput | number
-  vol?: Prisma.IntFieldUpdateOperationsInput | number
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  views?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vol?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tags?: Prisma.ReportTagsUpdateManyWithoutReportNestedInput
   lawSubjects?: Prisma.ReportToSubjectUpdateManyWithoutReportNestedInput
@@ -1879,7 +1893,7 @@ export type ReportUpdateWithoutAdded_byInput = {
 export type ReportUncheckedUpdateWithoutAdded_byInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   court?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   issues?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1889,10 +1903,10 @@ export type ReportUncheckedUpdateWithoutAdded_byInput = {
   suitNo?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  views?: Prisma.IntFieldUpdateOperationsInput | number
-  vol?: Prisma.IntFieldUpdateOperationsInput | number
+  views?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vol?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tags?: Prisma.ReportTagsUncheckedUpdateManyWithoutReportNestedInput
   lawSubjects?: Prisma.ReportToSubjectUncheckedUpdateManyWithoutReportNestedInput
@@ -1905,7 +1919,7 @@ export type ReportUncheckedUpdateWithoutAdded_byInput = {
 export type ReportUncheckedUpdateManyWithoutAdded_byInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   court?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   issues?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1915,17 +1929,17 @@ export type ReportUncheckedUpdateManyWithoutAdded_byInput = {
   suitNo?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  views?: Prisma.IntFieldUpdateOperationsInput | number
-  vol?: Prisma.IntFieldUpdateOperationsInput | number
+  views?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vol?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ReportUpdateWithoutUpdated_byInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   court?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   issues?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1935,9 +1949,9 @@ export type ReportUpdateWithoutUpdated_byInput = {
   suitNo?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  views?: Prisma.IntFieldUpdateOperationsInput | number
-  vol?: Prisma.IntFieldUpdateOperationsInput | number
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  views?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vol?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tags?: Prisma.ReportTagsUpdateManyWithoutReportNestedInput
   lawSubjects?: Prisma.ReportToSubjectUpdateManyWithoutReportNestedInput
@@ -1951,7 +1965,7 @@ export type ReportUpdateWithoutUpdated_byInput = {
 export type ReportUncheckedUpdateWithoutUpdated_byInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   court?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   issues?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1961,10 +1975,10 @@ export type ReportUncheckedUpdateWithoutUpdated_byInput = {
   suitNo?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   added_by_id?: Prisma.StringFieldUpdateOperationsInput | string
-  views?: Prisma.IntFieldUpdateOperationsInput | number
-  vol?: Prisma.IntFieldUpdateOperationsInput | number
+  views?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vol?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tags?: Prisma.ReportTagsUncheckedUpdateManyWithoutReportNestedInput
   lawSubjects?: Prisma.ReportToSubjectUncheckedUpdateManyWithoutReportNestedInput
@@ -1977,7 +1991,7 @@ export type ReportUncheckedUpdateWithoutUpdated_byInput = {
 export type ReportUncheckedUpdateManyWithoutUpdated_byInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   court?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   issues?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1987,10 +2001,10 @@ export type ReportUncheckedUpdateManyWithoutUpdated_byInput = {
   suitNo?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   added_by_id?: Prisma.StringFieldUpdateOperationsInput | string
-  views?: Prisma.IntFieldUpdateOperationsInput | number
-  vol?: Prisma.IntFieldUpdateOperationsInput | number
+  views?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vol?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
@@ -2154,7 +2168,7 @@ export type $ReportPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     id: string
     body: string
     court: string
-    createdAt: Date
+    createdAt: Date | null
     date: Date
     isPublished: boolean
     issues: string | null
@@ -2164,11 +2178,11 @@ export type $ReportPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     suitNo: string
     summary: string
     title: string
-    updatedAt: Date
+    updatedAt: Date | null
     added_by_id: string
     updated_by_id: string | null
-    views: number
-    vol: number
+    views: number | null
+    vol: number | null
     objectId: string | null
   }, ExtArgs["result"]["report"]>
   composites: {}
