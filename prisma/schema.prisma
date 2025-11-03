@@ -185,6 +185,7 @@ model Bookmark {
   report    Report   @relation(fields: [reportId], references: [id])
   user      User     @relation(fields: [userId], references: [id])
 
+  @@unique([userId, reportId])
   @@map("bookmarks")
 }
 

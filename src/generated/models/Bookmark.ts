@@ -197,6 +197,7 @@ export type BookmarkOrderByWithRelationInput = {
 
 export type BookmarkWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  userId_reportId?: Prisma.BookmarkUserIdReportIdCompoundUniqueInput
   AND?: Prisma.BookmarkWhereInput | Prisma.BookmarkWhereInput[]
   OR?: Prisma.BookmarkWhereInput[]
   NOT?: Prisma.BookmarkWhereInput | Prisma.BookmarkWhereInput[]
@@ -206,7 +207,7 @@ export type BookmarkWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Bookmark"> | Date | string
   report?: Prisma.XOR<Prisma.ReportScalarRelationFilter, Prisma.ReportWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "id">
+}, "id" | "userId_reportId">
 
 export type BookmarkOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -288,6 +289,11 @@ export type BookmarkListRelationFilter = {
 
 export type BookmarkOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type BookmarkUserIdReportIdCompoundUniqueInput = {
+  userId: string
+  reportId: string
 }
 
 export type BookmarkCountOrderByAggregateInput = {

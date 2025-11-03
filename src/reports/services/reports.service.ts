@@ -3,6 +3,7 @@ import { Prisma, User } from '../../generated/client';
 import { PrismaService } from '../../prisma.service';
 import { slugify } from '../../utils/helpers';
 import {
+  CreateReportBookmarkDTO,
   CreateReportDTO,
   GetReportsFilter,
   UpdateReportDTO,
@@ -166,4 +167,109 @@ export class ReportsService {
       throw error;
     }
   }
+
+  // get top viewed reports
+  async getTopViewedReports(limit: number = 5) {
+    try {
+      const reports = await this.prisma.report.findMany({
+        orderBy: {
+          views: 'desc',
+        },
+        take: limit,
+        omit: {
+          ratios: true,
+          body: true,
+        },
+      });
+      return reports;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // bookmark report
+  async bookmarkReport(input: CreateReportBookmarkDTO, user: User) {
+    try {
+      const { reportId } = input;
+      const bookmark = await this.prisma.bookmark.create({
+        data: {
+          userId: user.id,
+          reportId,
+        },
+      });
+      return bookmark;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // remove bookmark
+  async removeBookmark(input: CreateReportBookmarkDTO, user: User) {
+    try {
+      const { reportId } = input;
+      const bookmark = await this.prisma.bookmark.delete({
+        where: {
+          userId_reportId: {
+            userId: user.id,
+            reportId,
+          },
+        },
+      });
+      return bookmark;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getBookmarks(user: User) {
+    try {
+      const bookmarks = await this.prisma.bookmark.findMany({
+        where: { userId: user.id },
+        include: {
+          report: true,
+        },
+      });
+      return bookmarks.map((b) => b.report);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async likeReport(reportId: string, user: User) {
+    try {
+      const existingLike = await this.prisma.reportLike.findFirst({
+        where: {
+          reportId,
+          userId: user.id,
+        },
+      });
+      if (existingLike) {
+        // delete like ie unlike
+        await this.prisma.reportLike.delete({
+          where: { id: existingLike.id },
+        });
+        return {
+          message: 'Report unliked successfully',
+          success: true,
+        };
+      }
+      const like = await this.prisma.reportLike.create({
+        data: {
+          reportId,
+          userId: user.id,
+        },
+      });
+      return {
+        message: 'Report liked successfully',
+        success: true,
+        reportLike: like,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // like report
+
+  // unlike report
 }

@@ -61,3 +61,9 @@ export class UpdateReportDTO extends PartialType(CreateReportDTO) {
   @IsString()
   id: string;
 }
+
+export class CreateReportBookmarkDTO {
+  @ApiProperty()
+  @IsString()
+  reportId: string;
+}

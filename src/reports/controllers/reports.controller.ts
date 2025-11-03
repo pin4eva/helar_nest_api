@@ -53,4 +53,10 @@ export class ReportsController {
   ) {
     return this.reportsService.updateReport(input, user);
   }
+
+  @Post('like-dislike/:id')
+  @UseGuards(AuthGuard)
+  async likeReport(@Param('id') id: string, @CurrentUser() user: User) {
+    return this.reportsService.likeReport(id, user);
+  }
 }
