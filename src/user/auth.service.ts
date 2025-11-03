@@ -206,12 +206,22 @@ export class AuthService {
   // reset password
 
   // decode token
-  async decodeToken(token: string): Promise<User> {
+  async decodeToken(token: string): Promise<User | null> {
+    if (!token) return null;
+    const bearerToken = token?.split(' ')[1] || token;
+    token = bearerToken;
     try {
+      console.log('Decoding token:', token);
+
       const decoded = jwt.verify(token, environments.JWT_SECRETS) as {
         id?: string;
         tokenType?: string;
       };
+      if (!decoded) {
+        console.error({ decoded });
+        throw new UnauthorizedException('Invalid token');
+      }
+
       if (decoded.tokenType !== 'access') {
         throw new UnauthorizedException('Invalid token type');
       }

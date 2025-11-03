@@ -9,7 +9,6 @@ import { User } from './user.schema';
 
 export class GetUsersFilterInput {
   @ApiProperty({ required: false })
-  @IsString()
   search?: string;
   @ApiProperty({ required: false })
   limit?: number;

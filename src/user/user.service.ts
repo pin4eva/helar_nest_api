@@ -30,6 +30,15 @@ export class UserService {
 
     return this.prisma.user.findMany({
       where,
+      select: {
+        id: true,
+        firstName: true,
+        lastName: true,
+        email: true,
+        role: true,
+        status: true,
+        profileType: true,
+      },
       take: limit,
     });
   }
