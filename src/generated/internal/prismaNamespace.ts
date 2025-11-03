@@ -395,6 +395,7 @@ export const ModelName = {
   Report: 'Report',
   ReportToSubject: 'ReportToSubject',
   ReportComment: 'ReportComment',
+  ReportCommentLike: 'ReportCommentLike',
   ReportLike: 'ReportLike',
   ReportTags: 'ReportTags',
   ReportVisits: 'ReportVisits',
@@ -423,7 +424,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "auth" | "user" | "subscription" | "report" | "reportToSubject" | "reportComment" | "reportLike" | "reportTags" | "reportVisits" | "bookmark" | "handbookCase" | "handbook" | "noteItem" | "quote" | "subject" | "facultyNoteSummary" | "nlsNoteSummary" | "textbookCase" | "textbook"
+    modelProps: "auth" | "user" | "subscription" | "report" | "reportToSubject" | "reportComment" | "reportCommentLike" | "reportLike" | "reportTags" | "reportVisits" | "bookmark" | "handbookCase" | "handbook" | "noteItem" | "quote" | "subject" | "facultyNoteSummary" | "nlsNoteSummary" | "textbookCase" | "textbook"
     txIsolationLevel: never
   }
   model: {
@@ -868,6 +869,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ReportCommentCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ReportCommentCountAggregateOutputType> | number
+        }
+      }
+    }
+    ReportCommentLike: {
+      payload: Prisma.$ReportCommentLikePayload<ExtArgs>
+      fields: Prisma.ReportCommentLikeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ReportCommentLikeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportCommentLikePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ReportCommentLikeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportCommentLikePayload>
+        }
+        findFirst: {
+          args: Prisma.ReportCommentLikeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportCommentLikePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ReportCommentLikeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportCommentLikePayload>
+        }
+        findMany: {
+          args: Prisma.ReportCommentLikeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportCommentLikePayload>[]
+        }
+        create: {
+          args: Prisma.ReportCommentLikeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportCommentLikePayload>
+        }
+        createMany: {
+          args: Prisma.ReportCommentLikeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.ReportCommentLikeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportCommentLikePayload>
+        }
+        update: {
+          args: Prisma.ReportCommentLikeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportCommentLikePayload>
+        }
+        deleteMany: {
+          args: Prisma.ReportCommentLikeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ReportCommentLikeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.ReportCommentLikeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportCommentLikePayload>
+        }
+        aggregate: {
+          args: Prisma.ReportCommentLikeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateReportCommentLike>
+        }
+        groupBy: {
+          args: Prisma.ReportCommentLikeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReportCommentLikeGroupByOutputType>[]
+        }
+        findRaw: {
+          args: Prisma.ReportCommentLikeFindRawArgs<ExtArgs>
+          result: Prisma.JsonObject
+        }
+        aggregateRaw: {
+          args: Prisma.ReportCommentLikeAggregateRawArgs<ExtArgs>
+          result: Prisma.JsonObject
+        }
+        count: {
+          args: Prisma.ReportCommentLikeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReportCommentLikeCountAggregateOutputType> | number
         }
       }
     }
@@ -1959,6 +2034,15 @@ export const ReportCommentScalarFieldEnum = {
 export type ReportCommentScalarFieldEnum = (typeof ReportCommentScalarFieldEnum)[keyof typeof ReportCommentScalarFieldEnum]
 
 
+export const ReportCommentLikeScalarFieldEnum = {
+  id: 'id',
+  reportCommentId: 'reportCommentId',
+  userId: 'userId'
+} as const
+
+export type ReportCommentLikeScalarFieldEnum = (typeof ReportCommentLikeScalarFieldEnum)[keyof typeof ReportCommentLikeScalarFieldEnum]
+
+
 export const ReportLikeScalarFieldEnum = {
   id: 'id',
   reportId: 'reportId',
@@ -2385,6 +2469,7 @@ export type GlobalOmitConfig = {
   report?: Prisma.ReportOmit
   reportToSubject?: Prisma.ReportToSubjectOmit
   reportComment?: Prisma.ReportCommentOmit
+  reportCommentLike?: Prisma.ReportCommentLikeOmit
   reportLike?: Prisma.ReportLikeOmit
   reportTags?: Prisma.ReportTagsOmit
   reportVisits?: Prisma.ReportVisitsOmit

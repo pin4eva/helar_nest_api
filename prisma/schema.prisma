@@ -62,9 +62,10 @@ model User {
   reports_added       Report[]            @relation("reports_added")
   reports_updated     Report[]            @relation("reports_updated")
 
-  subscriptions         Subscription[] @relation("UserSubscriptions")
-  currentSubscriptionId String?        @unique @db.ObjectId
-  currentSubscription   Subscription?  @relation("CurrentSubscription", fields: [currentSubscriptionId], references: [id], onDelete: SetNull, onUpdate: NoAction)
+  subscriptions         Subscription[]      @relation("UserSubscriptions")
+  currentSubscriptionId String?             @unique @db.ObjectId
+  currentSubscription   Subscription?       @relation("CurrentSubscription", fields: [currentSubscriptionId], references: [id], onDelete: SetNull, onUpdate: NoAction)
+  ReportCommentLike     ReportCommentLike[]
 
   @@map("users")
 }
@@ -132,17 +133,29 @@ model ReportToSubject {
 }
 
 model ReportComment {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  authorId  String   @db.ObjectId
+  id        String              @id @default(auto()) @map("_id") @db.ObjectId
+  authorId  String              @db.ObjectId
   objectId  String?
   comment   String
-  createdAt DateTime @default(now())
-  reportId  String   @db.ObjectId
-  updatedAt DateTime @updatedAt
-  user      User     @relation(fields: [authorId], references: [id])
-  report    Report   @relation(fields: [reportId], references: [id])
+  createdAt DateTime            @default(now())
+  reportId  String              @db.ObjectId
+  updatedAt DateTime            @updatedAt
+  user      User                @relation(fields: [authorId], references: [id])
+  report    Report              @relation(fields: [reportId], references: [id])
+  likes     ReportCommentLike[]
 
   @@map("report_comments")
+}
+
+model ReportCommentLike {
+  id              String        @id @default(auto()) @map("_id") @db.ObjectId
+  reportCommentId String        @db.ObjectId
+  userId          String        @db.ObjectId
+  reportComment   ReportComment @relation(fields: [reportCommentId], references: [id])
+  user            User          @relation(fields: [userId], references: [id])
+
+  @@unique([reportCommentId, userId])
+  @@map("report_comment_likes")
 }
 
 model ReportLike {

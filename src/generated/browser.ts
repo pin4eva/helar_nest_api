@@ -47,6 +47,11 @@ export type ReportToSubject = Prisma.ReportToSubjectModel
  */
 export type ReportComment = Prisma.ReportCommentModel
 /**
+ * Model ReportCommentLike
+ * 
+ */
+export type ReportCommentLike = Prisma.ReportCommentLikeModel
+/**
  * Model ReportLike
  * 
  */

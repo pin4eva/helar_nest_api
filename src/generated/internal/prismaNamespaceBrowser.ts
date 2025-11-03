@@ -54,6 +54,7 @@ export const ModelName = {
   Report: 'Report',
   ReportToSubject: 'ReportToSubject',
   ReportComment: 'ReportComment',
+  ReportCommentLike: 'ReportCommentLike',
   ReportLike: 'ReportLike',
   ReportTags: 'ReportTags',
   ReportVisits: 'ReportVisits',
@@ -182,6 +183,15 @@ export const ReportCommentScalarFieldEnum = {
 } as const
 
 export type ReportCommentScalarFieldEnum = (typeof ReportCommentScalarFieldEnum)[keyof typeof ReportCommentScalarFieldEnum]
+
+
+export const ReportCommentLikeScalarFieldEnum = {
+  id: 'id',
+  reportCommentId: 'reportCommentId',
+  userId: 'userId'
+} as const
+
+export type ReportCommentLikeScalarFieldEnum = (typeof ReportCommentLikeScalarFieldEnum)[keyof typeof ReportCommentLikeScalarFieldEnum]
 
 
 export const ReportLikeScalarFieldEnum = {
