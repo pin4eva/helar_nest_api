@@ -98,7 +98,7 @@ export class ReportsService {
   // get reports
   async getReports(filter?: GetReportsFilter) {
     try {
-      const { search, limit = 20 } = filter || {};
+      const { search, limit = 20 } = filter || { search: '', limit: 20 };
       let where: Prisma.ReportWhereInput = {};
       if (search) {
         where = {
@@ -126,7 +126,7 @@ export class ReportsService {
       }
       const reports = await this.prisma.report.findMany({
         where,
-        take: limit,
+        take: Number(limit),
         omit: {
           ratios: true,
           body: true,
