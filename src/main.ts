@@ -3,6 +3,7 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import type { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import type { Request, Response } from 'express';
 import * as express from 'express';
 import { AppModule } from './app.module';
 
@@ -56,9 +57,21 @@ async function bootstrap() {
   return app;
 }
 
-bootstrap().then((app) => {
-  app.listen(process.env.PORT ?? 8000, async () => {
-    const url = await app.getUrl();
-    Logger.debug(`Server is running on ${url}`);
+// Start HTTP server only when not running in a serverless environment (e.g., Vercel)
+if (!process.env.VERCEL) {
+  bootstrap().then((app) => {
+    app.listen(process.env.PORT ?? 8000, async () => {
+      const url = await app.getUrl();
+      Logger.debug(`Server is running on ${url}`);
+    });
   });
-});
+}
+
+// Export a serverless handler for platforms like Vercel
+// Vercel will import this module and look for a default export (request handler)
+// to route incoming HTTP requests. We reuse the initialized Nest app.
+export default async function handler(req: Request, res: Response) {
+  const app = await bootstrap();
+  const instance = app.getHttpAdapter().getInstance();
+  return instance(req, res);
+}
