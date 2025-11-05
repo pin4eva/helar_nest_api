@@ -8,8 +8,8 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
+import { User } from 'src/user/schema/user.schema';
 import { CurrentUser } from '../../decorators/current-user.decorator';
-import { User } from '../../generated/client';
 import { AuthGuard } from '../../guards/auth.guard';
 import {
   CreateReportDTO,

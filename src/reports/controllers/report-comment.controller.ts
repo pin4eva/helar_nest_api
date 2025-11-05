@@ -9,8 +9,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { User } from 'src/user/schema/user.schema';
 import { CurrentUser } from '../../decorators/current-user.decorator';
-import { User } from '../../generated/client';
 import { AuthGuard } from '../../guards/auth.guard';
 import {
   CreateReportCommentDTO,

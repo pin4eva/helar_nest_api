@@ -1,0 +1,134 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: ID!
+  bio: String
+  city: String
+  contact: String
+  email: String!
+  firstName: String!
+  lastName: String
+  image: String
+  imagePublicId: String
+  lastSeen: DateTime
+  phone: String
+  profileType: UserProfileTypeEnum
+  role: UserRoleEnum
+  status: UserStatusEnum
+  passwordUpdateToken: String
+  gender: GenderEnum
+  emailToken: String
+  isEmailVerified: Boolean
+  updatedAt: DateTime
+  createdAt: DateTime
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+enum UserProfileTypeEnum {
+  Student
+  Lawyer
+  Guest
+  Staff
+}
+
+enum UserRoleEnum {
+  Admin
+  Editor
+  User
+  Developer
+}
+
+enum UserStatusEnum {
+  Active
+  Suspended
+  Banned
+}
+
+enum GenderEnum {
+  Male
+  Female
+}
+
+type Bookmark {
+  id: ID!
+  reportId: ID!
+  userId: ID!
+}
+
+type ReportVisit {
+  id: ID!
+  reportId: ID!
+  userId: ID!
+  ipAddress: String!
+}
+
+type ReportComment {
+  id: ID!
+  reportId: ID!
+  authorId: ID!
+  comment: String!
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+type Report {
+  id: ID!
+  body: String!
+  court: String!
+  date: DateTime!
+  isPublished: Boolean!
+  issues: String!
+  ratios: String!
+  reportId: Float!
+  slug: String!
+  suitNo: String!
+  summary: String!
+  title: String!
+  added_by_id: ID
+  updated_by_id: ID
+  views: Int!
+  vol: Float!
+  visits: [ReportVisit!]!
+  bookmarks: [Bookmark!]!
+  comments: [ReportComment!]!
+  likes: [ReportLike!]!
+  updatedAt: DateTime!
+  createdAt: DateTime!
+}
+
+type ReportLike {
+  id: ID!
+  reportId: ID!
+  userId: ID!
+}
+
+type Query {
+  getUsers(input: GetUsersFilterInput): [User!]!
+  getUser(id: ID!): User
+  getReports(input: GetReportsFilter!): [Report!]!
+}
+
+input GetUsersFilterInput {
+  search: String
+  limit: Int
+}
+
+input GetReportsFilter {
+  limit: Int
+  search: String
+}
+
+type Mutation {
+  updateUser(input: UpdateUserDTO!): String!
+  deleteUser(id: ID!): Boolean!
+}
+
+input UpdateUserDTO {
+  id: String!
+}

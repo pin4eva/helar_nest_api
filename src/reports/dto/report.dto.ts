@@ -1,3 +1,4 @@
+import { Field, InputType, Int } from '@nestjs/graphql';
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { IsDate, IsEnum, IsString } from 'class-validator';
 
@@ -8,10 +9,13 @@ export enum CourtEnum {
   TRIBUNAL = 'Tribunal',
 }
 
+@InputType()
 export class GetReportsFilter {
+  @Field(() => Int, { nullable: true })
   @ApiProperty({ required: false })
   limit?: number;
 
+  @Field(() => String, { nullable: true })
   @ApiProperty({ required: false })
   search?: string;
 }

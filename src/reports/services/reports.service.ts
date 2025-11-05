@@ -1,39 +1,38 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Prisma, User } from '../../generated/client';
-import { PrismaService } from '../../prisma.service';
+import { InjectModel } from '@nestjs/mongoose';
+import { FilterQuery, Model } from 'mongoose';
+import { User } from 'src/user/schema/user.schema';
 import { slugify } from '../../utils/helpers';
 import {
-  CreateReportBookmarkDTO,
   CreateReportDTO,
   GetReportsFilter,
   UpdateReportDTO,
 } from '../dto/report.dto';
+import { Report, ReportLike } from '../schema/report.schema';
 
 @Injectable()
 export class ReportsService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    @InjectModel(Report.name) private reportModel: Model<Report>,
+    @InjectModel(ReportLike.name) private reportLikeModel: Model<ReportLike>,
+  ) {}
 
   // create report
   async createReport(input: CreateReportDTO, user: User) {
     try {
       const title = input?.title?.toLowerCase().trim().replace(/\s+$/, '');
-      const existingReport = await this.prisma.report.findFirst({
-        where: { title },
-      });
+      const existingReport = await this.reportModel.findOne({ title });
 
       if (existingReport) {
         throw new Error('Report with this title already exists');
       }
 
-      const lastReport = await this.prisma.report.findMany({
-        orderBy: {
-          reportId: 'desc',
-        },
-        take: 1,
-        select: {
-          reportId: true,
-        },
-      });
+      const lastReport = await this.reportModel
+        .find({})
+        .sort({ reportId: -1 })
+        .limit(1)
+        .lean()
+        .exec();
 
       const slug = slugify(input.title);
 
@@ -41,21 +40,13 @@ export class ReportsService {
 
       const createdDate = new Date(input.date);
       const { court } = input;
-      const report = await this.prisma.report.create({
-        data: {
-          court: court as string,
-          title,
-          slug,
-          reportId: lastReportId + 1,
-          date: createdDate,
-          added_by_id: user.id,
-          updated_by_id: user.id,
-          body: input.body,
-          issues: input.issues,
-          ratios: input.ratios,
-          suitNo: input.suitNo,
-          summary: input.summary,
-        },
+      const report = await this.reportModel.create({
+        ...input,
+        reportId: lastReportId + 1,
+        slug,
+        date: Number.isNaN(createdDate.getTime()) ? new Date() : createdDate,
+        court: court ? court : 'Unknown',
+        added_by_id: user.id,
       });
 
       return report;
@@ -68,14 +59,14 @@ export class ReportsService {
   async updateReport(input: UpdateReportDTO, user: User) {
     try {
       const { id, ...data } = input;
-      const report = await this.prisma.report.update({
-        where: { id },
-        data: {
-          ...data,
-          updated_by_id: user.id,
-          court: data?.court as string,
-        },
-      });
+
+      const report = await this.reportModel.findById(id);
+      if (!report) {
+        throw new NotFoundException(`Report with id ${id} not found`);
+      }
+      Object.assign(report, data);
+      report.updated_by_id = user.id;
+      await report.save();
 
       return report;
     } catch (error) {
@@ -86,10 +77,16 @@ export class ReportsService {
   // delete report
   async deleteReport(id: string) {
     try {
-      const report = await this.prisma.report.delete({
-        where: { id },
-      });
-      return report;
+      const report = await this.reportModel.findById(id);
+      if (!report) {
+        throw new NotFoundException(`Report with id ${id} not found`);
+      }
+      await this.reportModel.deleteOne({ _id: report._id });
+      return {
+        message: `Report with id ${id} deleted successfully`,
+        success: true,
+        id: report.id,
+      };
     } catch (error) {
       throw error;
     }
@@ -99,39 +96,19 @@ export class ReportsService {
   async getReports(filter?: GetReportsFilter) {
     try {
       const { search, limit = 20 } = filter || { search: '', limit: 20 };
-      let where: Prisma.ReportWhereInput = {};
+      const where: FilterQuery<Report> = {};
       if (search) {
-        where = {
-          OR: [
-            {
-              title: {
-                contains: search,
-                mode: 'insensitive',
-              },
-            },
-            {
-              body: {
-                contains: search,
-                mode: 'insensitive',
-              },
-            },
-            {
-              issues: {
-                contains: search,
-                mode: 'insensitive',
-              },
-            },
-          ],
-        };
+        where.$or = [
+          { title: { $regex: search, $options: 'i' } },
+          { body: { $regex: search, $options: 'i' } },
+          { issues: { $regex: search, $options: 'i' } },
+        ];
       }
-      const reports = await this.prisma.report.findMany({
-        where,
-        take: Number(limit),
-        omit: {
-          ratios: true,
-          body: true,
-        },
-      });
+      const reports = await this.reportModel
+        .find(where)
+        .limit(Number(limit))
+        .select('-ratios -body')
+        .exec();
       return reports;
     } catch (error) {
       throw error;
@@ -141,9 +118,7 @@ export class ReportsService {
   // get report by id
   async getReportById(id: string) {
     try {
-      const report = await this.prisma.report.findUnique({
-        where: { id },
-      });
+      const report = await this.reportModel.findById(id);
       if (!report)
         throw new NotFoundException(`Report with id ${id} not found`);
       return report;
@@ -155,8 +130,8 @@ export class ReportsService {
   // get report by reportId
   async getReportByReportId(reportId: number) {
     try {
-      const report = await this.prisma.report.findFirst({
-        where: { reportId },
+      const report = await this.reportModel.findOne({
+        reportId,
       });
       if (!report)
         throw new NotFoundException(
@@ -171,65 +146,12 @@ export class ReportsService {
   // get top viewed reports
   async getTopViewedReports(limit: number = 5) {
     try {
-      const reports = await this.prisma.report.findMany({
-        orderBy: {
-          views: 'desc',
-        },
-        take: limit,
-        omit: {
-          ratios: true,
-          body: true,
-        },
-      });
+      const reports = await this.reportModel
+        .find({}, { body: 0, ratios: 0 })
+        .sort({ views: -1 })
+        .limit(limit)
+        .exec();
       return reports;
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  // bookmark report
-  async bookmarkReport(input: CreateReportBookmarkDTO, user: User) {
-    try {
-      const { reportId } = input;
-      const bookmark = await this.prisma.bookmark.create({
-        data: {
-          userId: user.id,
-          reportId,
-        },
-      });
-      return bookmark;
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  // remove bookmark
-  async removeBookmark(input: CreateReportBookmarkDTO, user: User) {
-    try {
-      const { reportId } = input;
-      const bookmark = await this.prisma.bookmark.delete({
-        where: {
-          userId_reportId: {
-            userId: user.id,
-            reportId,
-          },
-        },
-      });
-      return bookmark;
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async getBookmarks(user: User) {
-    try {
-      const bookmarks = await this.prisma.bookmark.findMany({
-        where: { userId: user.id },
-        include: {
-          report: true,
-        },
-      });
-      return bookmarks.map((b) => b.report);
     } catch (error) {
       throw error;
     }
@@ -237,32 +159,29 @@ export class ReportsService {
 
   async likeReport(reportId: string, user: User) {
     try {
-      const existingLike = await this.prisma.reportLike.findFirst({
-        where: {
-          reportId,
-          userId: user.id,
-        },
+      const existingLike = await this.reportLikeModel.findOne({
+        reportId,
+        userId: user.id,
       });
       if (existingLike) {
         // delete like ie unlike
-        await this.prisma.reportLike.delete({
-          where: { id: existingLike.id },
+        await this.reportLikeModel.deleteOne({
+          _id: existingLike._id,
         });
         return {
           message: 'Report unliked successfully',
           success: true,
+          id: existingLike._id,
         };
       }
-      const like = await this.prisma.reportLike.create({
-        data: {
-          reportId,
-          userId: user.id,
-        },
+      const like = await this.reportLikeModel.create({
+        reportId,
+        userId: user.id,
       });
       return {
         message: 'Report liked successfully',
         success: true,
-        data: like,
+        id: like.id,
       };
     } catch (error) {
       throw error;
