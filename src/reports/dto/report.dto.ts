@@ -76,8 +76,9 @@ export class UpdateReportDTO extends PartialType(CreateReportDTO) {
   id: string;
 }
 
-export class CreateReportBookmarkDTO {
-  @ApiProperty()
-  @IsString()
-  reportId: string;
+export class ReportSession {
+  sessionId: string;
+  userId?: string;
+  reports: Set<string>;
+  createdAt: Date;
 }

@@ -20,11 +20,11 @@ import { ReportCommentService } from '../services/report-comment.service';
 
 @ApiBearerAuth()
 @ApiTags('Report Comments')
+@UseGuards(AuthGuard)
 @Controller('report/comments')
 export class ReportCommentController {
   constructor(private readonly reportCommentService: ReportCommentService) {}
 
-  @UseGuards(AuthGuard)
   @Post()
   async createComment(
     @Body() input: CreateReportCommentDTO,
@@ -33,7 +33,6 @@ export class ReportCommentController {
     return this.reportCommentService.createComment(input, user);
   }
 
-  @UseGuards(AuthGuard)
   @Put()
   async updateComment(
     @Body() input: UpdateReportCommentDTO,
@@ -47,7 +46,6 @@ export class ReportCommentController {
     return this.reportCommentService.getCommentsForReport(reportId);
   }
 
-  @UseGuards(AuthGuard)
   @Delete(':commentId')
   async deleteComment(
     @Param('commentId') commentId: string,
@@ -56,8 +54,7 @@ export class ReportCommentController {
     return this.reportCommentService.deleteReportComment(commentId, user);
   }
 
-  @UseGuards(AuthGuard)
-  @Post('toggle-like/:commentId')
+  @Post(':commentId/toggle-like')
   async toggleLikeComment(
     @Param('commentId') commentId: string,
     @CurrentUser() user: User,
