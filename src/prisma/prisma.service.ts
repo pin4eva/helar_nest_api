@@ -4,6 +4,7 @@ import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from 'src/generated/client';
 import { Pool } from 'pg';
 import { environments } from 'src/utils/environments';
+// import { withAccelerate } from '@prisma/extension-accelerate';
 
 @Injectable()
 export class PrismaService
@@ -11,24 +12,24 @@ export class PrismaService
   implements OnModuleInit, OnModuleDestroy
 {
   constructor() {
-    const DATABASE_URL = environments.DATABASE_URL;
+    const db = environments.database;
+
+    const connectionString = db.DATABASE_URL;
+    console.log('connectionString:', connectionString);
+
     const pool = new Pool({
-      connectionString: DATABASE_URL,
-      // ssl: !DATABASE_URL.includes('localhost')
-      //   ? { rejectUnauthorized: false }
-      //   : undefined,
-      ssl: DATABASE_URL.includes('aiven')
-        ? {
-            rejectUnauthorized: false,
-            ca: environments.CA_CERTIFICATE,
-            // cert: environments.CA_CERTIFICATE,
-          }
-        : undefined,
+      connectionString,
+    });
+    pool.on('connect', () => {
+      console.log('Connected to the database');
     });
     const adapter = new PrismaPg(pool);
+    // super({ accelerateUrl: connectionString });
     super({ adapter });
   }
-  async onModuleInit() {}
+  async onModuleInit() {
+    // this.$extends(withAccelerate());
+  }
 
   async onModuleDestroy() {
     await this.$disconnect();

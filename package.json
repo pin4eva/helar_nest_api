@@ -33,6 +33,7 @@
     "@nestjs/swagger": "^11.2.1",
     "@prisma/adapter-pg": "^7.0.0",
     "@prisma/client": "^7.0.0",
+    "@prisma/extension-accelerate": "^3.0.0",
     "@types/pg": "^8.15.6",
     "bcryptjs": "^3.0.2",
     "cache-manager": "^7.2.5",
