@@ -12,6 +12,7 @@ import { environments } from './utils/environments';
 import { MulterModule } from '@nestjs/platform-express';
 import { EmailModule } from './email/email.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { SubjectModule } from './subject/subject.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { PrismaModule } from './prisma/prisma.module';
     }),
     EmailModule,
     PrismaModule,
+    SubjectModule,
   ],
   controllers: [AppController],
   providers: [AppService],

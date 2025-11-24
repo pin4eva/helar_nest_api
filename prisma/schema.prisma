@@ -263,7 +263,7 @@ model Subject {
   createdAt            DateTime             @default(now())
   intro                String
   name                 String
-  slug                 String
+  slug                 String               @unique
   updatedAt            DateTime             @updatedAt
   objectId             String?
   report_to_subject    ReportToSubject[]
