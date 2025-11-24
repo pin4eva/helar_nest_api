@@ -19,7 +19,7 @@ export class PrismaService
       //   : undefined,
       ssl: DATABASE_URL.includes('aiven')
         ? {
-            rejectUnauthorized: true,
+            rejectUnauthorized: false,
             ca: environments.CA_CERTIFICATE,
             cert: environments.CA_CERTIFICATE,
           }
