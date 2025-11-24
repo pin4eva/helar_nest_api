@@ -15,8 +15,7 @@ export class PrismaService
     const db = environments.database;
 
     const connectionString = db.DATABASE_URL;
-    console.log('connectionString:', connectionString);
-
+    const logs = ['query', 'info', 'warn', 'error'];
     const pool = new Pool({
       connectionString,
     });
@@ -25,7 +24,13 @@ export class PrismaService
     });
     const adapter = new PrismaPg(pool);
     // super({ accelerateUrl: connectionString });
-    super({ adapter });
+    super({
+      adapter,
+      log:
+        process.env.NODE_ENV === 'production'
+          ? ['warn', 'error']
+          : ['query', 'info', 'warn', 'error'],
+    });
   }
   async onModuleInit() {
     // this.$extends(withAccelerate());
