@@ -20,6 +20,7 @@ export const environments = {
   PAYSTACK_PUBLIC_KEY: process.env.PAYSTACK_PUBLIC_KEY,
   PAYSTACK_SECRET_KEY: process.env.PAYSTACK_SECRET_KEY,
   BREVO_API_KEY: process.env.BREVO_API_KEY || '',
+  CA_CERTIFICATE: process.env.CA_CERTIFICATE || '',
   MAIL_SENDER: {
     email: 'no-reply@helar.law',
     name: 'Helar Law',

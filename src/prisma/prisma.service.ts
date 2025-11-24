@@ -14,8 +14,15 @@ export class PrismaService
     const DATABASE_URL = environments.DATABASE_URL;
     const pool = new Pool({
       connectionString: DATABASE_URL,
-      ssl: !DATABASE_URL.includes('localhost')
-        ? { rejectUnauthorized: false }
+      // ssl: !DATABASE_URL.includes('localhost')
+      //   ? { rejectUnauthorized: false }
+      //   : undefined,
+      ssl: DATABASE_URL.includes('aiven')
+        ? {
+            rejectUnauthorized: true,
+            ca: environments.CA_CERTIFICATE,
+            cert: environments.CA_CERTIFICATE,
+          }
         : undefined,
     });
     const adapter = new PrismaPg(pool);
