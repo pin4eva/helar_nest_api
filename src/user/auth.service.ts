@@ -9,8 +9,8 @@ import {
 import { Request } from 'express';
 import * as jwt from 'jsonwebtoken';
 import { pbkdf2Sync, randomBytes, timingSafeEqual } from 'node:crypto';
-import { EmailService } from 'src/email/email.service';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { EmailService } from '../email/email.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { User, UserProfileTypeEnum } from '../generated/client';
 import { environments } from '../utils/environments';
 import { parseExpiry } from '../utils/helpers';
