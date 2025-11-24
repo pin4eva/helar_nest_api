@@ -21,7 +21,7 @@ export class PrismaService
         ? {
             rejectUnauthorized: false,
             ca: environments.CA_CERTIFICATE,
-            cert: environments.CA_CERTIFICATE,
+            // cert: environments.CA_CERTIFICATE,
           }
         : undefined,
     });
