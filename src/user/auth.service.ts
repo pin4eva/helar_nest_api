@@ -1,25 +1,48 @@
-import { pbkdf2Sync, randomBytes, timingSafeEqual } from 'node:crypto';
+import { Cache, CACHE_MANAGER } from '@nestjs/cache-manager';
 import {
   BadRequestException,
+  Inject,
   Injectable,
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
+import { Request } from 'express';
 import * as jwt from 'jsonwebtoken';
-import { User } from '../generated/client';
-import { PrismaService } from '../prisma.service';
+import { pbkdf2Sync, randomBytes, timingSafeEqual } from 'node:crypto';
+import { EmailService } from '../email/email.service';
+import { PrismaService } from '../prisma/prisma.service';
+import { User, UserProfileTypeEnum } from '../generated/client';
 import { environments } from '../utils/environments';
 import { parseExpiry } from '../utils/helpers';
 import {
   CreatePasswordDTO,
   LoginDTO,
   LoginResponse,
-  RegisterDTO,
+  SessionInfo,
+  VerifyEmailTokenDTO,
 } from './auth.dto';
+import { CreateUserDTO } from './user.dto';
+const tokenOptions: jwt.SignOptions = {
+  expiresIn: environments.ACCESS_TOKEN_EXPIRY,
+  issuer: 'helar.law',
+  algorithm: 'HS256',
+  audience: 'helar-clients',
+};
+
+type JwtPayload = jwt.JwtPayload & {
+  tokenType?: string;
+  id: string;
+  sessionId: string;
+};
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly prismaService: PrismaService) {}
+  private readonly SET_PASSWORD_PATH = 'set-password';
+  constructor(
+    private readonly prismaService: PrismaService,
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
+    private readonly emailService: EmailService,
+  ) {}
 
   private readonly pbkdf2Iterations = 100_000;
   private readonly pbkdf2KeyLength = 32; // 32 bytes = 256 bits
@@ -63,7 +86,9 @@ export class AuthService {
         throw new UnauthorizedException('Incorrect email or password');
       }
 
-      const { access_token, refresh_token } = this.generateTokens(user.id);
+      const { access_token, refresh_token } = await this.generateTokens(
+        user.id,
+      );
       return {
         userId: user.id,
         message: 'Login successful',
@@ -77,7 +102,9 @@ export class AuthService {
   }
 
   // register
-  async register(input: RegisterDTO) {
+  async signup(input: CreateUserDTO, request: Request) {
+    const origin = request.headers.origin;
+    const email = input.email.toLowerCase().trim();
     try {
       const existingUser = await this.prismaService.user.findUnique({
         where: { email: input.email },
@@ -86,26 +113,103 @@ export class AuthService {
       if (existingUser) {
         throw new BadRequestException('Email already in use');
       }
-      const newUser = await this.prismaService.user.create({
+
+      // Send verification email instead of setting password directly
+      const verificationToken = randomBytes(32).toString('hex');
+      await this.prismaService.user.create({
         data: {
-          firstName: input.firstName,
-          lastName: input.lastName,
-          email: input.email,
+          ...input,
+          email,
+          emailToken: verificationToken,
         },
       });
-
-      const { salt, hash, iterations } = this.hashPassword(input.password);
-
-      await this.prismaService.auth.create({
-        data: {
-          userId: newUser.id,
-          password: hash,
-          salt,
-          iterations,
-        },
+      const activationLink = `${origin}/${this.SET_PASSWORD_PATH}?token=${verificationToken}`;
+      await this.emailService.sendActivationEmail({
+        to: email,
+        activationLink,
+        name: input.firstName,
       });
+
       return {
-        message: 'Registration successful',
+        message: 'Please verify your email to complete registration',
+        success: true,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async resendVerificationEmail(email: string, request: Request) {
+    const origin = request.headers.origin;
+    email = email.toLowerCase().trim();
+    try {
+      const user = await this.prismaService.user.findUnique({
+        where: { email },
+      });
+
+      if (!user) {
+        throw new NotFoundException('User not found');
+      }
+
+      if (user.isEmailVerified) {
+        throw new BadRequestException('Email is already verified');
+      }
+
+      const verificationToken = randomBytes(32).toString('hex');
+      await this.prismaService.user.update({
+        where: { id: user.id },
+        data: { emailToken: verificationToken },
+      });
+
+      const activationLink = `${origin}/${this.SET_PASSWORD_PATH}?token=${verificationToken}`;
+      await this.emailService.sendActivationEmail({
+        to: email,
+        activationLink,
+        name: user.firstName,
+      });
+
+      return {
+        message: 'Verification email resent successfully',
+        success: true,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // verify email token and set password
+
+  async verifyEmailToken({
+    token,
+    password,
+  }: VerifyEmailTokenDTO): Promise<{ message: string; success: boolean }> {
+    try {
+      const user = await this.prismaService.user.findFirst({
+        where: { emailToken: token },
+      });
+
+      if (!user) {
+        throw new BadRequestException('Invalid or expired verification token');
+      }
+
+      await this.prismaService.user.update({
+        where: { id: user.id },
+        data: {
+          isEmailVerified: true,
+          emailToken: null,
+          profileType: UserProfileTypeEnum.User,
+        },
+      });
+
+      const { salt, hash, iterations } = this.hashPassword(password);
+      await this.prismaService.auth.upsert({
+        where: { userId: user.id },
+        update: { password: hash, salt, iterations },
+        create: { userId: user.id, password: hash, salt, iterations },
+      });
+
+      return {
+        message: 'Email verified successfully',
         success: true,
       };
     } catch (error) {
@@ -166,7 +270,9 @@ export class AuthService {
         throw new UnauthorizedException('User not found');
       }
 
-      const { access_token, refresh_token } = this.generateTokens(user.id);
+      const { access_token, refresh_token } = await this.generateTokens(
+        user.id,
+      );
       return {
         access_token,
         refresh_token,
@@ -199,10 +305,83 @@ export class AuthService {
   }
 
   // logout
+  async logout(token: string) {
+    if (!token) return null;
+    const bearerToken = token?.split(' ')[1] || token;
+    token = bearerToken;
+    try {
+      const decoded = jwt.verify(token, environments.JWT_SECRETS, {
+        issuer: tokenOptions.issuer,
+        algorithms: [tokenOptions.algorithm as jwt.Algorithm],
+        audience: tokenOptions.audience as string,
+      }) as JwtPayload;
+      if (!decoded) {
+        throw new UnauthorizedException('Unable to decode token');
+      }
+
+      if (decoded.tokenType !== 'access') {
+        throw new UnauthorizedException('Invalid token type');
+      }
+
+      const session = await this.cacheManager.get<SessionInfo>(
+        decoded.sessionId,
+      );
+      if (!session || !session?.user) {
+        throw new UnauthorizedException('Session expired! login again.');
+      }
+
+      await this.cacheManager.del(decoded.sessionId);
+
+      return {
+        message: 'Logout successful',
+        success: true,
+      };
+    } catch (error) {
+      if (error instanceof jwt.JsonWebTokenError) {
+        throw new UnauthorizedException(
+          (error as jwt.JsonWebTokenError)?.message,
+        );
+      }
+      throw error;
+    }
+  }
 
   // verify email
 
-  // send reset password link
+  // send forgot password link
+  async sendForgotPasswordLink(email: string, request: Request) {
+    const origin = request.headers.origin;
+    email = email.toLowerCase().trim();
+    try {
+      const user = await this.prismaService.user.findUnique({
+        where: { email },
+      });
+
+      if (!user) {
+        throw new NotFoundException('User not found');
+      }
+
+      const resetToken = randomBytes(32).toString('hex');
+      await this.prismaService.user.update({
+        where: { id: user.id },
+        data: { emailToken: resetToken },
+      });
+
+      const resetLink = `${origin}/${this.SET_PASSWORD_PATH}?token=${resetToken}&userId=${user.id}`;
+      await this.emailService.sendForgotPasswordEmail({
+        to: email,
+        resetLink,
+        name: user.firstName,
+      });
+
+      return {
+        message: 'Password reset link sent successfully',
+        success: true,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
   // reset password
 
   // decode token
@@ -211,48 +390,83 @@ export class AuthService {
     const bearerToken = token?.split(' ')[1] || token;
     token = bearerToken;
     try {
-      const decoded = jwt.verify(token, environments.JWT_SECRETS) as {
-        id?: string;
-        tokenType?: string;
-      };
+      const decoded = jwt.verify(token, environments.JWT_SECRETS, {
+        issuer: tokenOptions.issuer,
+        algorithms: [tokenOptions.algorithm as jwt.Algorithm],
+        audience: tokenOptions.audience as string,
+      }) as JwtPayload;
       if (!decoded) {
-        throw new UnauthorizedException('Invalid token');
+        throw new UnauthorizedException('Unable to decode token');
       }
 
       if (decoded.tokenType !== 'access') {
         throw new UnauthorizedException('Invalid token type');
       }
-      const user = await this.prismaService.user.findUnique({
-        where: { id: decoded.id },
-        omit: { passwordUpdateToken: true },
-      });
-      if (!user) {
-        throw new UnauthorizedException('User not found');
+
+      const session = await this.cacheManager.get<SessionInfo>(
+        decoded.sessionId,
+      );
+      if (!session || !session?.user) {
+        throw new UnauthorizedException('Session expired! login again.');
       }
-      return user as User;
+
+      return session.user;
     } catch (error) {
+      if (error instanceof jwt.JsonWebTokenError) {
+        throw new UnauthorizedException(
+          (error as jwt.JsonWebTokenError)?.message,
+        );
+      }
       throw error;
     }
   }
 
   // generate access and refresh tokens
-  private generateTokens(userId: string): {
+  private async generateTokens(userId: string): Promise<{
     access_token: string;
     refresh_token: string;
-  } {
+  }> {
+    const sessionId = randomBytes(16).toString('hex');
+
+    const payload: JwtPayload = {
+      id: userId,
+      tokenType: 'access',
+      sessionId,
+    };
+
+    const user = await this.prismaService.user.findUnique({
+      where: { id: userId },
+    });
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
     const access_token = jwt.sign(
-      { id: userId, tokenType: 'access' },
+      payload,
+      environments.JWT_SECRETS,
+      tokenOptions,
+    );
+
+    const refresh_token = jwt.sign(
+      { ...payload, tokenType: 'refresh' },
       environments.JWT_SECRETS,
       {
-        expiresIn: parseExpiry(environments.ACCESS_TOKEN_EXPIRY),
+        ...tokenOptions,
+        expiresIn: environments.REFRESH_TOKEN_EXPIRY,
       },
     );
-    const refresh_token = jwt.sign(
-      { id: userId, tokenType: 'refresh' },
-      environments.JWT_SECRETS,
-      {
-        expiresIn: parseExpiry(environments.REFRESH_TOKEN_EXPIRY),
-      },
+
+    const sessionInfo: SessionInfo = {
+      sessionId,
+      userId,
+      refresh_token,
+      user: user,
+      createdAt: new Date(),
+    };
+
+    await this.cacheManager.set(
+      sessionId,
+      sessionInfo,
+      parseExpiry(environments.REFRESH_TOKEN_EXPIRY),
     );
     return { access_token, refresh_token };
   }

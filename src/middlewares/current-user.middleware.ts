@@ -1,7 +1,7 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import type { NextFunction, Request, Response } from 'express';
 import { User } from '../generated/client';
-import { AuthService } from '../user/auth.service';
+import { AuthService } from 'src/user/auth.service';
 
 declare global {
   namespace Express {
@@ -18,12 +18,18 @@ export class CurrentUserMiddleware implements NestMiddleware {
 
   async use(req: Request, _: Response, next: NextFunction) {
     const token = req.headers?.authorization;
+
     if (!token) {
       return next();
     }
-    const user = await this.authService.decodeToken(token);
-    if (user) {
-      req.user = user;
+    try {
+      const user = await this.authService.decodeToken(token);
+      if (user) {
+        req.user = user;
+      }
+    } catch (error) {
+      console.error(error?.message);
+      return next();
     }
     next();
   }

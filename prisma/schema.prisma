@@ -11,13 +11,13 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
-  url      = env("DATABASE_URL")
+  provider = "postgresql"
+  // url      = env("DATABASE_URL")
 }
 
 model Auth {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId     String   @unique @db.ObjectId
+  id         String   @id @default(cuid())
+  userId     String   @unique
   password   String
   salt       String
   iterations Int
@@ -28,7 +28,7 @@ model Auth {
 }
 
 model User {
-  id                  String              @id @default(auto()) @map("_id") @db.ObjectId
+  id                  String              @id @default(cuid())
   bio                 String?
   city                String?
   contact             String?
@@ -53,9 +53,7 @@ model User {
   gender              GenderEnum?         @default(Male)
   emailToken          String?
   isEmailVerified     Boolean             @default(false)
-  lawSchoolCampus     String?
-  townState           String?
-  universityCampus    String?
+  schoolId            String?
   bookmarks           Bookmark[]
   report_comments     ReportComment[]
   report_likes        ReportLike[]
@@ -63,7 +61,7 @@ model User {
   reports_updated     Report[]            @relation("reports_updated")
 
   subscriptions         Subscription[]      @relation("UserSubscriptions")
-  currentSubscriptionId String?             @unique @db.ObjectId
+  currentSubscriptionId String?             @unique
   currentSubscription   Subscription?       @relation("CurrentSubscription", fields: [currentSubscriptionId], references: [id], onDelete: SetNull, onUpdate: NoAction)
   ReportCommentLike     ReportCommentLike[]
 
@@ -71,8 +69,8 @@ model User {
 }
 
 model Subscription {
-  id          String                 @id @default(auto()) @map("_id") @db.ObjectId
-  userId      String                 @db.ObjectId
+  id          String                 @id @default(cuid())
+  userId      String
   reference   String                 @unique
   createdAt   DateTime               @default(now())
   expiresAt   DateTime
@@ -90,7 +88,7 @@ model Subscription {
 }
 
 model Report {
-  id            String            @id @default(auto()) @map("_id") @db.ObjectId
+  id            String            @id @default(cuid())
   body          String
   court         String
   createdAt     DateTime?         @default(now())
@@ -104,8 +102,8 @@ model Report {
   summary       String
   title         String
   updatedAt     DateTime?         @updatedAt
-  added_by_id   String            @db.ObjectId
-  updated_by_id String?           @db.ObjectId
+  added_by_id   String
+  updated_by_id String?
   views         Int?              @default(0)
   vol           Int?
   objectId      String?
@@ -122,9 +120,9 @@ model Report {
 }
 
 model ReportToSubject {
-  id        String  @id @default(auto()) @map("_id") @db.ObjectId
-  reportId  String  @db.ObjectId
-  subjectId String  @db.ObjectId
+  id        String  @id @default(cuid())
+  reportId  String
+  subjectId String
   report    Report  @relation(fields: [reportId], references: [id])
   subject   Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
 
@@ -133,12 +131,12 @@ model ReportToSubject {
 }
 
 model ReportComment {
-  id        String              @id @default(auto()) @map("_id") @db.ObjectId
-  authorId  String              @db.ObjectId
+  id        String              @id @default(cuid())
+  authorId  String
   objectId  String?
   comment   String
   createdAt DateTime            @default(now())
-  reportId  String              @db.ObjectId
+  reportId  String
   updatedAt DateTime            @updatedAt
   user      User                @relation(fields: [authorId], references: [id])
   report    Report              @relation(fields: [reportId], references: [id])
@@ -148,9 +146,9 @@ model ReportComment {
 }
 
 model ReportCommentLike {
-  id              String        @id @default(auto()) @map("_id") @db.ObjectId
-  reportCommentId String        @db.ObjectId
-  userId          String        @db.ObjectId
+  id              String        @id @default(cuid())
+  reportCommentId String
+  userId          String
   reportComment   ReportComment @relation(fields: [reportCommentId], references: [id])
   user            User          @relation(fields: [userId], references: [id])
 
@@ -159,9 +157,9 @@ model ReportCommentLike {
 }
 
 model ReportLike {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
-  reportId String @db.ObjectId
-  userId   String @db.ObjectId
+  id       String @id @default(cuid())
+  reportId String
+  userId   String
   report   Report @relation(fields: [reportId], references: [id])
   user     User   @relation(fields: [userId], references: [id])
 
@@ -170,8 +168,8 @@ model ReportLike {
 }
 
 model ReportTags {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
-  reportId String @db.ObjectId
+  id       String @id @default(cuid())
+  reportId String
   tag      String
   report   Report @relation(fields: [reportId], references: [id])
 
@@ -180,8 +178,7 @@ model ReportTags {
 }
 
 model ReportVisits {
-  id        String @id @default(auto()) @map("_id") @db.ObjectId
-  reportId  String @db.ObjectId
+  reportId  String
   sessionId String
   report    Report @relation(fields: [reportId], references: [id])
 
@@ -190,9 +187,8 @@ model ReportVisits {
 }
 
 model Bookmark {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId    String   @db.ObjectId
-  reportId  String   @db.ObjectId
+  userId    String
+  reportId  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   report    Report   @relation(fields: [reportId], references: [id])
@@ -203,12 +199,12 @@ model Bookmark {
 }
 
 model HandbookCase {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  id         String   @id @default(cuid())
   body       String
   byline     String
   citation   String
   createdAt  DateTime @default(now())
-  handbookId String   @db.ObjectId
+  handbookId String
   ref        Int      @unique
   slug       String   @unique
   title      String
@@ -220,10 +216,10 @@ model HandbookCase {
 }
 
 model Handbook {
-  id           String         @id @default(auto()) @map("_id") @db.ObjectId
+  id           String         @id @default(cuid())
   createdAt    DateTime       @default(now())
   slug         String         @unique
-  subjectId    String         @db.ObjectId
+  subjectId    String
   topic        String
   updatedAt    DateTime       @updatedAt
   objectId     String?
@@ -234,7 +230,7 @@ model Handbook {
 }
 
 model NoteItem {
-  id                   String              @id @default(auto()) @map("_id") @db.ObjectId
+  id                   String              @id @default(cuid())
   createdAt            DateTime            @default(now())
   slug                 String?             @unique
   updatedAt            DateTime            @updatedAt
@@ -243,15 +239,15 @@ model NoteItem {
   question             String
   answer               String
   facultyNoteSummary   FacultyNoteSummary? @relation(fields: [facultyNoteSummaryId], references: [id])
-  facultyNoteSummaryId String?             @db.ObjectId
+  facultyNoteSummaryId String?
   nlsNoteSummary       NlsNoteSummary?     @relation(fields: [nlsNoteSummaryId], references: [id])
-  nlsNoteSummaryId     String?             @db.ObjectId
+  nlsNoteSummaryId     String?
 
   @@map("note_items")
 }
 
 model Quote {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        String   @id @default(cuid())
   text      String
   author    String
   createdAt DateTime @default(now())
@@ -262,7 +258,7 @@ model Quote {
 }
 
 model Subject {
-  id                   String               @id @default(auto()) @map("_id") @db.ObjectId
+  id                   String               @id @default(cuid())
   createdAt            DateTime             @default(now())
   intro                String
   name                 String
@@ -279,11 +275,11 @@ model Subject {
 }
 
 model FacultyNoteSummary {
-  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  id        String     @id @default(cuid())
   slug      String     @unique
   title     String
   ref       Int
-  subjectId String     @db.ObjectId
+  subjectId String
   note      Subject    @relation(fields: [subjectId], references: [id])
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
@@ -295,11 +291,11 @@ model FacultyNoteSummary {
 }
 
 model NlsNoteSummary {
-  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  id        String     @id @default(cuid())
   slug      String     @unique
   title     String
   ref       Int
-  subjectId String     @db.ObjectId
+  subjectId String
   note      Subject    @relation(fields: [subjectId], references: [id])
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
@@ -311,7 +307,7 @@ model NlsNoteSummary {
 }
 
 model TextbookCase {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  id         String   @id @default(cuid())
   body       String
   byline     String
   citation   String
@@ -320,17 +316,17 @@ model TextbookCase {
   slug       String   @unique
   title      String
   updatedAt  DateTime @updatedAt
-  textbookId String   @db.ObjectId
+  textbookId String
   textbooks  Textbook @relation(fields: [textbookId], references: [id])
 
   @@map("textbook_cases")
 }
 
 model Textbook {
-  id           String         @id @default(auto()) @map("_id") @db.ObjectId
+  id           String         @id @default(cuid())
   createdAt    DateTime       @default(now())
   slug         String         @unique
-  subjectId    String         @db.ObjectId
+  subjectId    String
   topic        String
   updatedAt    DateTime       @updatedAt
   objectId     String?
@@ -338,6 +334,15 @@ model Textbook {
   subject      Subject        @relation(fields: [subjectId], references: [id])
 
   @@map("textbooks")
+}
+
+model School {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("schools")
 }
 
 enum GenderEnum {
@@ -349,6 +354,7 @@ enum UserProfileTypeEnum {
   Student
   Lawyer
   Guest
+  User
   Staff
 
   @@map("UserProfileType")

@@ -1,6 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma } from '../generated/client';
-import { PrismaService } from '../prisma.service';
 import { cloudinaryUpload, deleteImage } from '../utils/cloudinary';
 import {
   GetUsersFilterInput,
@@ -10,10 +9,11 @@ import {
   UpdateUserRoleDTO,
   UploadImageDTO,
 } from './user.dto';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class UserService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   // get users
   async getUsers(input?: GetUsersFilterInput) {

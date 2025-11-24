@@ -8,6 +8,14 @@ import { AppModule } from './app.module';
 
 let cachedApp: NestExpressApplication | null = null;
 
+const devOrigins = [
+  'http://localhost:3000',
+  'http://localhost:3001',
+  'http://localhost:8000',
+];
+
+const prodOrigins = ['https://*.helar.law', 'https://*.vercel.app'];
+
 async function bootstrap() {
   if (cachedApp) {
     return cachedApp;
@@ -16,9 +24,17 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   app.setGlobalPrefix('api');
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      transform: true,
+    }),
+  );
   app.use(express.json({ limit: '50mb' }));
-  app.enableCors();
+  app.enableCors({
+    origin: process.env.NODE_ENV === 'production' ? prodOrigins : devOrigins,
+    credentials: true,
+  });
 
   const config = new DocumentBuilder()
     .setTitle('API Documentation')

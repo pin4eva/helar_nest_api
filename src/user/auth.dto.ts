@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsString } from 'class-validator';
+import { User } from 'src/generated/client';
 
 export class LoginDTO {
   @ApiProperty({ required: true })
@@ -21,29 +22,30 @@ export class LoginResponse {
   refresh_token?: string;
 }
 
-export class RegisterDTO {
+export class CreatePasswordDTO {
   @ApiProperty({ required: true })
   @IsString()
-  firstName: string;
+  userId: string;
 
   @ApiProperty({ required: true })
   @IsString()
-  lastName: string;
-
-  @ApiProperty({ required: true })
-  @IsEmail()
-  email: string;
+  token: string;
 
   @ApiProperty({ required: true })
   @IsString()
   password: string;
 }
 
-export class CreatePasswordDTO {
-  @ApiProperty({ required: true })
-  @IsString()
+export class SessionInfo {
+  sessionId: string;
   userId: string;
+  refresh_token?: string;
+  createdAt: Date;
+  expiresAt?: Date;
+  user?: User;
+}
 
+export class VerifyEmailTokenDTO {
   @ApiProperty({ required: true })
   @IsString()
   token: string;
