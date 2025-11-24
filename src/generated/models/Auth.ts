@@ -242,6 +242,7 @@ export type AuthOrderByWithRelationInput = {
   iterations?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  _relevance?: Prisma.AuthOrderByRelevanceInput
 }
 
 export type AuthWhereUniqueInput = Prisma.AtLeast<{
@@ -353,6 +354,12 @@ export type AuthUncheckedUpdateManyInput = {
   iterations?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type AuthOrderByRelevanceInput = {
+  fields: Prisma.AuthOrderByRelevanceFieldEnum | Prisma.AuthOrderByRelevanceFieldEnum[]
+  sort: Prisma.SortOrder
+  search: string
 }
 
 export type AuthCountOrderByAggregateInput = {

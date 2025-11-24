@@ -1,17 +1,22 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Cache, CACHE_MANAGER } from '@nestjs/cache-manager';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma, User } from '../../generated/client';
+import { PrismaService } from '../../prisma/prisma.service';
 import { slugify } from '../../utils/helpers';
+import { buildTsQuery } from '../../utils/search';
 import {
-  CreateReportBookmarkDTO,
   CreateReportDTO,
   GetReportsFilter,
+  ReportSession,
   UpdateReportDTO,
 } from '../dto/report.dto';
-import { PrismaService } from '../../prisma/prisma.service';
 
 @Injectable()
 export class ReportsService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
+  ) {}
 
   // create report
   async createReport(input: CreateReportDTO, user: User) {
@@ -100,31 +105,52 @@ export class ReportsService {
   async getReports(filter?: GetReportsFilter) {
     try {
       const { search, limit = 20 } = filter || { search: '', limit: 20 };
+      const normalizedSearch = search?.trim();
       let where: Prisma.ReportWhereInput = {};
-      if (search) {
-        where = {
-          OR: [
-            {
-              title: {
-                contains: search,
-                mode: 'insensitive',
-              },
+      let orderBy:
+        | Prisma.ReportOrderByWithRelationInput
+        | Prisma.ReportOrderByWithRelationInput[]
+        | undefined = {
+        reportId: 'desc',
+      };
+
+      if (normalizedSearch) {
+        const tsQuery = buildTsQuery(normalizedSearch);
+        if (tsQuery) {
+          const searchFilter: Prisma.StringFilter = {
+            search: tsQuery,
+            mode: 'insensitive',
+          };
+          where = {
+            OR: [
+              { title: searchFilter },
+              { body: searchFilter },
+              { issues: searchFilter },
+              { ratios: searchFilter },
+            ],
+          };
+          orderBy = {
+            _relevance: {
+              fields: ['title', 'issues', 'body'],
+              search: tsQuery,
+              sort: 'desc',
             },
-            {
-              body: {
-                contains: search,
-                mode: 'insensitive',
-              },
-            },
-            {
-              issues: {
-                contains: search,
-                mode: 'insensitive',
-              },
-            },
-          ],
-        };
+          };
+        } else {
+          const containsFilter: Prisma.StringFilter = {
+            contains: normalizedSearch,
+            mode: 'insensitive',
+          };
+          where = {
+            OR: [
+              { title: containsFilter },
+              { body: containsFilter },
+              { issues: containsFilter },
+            ],
+          };
+        }
       }
+
       const reports = await this.prisma.report.findMany({
         where,
         take: Number(limit),
@@ -132,6 +158,7 @@ export class ReportsService {
           ratios: true,
           body: true,
         },
+        orderBy,
       });
       return reports;
     } catch (error) {
@@ -147,6 +174,7 @@ export class ReportsService {
       });
       if (!report)
         throw new NotFoundException(`Report with id ${id} not found`);
+
       return report;
     } catch (error) {
       throw error;
@@ -163,6 +191,7 @@ export class ReportsService {
         throw new NotFoundException(
           `Report with reportId ${reportId} not found`,
         );
+
       return report;
     } catch (error) {
       throw error;
@@ -188,49 +217,56 @@ export class ReportsService {
     }
   }
 
-  // bookmark report
-  async bookmarkReport(input: CreateReportBookmarkDTO, user: User) {
-    try {
-      const { reportId } = input;
-      const bookmark = await this.prisma.bookmark.create({
-        data: {
-          userId: user.id,
-          reportId,
-        },
-      });
-      return bookmark;
-    } catch (error) {
-      throw error;
+  // mark report as viewed
+  async markReportAsViewed(reportId: string, sessionId?: string) {
+    if (!sessionId) {
+      return;
     }
-  }
 
-  // remove bookmark
-  async removeBookmark(input: CreateReportBookmarkDTO, user: User) {
     try {
-      const { reportId } = input;
-      const bookmark = await this.prisma.bookmark.delete({
+      // check cache if session has viewed report
+      const cacheKey = `report:${reportId}:session:${sessionId}`;
+      const cachedVisit = await this.cacheManager.get<ReportSession>(cacheKey);
+      if (cachedVisit) {
+        return;
+      }
+
+      const existingVisit = await this.prisma.reportVisits.findUnique({
         where: {
-          userId_reportId: {
-            userId: user.id,
+          reportId_sessionId: {
             reportId,
+            sessionId,
           },
         },
       });
-      return bookmark;
-    } catch (error) {
-      throw error;
-    }
-  }
 
-  async getBookmarks(user: User) {
-    try {
-      const bookmarks = await this.prisma.bookmark.findMany({
-        where: { userId: user.id },
-        include: {
-          report: true,
+      if (existingVisit) {
+        return;
+      }
+      await this.prisma.reportVisits.upsert({
+        where: {
+          reportId_sessionId: {
+            reportId,
+            sessionId: sessionId,
+          },
+        },
+        create: {
+          reportId,
+          sessionId: sessionId,
+        },
+        update: {
+          reportId,
+          sessionId: sessionId,
         },
       });
-      return bookmarks.map((b) => b.report);
+      await this.prisma.report.update({
+        where: { id: reportId },
+        data: {
+          views: {
+            increment: 1,
+          },
+        },
+      });
     } catch (error) {
       throw error;
     }

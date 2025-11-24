@@ -212,6 +212,7 @@ export type TextbookOrderByWithRelationInput = {
   objectId?: Prisma.SortOrderInput | Prisma.SortOrder
   textbookCase?: Prisma.TextbookCaseOrderByRelationAggregateInput
   subject?: Prisma.SubjectOrderByWithRelationInput
+  _relevance?: Prisma.TextbookOrderByRelevanceInput
 }
 
 export type TextbookWhereUniqueInput = Prisma.AtLeast<{
@@ -341,6 +342,12 @@ export type TextbookOrderByRelationAggregateInput = {
 export type TextbookScalarRelationFilter = {
   is?: Prisma.TextbookWhereInput
   isNot?: Prisma.TextbookWhereInput
+}
+
+export type TextbookOrderByRelevanceInput = {
+  fields: Prisma.TextbookOrderByRelevanceFieldEnum | Prisma.TextbookOrderByRelevanceFieldEnum[]
+  sort: Prisma.SortOrder
+  search: string
 }
 
 export type TextbookCountOrderByAggregateInput = {

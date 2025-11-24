@@ -176,6 +176,7 @@ export type ReportLikeOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
   report?: Prisma.ReportOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
+  _relevance?: Prisma.ReportLikeOrderByRelevanceInput
 }
 
 export type ReportLikeWhereUniqueInput = Prisma.AtLeast<{
@@ -256,6 +257,12 @@ export type ReportLikeListRelationFilter = {
 
 export type ReportLikeOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type ReportLikeOrderByRelevanceInput = {
+  fields: Prisma.ReportLikeOrderByRelevanceFieldEnum | Prisma.ReportLikeOrderByRelevanceFieldEnum[]
+  sort: Prisma.SortOrder
+  search: string
 }
 
 export type ReportLikeReportIdUserIdCompoundUniqueInput = {

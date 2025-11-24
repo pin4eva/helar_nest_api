@@ -264,6 +264,7 @@ export type SubscriptionOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   currentUser?: Prisma.UserOrderByWithRelationInput
+  _relevance?: Prisma.SubscriptionOrderByRelevanceInput
 }
 
 export type SubscriptionWhereUniqueInput = Prisma.AtLeast<{
@@ -415,6 +416,12 @@ export type SubscriptionNullableScalarRelationFilter = {
 
 export type SubscriptionOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type SubscriptionOrderByRelevanceInput = {
+  fields: Prisma.SubscriptionOrderByRelevanceFieldEnum | Prisma.SubscriptionOrderByRelevanceFieldEnum[]
+  sort: Prisma.SortOrder
+  search: string
 }
 
 export type SubscriptionCountOrderByAggregateInput = {

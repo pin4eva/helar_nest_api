@@ -181,6 +181,7 @@ export type SchoolOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  _relevance?: Prisma.SchoolOrderByRelevanceInput
 }
 
 export type SchoolWhereUniqueInput = Prisma.AtLeast<{
@@ -260,6 +261,12 @@ export type SchoolUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type SchoolOrderByRelevanceInput = {
+  fields: Prisma.SchoolOrderByRelevanceFieldEnum | Prisma.SchoolOrderByRelevanceFieldEnum[]
+  sort: Prisma.SortOrder
+  search: string
 }
 
 export type SchoolCountOrderByAggregateInput = {

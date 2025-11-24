@@ -5,9 +5,10 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated"
-  target   = "bun"
+  provider        = "prisma-client"
+  output          = "../src/generated"
+  target          = "bun"
+  previewFeatures = ["fullTextSearchPostgres"]
 }
 
 datasource db {

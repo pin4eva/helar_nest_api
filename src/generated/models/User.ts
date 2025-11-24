@@ -395,6 +395,7 @@ export type UserOrderByWithRelationInput = {
   subscriptions?: Prisma.SubscriptionOrderByRelationAggregateInput
   currentSubscription?: Prisma.SubscriptionOrderByWithRelationInput
   ReportCommentLike?: Prisma.ReportCommentLikeOrderByRelationAggregateInput
+  _relevance?: Prisma.UserOrderByRelevanceInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -729,6 +730,12 @@ export type UserUncheckedUpdateManyInput = {
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type UserOrderByRelevanceInput = {
+  fields: Prisma.UserOrderByRelevanceFieldEnum | Prisma.UserOrderByRelevanceFieldEnum[]
+  sort: Prisma.SortOrder
+  search: string
 }
 
 export type UserCountOrderByAggregateInput = {

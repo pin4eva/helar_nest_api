@@ -174,6 +174,7 @@ export type ReportTagsOrderByWithRelationInput = {
   reportId?: Prisma.SortOrder
   tag?: Prisma.SortOrder
   report?: Prisma.ReportOrderByWithRelationInput
+  _relevance?: Prisma.ReportTagsOrderByRelevanceInput
 }
 
 export type ReportTagsWhereUniqueInput = Prisma.AtLeast<{
@@ -254,6 +255,12 @@ export type ReportTagsListRelationFilter = {
 
 export type ReportTagsOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type ReportTagsOrderByRelevanceInput = {
+  fields: Prisma.ReportTagsOrderByRelevanceFieldEnum | Prisma.ReportTagsOrderByRelevanceFieldEnum[]
+  sort: Prisma.SortOrder
+  search: string
 }
 
 export type ReportTagsReportIdTagCompoundUniqueInput = {

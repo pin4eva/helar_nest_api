@@ -185,6 +185,7 @@ export type BookmarkOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   report?: Prisma.ReportOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
+  _relevance?: Prisma.BookmarkOrderByRelevanceInput
 }
 
 export type BookmarkWhereUniqueInput = Prisma.AtLeast<{
@@ -275,6 +276,12 @@ export type BookmarkListRelationFilter = {
 
 export type BookmarkOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type BookmarkOrderByRelevanceInput = {
+  fields: Prisma.BookmarkOrderByRelevanceFieldEnum | Prisma.BookmarkOrderByRelevanceFieldEnum[]
+  sort: Prisma.SortOrder
+  search: string
 }
 
 export type BookmarkUserIdReportIdCompoundUniqueInput = {
