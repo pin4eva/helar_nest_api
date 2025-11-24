@@ -117,3 +117,8 @@ export type TextbookCase = Prisma.TextbookCaseModel
  * 
  */
 export type Textbook = Prisma.TextbookModel
+/**
+ * Model School
+ * 
+ */
+export type School = Prisma.SchoolModel

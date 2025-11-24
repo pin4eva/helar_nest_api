@@ -70,7 +70,8 @@ export const ModelName = {
   FacultyNoteSummary: 'FacultyNoteSummary',
   NlsNoteSummary: 'NlsNoteSummary',
   TextbookCase: 'TextbookCase',
-  Textbook: 'Textbook'
+  Textbook: 'Textbook',
+  School: 'School'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -127,9 +128,7 @@ export const UserScalarFieldEnum = {
   gender: 'gender',
   emailToken: 'emailToken',
   isEmailVerified: 'isEmailVerified',
-  lawSchoolCampus: 'lawSchoolCampus',
-  townState: 'townState',
-  universityCampus: 'universityCampus',
+  schoolId: 'schoolId',
   currentSubscriptionId: 'currentSubscriptionId'
 } as const
 
@@ -369,6 +368,16 @@ export const TextbookScalarFieldEnum = {
 } as const
 
 export type TextbookScalarFieldEnum = (typeof TextbookScalarFieldEnum)[keyof typeof TextbookScalarFieldEnum]
+
+
+export const SchoolScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SchoolScalarFieldEnum = (typeof SchoolScalarFieldEnum)[keyof typeof SchoolScalarFieldEnum]
 
 
 export const SortOrder = {

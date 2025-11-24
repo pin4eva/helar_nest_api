@@ -21,6 +21,7 @@ export const UserProfileTypeEnum = {
   Student: 'Student',
   Lawyer: 'Lawyer',
   Guest: 'Guest',
+  User: 'User',
   Staff: 'Staff'
 } as const
 

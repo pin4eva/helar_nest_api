@@ -49,9 +49,7 @@ export type UserMinAggregateOutputType = {
   gender: $Enums.GenderEnum | null
   emailToken: string | null
   isEmailVerified: boolean | null
-  lawSchoolCampus: string | null
-  townState: string | null
-  universityCampus: string | null
+  schoolId: string | null
   currentSubscriptionId: string | null
 }
 
@@ -80,9 +78,7 @@ export type UserMaxAggregateOutputType = {
   gender: $Enums.GenderEnum | null
   emailToken: string | null
   isEmailVerified: boolean | null
-  lawSchoolCampus: string | null
-  townState: string | null
-  universityCampus: string | null
+  schoolId: string | null
   currentSubscriptionId: string | null
 }
 
@@ -111,9 +107,7 @@ export type UserCountAggregateOutputType = {
   gender: number
   emailToken: number
   isEmailVerified: number
-  lawSchoolCampus: number
-  townState: number
-  universityCampus: number
+  schoolId: number
   currentSubscriptionId: number
   _all: number
 }
@@ -144,9 +138,7 @@ export type UserMinAggregateInputType = {
   gender?: true
   emailToken?: true
   isEmailVerified?: true
-  lawSchoolCampus?: true
-  townState?: true
-  universityCampus?: true
+  schoolId?: true
   currentSubscriptionId?: true
 }
 
@@ -175,9 +167,7 @@ export type UserMaxAggregateInputType = {
   gender?: true
   emailToken?: true
   isEmailVerified?: true
-  lawSchoolCampus?: true
-  townState?: true
-  universityCampus?: true
+  schoolId?: true
   currentSubscriptionId?: true
 }
 
@@ -206,9 +196,7 @@ export type UserCountAggregateInputType = {
   gender?: true
   emailToken?: true
   isEmailVerified?: true
-  lawSchoolCampus?: true
-  townState?: true
-  universityCampus?: true
+  schoolId?: true
   currentSubscriptionId?: true
   _all?: true
 }
@@ -310,9 +298,7 @@ export type UserGroupByOutputType = {
   gender: $Enums.GenderEnum | null
   emailToken: string | null
   isEmailVerified: boolean
-  lawSchoolCampus: string | null
-  townState: string | null
-  universityCampus: string | null
+  schoolId: string | null
   currentSubscriptionId: string | null
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
@@ -362,9 +348,7 @@ export type UserWhereInput = {
   gender?: Prisma.EnumGenderEnumNullableFilter<"User"> | $Enums.GenderEnum | null
   emailToken?: Prisma.StringNullableFilter<"User"> | string | null
   isEmailVerified?: Prisma.BoolFilter<"User"> | boolean
-  lawSchoolCampus?: Prisma.StringNullableFilter<"User"> | string | null
-  townState?: Prisma.StringNullableFilter<"User"> | string | null
-  universityCampus?: Prisma.StringNullableFilter<"User"> | string | null
+  schoolId?: Prisma.StringNullableFilter<"User"> | string | null
   currentSubscriptionId?: Prisma.StringNullableFilter<"User"> | string | null
   bookmarks?: Prisma.BookmarkListRelationFilter
   report_comments?: Prisma.ReportCommentListRelationFilter
@@ -401,9 +385,7 @@ export type UserOrderByWithRelationInput = {
   gender?: Prisma.SortOrderInput | Prisma.SortOrder
   emailToken?: Prisma.SortOrderInput | Prisma.SortOrder
   isEmailVerified?: Prisma.SortOrder
-  lawSchoolCampus?: Prisma.SortOrderInput | Prisma.SortOrder
-  townState?: Prisma.SortOrderInput | Prisma.SortOrder
-  universityCampus?: Prisma.SortOrderInput | Prisma.SortOrder
+  schoolId?: Prisma.SortOrderInput | Prisma.SortOrder
   currentSubscriptionId?: Prisma.SortOrderInput | Prisma.SortOrder
   bookmarks?: Prisma.BookmarkOrderByRelationAggregateInput
   report_comments?: Prisma.ReportCommentOrderByRelationAggregateInput
@@ -444,9 +426,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   gender?: Prisma.EnumGenderEnumNullableFilter<"User"> | $Enums.GenderEnum | null
   emailToken?: Prisma.StringNullableFilter<"User"> | string | null
   isEmailVerified?: Prisma.BoolFilter<"User"> | boolean
-  lawSchoolCampus?: Prisma.StringNullableFilter<"User"> | string | null
-  townState?: Prisma.StringNullableFilter<"User"> | string | null
-  universityCampus?: Prisma.StringNullableFilter<"User"> | string | null
+  schoolId?: Prisma.StringNullableFilter<"User"> | string | null
   bookmarks?: Prisma.BookmarkListRelationFilter
   report_comments?: Prisma.ReportCommentListRelationFilter
   report_likes?: Prisma.ReportLikeListRelationFilter
@@ -482,9 +462,7 @@ export type UserOrderByWithAggregationInput = {
   gender?: Prisma.SortOrderInput | Prisma.SortOrder
   emailToken?: Prisma.SortOrderInput | Prisma.SortOrder
   isEmailVerified?: Prisma.SortOrder
-  lawSchoolCampus?: Prisma.SortOrderInput | Prisma.SortOrder
-  townState?: Prisma.SortOrderInput | Prisma.SortOrder
-  universityCampus?: Prisma.SortOrderInput | Prisma.SortOrder
+  schoolId?: Prisma.SortOrderInput | Prisma.SortOrder
   currentSubscriptionId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -519,9 +497,7 @@ export type UserScalarWhereWithAggregatesInput = {
   gender?: Prisma.EnumGenderEnumNullableWithAggregatesFilter<"User"> | $Enums.GenderEnum | null
   emailToken?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   isEmailVerified?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
-  lawSchoolCampus?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  townState?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  universityCampus?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  schoolId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   currentSubscriptionId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
 }
 
@@ -550,9 +526,7 @@ export type UserCreateInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  lawSchoolCampus?: string | null
-  townState?: string | null
-  universityCampus?: string | null
+  schoolId?: string | null
   bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
   report_comments?: Prisma.ReportCommentCreateNestedManyWithoutUserInput
   report_likes?: Prisma.ReportLikeCreateNestedManyWithoutUserInput
@@ -588,9 +562,7 @@ export type UserUncheckedCreateInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  lawSchoolCampus?: string | null
-  townState?: string | null
-  universityCampus?: string | null
+  schoolId?: string | null
   currentSubscriptionId?: string | null
   bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
   report_comments?: Prisma.ReportCommentUncheckedCreateNestedManyWithoutUserInput
@@ -626,9 +598,7 @@ export type UserUpdateInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
   report_comments?: Prisma.ReportCommentUpdateManyWithoutUserNestedInput
   report_likes?: Prisma.ReportLikeUpdateManyWithoutUserNestedInput
@@ -664,9 +634,7 @@ export type UserUncheckedUpdateInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
   report_comments?: Prisma.ReportCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -702,9 +670,7 @@ export type UserCreateManyInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  lawSchoolCampus?: string | null
-  townState?: string | null
-  universityCampus?: string | null
+  schoolId?: string | null
   currentSubscriptionId?: string | null
 }
 
@@ -733,9 +699,7 @@ export type UserUpdateManyMutationInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -763,9 +727,7 @@ export type UserUncheckedUpdateManyInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
@@ -794,9 +756,7 @@ export type UserCountOrderByAggregateInput = {
   gender?: Prisma.SortOrder
   emailToken?: Prisma.SortOrder
   isEmailVerified?: Prisma.SortOrder
-  lawSchoolCampus?: Prisma.SortOrder
-  townState?: Prisma.SortOrder
-  universityCampus?: Prisma.SortOrder
+  schoolId?: Prisma.SortOrder
   currentSubscriptionId?: Prisma.SortOrder
 }
 
@@ -825,9 +785,7 @@ export type UserMaxOrderByAggregateInput = {
   gender?: Prisma.SortOrder
   emailToken?: Prisma.SortOrder
   isEmailVerified?: Prisma.SortOrder
-  lawSchoolCampus?: Prisma.SortOrder
-  townState?: Prisma.SortOrder
-  universityCampus?: Prisma.SortOrder
+  schoolId?: Prisma.SortOrder
   currentSubscriptionId?: Prisma.SortOrder
 }
 
@@ -856,9 +814,7 @@ export type UserMinOrderByAggregateInput = {
   gender?: Prisma.SortOrder
   emailToken?: Prisma.SortOrder
   isEmailVerified?: Prisma.SortOrder
-  lawSchoolCampus?: Prisma.SortOrder
-  townState?: Prisma.SortOrder
-  universityCampus?: Prisma.SortOrder
+  schoolId?: Prisma.SortOrder
   currentSubscriptionId?: Prisma.SortOrder
 }
 
@@ -1057,9 +1013,7 @@ export type UserCreateWithoutSubscriptionsInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  lawSchoolCampus?: string | null
-  townState?: string | null
-  universityCampus?: string | null
+  schoolId?: string | null
   bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
   report_comments?: Prisma.ReportCommentCreateNestedManyWithoutUserInput
   report_likes?: Prisma.ReportLikeCreateNestedManyWithoutUserInput
@@ -1094,9 +1048,7 @@ export type UserUncheckedCreateWithoutSubscriptionsInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  lawSchoolCampus?: string | null
-  townState?: string | null
-  universityCampus?: string | null
+  schoolId?: string | null
   currentSubscriptionId?: string | null
   bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
   report_comments?: Prisma.ReportCommentUncheckedCreateNestedManyWithoutUserInput
@@ -1136,9 +1088,7 @@ export type UserCreateWithoutCurrentSubscriptionInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  lawSchoolCampus?: string | null
-  townState?: string | null
-  universityCampus?: string | null
+  schoolId?: string | null
   bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
   report_comments?: Prisma.ReportCommentCreateNestedManyWithoutUserInput
   report_likes?: Prisma.ReportLikeCreateNestedManyWithoutUserInput
@@ -1173,9 +1123,7 @@ export type UserUncheckedCreateWithoutCurrentSubscriptionInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  lawSchoolCampus?: string | null
-  townState?: string | null
-  universityCampus?: string | null
+  schoolId?: string | null
   bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
   report_comments?: Prisma.ReportCommentUncheckedCreateNestedManyWithoutUserInput
   report_likes?: Prisma.ReportLikeUncheckedCreateNestedManyWithoutUserInput
@@ -1226,9 +1174,7 @@ export type UserUpdateWithoutSubscriptionsInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
   report_comments?: Prisma.ReportCommentUpdateManyWithoutUserNestedInput
   report_likes?: Prisma.ReportLikeUpdateManyWithoutUserNestedInput
@@ -1263,9 +1209,7 @@ export type UserUncheckedUpdateWithoutSubscriptionsInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
   report_comments?: Prisma.ReportCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -1311,9 +1255,7 @@ export type UserUpdateWithoutCurrentSubscriptionInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
   report_comments?: Prisma.ReportCommentUpdateManyWithoutUserNestedInput
   report_likes?: Prisma.ReportLikeUpdateManyWithoutUserNestedInput
@@ -1348,9 +1290,7 @@ export type UserUncheckedUpdateWithoutCurrentSubscriptionInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
   report_comments?: Prisma.ReportCommentUncheckedUpdateManyWithoutUserNestedInput
   report_likes?: Prisma.ReportLikeUncheckedUpdateManyWithoutUserNestedInput
@@ -1385,9 +1325,7 @@ export type UserCreateWithoutReports_addedInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  lawSchoolCampus?: string | null
-  townState?: string | null
-  universityCampus?: string | null
+  schoolId?: string | null
   bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
   report_comments?: Prisma.ReportCommentCreateNestedManyWithoutUserInput
   report_likes?: Prisma.ReportLikeCreateNestedManyWithoutUserInput
@@ -1422,9 +1360,7 @@ export type UserUncheckedCreateWithoutReports_addedInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  lawSchoolCampus?: string | null
-  townState?: string | null
-  universityCampus?: string | null
+  schoolId?: string | null
   currentSubscriptionId?: string | null
   bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
   report_comments?: Prisma.ReportCommentUncheckedCreateNestedManyWithoutUserInput
@@ -1464,9 +1400,7 @@ export type UserCreateWithoutReports_updatedInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  lawSchoolCampus?: string | null
-  townState?: string | null
-  universityCampus?: string | null
+  schoolId?: string | null
   bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
   report_comments?: Prisma.ReportCommentCreateNestedManyWithoutUserInput
   report_likes?: Prisma.ReportLikeCreateNestedManyWithoutUserInput
@@ -1501,9 +1435,7 @@ export type UserUncheckedCreateWithoutReports_updatedInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  lawSchoolCampus?: string | null
-  townState?: string | null
-  universityCampus?: string | null
+  schoolId?: string | null
   currentSubscriptionId?: string | null
   bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
   report_comments?: Prisma.ReportCommentUncheckedCreateNestedManyWithoutUserInput
@@ -1554,9 +1486,7 @@ export type UserUpdateWithoutReports_addedInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
   report_comments?: Prisma.ReportCommentUpdateManyWithoutUserNestedInput
   report_likes?: Prisma.ReportLikeUpdateManyWithoutUserNestedInput
@@ -1591,9 +1521,7 @@ export type UserUncheckedUpdateWithoutReports_addedInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
   report_comments?: Prisma.ReportCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -1639,9 +1567,7 @@ export type UserUpdateWithoutReports_updatedInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
   report_comments?: Prisma.ReportCommentUpdateManyWithoutUserNestedInput
   report_likes?: Prisma.ReportLikeUpdateManyWithoutUserNestedInput
@@ -1676,9 +1602,7 @@ export type UserUncheckedUpdateWithoutReports_updatedInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
   report_comments?: Prisma.ReportCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -1713,9 +1637,7 @@ export type UserCreateWithoutReport_commentsInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  lawSchoolCampus?: string | null
-  townState?: string | null
-  universityCampus?: string | null
+  schoolId?: string | null
   bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
   report_likes?: Prisma.ReportLikeCreateNestedManyWithoutUserInput
   reports_added?: Prisma.ReportCreateNestedManyWithoutAdded_byInput
@@ -1750,9 +1672,7 @@ export type UserUncheckedCreateWithoutReport_commentsInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  lawSchoolCampus?: string | null
-  townState?: string | null
-  universityCampus?: string | null
+  schoolId?: string | null
   currentSubscriptionId?: string | null
   bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
   report_likes?: Prisma.ReportLikeUncheckedCreateNestedManyWithoutUserInput
@@ -1803,9 +1723,7 @@ export type UserUpdateWithoutReport_commentsInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
   report_likes?: Prisma.ReportLikeUpdateManyWithoutUserNestedInput
   reports_added?: Prisma.ReportUpdateManyWithoutAdded_byNestedInput
@@ -1840,9 +1758,7 @@ export type UserUncheckedUpdateWithoutReport_commentsInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
   report_likes?: Prisma.ReportLikeUncheckedUpdateManyWithoutUserNestedInput
@@ -1877,9 +1793,7 @@ export type UserCreateWithoutReportCommentLikeInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  lawSchoolCampus?: string | null
-  townState?: string | null
-  universityCampus?: string | null
+  schoolId?: string | null
   bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
   report_comments?: Prisma.ReportCommentCreateNestedManyWithoutUserInput
   report_likes?: Prisma.ReportLikeCreateNestedManyWithoutUserInput
@@ -1914,9 +1828,7 @@ export type UserUncheckedCreateWithoutReportCommentLikeInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  lawSchoolCampus?: string | null
-  townState?: string | null
-  universityCampus?: string | null
+  schoolId?: string | null
   currentSubscriptionId?: string | null
   bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
   report_comments?: Prisma.ReportCommentUncheckedCreateNestedManyWithoutUserInput
@@ -1967,9 +1879,7 @@ export type UserUpdateWithoutReportCommentLikeInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
   report_comments?: Prisma.ReportCommentUpdateManyWithoutUserNestedInput
   report_likes?: Prisma.ReportLikeUpdateManyWithoutUserNestedInput
@@ -2004,9 +1914,7 @@ export type UserUncheckedUpdateWithoutReportCommentLikeInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
   report_comments?: Prisma.ReportCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -2041,9 +1949,7 @@ export type UserCreateWithoutReport_likesInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  lawSchoolCampus?: string | null
-  townState?: string | null
-  universityCampus?: string | null
+  schoolId?: string | null
   bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
   report_comments?: Prisma.ReportCommentCreateNestedManyWithoutUserInput
   reports_added?: Prisma.ReportCreateNestedManyWithoutAdded_byInput
@@ -2078,9 +1984,7 @@ export type UserUncheckedCreateWithoutReport_likesInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  lawSchoolCampus?: string | null
-  townState?: string | null
-  universityCampus?: string | null
+  schoolId?: string | null
   currentSubscriptionId?: string | null
   bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
   report_comments?: Prisma.ReportCommentUncheckedCreateNestedManyWithoutUserInput
@@ -2131,9 +2035,7 @@ export type UserUpdateWithoutReport_likesInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
   report_comments?: Prisma.ReportCommentUpdateManyWithoutUserNestedInput
   reports_added?: Prisma.ReportUpdateManyWithoutAdded_byNestedInput
@@ -2168,9 +2070,7 @@ export type UserUncheckedUpdateWithoutReport_likesInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
   report_comments?: Prisma.ReportCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -2205,9 +2105,7 @@ export type UserCreateWithoutBookmarksInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  lawSchoolCampus?: string | null
-  townState?: string | null
-  universityCampus?: string | null
+  schoolId?: string | null
   report_comments?: Prisma.ReportCommentCreateNestedManyWithoutUserInput
   report_likes?: Prisma.ReportLikeCreateNestedManyWithoutUserInput
   reports_added?: Prisma.ReportCreateNestedManyWithoutAdded_byInput
@@ -2242,9 +2140,7 @@ export type UserUncheckedCreateWithoutBookmarksInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  lawSchoolCampus?: string | null
-  townState?: string | null
-  universityCampus?: string | null
+  schoolId?: string | null
   currentSubscriptionId?: string | null
   report_comments?: Prisma.ReportCommentUncheckedCreateNestedManyWithoutUserInput
   report_likes?: Prisma.ReportLikeUncheckedCreateNestedManyWithoutUserInput
@@ -2295,9 +2191,7 @@ export type UserUpdateWithoutBookmarksInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   report_comments?: Prisma.ReportCommentUpdateManyWithoutUserNestedInput
   report_likes?: Prisma.ReportLikeUpdateManyWithoutUserNestedInput
   reports_added?: Prisma.ReportUpdateManyWithoutAdded_byNestedInput
@@ -2332,9 +2226,7 @@ export type UserUncheckedUpdateWithoutBookmarksInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lawSchoolCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  townState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  universityCampus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   report_comments?: Prisma.ReportCommentUncheckedUpdateManyWithoutUserNestedInput
   report_likes?: Prisma.ReportLikeUncheckedUpdateManyWithoutUserNestedInput
@@ -2454,9 +2346,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   gender?: boolean
   emailToken?: boolean
   isEmailVerified?: boolean
-  lawSchoolCampus?: boolean
-  townState?: boolean
-  universityCampus?: boolean
+  schoolId?: boolean
   currentSubscriptionId?: boolean
   bookmarks?: boolean | Prisma.User$bookmarksArgs<ExtArgs>
   report_comments?: boolean | Prisma.User$report_commentsArgs<ExtArgs>
@@ -2494,9 +2384,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   gender?: boolean
   emailToken?: boolean
   isEmailVerified?: boolean
-  lawSchoolCampus?: boolean
-  townState?: boolean
-  universityCampus?: boolean
+  schoolId?: boolean
   currentSubscriptionId?: boolean
   currentSubscription?: boolean | Prisma.User$currentSubscriptionArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
@@ -2526,9 +2414,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   gender?: boolean
   emailToken?: boolean
   isEmailVerified?: boolean
-  lawSchoolCampus?: boolean
-  townState?: boolean
-  universityCampus?: boolean
+  schoolId?: boolean
   currentSubscriptionId?: boolean
   currentSubscription?: boolean | Prisma.User$currentSubscriptionArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
@@ -2558,13 +2444,11 @@ export type UserSelectScalar = {
   gender?: boolean
   emailToken?: boolean
   isEmailVerified?: boolean
-  lawSchoolCampus?: boolean
-  townState?: boolean
-  universityCampus?: boolean
+  schoolId?: boolean
   currentSubscriptionId?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "bio" | "city" | "contact" | "createdAt" | "email" | "firstName" | "image" | "imagePublicId" | "isContactPublic" | "isPhonePublic" | "lastName" | "lastSeen" | "phone" | "profileType" | "role" | "state" | "status" | "updatedAt" | "objectId" | "passwordUpdateToken" | "gender" | "emailToken" | "isEmailVerified" | "lawSchoolCampus" | "townState" | "universityCampus" | "currentSubscriptionId", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "bio" | "city" | "contact" | "createdAt" | "email" | "firstName" | "image" | "imagePublicId" | "isContactPublic" | "isPhonePublic" | "lastName" | "lastSeen" | "phone" | "profileType" | "role" | "state" | "status" | "updatedAt" | "objectId" | "passwordUpdateToken" | "gender" | "emailToken" | "isEmailVerified" | "schoolId" | "currentSubscriptionId", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   bookmarks?: boolean | Prisma.User$bookmarksArgs<ExtArgs>
   report_comments?: boolean | Prisma.User$report_commentsArgs<ExtArgs>
@@ -2620,9 +2504,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     gender: $Enums.GenderEnum | null
     emailToken: string | null
     isEmailVerified: boolean
-    lawSchoolCampus: string | null
-    townState: string | null
-    universityCampus: string | null
+    schoolId: string | null
     currentSubscriptionId: string | null
   }, ExtArgs["result"]["user"]>
   composites: {}
@@ -3079,9 +2961,7 @@ export interface UserFieldRefs {
   readonly gender: Prisma.FieldRef<"User", 'GenderEnum'>
   readonly emailToken: Prisma.FieldRef<"User", 'String'>
   readonly isEmailVerified: Prisma.FieldRef<"User", 'Boolean'>
-  readonly lawSchoolCampus: Prisma.FieldRef<"User", 'String'>
-  readonly townState: Prisma.FieldRef<"User", 'String'>
-  readonly universityCampus: Prisma.FieldRef<"User", 'String'>
+  readonly schoolId: Prisma.FieldRef<"User", 'String'>
   readonly currentSubscriptionId: Prisma.FieldRef<"User", 'String'>
 }
     

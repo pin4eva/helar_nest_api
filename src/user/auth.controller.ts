@@ -1,12 +1,26 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Get,
+  Patch,
+  Post,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { Request } from 'express';
+import { User } from 'src/generated/browser';
+import { CurrentUser } from '../decorators/current-user.decorator';
+import { AuthGuard } from '../guards/auth.guard';
 import {
   CreatePasswordDTO,
   LoginDTO,
   LoginResponse,
-  RegisterDTO,
+  VerifyEmailTokenDTO,
 } from './auth.dto';
 import { AuthService } from './auth.service';
+import { CreateUserDTO } from './user.dto';
 
 @ApiTags('Authentication')
 @Controller('auth')
@@ -21,8 +35,21 @@ export class AuthController {
 
   // register
   @Post('signup')
-  async signup(@Body() input: RegisterDTO) {
-    return this.authService.register(input);
+  async signup(@Body() input: CreateUserDTO, @Req() req: Request) {
+    return this.authService.signup(input, req);
+  }
+
+  @Patch('resend-verification')
+  async resendVerificationEmail(
+    @Body('email') email: string,
+    @Req() req: Request,
+  ) {
+    return this.authService.resendVerificationEmail(email, req);
+  }
+
+  @Post('verify-email')
+  async verifyEmail(@Body() input: VerifyEmailTokenDTO) {
+    return this.authService.verifyEmailToken(input);
   }
 
   // create password
@@ -31,15 +58,34 @@ export class AuthController {
     return this.authService.createPassword(input);
   }
 
+  @UseGuards(AuthGuard)
+  @Get('me')
+  getMe(@CurrentUser() user: User) {
+    return user;
+  }
+
   // refresh token
-  @Post('refresh-token')
+  @Post('refresh')
   async refreshToken(@Body('refresh_token') refresh_token: string) {
     return this.authService.refreshAccessToken(refresh_token);
   }
 
   // logout
+  @UseGuards(AuthGuard)
+  @Post('logout')
+  async logout(@Req() req: Request) {
+    const token = req.headers.authorization;
+    if (!token) {
+      throw new BadRequestException('No token provided');
+    }
+    return this.authService.logout(token);
+  }
 
   // forgot password
+  @Post('forgot-password')
+  async forgotPassword(@Body('email') email: string, @Req() req: Request) {
+    return this.authService.sendForgotPasswordLink(email, req);
+  }
 
   // reset password
 }
