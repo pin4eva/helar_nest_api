@@ -280,6 +280,7 @@ export type HandbookCaseOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   objectId?: Prisma.SortOrderInput | Prisma.SortOrder
   handbooks?: Prisma.HandbookOrderByWithRelationInput
+  _relevance?: Prisma.HandbookCaseOrderByRelevanceInput
 }
 
 export type HandbookCaseWhereUniqueInput = Prisma.AtLeast<{
@@ -431,6 +432,12 @@ export type HandbookCaseUncheckedUpdateManyInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type HandbookCaseOrderByRelevanceInput = {
+  fields: Prisma.HandbookCaseOrderByRelevanceFieldEnum | Prisma.HandbookCaseOrderByRelevanceFieldEnum[]
+  sort: Prisma.SortOrder
+  search: string
 }
 
 export type HandbookCaseCountOrderByAggregateInput = {

@@ -255,6 +255,7 @@ export type NlsNoteSummaryOrderByWithRelationInput = {
   objectId?: Prisma.SortOrderInput | Prisma.SortOrder
   note?: Prisma.SubjectOrderByWithRelationInput
   items?: Prisma.NoteItemOrderByRelationAggregateInput
+  _relevance?: Prisma.NlsNoteSummaryOrderByRelevanceInput
 }
 
 export type NlsNoteSummaryWhereUniqueInput = Prisma.AtLeast<{
@@ -396,6 +397,12 @@ export type NlsNoteSummaryListRelationFilter = {
 
 export type NlsNoteSummaryOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type NlsNoteSummaryOrderByRelevanceInput = {
+  fields: Prisma.NlsNoteSummaryOrderByRelevanceFieldEnum | Prisma.NlsNoteSummaryOrderByRelevanceFieldEnum[]
+  sort: Prisma.SortOrder
+  search: string
 }
 
 export type NlsNoteSummaryCountOrderByAggregateInput = {

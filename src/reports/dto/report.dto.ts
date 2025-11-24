@@ -1,5 +1,13 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { IsDate, IsEnum, IsString } from 'class-validator';
+import { Type } from 'class-transformer';
+import {
+  IsDate,
+  IsEnum,
+  IsInt,
+  IsOptional,
+  IsString,
+  Min,
+} from 'class-validator';
 
 export enum CourtEnum {
   SUPREME_COURT = 'Supreme Court',
@@ -10,9 +18,15 @@ export enum CourtEnum {
 
 export class GetReportsFilter {
   @ApiProperty({ required: false })
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(1)
   limit?: number;
 
   @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
   search?: string;
 }
 

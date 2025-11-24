@@ -12,7 +12,7 @@ const database = {
   DATABASE_PASSWORD: process.env.DATABASE_PASSWORD || '',
   SSL_MODE: process.env.SSL_MODE || '',
 };
-
+database.DATABASE_URL = `postgresql://${database.DATABASE_USER}:${database.DATABASE_PASSWORD}@${database.DATABASE_HOST}:${database.DATABASE_PORT}/${database.DATABASE_NAME}`;
 if (database.DATABASE_HOST.includes('prisma.io')) {
   database.DATABASE_URL = `postgresql://${database.DATABASE_USER}:${database.DATABASE_PASSWORD}@${database.DATABASE_HOST}:${database.DATABASE_PORT}/${database.DATABASE_NAME}?sslmode=require`;
 }

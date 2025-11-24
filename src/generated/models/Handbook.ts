@@ -212,6 +212,7 @@ export type HandbookOrderByWithRelationInput = {
   objectId?: Prisma.SortOrderInput | Prisma.SortOrder
   handbookCase?: Prisma.HandbookCaseOrderByRelationAggregateInput
   subject?: Prisma.SubjectOrderByWithRelationInput
+  _relevance?: Prisma.HandbookOrderByRelevanceInput
 }
 
 export type HandbookWhereUniqueInput = Prisma.AtLeast<{
@@ -331,6 +332,12 @@ export type HandbookUncheckedUpdateManyInput = {
 export type HandbookScalarRelationFilter = {
   is?: Prisma.HandbookWhereInput
   isNot?: Prisma.HandbookWhereInput
+}
+
+export type HandbookOrderByRelevanceInput = {
+  fields: Prisma.HandbookOrderByRelevanceFieldEnum | Prisma.HandbookOrderByRelevanceFieldEnum[]
+  sort: Prisma.SortOrder
+  search: string
 }
 
 export type HandbookCountOrderByAggregateInput = {

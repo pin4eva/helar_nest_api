@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma, User } from '../../generated/client';
 import { slugify } from '../../utils/helpers';
+import { buildTsQuery } from '../../utils/search';
 import {
   CreateReportBookmarkDTO,
   CreateReportDTO,
@@ -100,31 +101,52 @@ export class ReportsService {
   async getReports(filter?: GetReportsFilter) {
     try {
       const { search, limit = 20 } = filter || { search: '', limit: 20 };
+      const normalizedSearch = search?.trim();
       let where: Prisma.ReportWhereInput = {};
-      if (search) {
-        where = {
-          OR: [
-            {
-              title: {
-                contains: search,
-                mode: 'insensitive',
-              },
+      let orderBy:
+        | Prisma.ReportOrderByWithRelationInput
+        | Prisma.ReportOrderByWithRelationInput[]
+        | undefined = {
+        reportId: 'desc',
+      };
+
+      if (normalizedSearch) {
+        const tsQuery = buildTsQuery(normalizedSearch);
+        if (tsQuery) {
+          const searchFilter: Prisma.StringFilter = {
+            search: tsQuery,
+            mode: 'insensitive',
+          };
+          where = {
+            OR: [
+              { title: searchFilter },
+              { body: searchFilter },
+              { issues: searchFilter },
+              { ratios: searchFilter },
+            ],
+          };
+          orderBy = {
+            _relevance: {
+              fields: ['title', 'issues', 'body'],
+              search: tsQuery,
+              sort: 'desc',
             },
-            {
-              body: {
-                contains: search,
-                mode: 'insensitive',
-              },
-            },
-            {
-              issues: {
-                contains: search,
-                mode: 'insensitive',
-              },
-            },
-          ],
-        };
+          };
+        } else {
+          const containsFilter: Prisma.StringFilter = {
+            contains: normalizedSearch,
+            mode: 'insensitive',
+          };
+          where = {
+            OR: [
+              { title: containsFilter },
+              { body: containsFilter },
+              { issues: containsFilter },
+            ],
+          };
+        }
       }
+
       const reports = await this.prisma.report.findMany({
         where,
         take: Number(limit),
@@ -132,6 +154,7 @@ export class ReportsService {
           ratios: true,
           body: true,
         },
+        orderBy,
       });
       return reports;
     } catch (error) {

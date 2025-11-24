@@ -396,10 +396,246 @@ export const QueryMode = {
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
+export const AuthOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  password: 'password',
+  salt: 'salt'
+} as const
+
+export type AuthOrderByRelevanceFieldEnum = (typeof AuthOrderByRelevanceFieldEnum)[keyof typeof AuthOrderByRelevanceFieldEnum]
+
+
 export const NullsOrder = {
   first: 'first',
   last: 'last'
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const UserOrderByRelevanceFieldEnum = {
+  id: 'id',
+  bio: 'bio',
+  city: 'city',
+  contact: 'contact',
+  email: 'email',
+  firstName: 'firstName',
+  image: 'image',
+  imagePublicId: 'imagePublicId',
+  lastName: 'lastName',
+  phone: 'phone',
+  state: 'state',
+  objectId: 'objectId',
+  passwordUpdateToken: 'passwordUpdateToken',
+  emailToken: 'emailToken',
+  schoolId: 'schoolId',
+  currentSubscriptionId: 'currentSubscriptionId'
+} as const
+
+export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
+
+
+export const SubscriptionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  reference: 'reference',
+  paymentId: 'paymentId'
+} as const
+
+export type SubscriptionOrderByRelevanceFieldEnum = (typeof SubscriptionOrderByRelevanceFieldEnum)[keyof typeof SubscriptionOrderByRelevanceFieldEnum]
+
+
+export const ReportOrderByRelevanceFieldEnum = {
+  id: 'id',
+  body: 'body',
+  court: 'court',
+  issues: 'issues',
+  ratios: 'ratios',
+  slug: 'slug',
+  suitNo: 'suitNo',
+  summary: 'summary',
+  title: 'title',
+  added_by_id: 'added_by_id',
+  updated_by_id: 'updated_by_id',
+  objectId: 'objectId'
+} as const
+
+export type ReportOrderByRelevanceFieldEnum = (typeof ReportOrderByRelevanceFieldEnum)[keyof typeof ReportOrderByRelevanceFieldEnum]
+
+
+export const ReportToSubjectOrderByRelevanceFieldEnum = {
+  id: 'id',
+  reportId: 'reportId',
+  subjectId: 'subjectId'
+} as const
+
+export type ReportToSubjectOrderByRelevanceFieldEnum = (typeof ReportToSubjectOrderByRelevanceFieldEnum)[keyof typeof ReportToSubjectOrderByRelevanceFieldEnum]
+
+
+export const ReportCommentOrderByRelevanceFieldEnum = {
+  id: 'id',
+  authorId: 'authorId',
+  objectId: 'objectId',
+  comment: 'comment',
+  reportId: 'reportId'
+} as const
+
+export type ReportCommentOrderByRelevanceFieldEnum = (typeof ReportCommentOrderByRelevanceFieldEnum)[keyof typeof ReportCommentOrderByRelevanceFieldEnum]
+
+
+export const ReportCommentLikeOrderByRelevanceFieldEnum = {
+  id: 'id',
+  reportCommentId: 'reportCommentId',
+  userId: 'userId'
+} as const
+
+export type ReportCommentLikeOrderByRelevanceFieldEnum = (typeof ReportCommentLikeOrderByRelevanceFieldEnum)[keyof typeof ReportCommentLikeOrderByRelevanceFieldEnum]
+
+
+export const ReportLikeOrderByRelevanceFieldEnum = {
+  id: 'id',
+  reportId: 'reportId',
+  userId: 'userId'
+} as const
+
+export type ReportLikeOrderByRelevanceFieldEnum = (typeof ReportLikeOrderByRelevanceFieldEnum)[keyof typeof ReportLikeOrderByRelevanceFieldEnum]
+
+
+export const ReportTagsOrderByRelevanceFieldEnum = {
+  id: 'id',
+  reportId: 'reportId',
+  tag: 'tag'
+} as const
+
+export type ReportTagsOrderByRelevanceFieldEnum = (typeof ReportTagsOrderByRelevanceFieldEnum)[keyof typeof ReportTagsOrderByRelevanceFieldEnum]
+
+
+export const ReportVisitsOrderByRelevanceFieldEnum = {
+  reportId: 'reportId',
+  sessionId: 'sessionId'
+} as const
+
+export type ReportVisitsOrderByRelevanceFieldEnum = (typeof ReportVisitsOrderByRelevanceFieldEnum)[keyof typeof ReportVisitsOrderByRelevanceFieldEnum]
+
+
+export const BookmarkOrderByRelevanceFieldEnum = {
+  userId: 'userId',
+  reportId: 'reportId'
+} as const
+
+export type BookmarkOrderByRelevanceFieldEnum = (typeof BookmarkOrderByRelevanceFieldEnum)[keyof typeof BookmarkOrderByRelevanceFieldEnum]
+
+
+export const HandbookCaseOrderByRelevanceFieldEnum = {
+  id: 'id',
+  body: 'body',
+  byline: 'byline',
+  citation: 'citation',
+  handbookId: 'handbookId',
+  slug: 'slug',
+  title: 'title',
+  objectId: 'objectId'
+} as const
+
+export type HandbookCaseOrderByRelevanceFieldEnum = (typeof HandbookCaseOrderByRelevanceFieldEnum)[keyof typeof HandbookCaseOrderByRelevanceFieldEnum]
+
+
+export const HandbookOrderByRelevanceFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  subjectId: 'subjectId',
+  topic: 'topic',
+  objectId: 'objectId'
+} as const
+
+export type HandbookOrderByRelevanceFieldEnum = (typeof HandbookOrderByRelevanceFieldEnum)[keyof typeof HandbookOrderByRelevanceFieldEnum]
+
+
+export const NoteItemOrderByRelevanceFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  objectId: 'objectId',
+  question: 'question',
+  answer: 'answer',
+  facultyNoteSummaryId: 'facultyNoteSummaryId',
+  nlsNoteSummaryId: 'nlsNoteSummaryId'
+} as const
+
+export type NoteItemOrderByRelevanceFieldEnum = (typeof NoteItemOrderByRelevanceFieldEnum)[keyof typeof NoteItemOrderByRelevanceFieldEnum]
+
+
+export const QuoteOrderByRelevanceFieldEnum = {
+  id: 'id',
+  text: 'text',
+  author: 'author',
+  objectId: 'objectId'
+} as const
+
+export type QuoteOrderByRelevanceFieldEnum = (typeof QuoteOrderByRelevanceFieldEnum)[keyof typeof QuoteOrderByRelevanceFieldEnum]
+
+
+export const SubjectOrderByRelevanceFieldEnum = {
+  id: 'id',
+  intro: 'intro',
+  name: 'name',
+  slug: 'slug',
+  objectId: 'objectId'
+} as const
+
+export type SubjectOrderByRelevanceFieldEnum = (typeof SubjectOrderByRelevanceFieldEnum)[keyof typeof SubjectOrderByRelevanceFieldEnum]
+
+
+export const FacultyNoteSummaryOrderByRelevanceFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  title: 'title',
+  subjectId: 'subjectId',
+  objectId: 'objectId'
+} as const
+
+export type FacultyNoteSummaryOrderByRelevanceFieldEnum = (typeof FacultyNoteSummaryOrderByRelevanceFieldEnum)[keyof typeof FacultyNoteSummaryOrderByRelevanceFieldEnum]
+
+
+export const NlsNoteSummaryOrderByRelevanceFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  title: 'title',
+  subjectId: 'subjectId',
+  objectId: 'objectId'
+} as const
+
+export type NlsNoteSummaryOrderByRelevanceFieldEnum = (typeof NlsNoteSummaryOrderByRelevanceFieldEnum)[keyof typeof NlsNoteSummaryOrderByRelevanceFieldEnum]
+
+
+export const TextbookCaseOrderByRelevanceFieldEnum = {
+  id: 'id',
+  body: 'body',
+  byline: 'byline',
+  citation: 'citation',
+  slug: 'slug',
+  title: 'title',
+  textbookId: 'textbookId'
+} as const
+
+export type TextbookCaseOrderByRelevanceFieldEnum = (typeof TextbookCaseOrderByRelevanceFieldEnum)[keyof typeof TextbookCaseOrderByRelevanceFieldEnum]
+
+
+export const TextbookOrderByRelevanceFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  subjectId: 'subjectId',
+  topic: 'topic',
+  objectId: 'objectId'
+} as const
+
+export type TextbookOrderByRelevanceFieldEnum = (typeof TextbookOrderByRelevanceFieldEnum)[keyof typeof TextbookOrderByRelevanceFieldEnum]
+
+
+export const SchoolOrderByRelevanceFieldEnum = {
+  id: 'id',
+  name: 'name'
+} as const
+
+export type SchoolOrderByRelevanceFieldEnum = (typeof SchoolOrderByRelevanceFieldEnum)[keyof typeof SchoolOrderByRelevanceFieldEnum]
 

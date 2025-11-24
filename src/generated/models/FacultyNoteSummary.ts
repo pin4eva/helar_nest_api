@@ -255,6 +255,7 @@ export type FacultyNoteSummaryOrderByWithRelationInput = {
   objectId?: Prisma.SortOrderInput | Prisma.SortOrder
   note?: Prisma.SubjectOrderByWithRelationInput
   items?: Prisma.NoteItemOrderByRelationAggregateInput
+  _relevance?: Prisma.FacultyNoteSummaryOrderByRelevanceInput
 }
 
 export type FacultyNoteSummaryWhereUniqueInput = Prisma.AtLeast<{
@@ -396,6 +397,12 @@ export type FacultyNoteSummaryListRelationFilter = {
 
 export type FacultyNoteSummaryOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type FacultyNoteSummaryOrderByRelevanceInput = {
+  fields: Prisma.FacultyNoteSummaryOrderByRelevanceFieldEnum | Prisma.FacultyNoteSummaryOrderByRelevanceFieldEnum[]
+  sort: Prisma.SortOrder
+  search: string
 }
 
 export type FacultyNoteSummaryCountOrderByAggregateInput = {

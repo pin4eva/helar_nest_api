@@ -271,6 +271,7 @@ export type TextbookCaseOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   textbookId?: Prisma.SortOrder
   textbooks?: Prisma.TextbookOrderByWithRelationInput
+  _relevance?: Prisma.TextbookCaseOrderByRelevanceInput
 }
 
 export type TextbookCaseWhereUniqueInput = Prisma.AtLeast<{
@@ -412,6 +413,12 @@ export type TextbookCaseUncheckedUpdateManyInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   textbookId?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+export type TextbookCaseOrderByRelevanceInput = {
+  fields: Prisma.TextbookCaseOrderByRelevanceFieldEnum | Prisma.TextbookCaseOrderByRelevanceFieldEnum[]
+  sort: Prisma.SortOrder
+  search: string
 }
 
 export type TextbookCaseCountOrderByAggregateInput = {

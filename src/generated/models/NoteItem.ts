@@ -273,6 +273,7 @@ export type NoteItemOrderByWithRelationInput = {
   nlsNoteSummaryId?: Prisma.SortOrderInput | Prisma.SortOrder
   facultyNoteSummary?: Prisma.FacultyNoteSummaryOrderByWithRelationInput
   nlsNoteSummary?: Prisma.NlsNoteSummaryOrderByWithRelationInput
+  _relevance?: Prisma.NoteItemOrderByRelevanceInput
 }
 
 export type NoteItemWhereUniqueInput = Prisma.AtLeast<{
@@ -414,6 +415,12 @@ export type NoteItemUncheckedUpdateManyInput = {
   answer?: Prisma.StringFieldUpdateOperationsInput | string
   facultyNoteSummaryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nlsNoteSummaryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type NoteItemOrderByRelevanceInput = {
+  fields: Prisma.NoteItemOrderByRelevanceFieldEnum | Prisma.NoteItemOrderByRelevanceFieldEnum[]
+  sort: Prisma.SortOrder
+  search: string
 }
 
 export type NoteItemCountOrderByAggregateInput = {

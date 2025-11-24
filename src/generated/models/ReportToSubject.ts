@@ -176,6 +176,7 @@ export type ReportToSubjectOrderByWithRelationInput = {
   subjectId?: Prisma.SortOrder
   report?: Prisma.ReportOrderByWithRelationInput
   subject?: Prisma.SubjectOrderByWithRelationInput
+  _relevance?: Prisma.ReportToSubjectOrderByRelevanceInput
 }
 
 export type ReportToSubjectWhereUniqueInput = Prisma.AtLeast<{
@@ -256,6 +257,12 @@ export type ReportToSubjectListRelationFilter = {
 
 export type ReportToSubjectOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type ReportToSubjectOrderByRelevanceInput = {
+  fields: Prisma.ReportToSubjectOrderByRelevanceFieldEnum | Prisma.ReportToSubjectOrderByRelevanceFieldEnum[]
+  sort: Prisma.SortOrder
+  search: string
 }
 
 export type ReportToSubjectSubjectIdReportIdCompoundUniqueInput = {

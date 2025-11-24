@@ -15,11 +15,10 @@ export class PrismaService
     const db = environments.database;
 
     const connectionString = db.DATABASE_URL;
-    const logs = ['query', 'info', 'warn', 'error'];
     const pool = new Pool({
       connectionString,
     });
-    pool.on('connect', () => {
+    pool.on('connect', (db) => {
       console.log('Connected to the database');
     });
     const adapter = new PrismaPg(pool);

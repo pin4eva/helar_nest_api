@@ -165,6 +165,7 @@ export type ReportVisitsOrderByWithRelationInput = {
   reportId?: Prisma.SortOrder
   sessionId?: Prisma.SortOrder
   report?: Prisma.ReportOrderByWithRelationInput
+  _relevance?: Prisma.ReportVisitsOrderByRelevanceInput
 }
 
 export type ReportVisitsWhereUniqueInput = Prisma.AtLeast<{
@@ -235,6 +236,12 @@ export type ReportVisitsListRelationFilter = {
 
 export type ReportVisitsOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type ReportVisitsOrderByRelevanceInput = {
+  fields: Prisma.ReportVisitsOrderByRelevanceFieldEnum | Prisma.ReportVisitsOrderByRelevanceFieldEnum[]
+  sort: Prisma.SortOrder
+  search: string
 }
 
 export type ReportVisitsReportIdSessionIdCompoundUniqueInput = {

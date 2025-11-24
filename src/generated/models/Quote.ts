@@ -199,6 +199,7 @@ export type QuoteOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   objectId?: Prisma.SortOrderInput | Prisma.SortOrder
+  _relevance?: Prisma.QuoteOrderByRelevanceInput
 }
 
 export type QuoteWhereUniqueInput = Prisma.AtLeast<{
@@ -298,6 +299,12 @@ export type QuoteUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type QuoteOrderByRelevanceInput = {
+  fields: Prisma.QuoteOrderByRelevanceFieldEnum | Prisma.QuoteOrderByRelevanceFieldEnum[]
+  sort: Prisma.SortOrder
+  search: string
 }
 
 export type QuoteCountOrderByAggregateInput = {
