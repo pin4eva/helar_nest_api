@@ -46,6 +46,7 @@ export class ReportsService {
           court: court as string,
           title,
           slug,
+          vol: 1,
           reportId: lastReportId + 1,
           date: createdDate,
           added_by_id: user.id,
@@ -246,7 +247,12 @@ export class ReportsService {
       if (existingLike) {
         // delete like ie unlike
         await this.prisma.reportLike.delete({
-          where: { id: existingLike.id },
+          where: {
+            reportId_userId: {
+              reportId,
+              userId: user.id,
+            },
+          },
         });
         return {
           message: 'Report unliked successfully',

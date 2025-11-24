@@ -231,7 +231,12 @@ export class AuthService {
       }
       return user as User;
     } catch (error) {
-      throw error;
+      if (error instanceof jwt.JsonWebTokenError) {
+        throw new UnauthorizedException(
+          (error as jwt.JsonWebTokenError)?.message,
+        );
+      }
+      throw new UnauthorizedException('Invalid token');
     }
   }
 
