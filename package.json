@@ -7,6 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "prisma generate && nest build",
+    "build:prod": "prisma generate && prisma migrate deploy && nest build",
     "format": "biome format --write src/**/*.ts",
     "start": "nest start",
     "dev": "nest start --watch",
