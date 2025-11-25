@@ -18,6 +18,7 @@ export class CurrentUserMiddleware implements NestMiddleware {
 
   async use(req: Request, _: Response, next: NextFunction) {
     const token = req.headers?.authorization;
+    console.log('Token in middleware:', token);
 
     if (!token) {
       return next();

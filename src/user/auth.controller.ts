@@ -8,9 +8,9 @@ import {
   Req,
   UseGuards,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Request } from 'express';
-import { User } from 'src/generated/browser';
+import { User } from 'src/generated/client';
 import { CurrentUser } from '../decorators/current-user.decorator';
 import { AuthGuard } from '../guards/auth.guard';
 import {
@@ -23,6 +23,7 @@ import { AuthService } from './auth.service';
 import { CreateUserDTO } from './user.dto';
 
 @ApiTags('Authentication')
+@ApiBearerAuth()
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
@@ -58,10 +59,10 @@ export class AuthController {
     return this.authService.createPassword(input);
   }
 
-  @UseGuards(AuthGuard)
   @Get('me')
-  getMe(@CurrentUser() user: User) {
-    return user;
+  @UseGuards(AuthGuard)
+  async getMe(@CurrentUser() user: User) {
+    return this.authService.me(user.id);
   }
 
   // refresh token
