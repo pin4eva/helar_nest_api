@@ -40,19 +40,21 @@ export class ReportsService {
         },
       });
 
-      const slug = slugify(input.title);
+      let slug = slugify(input.title);
 
       const lastReportId = lastReport?.[0]?.reportId || 5000;
 
       const createdDate = new Date(input.date);
       const { court } = input;
+      const reportId = lastReportId + 1;
+      slug += `-${reportId}`;
       const report = await this.prisma.report.create({
         data: {
           court: court as string,
           title,
           slug,
           vol: 1,
-          reportId: lastReportId + 1,
+          reportId,
           date: createdDate,
           added_by_id: user.id,
           updated_by_id: user.id,
@@ -74,12 +76,24 @@ export class ReportsService {
   async updateReport(input: UpdateReportDTO, user: User) {
     try {
       const { id, ...data } = input;
+      const existingReport = await this.prisma.report.findUnique({
+        where: { id },
+      });
+      if (!existingReport) {
+        throw new NotFoundException(`Report with id ${id} not found`);
+      }
+      let slug = existingReport.slug;
+
+      if (data?.title && existingReport.title !== data.title) {
+        slug = slugify(data.title) + `-${existingReport.reportId}`;
+      }
       const report = await this.prisma.report.update({
         where: { id },
         data: {
           ...data,
           updated_by_id: user.id,
           court: data?.court as string,
+          slug,
         },
       });
 
@@ -272,6 +286,7 @@ export class ReportsService {
     }
   }
 
+  // like report
   async likeReport(reportId: string, user: User) {
     try {
       const existingLike = await this.prisma.reportLike.findFirst({
@@ -311,7 +326,24 @@ export class ReportsService {
     }
   }
 
-  // like report
+  // ensure slug is unique by appending the reportId for all reports
+  async updateAllSlugs() {
+    try {
+      const reports = await this.prisma.report.findMany({
+        select: { id: true, title: true, reportId: true, slug: true },
+      });
 
-  // unlike report
+      for (const report of reports) {
+        const slug = `${slugify(report.title)}-${report.reportId}`;
+        await this.prisma.report.update({
+          where: { id: report.id },
+          data: { slug },
+        });
+      }
+
+      return { message: 'Report slugs updated successfully' };
+    } catch (error) {
+      throw error;
+    }
+  }
 }

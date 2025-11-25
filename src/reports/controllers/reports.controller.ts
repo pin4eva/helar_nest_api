@@ -104,4 +104,9 @@ export class ReportsController {
   getBookmarks(@CurrentUser() user: User) {
     return this.bookmarkService.getBookmarks(user);
   }
+
+  @Patch('update-all-slugs')
+  updateAllSlugs() {
+    return this.reportsService.updateAllSlugs();
+  }
 }

@@ -223,13 +223,13 @@ export type SubjectOrderByWithRelationInput = {
 
 export type SubjectWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  slug?: string
   AND?: Prisma.SubjectWhereInput | Prisma.SubjectWhereInput[]
   OR?: Prisma.SubjectWhereInput[]
   NOT?: Prisma.SubjectWhereInput | Prisma.SubjectWhereInput[]
   createdAt?: Prisma.DateTimeFilter<"Subject"> | Date | string
   intro?: Prisma.StringFilter<"Subject"> | string
   name?: Prisma.StringFilter<"Subject"> | string
-  slug?: Prisma.StringFilter<"Subject"> | string
   updatedAt?: Prisma.DateTimeFilter<"Subject"> | Date | string
   objectId?: Prisma.StringNullableFilter<"Subject"> | string | null
   report_to_subject?: Prisma.ReportToSubjectListRelationFilter
@@ -237,7 +237,7 @@ export type SubjectWhereUniqueInput = Prisma.AtLeast<{
   textbooks?: Prisma.TextbookListRelationFilter
   facultyNoteSummaries?: Prisma.FacultyNoteSummaryListRelationFilter
   nlsNoteSummaries?: Prisma.NlsNoteSummaryListRelationFilter
-}, "id">
+}, "id" | "slug">
 
 export type SubjectOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
