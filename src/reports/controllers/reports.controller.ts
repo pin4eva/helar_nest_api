@@ -87,7 +87,7 @@ export class ReportsController {
     return this.reportsService.deleteReport(id);
   }
 
-  @Patch('bookmark/:id')
+  @Patch('bookmark')
   @UseGuards(AuthGuard)
   toggleBookmark(
     @Body() CreateReportBookmarkDTO: CreateReportBookmarkDTO,
