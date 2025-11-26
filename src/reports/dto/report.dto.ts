@@ -82,3 +82,11 @@ export class ReportSession {
   reports: Set<string>;
   createdAt: Date;
 }
+
+export class ReportWithExcerpt {
+  @ApiProperty({ required: false })
+  excerpt?: string;
+
+  @ApiProperty({ required: false })
+  matchedField?: 'title' | 'body';
+}

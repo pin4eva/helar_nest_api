@@ -3,7 +3,12 @@ import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma, User } from '../../generated/client';
 import { PrismaService } from '../../prisma/prisma.service';
 import { slugify } from '../../utils/helpers';
-import { buildTsQuery } from '../../utils/search';
+import {
+  normalizeSearchQuery,
+  generateSimpleExcerpt,
+  stripHtmlAndMarkdown,
+  removeStopWords,
+} from '../../utils/search';
 import {
   CreateReportDTO,
   GetReportsFilter,
@@ -129,28 +134,147 @@ export class ReportsService {
       };
 
       if (normalizedSearch) {
-        const tsQuery = buildTsQuery(normalizedSearch);
-        if (tsQuery) {
-          const searchFilter: Prisma.StringFilter = {
-            search: tsQuery,
-            mode: 'insensitive',
-          };
-          where = {
-            OR: [
-              { title: searchFilter },
-              { body: searchFilter },
-              { issues: searchFilter },
-              { ratios: searchFilter },
-            ],
-          };
-          orderBy = {
-            _relevance: {
-              fields: ['title', 'issues', 'body'],
-              search: tsQuery,
-              sort: 'desc',
-            },
-          };
+        const searchQuery = normalizeSearchQuery(normalizedSearch);
+        if (searchQuery) {
+          // Use plainto_tsquery which automatically handles stop words and stemming
+          const query = `
+            SELECT
+              r.*,
+              ts_rank(
+                setweight(to_tsvector('english', COALESCE(r.title, '')), 'A') ||
+                setweight(to_tsvector('english', COALESCE(r.body, '')), 'B'),
+                plainto_tsquery('english', $1)
+              ) as relevance_score
+            FROM reports r
+            WHERE (
+              to_tsvector('english', r.title) @@ plainto_tsquery('english', $1) OR
+              to_tsvector('english', r.body) @@ plainto_tsquery('english', $1)
+            )
+            ORDER BY relevance_score DESC, r."reportId" DESC
+            LIMIT $2
+          `;
+
+          const results: any[] = await this.prisma.$queryRawUnsafe(
+            query,
+            searchQuery,
+            Number(limit),
+          );
+
+          // Process results: strip markdown/HTML first, then apply highlighting
+          return results.map((report) => {
+            // Filter out stop words from search terms for highlighting
+            const filteredSearchQuery = removeStopWords(searchQuery);
+
+            // Helper function to generate excerpt with highlighting
+            const generateExcerpt = (
+              text: string,
+              searchTerms: string,
+              maxWords: number = 50,
+            ): string => {
+              if (!text) return '';
+
+              // Strip HTML/markdown first
+              const cleanText = stripHtmlAndMarkdown(text);
+
+              // Create regex from search terms (now just space-separated words)
+              const terms = searchTerms.split(/\s+/).filter(Boolean);
+
+              // Find first occurrence of any search term
+              let firstIndex = -1;
+              let foundTerm = '';
+              for (const term of terms) {
+                const idx = cleanText.toLowerCase().indexOf(term.toLowerCase());
+                if (idx !== -1 && (firstIndex === -1 || idx < firstIndex)) {
+                  firstIndex = idx;
+                  foundTerm = term;
+                }
+              }
+
+              if (firstIndex === -1) {
+                // No match found, return beginning
+                const words = cleanText.split(/\s+/).slice(0, maxWords);
+                return (
+                  words.join(' ') +
+                  (cleanText.split(/\s+/).length > maxWords ? '...' : '')
+                );
+              }
+
+              // Calculate word boundaries around the match
+              const words = cleanText.split(/\s+/);
+              let currentPos = 0;
+              let matchWordIdx = 0;
+
+              for (let i = 0; i < words.length; i++) {
+                const wordEnd = currentPos + words[i].length;
+                if (currentPos <= firstIndex && firstIndex <= wordEnd) {
+                  matchWordIdx = i;
+                  break;
+                }
+                currentPos = wordEnd + 1;
+              }
+
+              const startIdx = Math.max(
+                0,
+                matchWordIdx - Math.floor(maxWords / 2),
+              );
+              const endIdx = Math.min(
+                words.length,
+                matchWordIdx + Math.floor(maxWords / 2),
+              );
+
+              let excerpt = words.slice(startIdx, endIdx).join(' ');
+              const prefix = startIdx > 0 ? '...' : '';
+              const suffix = endIdx < words.length ? '...' : '';
+
+              // Highlight all matching terms (case-insensitive)
+              terms.forEach((term) => {
+                const regex = new RegExp(`(${term})`, 'gi');
+                excerpt = excerpt.replace(regex, '<mark>$1</mark>');
+              });
+
+              return prefix + excerpt + suffix;
+            };
+
+            // Determine which field has the best match
+            let excerpt = '';
+            let matchedField: 'title' | 'body' = 'title';
+
+            // Check title first (highest priority)
+            if (
+              report.title &&
+              filteredSearchQuery
+                .split(/\s+/)
+                .some((term) =>
+                  report.title.toLowerCase().includes(term.toLowerCase()),
+                )
+            ) {
+              excerpt = generateExcerpt(report.title, filteredSearchQuery, 30);
+              matchedField = 'title';
+            }
+            // Then body
+            else if (
+              report.body &&
+              filteredSearchQuery
+                .split(/\s+/)
+                .some((term) =>
+                  report.body.toLowerCase().includes(term.toLowerCase()),
+                )
+            ) {
+              excerpt = generateExcerpt(report.body, filteredSearchQuery, 50);
+              matchedField = 'body';
+            }
+
+            // Remove unwanted fields
+            const { relevance_score, ratios, body, ...reportData } = report;
+
+            return {
+              ...reportData,
+              excerpt: excerpt || undefined,
+              matchedField: excerpt ? matchedField : undefined,
+            };
+          });
         } else {
+          // Fallback to basic contains search with simple excerpts
           const containsFilter: Prisma.StringFilter = {
             contains: normalizedSearch,
             mode: 'insensitive',
@@ -162,9 +286,63 @@ export class ReportsService {
               { issues: containsFilter },
             ],
           };
+
+          const reports = await this.prisma.report.findMany({
+            where,
+            take: Number(limit),
+            orderBy: { reportId: 'desc' },
+          });
+
+          // Generate simple excerpts
+          return reports.map((report) => {
+            let excerpt = '';
+            let matchedField: 'title' | 'body' | 'issues' | 'ratios' = 'title';
+
+            // Check each field for the search term
+            if (
+              report.title
+                .toLowerCase()
+                .includes(normalizedSearch.toLowerCase())
+            ) {
+              excerpt = generateSimpleExcerpt(
+                report.title,
+                normalizedSearch,
+                40,
+              );
+              matchedField = 'title';
+            } else if (
+              report.issues
+                ?.toLowerCase()
+                .includes(normalizedSearch.toLowerCase())
+            ) {
+              excerpt = generateSimpleExcerpt(
+                report.issues,
+                normalizedSearch,
+                40,
+              );
+              matchedField = 'issues';
+            } else if (
+              report.body.toLowerCase().includes(normalizedSearch.toLowerCase())
+            ) {
+              excerpt = generateSimpleExcerpt(
+                report.body,
+                normalizedSearch,
+                40,
+              );
+              matchedField = 'body';
+            }
+
+            const { ratios, body, ...reportData } = report;
+            return {
+              ...reportData,
+              excerpt: excerpt || undefined,
+              matchedField: excerpt ? matchedField : undefined,
+            };
+          });
         }
       }
 
+      // No search - return normal results without excerpts
       const reports = await this.prisma.report.findMany({
         where,
         take: Number(limit),
