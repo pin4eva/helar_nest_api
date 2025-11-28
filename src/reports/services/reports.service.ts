@@ -1,5 +1,10 @@
 import { Cache, CACHE_MANAGER } from '@nestjs/cache-manager';
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { Prisma, User } from '../../generated/client';
 import { PrismaService } from '../../prisma/prisma.service';
 import { slugify } from '../../utils/helpers';
@@ -10,6 +15,7 @@ import {
   removeStopWords,
 } from '../../utils/search';
 import {
+  CourtEnum,
   CreateReportDTO,
   GetReportsFilter,
   ReportSession,
@@ -32,7 +38,7 @@ export class ReportsService {
       });
 
       if (existingReport) {
-        throw new Error('Report with this title already exists');
+        throw new BadRequestException('Report with this title already exists');
       }
 
       const lastReport = await this.prisma.report.findMany({
@@ -64,8 +70,8 @@ export class ReportsService {
           added_by_id: user.id,
           updated_by_id: user.id,
           body: input.body,
-          issues: input.issues,
-          ratios: input.ratios,
+          issues: '',
+          ratios: '',
           suitNo: input.suitNo,
           summary: input.summary,
         },
@@ -80,7 +86,7 @@ export class ReportsService {
   // update report
   async updateReport(input: UpdateReportDTO, user: User) {
     try {
-      const { id, ...data } = input;
+      const { id, date, ...data } = input;
       const existingReport = await this.prisma.report.findUnique({
         where: { id },
       });
@@ -99,6 +105,7 @@ export class ReportsService {
           updated_by_id: user.id,
           court: data?.court as string,
           slug,
+          date: date ? new Date(date) : existingReport.date,
         },
       });
 
@@ -115,6 +122,34 @@ export class ReportsService {
         where: { id },
       });
       return report;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // Get all reports without limits
+  async getAllReports() {
+    try {
+      const reports = await this.prisma.report.findMany({
+        select: {
+          id: true,
+          reportId: true,
+          slug: true,
+          title: true,
+          court: true,
+          date: true,
+          isPublished: true,
+          _count: {
+            select: {
+              likes: true,
+              visits: true,
+              comments: true,
+              bookmarks: true,
+            },
+          },
+        },
+      });
+      return reports;
     } catch (error) {
       throw error;
     }
@@ -559,21 +594,82 @@ export class ReportsService {
   }
 
   // ensure slug is unique by appending the reportId for all reports
-  async updateAllSlugs() {
+  async updateAllReports() {
     try {
       const reports = await this.prisma.report.findMany({
-        select: { id: true, title: true, reportId: true, slug: true },
+        select: { id: true, court: true },
       });
 
       for (const report of reports) {
-        const slug = `${slugify(report.title)}-${report.reportId}`;
+        // regularize court string with CourtEnum values
+        let court = report.court?.toLowerCase()?.trim();
+        if (court?.includes('sup')) {
+          court = CourtEnum.SUPREME_COURT;
+        } else if (court?.includes('ap')) {
+          court = CourtEnum.APPEAL_COURT;
+        } else {
+          court = report.court;
+        }
         await this.prisma.report.update({
           where: { id: report.id },
-          data: { slug },
+          data: { court },
         });
       }
 
       return { message: 'Report slugs updated successfully' };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // get dashboard metrics
+  async getReportMetrics() {
+    try {
+      const [totalReports, publishedReports, draftReports, viewsAggregate] =
+        await Promise.all([
+          this.prisma.report.count(),
+          this.prisma.report.count({
+            where: { isPublished: true },
+          }),
+          this.prisma.report.count({
+            where: { isPublished: false },
+          }),
+          this.prisma.report.aggregate({
+            _sum: {
+              views: true,
+            },
+          }),
+        ]);
+
+      return {
+        totalReports,
+        publishedReports,
+        draftReports,
+        totalViews: viewsAggregate._sum.views || 0,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async publishReport(id: string) {
+    try {
+      const report = await this.prisma.report.findFirst({
+        where: { id },
+      });
+      if (!report)
+        throw new NotFoundException(`Report with id ${id} not found`);
+      const isPublished = !report?.isPublished || false;
+      await this.prisma.report.update({
+        where: { id },
+        data: {
+          isPublished,
+        },
+      });
+      return {
+        message: `Report ${isPublished ? 'published' : 'unpublished'} successfully`,
+        isPublished,
+      };
     } catch (error) {
       throw error;
     }

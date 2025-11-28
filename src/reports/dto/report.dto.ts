@@ -44,16 +44,8 @@ export class CreateReportDTO {
   court: CourtEnum;
 
   @ApiProperty()
-  @IsDate()
-  date: string;
-
-  @ApiProperty()
   @IsString()
-  issues: string;
-
-  @ApiProperty()
-  @IsString()
-  ratios: string;
+  date: Date;
 
   @ApiProperty()
   @IsString()

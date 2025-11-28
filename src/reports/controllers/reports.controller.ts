@@ -36,10 +36,25 @@ export class ReportsController {
   async getReports(@Query() query?: GetReportsFilter) {
     return this.reportsService.getReports(query);
   }
+  @Get('all')
+  getAllReports() {
+    return this.reportsService.getAllReports();
+  }
+
+  @Get('metrics')
+  @UseGuards(AuthGuard)
+  async getReportMetrics() {
+    return this.reportsService.getReportMetrics();
+  }
 
   @Get('single/:id')
   async getReportById(@Param('id') id: string) {
     return this.reportsService.getReportById(id);
+  }
+  @Patch('publish/:id')
+  @UseGuards(AuthGuard)
+  async publishReport(@Param('id') id: string) {
+    return this.reportsService.publishReport(id);
   }
   @Get('reportId/:reportId')
   async getReportByReportId(
@@ -111,6 +126,6 @@ export class ReportsController {
 
   @Patch('update-all-slugs')
   updateAllSlugs() {
-    return this.reportsService.updateAllSlugs();
+    return this.reportsService.updateAllReports();
   }
 }
