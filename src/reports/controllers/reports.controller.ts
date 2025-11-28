@@ -48,6 +48,10 @@ export class ReportsController {
   ) {
     return this.reportsService.getReportByReportId(reportId);
   }
+  @Get('slug/:slug')
+  async getReportBySlug(@Param('slug') slug: string, @Req() request: Request) {
+    return this.reportsService.getReportBySlug(slug);
+  }
 
   @UseGuards(AuthGuard)
   @Post()

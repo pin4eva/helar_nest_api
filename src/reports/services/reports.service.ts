@@ -374,15 +374,69 @@ export class ReportsService {
   }
 
   // get report by reportId
-  async getReportByReportId(reportId: number) {
+  async getReportByReportId(reportId: number, user?: User) {
     try {
+      const where: Prisma.ReportWhereInput = { reportId };
+      const include: Prisma.ReportInclude = {
+        _count: {
+          select: {
+            comments: true,
+            bookmarks: true,
+            likes: true,
+            visits: true,
+          },
+        },
+      };
+
       const report = await this.prisma.report.findFirst({
-        where: { reportId },
+        where,
+        include,
       });
+
+      let isLikedByUser = false;
+      let isBookmarkedByUser = false;
+
       if (!report)
         throw new NotFoundException(
           `Report with reportId ${reportId} not found`,
         );
+
+      if (user) {
+        const bookmark = await this.prisma.bookmark.findFirst({
+          where: {
+            reportId: report.id,
+            userId: user.id,
+          },
+        });
+        isBookmarkedByUser = !!bookmark;
+
+        const like = await this.prisma.reportLike.findFirst({
+          where: {
+            reportId: report.id,
+            userId: user.id,
+          },
+        });
+        isLikedByUser = !!like;
+      }
+
+      return {
+        ...report,
+        isBookmarkedByUser,
+        isLikedByUser,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // get report by slug
+  async getReportBySlug(slug: string) {
+    try {
+      const report = await this.prisma.report.findFirst({
+        where: { slug },
+      });
+      if (!report)
+        throw new NotFoundException(`Report with slug ${slug} not found`);
 
       return report;
     } catch (error) {
