@@ -162,4 +162,24 @@ export class HandbookService {
     }
     return item;
   }
+
+  // update all topic and case to have slug (one-time use)
+  async generateSlugs() {
+    const topics = await this.prisma.handbookTopic.findMany();
+    for (const topic of topics) {
+      const slug = slugify(topic.title);
+      await this.prisma.handbookTopic.update({
+        where: { id: topic.id },
+        data: { slug },
+      });
+    }
+    const cases = await this.prisma.handbookCase.findMany();
+    for (const item of cases) {
+      const slug = slugify(`${item.title}-${item.ref}`);
+      await this.prisma.handbookCase.update({
+        where: { id: item.id },
+        data: { slug },
+      });
+    }
+  }
 }

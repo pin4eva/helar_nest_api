@@ -82,4 +82,9 @@ export class HandbookController {
   deleteCase(@Param('id') id: string) {
     return this.handbookService.deleteCase(id);
   }
+
+  @Patch('update-slugs')
+  async updateSlugs() {
+    return this.handbookService.generateSlugs();
+  }
 }

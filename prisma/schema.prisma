@@ -355,7 +355,7 @@ model HandbookCase {
 model SummaryTopic {
   id        String          @id @default(cuid())
   title     String          @unique
-  slug      String?
+  slug      String
   subjectId String
   type      SummaryTypeEnum @default(Faculty_Summary)
   subject   Subject         @relation(fields: [subjectId], references: [id])
