@@ -199,53 +199,36 @@ model Bookmark {
   @@map("bookmarks")
 }
 
-model HandbookCase {
-  id         String   @id @default(cuid())
-  body       String
-  byline     String
-  citation   String
-  createdAt  DateTime @default(now())
-  handbookId String
-  ref        Int      @unique
-  slug       String   @unique
-  title      String
-  updatedAt  DateTime @updatedAt
-  objectId   String?
-  handbooks  Handbook @relation(fields: [handbookId], references: [id])
+// model Handbook {
+//   id           String         @id @default(cuid())
+//   createdAt    DateTime       @default(now())
+//   slug         String         @unique
+//   subjectId    String
+//   topic        String
+//   updatedAt    DateTime       @updatedAt
+//   objectId     String?
+//   handbookCase HandbookCase[]
+//   subject      Subject        @relation(fields: [subjectId], references: [id])
 
-  @@map("handbook_cases")
-}
+//   @@map("handbooks")
+// }
 
-model Handbook {
-  id           String         @id @default(cuid())
-  createdAt    DateTime       @default(now())
-  slug         String         @unique
-  subjectId    String
-  topic        String
-  updatedAt    DateTime       @updatedAt
-  objectId     String?
-  handbookCase HandbookCase[]
-  subject      Subject        @relation(fields: [subjectId], references: [id])
+// model NoteItem {
+//   id                   String              @id @default(cuid())
+//   createdAt            DateTime            @default(now())
+//   slug                 String?             @unique
+//   updatedAt            DateTime            @updatedAt
+//   objectId             String?
+//   ref                  Int                 @unique
+//   question             String
+//   answer               String
+//   facultyNoteSummary   FacultyNoteSummary? @relation(fields: [facultyNoteSummaryId], references: [id])
+//   facultyNoteSummaryId String?
+//   nlsNoteSummary       NlsNoteSummary?     @relation(fields: [nlsNoteSummaryId], references: [id])
+//   nlsNoteSummaryId     String?
 
-  @@map("handbooks")
-}
-
-model NoteItem {
-  id                   String              @id @default(cuid())
-  createdAt            DateTime            @default(now())
-  slug                 String?             @unique
-  updatedAt            DateTime            @updatedAt
-  objectId             String?
-  ref                  Int                 @unique
-  question             String
-  answer               String
-  facultyNoteSummary   FacultyNoteSummary? @relation(fields: [facultyNoteSummaryId], references: [id])
-  facultyNoteSummaryId String?
-  nlsNoteSummary       NlsNoteSummary?     @relation(fields: [nlsNoteSummaryId], references: [id])
-  nlsNoteSummaryId     String?
-
-  @@map("note_items")
-}
+//   @@map("note_items")
+// }
 
 model Quote {
   id        String   @id @default(cuid())
@@ -259,82 +242,143 @@ model Quote {
 }
 
 model Subject {
-  id                   String               @id @default(cuid())
-  createdAt            DateTime             @default(now())
-  intro                String
-  name                 String
-  slug                 String               @unique
-  updatedAt            DateTime             @updatedAt
-  objectId             String?
-  report_to_subject    ReportToSubject[]
-  handbooks            Handbook[]
-  textbooks            Textbook[]
-  facultyNoteSummaries FacultyNoteSummary[]
-  nlsNoteSummaries     NlsNoteSummary[]
+  id                String            @id @default(cuid())
+  createdAt         DateTime          @default(now())
+  intro             String
+  name              String
+  slug              String            @unique
+  updatedAt         DateTime          @updatedAt
+  objectId          String?
+  report_to_subject ReportToSubject[]
+  // handbooks            Handbook[]
+  // textbooks            Textbook[]
+  // facultyNoteSummaries FacultyNoteSummary[]
+  // nlsNoteSummaries     NlsNoteSummary[]
+  handbookTopics    HandbookTopic[]
+  summaryTopics     SummaryTopic[]
 
   @@map("subjects")
 }
 
-model FacultyNoteSummary {
-  id        String     @id @default(cuid())
-  slug      String     @unique
-  title     String
-  ref       Int
+// model FacultyNoteSummary {
+//   id        String     @id @default(cuid())
+//   slug      String     @unique
+//   title     String
+//   ref       Int
+//   subjectId String
+//   note      Subject    @relation(fields: [subjectId], references: [id])
+//   createdAt DateTime   @default(now())
+//   updatedAt DateTime   @updatedAt
+//   objectId  String?
+//   items     NoteItem[]
+
+//   @@index([subjectId])
+//   @@map("faculty_note_summaries")
+// }
+
+// model NlsNoteSummary {
+//   id        String     @id @default(cuid())
+//   slug      String     @unique
+//   title     String
+//   ref       Int
+//   subjectId String
+//   note      Subject    @relation(fields: [subjectId], references: [id])
+//   createdAt DateTime   @default(now())
+//   updatedAt DateTime   @updatedAt
+//   objectId  String?
+//   items     NoteItem[]
+
+//   @@index([subjectId])
+//   @@map("nls_note_summaries")
+// }
+
+// model TextbookCase {
+//   id         String   @id @default(cuid())
+//   body       String
+//   byline     String
+//   citation   String
+//   createdAt  DateTime @default(now())
+//   ref        Int      @unique
+//   slug       String   @unique
+//   title      String
+//   updatedAt  DateTime @updatedAt
+//   textbookId String
+//   textbooks  Textbook @relation(fields: [textbookId], references: [id])
+
+//   @@map("textbook_cases")
+// }
+
+// model Textbook {
+//   id           String         @id @default(cuid())
+//   createdAt    DateTime       @default(now())
+//   slug         String         @unique
+//   subjectId    String
+//   topic        String
+//   updatedAt    DateTime       @updatedAt
+//   objectId     String?
+//   textbookCase TextbookCase[]
+//   subject      Subject        @relation(fields: [subjectId], references: [id])
+
+//   @@map("textbooks")
+// }
+
+model HandbookTopic {
+  id        String         @id @default(cuid())
+  title     String         @unique
+  slug      String?
   subjectId String
-  note      Subject    @relation(fields: [subjectId], references: [id])
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  objectId  String?
-  items     NoteItem[]
+  type      TopicTypeEnum  @default(Handbook)
+  subject   Subject        @relation(fields: [subjectId], references: [id])
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  cases     HandbookCase[]
 
-  @@index([subjectId])
-  @@map("faculty_note_summaries")
+  @@map("handbook_topics")
 }
 
-model NlsNoteSummary {
-  id        String     @id @default(cuid())
-  slug      String     @unique
+model HandbookCase {
+  id        String         @id @default(cuid())
+  body      String
+  byline    String
+  citation  String
+  createdAt DateTime       @default(now())
+  topicId   String
+  ref       Int            @unique
+  slug      String?
   title     String
-  ref       Int
+  updatedAt DateTime       @updatedAt
+  topic     HandbookTopic? @relation(fields: [topicId], references: [id])
+
+  @@map("handbook_cases")
+}
+
+model SummaryTopic {
+  id        String          @id @default(cuid())
+  title     String          @unique
+  slug      String?
   subjectId String
-  note      Subject    @relation(fields: [subjectId], references: [id])
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  type      SummaryTypeEnum @default(Faculty_Summary)
+  subject   Subject         @relation(fields: [subjectId], references: [id])
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  cases     SummaryCase[]
+
+  @@map("summary_topics")
+}
+
+model SummaryCase {
+  id        String        @id @default(cuid())
+  createdAt DateTime      @default(now())
+  topicId   String
+  slug      String?
+  ref       Int           @unique
+  question  String
+  answer    String
+  updatedAt DateTime      @updatedAt
   objectId  String?
-  items     NoteItem[]
+  topic     SummaryTopic? @relation(fields: [topicId], references: [id])
 
-  @@index([subjectId])
-  @@map("nls_note_summaries")
-}
-
-model TextbookCase {
-  id         String   @id @default(cuid())
-  body       String
-  byline     String
-  citation   String
-  createdAt  DateTime @default(now())
-  ref        Int      @unique
-  slug       String   @unique
-  title      String
-  updatedAt  DateTime @updatedAt
-  textbookId String
-  textbooks  Textbook @relation(fields: [textbookId], references: [id])
-
-  @@map("textbook_cases")
-}
-
-model Textbook {
-  id           String         @id @default(cuid())
-  createdAt    DateTime       @default(now())
-  slug         String         @unique
-  subjectId    String
-  topic        String
-  updatedAt    DateTime       @updatedAt
-  objectId     String?
-  textbookCase TextbookCase[]
-  subject      Subject        @relation(fields: [subjectId], references: [id])
-
-  @@map("textbooks")
+  @@map("summary_cases")
 }
 
 model School {
@@ -382,4 +426,14 @@ enum SubscriptionPlanEnum {
 enum SubscriptionStatusEnum {
   Active
   Expired
+}
+
+enum TopicTypeEnum {
+  Textbook @map("Textbook")
+  Handbook @map("Handbook")
+}
+
+enum SummaryTypeEnum {
+  Faculty_Summary @map("Faculty Summary")
+  NLS_Summary     @map("NLS Summary")
 }

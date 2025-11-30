@@ -61,3 +61,19 @@ export const SubscriptionStatusEnum = {
 } as const
 
 export type SubscriptionStatusEnum = (typeof SubscriptionStatusEnum)[keyof typeof SubscriptionStatusEnum]
+
+
+export const TopicTypeEnum = {
+  Textbook: 'Textbook',
+  Handbook: 'Handbook'
+} as const
+
+export type TopicTypeEnum = (typeof TopicTypeEnum)[keyof typeof TopicTypeEnum]
+
+
+export const SummaryTypeEnum = {
+  Faculty_Summary: 'Faculty Summary',
+  NLS_Summary: 'NLS Summary'
+} as const
+
+export type SummaryTypeEnum = (typeof SummaryTypeEnum)[keyof typeof SummaryTypeEnum]

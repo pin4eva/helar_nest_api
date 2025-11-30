@@ -15,6 +15,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { SubjectModule } from './subject/subject.module';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './guards/roles.guard';
+import { HandbookModule } from './handbook/handbook.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { RolesGuard } from './guards/roles.guard';
     EmailModule,
     PrismaModule,
     SubjectModule,
+    HandbookModule,
   ],
   controllers: [AppController],
   providers: [
