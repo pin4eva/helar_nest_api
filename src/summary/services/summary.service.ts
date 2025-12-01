@@ -38,7 +38,7 @@ export class SummaryService {
   }
 
   async getTopicBySlug(slug: string) {
-    const topic = await this.prisma.summaryTopic.findUnique({
+    const topic = await this.prisma.summaryTopic.findFirst({
       where: { slug },
       include: { cases: true, subject: true },
     });

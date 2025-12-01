@@ -40,7 +40,7 @@ export class HandbookService {
   }
 
   async getTopicBySlug(slug: string) {
-    const topic = await this.prisma.handbookTopic.findUnique({
+    const topic = await this.prisma.handbookTopic.findFirst({
       where: { slug },
       include: { cases: true, subject: true },
     });
