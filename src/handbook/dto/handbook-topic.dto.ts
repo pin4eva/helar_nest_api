@@ -23,3 +23,20 @@ export class CreateHandbookTopicDto {
 export class UpdateHandbookTopicDto extends PartialType(
   CreateHandbookTopicDto,
 ) {}
+
+export class HandbookTopicsQueryDto {
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  subjectSlug?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  search?: string;
+
+  @ApiProperty({ required: false, enum: TopicTypeEnum })
+  @IsOptional()
+  @IsEnum(TopicTypeEnum)
+  type?: TopicTypeEnum;
+}

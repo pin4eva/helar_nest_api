@@ -3,6 +3,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { slugify } from 'src/utils/helpers';
 import {
   CreateHandbookTopicDto,
+  HandbookTopicsQueryDto,
   UpdateHandbookTopicDto,
 } from '../dto/handbook-topic.dto';
 import {
@@ -10,6 +11,7 @@ import {
   UpdateHandbookCaseDto,
 } from '../dto/handbook-case.dto';
 import { TopicTypeEnum } from 'src/generated/enums';
+import { Prisma, Subject } from 'src/generated/client';
 
 @Injectable()
 export class HandbookService {
@@ -37,11 +39,89 @@ export class HandbookService {
     return topic;
   }
 
+  async getTopicBySlug(slug: string) {
+    const topic = await this.prisma.handbookTopic.findUnique({
+      where: { slug },
+      include: { cases: true, subject: true },
+    });
+
+    if (!topic) {
+      throw new NotFoundException(`Handbook topic with slug ${slug} not found`);
+    }
+
+    return topic;
+  }
+
   async getTopicsBySubjectId(subjectId: string) {
     return this.prisma.handbookTopic.findMany({
       where: { subjectId },
       orderBy: { createdAt: 'desc' },
     });
+  }
+
+  async getTopicSubjects(type?: TopicTypeEnum): Promise<Subject[]> {
+    try {
+      const whereClause: Prisma.HandbookTopicWhereInput = {};
+      if (type) {
+        whereClause.type = type;
+      }
+      const subjects = await this.prisma.handbookTopic.findMany({
+        where: whereClause,
+        select: {
+          subject: true,
+        },
+        distinct: ['subjectId'],
+      });
+      return subjects.map((item) => item.subject);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getTopicsBySubjectSlug(query: HandbookTopicsQueryDto) {
+    const { type, search, subjectSlug } = query;
+    try {
+      const whereClause: Prisma.HandbookTopicWhereInput = {};
+      if (subjectSlug) {
+        whereClause.subject = { slug: subjectSlug };
+      }
+      if (type) {
+        whereClause.type = type;
+      }
+      if (search) {
+        whereClause.subject = undefined; // reset subject filter to avoid conflict
+        whereClause.type = undefined; // reset type filter to avoid conflict
+        whereClause.OR = [
+          { title: { contains: search, mode: 'insensitive' } },
+          {
+            cases: {
+              some: { title: { contains: search, mode: 'insensitive' } },
+            },
+          },
+          {
+            cases: {
+              some: { body: { contains: search, mode: 'insensitive' } },
+            },
+          },
+        ];
+      }
+      const topics = await this.prisma.handbookTopic.findMany({
+        where: whereClause,
+        include: {
+          subject: {
+            select: { id: true, name: true, slug: true },
+          },
+          _count: {
+            select: { cases: true },
+          },
+        },
+        orderBy: { createdAt: 'desc' },
+      });
+
+      return topics;
+    } catch (error) {
+      throw error;
+    }
   }
 
   createTopic(input: CreateHandbookTopicDto) {

@@ -6,16 +6,19 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { HandbookService } from '../services/handbook.service';
 import {
   CreateHandbookTopicDto,
+  HandbookTopicsQueryDto,
   UpdateHandbookTopicDto,
 } from '../dto/handbook-topic.dto';
 import {
   CreateHandbookCaseDto,
   UpdateHandbookCaseDto,
 } from '../dto/handbook-case.dto';
+import { TopicTypeEnum } from 'src/generated/browser';
 
 @Controller('handbook')
 export class HandbookController {
@@ -27,14 +30,17 @@ export class HandbookController {
     return this.handbookService.listTopics();
   }
 
-  @Get('topics/:id')
-  getTopic(@Param('id') id: string) {
-    return this.handbookService.getTopicById(id);
-  }
-
   @Get('topics/subject/:subjectId')
   getTopicsBySubjectId(@Param('subjectId') subjectId: string) {
     return this.handbookService.getTopicsBySubjectId(subjectId);
+  }
+  @Get('topics/subjects')
+  getTopicSubjects(@Query('type') type?: TopicTypeEnum) {
+    return this.handbookService.getTopicSubjects(type);
+  }
+  @Get('topics/subject-slug')
+  getTopicsBySubjectSlug(@Query() query: HandbookTopicsQueryDto) {
+    return this.handbookService.getTopicsBySubjectSlug(query);
   }
 
   @Post('topics')
@@ -52,6 +58,10 @@ export class HandbookController {
     return this.handbookService.deleteTopic(id);
   }
 
+  @Get('topics/:id')
+  getTopic(@Param('id') id: string) {
+    return this.handbookService.getTopicById(id);
+  }
   // Cases
   @Get('cases')
   getCases() {
@@ -66,6 +76,10 @@ export class HandbookController {
   @Get('cases/topic/:topicId')
   getCasesByTopicId(@Param('topicId') topicId: string) {
     return this.handbookService.getCasesByTopicId(topicId);
+  }
+  @Get('topics/slug/:slug')
+  getTopicBySlug(@Param('slug') slug: string) {
+    return this.handbookService.getTopicBySlug(slug);
   }
 
   @Post('cases')
