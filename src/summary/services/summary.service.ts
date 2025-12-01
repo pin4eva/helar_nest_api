@@ -68,7 +68,7 @@ export class SummaryService {
   // Cases
   listCases() {
     return this.prisma.summaryCase.findMany({
-      orderBy: { createdAt: 'desc' },
+      orderBy: { ref: 'desc' },
     });
   }
 
@@ -82,6 +82,18 @@ export class SummaryService {
     }
 
     return summaryCase;
+  }
+
+  async getCasesByTopicId(topicId: string) {
+    return this.prisma.summaryCase.findMany({
+      where: { topicId },
+      include: {
+        topic: {
+          include: { subject: true },
+        },
+      },
+      orderBy: { ref: 'desc' },
+    });
   }
 
   createCase(input: CreateSummaryCaseDto) {

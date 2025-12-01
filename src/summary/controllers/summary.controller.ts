@@ -53,6 +53,11 @@ export class SummaryController {
     return this.summaryService.listCases();
   }
 
+  @Get('topics/:topicId/cases')
+  getCasesByTopic(@Param('topicId') topicId: string) {
+    return this.summaryService.getCasesByTopicId(topicId);
+  }
+
   @Get('cases/:id')
   getCase(@Param('id') id: string) {
     return this.summaryService.getCaseById(id);
