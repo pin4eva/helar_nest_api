@@ -12,14 +12,14 @@ const devOrigins = [
   'http://localhost:3000',
   'http://localhost:3001',
   'http://localhost:8000',
-  'https://*.vercel.app',
   'https://dev-helar-nuxt.vercel.app',
+  'https://helar-nuxt.vercel.app',
 ];
 
 const prodOrigins = [
-  'https://*.helar.law',
-  'https://*.vercel.app',
+  'https://helar.law',
   'https://dev-helar-nuxt.vercel.app',
+  'https://helar-nuxt.vercel.app',
 ];
 
 async function bootstrap() {
@@ -38,7 +38,10 @@ async function bootstrap() {
   );
   app.use(express.json({ limit: '50mb' }));
   app.enableCors({
-    origin: process.env.NODE_ENV === 'production' ? prodOrigins : devOrigins,
+    origin:
+      process.env.NODE_ENV === 'development'
+        ? [...prodOrigins, ...devOrigins]
+        : prodOrigins,
     credentials: true,
   });
 
