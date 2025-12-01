@@ -68,7 +68,7 @@ export class SummaryService {
   // Cases
   listCases() {
     return this.prisma.summaryCase.findMany({
-      orderBy: { ref: 'desc' },
+      orderBy: { ref: 'asc' },
     });
   }
 
@@ -92,7 +92,7 @@ export class SummaryService {
           include: { subject: true },
         },
       },
-      orderBy: { ref: 'desc' },
+      orderBy: { ref: 'asc' },
     });
   }
 
