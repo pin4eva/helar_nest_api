@@ -12,6 +12,7 @@ const devOrigins = [
   'http://localhost:3000',
   'http://localhost:3001',
   'http://localhost:8000',
+  'https://*.vercel.app',
 ];
 
 const prodOrigins = ['https://*.helar.law', 'https://*.vercel.app'];
