@@ -43,6 +43,11 @@ export class HandbookController {
     return this.handbookService.getTopicsBySubjectSlug(query);
   }
 
+  @Get('topics/slug/:slug')
+  getTopicBySlug(@Param('slug') slug: string) {
+    return this.handbookService.getTopicBySlug(slug);
+  }
+
   @Post('topics')
   createTopic(@Body() input: CreateHandbookTopicDto) {
     return this.handbookService.createTopic(input);
@@ -76,10 +81,6 @@ export class HandbookController {
   @Get('cases/topic/:topicId')
   getCasesByTopicId(@Param('topicId') topicId: string) {
     return this.handbookService.getCasesByTopicId(topicId);
-  }
-  @Get('topics/slug/:slug')
-  getTopicBySlug(@Param('slug') slug: string) {
-    return this.handbookService.getTopicBySlug(slug);
   }
 
   @Post('cases')

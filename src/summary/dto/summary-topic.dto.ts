@@ -22,3 +22,19 @@ export class CreateSummaryTopicDto {
 }
 
 export class UpdateSummaryTopicDto extends PartialType(CreateSummaryTopicDto) {}
+
+export class SummaryTopicsQueryDto {
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  subjectSlug?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  type?: SummaryTypeEnum;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  search?: string;
+}

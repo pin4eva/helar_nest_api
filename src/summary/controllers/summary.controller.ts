@@ -6,16 +6,19 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { SummaryService } from '../services/summary.service';
 import {
   CreateSummaryTopicDto,
+  SummaryTopicsQueryDto,
   UpdateSummaryTopicDto,
 } from '../dto/summary-topic.dto';
 import {
   CreateSummaryCaseDto,
   UpdateSummaryCaseDto,
 } from '../dto/summary-case.dto';
+import { SummaryTypeEnum } from 'src/generated/enums';
 
 @Controller('summary')
 export class SummaryController {
@@ -25,6 +28,21 @@ export class SummaryController {
   @Get('topics')
   getTopics() {
     return this.summaryService.listTopics();
+  }
+
+  @Get('topics/subjects')
+  getTopicSubjects(@Query('type') type?: SummaryTypeEnum) {
+    return this.summaryService.getTopicSubjects(type);
+  }
+
+  @Get('topics/subject-slug')
+  getTopicsBySubjectSlug(@Query() query: SummaryTopicsQueryDto) {
+    return this.summaryService.getTopicsBySubjectSlug(query);
+  }
+
+  @Get('topics/slug/:slug')
+  getTopicBySlug(@Param('slug') slug: string) {
+    return this.summaryService.getTopicBySlug(slug);
   }
 
   @Get('topics/:id')
