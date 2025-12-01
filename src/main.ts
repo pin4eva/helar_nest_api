@@ -37,8 +37,14 @@ async function bootstrap() {
     }),
   );
   app.use(express.json({ limit: '50mb' }));
+
+  const isProduction = process.env.NODE_ENV === 'production';
+  const allowedOrigins = Array.from(
+    new Set(isProduction ? prodOrigins : [...prodOrigins, ...devOrigins]),
+  );
+
   app.enableCors({
-    origin: prodOrigins,
+    origin: allowedOrigins,
     credentials: true,
   });
 
