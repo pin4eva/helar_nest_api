@@ -18,7 +18,7 @@ import {
   CreateHandbookCaseDto,
   UpdateHandbookCaseDto,
 } from '../dto/handbook-case.dto';
-import { TopicTypeEnum } from 'src/generated/browser';
+import { TopicTypeEnum } from 'src/generated/client';
 
 @Controller('handbook')
 export class HandbookController {
