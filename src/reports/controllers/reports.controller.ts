@@ -36,10 +36,25 @@ export class ReportsController {
   async getReports(@Query() query?: GetReportsFilter) {
     return this.reportsService.getReports(query);
   }
+  @Get('all')
+  getAllReports() {
+    return this.reportsService.getAllReports();
+  }
+
+  @Get('metrics')
+  @UseGuards(AuthGuard)
+  async getReportMetrics() {
+    return this.reportsService.getReportMetrics();
+  }
 
   @Get('single/:id')
   async getReportById(@Param('id') id: string) {
     return this.reportsService.getReportById(id);
+  }
+  @Patch('publish/:id')
+  @UseGuards(AuthGuard)
+  async publishReport(@Param('id') id: string) {
+    return this.reportsService.publishReport(id);
   }
   @Get('reportId/:reportId')
   async getReportByReportId(
@@ -47,6 +62,10 @@ export class ReportsController {
     @Req() request: Request,
   ) {
     return this.reportsService.getReportByReportId(reportId);
+  }
+  @Get('slug/:slug')
+  async getReportBySlug(@Param('slug') slug: string, @Req() request: Request) {
+    return this.reportsService.getReportBySlug(slug);
   }
 
   @UseGuards(AuthGuard)
@@ -87,7 +106,7 @@ export class ReportsController {
     return this.reportsService.deleteReport(id);
   }
 
-  @Patch('bookmark/:id')
+  @Patch('bookmark')
   @UseGuards(AuthGuard)
   toggleBookmark(
     @Body() CreateReportBookmarkDTO: CreateReportBookmarkDTO,
@@ -103,5 +122,10 @@ export class ReportsController {
   @UseGuards(AuthGuard)
   getBookmarks(@CurrentUser() user: User) {
     return this.bookmarkService.getBookmarks(user);
+  }
+
+  @Patch('update-all-slugs')
+  updateAllSlugs() {
+    return this.reportsService.updateAllReports();
   }
 }

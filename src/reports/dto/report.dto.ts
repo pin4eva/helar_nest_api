@@ -44,16 +44,8 @@ export class CreateReportDTO {
   court: CourtEnum;
 
   @ApiProperty()
-  @IsDate()
-  date: string;
-
-  @ApiProperty()
   @IsString()
-  issues: string;
-
-  @ApiProperty()
-  @IsString()
-  ratios: string;
+  date: Date;
 
   @ApiProperty()
   @IsString()
@@ -81,4 +73,12 @@ export class ReportSession {
   userId?: string;
   reports: Set<string>;
   createdAt: Date;
+}
+
+export class ReportWithExcerpt {
+  @ApiProperty({ required: false })
+  excerpt?: string;
+
+  @ApiProperty({ required: false })
+  matchedField?: 'title' | 'body';
 }

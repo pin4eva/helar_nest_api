@@ -199,10 +199,8 @@ export type SubjectWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Subject"> | Date | string
   objectId?: Prisma.StringNullableFilter<"Subject"> | string | null
   report_to_subject?: Prisma.ReportToSubjectListRelationFilter
-  handbooks?: Prisma.HandbookListRelationFilter
-  textbooks?: Prisma.TextbookListRelationFilter
-  facultyNoteSummaries?: Prisma.FacultyNoteSummaryListRelationFilter
-  nlsNoteSummaries?: Prisma.NlsNoteSummaryListRelationFilter
+  handbookTopics?: Prisma.HandbookTopicListRelationFilter
+  summaryTopics?: Prisma.SummaryTopicListRelationFilter
 }
 
 export type SubjectOrderByWithRelationInput = {
@@ -214,30 +212,26 @@ export type SubjectOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   objectId?: Prisma.SortOrderInput | Prisma.SortOrder
   report_to_subject?: Prisma.ReportToSubjectOrderByRelationAggregateInput
-  handbooks?: Prisma.HandbookOrderByRelationAggregateInput
-  textbooks?: Prisma.TextbookOrderByRelationAggregateInput
-  facultyNoteSummaries?: Prisma.FacultyNoteSummaryOrderByRelationAggregateInput
-  nlsNoteSummaries?: Prisma.NlsNoteSummaryOrderByRelationAggregateInput
+  handbookTopics?: Prisma.HandbookTopicOrderByRelationAggregateInput
+  summaryTopics?: Prisma.SummaryTopicOrderByRelationAggregateInput
   _relevance?: Prisma.SubjectOrderByRelevanceInput
 }
 
 export type SubjectWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  slug?: string
   AND?: Prisma.SubjectWhereInput | Prisma.SubjectWhereInput[]
   OR?: Prisma.SubjectWhereInput[]
   NOT?: Prisma.SubjectWhereInput | Prisma.SubjectWhereInput[]
   createdAt?: Prisma.DateTimeFilter<"Subject"> | Date | string
   intro?: Prisma.StringFilter<"Subject"> | string
   name?: Prisma.StringFilter<"Subject"> | string
-  slug?: Prisma.StringFilter<"Subject"> | string
   updatedAt?: Prisma.DateTimeFilter<"Subject"> | Date | string
   objectId?: Prisma.StringNullableFilter<"Subject"> | string | null
   report_to_subject?: Prisma.ReportToSubjectListRelationFilter
-  handbooks?: Prisma.HandbookListRelationFilter
-  textbooks?: Prisma.TextbookListRelationFilter
-  facultyNoteSummaries?: Prisma.FacultyNoteSummaryListRelationFilter
-  nlsNoteSummaries?: Prisma.NlsNoteSummaryListRelationFilter
-}, "id">
+  handbookTopics?: Prisma.HandbookTopicListRelationFilter
+  summaryTopics?: Prisma.SummaryTopicListRelationFilter
+}, "id" | "slug">
 
 export type SubjectOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -274,10 +268,8 @@ export type SubjectCreateInput = {
   updatedAt?: Date | string
   objectId?: string | null
   report_to_subject?: Prisma.ReportToSubjectCreateNestedManyWithoutSubjectInput
-  handbooks?: Prisma.HandbookCreateNestedManyWithoutSubjectInput
-  textbooks?: Prisma.TextbookCreateNestedManyWithoutSubjectInput
-  facultyNoteSummaries?: Prisma.FacultyNoteSummaryCreateNestedManyWithoutNoteInput
-  nlsNoteSummaries?: Prisma.NlsNoteSummaryCreateNestedManyWithoutNoteInput
+  handbookTopics?: Prisma.HandbookTopicCreateNestedManyWithoutSubjectInput
+  summaryTopics?: Prisma.SummaryTopicCreateNestedManyWithoutSubjectInput
 }
 
 export type SubjectUncheckedCreateInput = {
@@ -289,10 +281,8 @@ export type SubjectUncheckedCreateInput = {
   updatedAt?: Date | string
   objectId?: string | null
   report_to_subject?: Prisma.ReportToSubjectUncheckedCreateNestedManyWithoutSubjectInput
-  handbooks?: Prisma.HandbookUncheckedCreateNestedManyWithoutSubjectInput
-  textbooks?: Prisma.TextbookUncheckedCreateNestedManyWithoutSubjectInput
-  facultyNoteSummaries?: Prisma.FacultyNoteSummaryUncheckedCreateNestedManyWithoutNoteInput
-  nlsNoteSummaries?: Prisma.NlsNoteSummaryUncheckedCreateNestedManyWithoutNoteInput
+  handbookTopics?: Prisma.HandbookTopicUncheckedCreateNestedManyWithoutSubjectInput
+  summaryTopics?: Prisma.SummaryTopicUncheckedCreateNestedManyWithoutSubjectInput
 }
 
 export type SubjectUpdateInput = {
@@ -304,10 +294,8 @@ export type SubjectUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   report_to_subject?: Prisma.ReportToSubjectUpdateManyWithoutSubjectNestedInput
-  handbooks?: Prisma.HandbookUpdateManyWithoutSubjectNestedInput
-  textbooks?: Prisma.TextbookUpdateManyWithoutSubjectNestedInput
-  facultyNoteSummaries?: Prisma.FacultyNoteSummaryUpdateManyWithoutNoteNestedInput
-  nlsNoteSummaries?: Prisma.NlsNoteSummaryUpdateManyWithoutNoteNestedInput
+  handbookTopics?: Prisma.HandbookTopicUpdateManyWithoutSubjectNestedInput
+  summaryTopics?: Prisma.SummaryTopicUpdateManyWithoutSubjectNestedInput
 }
 
 export type SubjectUncheckedUpdateInput = {
@@ -319,10 +307,8 @@ export type SubjectUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   report_to_subject?: Prisma.ReportToSubjectUncheckedUpdateManyWithoutSubjectNestedInput
-  handbooks?: Prisma.HandbookUncheckedUpdateManyWithoutSubjectNestedInput
-  textbooks?: Prisma.TextbookUncheckedUpdateManyWithoutSubjectNestedInput
-  facultyNoteSummaries?: Prisma.FacultyNoteSummaryUncheckedUpdateManyWithoutNoteNestedInput
-  nlsNoteSummaries?: Prisma.NlsNoteSummaryUncheckedUpdateManyWithoutNoteNestedInput
+  handbookTopics?: Prisma.HandbookTopicUncheckedUpdateManyWithoutSubjectNestedInput
+  summaryTopics?: Prisma.SummaryTopicUncheckedUpdateManyWithoutSubjectNestedInput
 }
 
 export type SubjectCreateManyInput = {
@@ -410,60 +396,32 @@ export type SubjectUpdateOneRequiredWithoutReport_to_subjectNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.SubjectUpdateToOneWithWhereWithoutReport_to_subjectInput, Prisma.SubjectUpdateWithoutReport_to_subjectInput>, Prisma.SubjectUncheckedUpdateWithoutReport_to_subjectInput>
 }
 
-export type SubjectCreateNestedOneWithoutHandbooksInput = {
-  create?: Prisma.XOR<Prisma.SubjectCreateWithoutHandbooksInput, Prisma.SubjectUncheckedCreateWithoutHandbooksInput>
-  connectOrCreate?: Prisma.SubjectCreateOrConnectWithoutHandbooksInput
+export type SubjectCreateNestedOneWithoutHandbookTopicsInput = {
+  create?: Prisma.XOR<Prisma.SubjectCreateWithoutHandbookTopicsInput, Prisma.SubjectUncheckedCreateWithoutHandbookTopicsInput>
+  connectOrCreate?: Prisma.SubjectCreateOrConnectWithoutHandbookTopicsInput
   connect?: Prisma.SubjectWhereUniqueInput
 }
 
-export type SubjectUpdateOneRequiredWithoutHandbooksNestedInput = {
-  create?: Prisma.XOR<Prisma.SubjectCreateWithoutHandbooksInput, Prisma.SubjectUncheckedCreateWithoutHandbooksInput>
-  connectOrCreate?: Prisma.SubjectCreateOrConnectWithoutHandbooksInput
-  upsert?: Prisma.SubjectUpsertWithoutHandbooksInput
+export type SubjectUpdateOneRequiredWithoutHandbookTopicsNestedInput = {
+  create?: Prisma.XOR<Prisma.SubjectCreateWithoutHandbookTopicsInput, Prisma.SubjectUncheckedCreateWithoutHandbookTopicsInput>
+  connectOrCreate?: Prisma.SubjectCreateOrConnectWithoutHandbookTopicsInput
+  upsert?: Prisma.SubjectUpsertWithoutHandbookTopicsInput
   connect?: Prisma.SubjectWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.SubjectUpdateToOneWithWhereWithoutHandbooksInput, Prisma.SubjectUpdateWithoutHandbooksInput>, Prisma.SubjectUncheckedUpdateWithoutHandbooksInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SubjectUpdateToOneWithWhereWithoutHandbookTopicsInput, Prisma.SubjectUpdateWithoutHandbookTopicsInput>, Prisma.SubjectUncheckedUpdateWithoutHandbookTopicsInput>
 }
 
-export type SubjectCreateNestedOneWithoutFacultyNoteSummariesInput = {
-  create?: Prisma.XOR<Prisma.SubjectCreateWithoutFacultyNoteSummariesInput, Prisma.SubjectUncheckedCreateWithoutFacultyNoteSummariesInput>
-  connectOrCreate?: Prisma.SubjectCreateOrConnectWithoutFacultyNoteSummariesInput
-  connect?: Prisma.SubjectWhereUniqueInput
-}
-
-export type SubjectUpdateOneRequiredWithoutFacultyNoteSummariesNestedInput = {
-  create?: Prisma.XOR<Prisma.SubjectCreateWithoutFacultyNoteSummariesInput, Prisma.SubjectUncheckedCreateWithoutFacultyNoteSummariesInput>
-  connectOrCreate?: Prisma.SubjectCreateOrConnectWithoutFacultyNoteSummariesInput
-  upsert?: Prisma.SubjectUpsertWithoutFacultyNoteSummariesInput
-  connect?: Prisma.SubjectWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.SubjectUpdateToOneWithWhereWithoutFacultyNoteSummariesInput, Prisma.SubjectUpdateWithoutFacultyNoteSummariesInput>, Prisma.SubjectUncheckedUpdateWithoutFacultyNoteSummariesInput>
-}
-
-export type SubjectCreateNestedOneWithoutNlsNoteSummariesInput = {
-  create?: Prisma.XOR<Prisma.SubjectCreateWithoutNlsNoteSummariesInput, Prisma.SubjectUncheckedCreateWithoutNlsNoteSummariesInput>
-  connectOrCreate?: Prisma.SubjectCreateOrConnectWithoutNlsNoteSummariesInput
+export type SubjectCreateNestedOneWithoutSummaryTopicsInput = {
+  create?: Prisma.XOR<Prisma.SubjectCreateWithoutSummaryTopicsInput, Prisma.SubjectUncheckedCreateWithoutSummaryTopicsInput>
+  connectOrCreate?: Prisma.SubjectCreateOrConnectWithoutSummaryTopicsInput
   connect?: Prisma.SubjectWhereUniqueInput
 }
 
-export type SubjectUpdateOneRequiredWithoutNlsNoteSummariesNestedInput = {
-  create?: Prisma.XOR<Prisma.SubjectCreateWithoutNlsNoteSummariesInput, Prisma.SubjectUncheckedCreateWithoutNlsNoteSummariesInput>
-  connectOrCreate?: Prisma.SubjectCreateOrConnectWithoutNlsNoteSummariesInput
-  upsert?: Prisma.SubjectUpsertWithoutNlsNoteSummariesInput
+export type SubjectUpdateOneRequiredWithoutSummaryTopicsNestedInput = {
+  create?: Prisma.XOR<Prisma.SubjectCreateWithoutSummaryTopicsInput, Prisma.SubjectUncheckedCreateWithoutSummaryTopicsInput>
+  connectOrCreate?: Prisma.SubjectCreateOrConnectWithoutSummaryTopicsInput
+  upsert?: Prisma.SubjectUpsertWithoutSummaryTopicsInput
   connect?: Prisma.SubjectWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.SubjectUpdateToOneWithWhereWithoutNlsNoteSummariesInput, Prisma.SubjectUpdateWithoutNlsNoteSummariesInput>, Prisma.SubjectUncheckedUpdateWithoutNlsNoteSummariesInput>
-}
-
-export type SubjectCreateNestedOneWithoutTextbooksInput = {
-  create?: Prisma.XOR<Prisma.SubjectCreateWithoutTextbooksInput, Prisma.SubjectUncheckedCreateWithoutTextbooksInput>
-  connectOrCreate?: Prisma.SubjectCreateOrConnectWithoutTextbooksInput
-  connect?: Prisma.SubjectWhereUniqueInput
-}
-
-export type SubjectUpdateOneRequiredWithoutTextbooksNestedInput = {
-  create?: Prisma.XOR<Prisma.SubjectCreateWithoutTextbooksInput, Prisma.SubjectUncheckedCreateWithoutTextbooksInput>
-  connectOrCreate?: Prisma.SubjectCreateOrConnectWithoutTextbooksInput
-  upsert?: Prisma.SubjectUpsertWithoutTextbooksInput
-  connect?: Prisma.SubjectWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.SubjectUpdateToOneWithWhereWithoutTextbooksInput, Prisma.SubjectUpdateWithoutTextbooksInput>, Prisma.SubjectUncheckedUpdateWithoutTextbooksInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SubjectUpdateToOneWithWhereWithoutSummaryTopicsInput, Prisma.SubjectUpdateWithoutSummaryTopicsInput>, Prisma.SubjectUncheckedUpdateWithoutSummaryTopicsInput>
 }
 
 export type SubjectCreateWithoutReport_to_subjectInput = {
@@ -474,10 +432,8 @@ export type SubjectCreateWithoutReport_to_subjectInput = {
   slug: string
   updatedAt?: Date | string
   objectId?: string | null
-  handbooks?: Prisma.HandbookCreateNestedManyWithoutSubjectInput
-  textbooks?: Prisma.TextbookCreateNestedManyWithoutSubjectInput
-  facultyNoteSummaries?: Prisma.FacultyNoteSummaryCreateNestedManyWithoutNoteInput
-  nlsNoteSummaries?: Prisma.NlsNoteSummaryCreateNestedManyWithoutNoteInput
+  handbookTopics?: Prisma.HandbookTopicCreateNestedManyWithoutSubjectInput
+  summaryTopics?: Prisma.SummaryTopicCreateNestedManyWithoutSubjectInput
 }
 
 export type SubjectUncheckedCreateWithoutReport_to_subjectInput = {
@@ -488,10 +444,8 @@ export type SubjectUncheckedCreateWithoutReport_to_subjectInput = {
   slug: string
   updatedAt?: Date | string
   objectId?: string | null
-  handbooks?: Prisma.HandbookUncheckedCreateNestedManyWithoutSubjectInput
-  textbooks?: Prisma.TextbookUncheckedCreateNestedManyWithoutSubjectInput
-  facultyNoteSummaries?: Prisma.FacultyNoteSummaryUncheckedCreateNestedManyWithoutNoteInput
-  nlsNoteSummaries?: Prisma.NlsNoteSummaryUncheckedCreateNestedManyWithoutNoteInput
+  handbookTopics?: Prisma.HandbookTopicUncheckedCreateNestedManyWithoutSubjectInput
+  summaryTopics?: Prisma.SummaryTopicUncheckedCreateNestedManyWithoutSubjectInput
 }
 
 export type SubjectCreateOrConnectWithoutReport_to_subjectInput = {
@@ -518,10 +472,8 @@ export type SubjectUpdateWithoutReport_to_subjectInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  handbooks?: Prisma.HandbookUpdateManyWithoutSubjectNestedInput
-  textbooks?: Prisma.TextbookUpdateManyWithoutSubjectNestedInput
-  facultyNoteSummaries?: Prisma.FacultyNoteSummaryUpdateManyWithoutNoteNestedInput
-  nlsNoteSummaries?: Prisma.NlsNoteSummaryUpdateManyWithoutNoteNestedInput
+  handbookTopics?: Prisma.HandbookTopicUpdateManyWithoutSubjectNestedInput
+  summaryTopics?: Prisma.SummaryTopicUpdateManyWithoutSubjectNestedInput
 }
 
 export type SubjectUncheckedUpdateWithoutReport_to_subjectInput = {
@@ -532,13 +484,11 @@ export type SubjectUncheckedUpdateWithoutReport_to_subjectInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  handbooks?: Prisma.HandbookUncheckedUpdateManyWithoutSubjectNestedInput
-  textbooks?: Prisma.TextbookUncheckedUpdateManyWithoutSubjectNestedInput
-  facultyNoteSummaries?: Prisma.FacultyNoteSummaryUncheckedUpdateManyWithoutNoteNestedInput
-  nlsNoteSummaries?: Prisma.NlsNoteSummaryUncheckedUpdateManyWithoutNoteNestedInput
+  handbookTopics?: Prisma.HandbookTopicUncheckedUpdateManyWithoutSubjectNestedInput
+  summaryTopics?: Prisma.SummaryTopicUncheckedUpdateManyWithoutSubjectNestedInput
 }
 
-export type SubjectCreateWithoutHandbooksInput = {
+export type SubjectCreateWithoutHandbookTopicsInput = {
   id?: string
   createdAt?: Date | string
   intro: string
@@ -547,12 +497,10 @@ export type SubjectCreateWithoutHandbooksInput = {
   updatedAt?: Date | string
   objectId?: string | null
   report_to_subject?: Prisma.ReportToSubjectCreateNestedManyWithoutSubjectInput
-  textbooks?: Prisma.TextbookCreateNestedManyWithoutSubjectInput
-  facultyNoteSummaries?: Prisma.FacultyNoteSummaryCreateNestedManyWithoutNoteInput
-  nlsNoteSummaries?: Prisma.NlsNoteSummaryCreateNestedManyWithoutNoteInput
+  summaryTopics?: Prisma.SummaryTopicCreateNestedManyWithoutSubjectInput
 }
 
-export type SubjectUncheckedCreateWithoutHandbooksInput = {
+export type SubjectUncheckedCreateWithoutHandbookTopicsInput = {
   id?: string
   createdAt?: Date | string
   intro: string
@@ -561,28 +509,26 @@ export type SubjectUncheckedCreateWithoutHandbooksInput = {
   updatedAt?: Date | string
   objectId?: string | null
   report_to_subject?: Prisma.ReportToSubjectUncheckedCreateNestedManyWithoutSubjectInput
-  textbooks?: Prisma.TextbookUncheckedCreateNestedManyWithoutSubjectInput
-  facultyNoteSummaries?: Prisma.FacultyNoteSummaryUncheckedCreateNestedManyWithoutNoteInput
-  nlsNoteSummaries?: Prisma.NlsNoteSummaryUncheckedCreateNestedManyWithoutNoteInput
+  summaryTopics?: Prisma.SummaryTopicUncheckedCreateNestedManyWithoutSubjectInput
 }
 
-export type SubjectCreateOrConnectWithoutHandbooksInput = {
+export type SubjectCreateOrConnectWithoutHandbookTopicsInput = {
   where: Prisma.SubjectWhereUniqueInput
-  create: Prisma.XOR<Prisma.SubjectCreateWithoutHandbooksInput, Prisma.SubjectUncheckedCreateWithoutHandbooksInput>
+  create: Prisma.XOR<Prisma.SubjectCreateWithoutHandbookTopicsInput, Prisma.SubjectUncheckedCreateWithoutHandbookTopicsInput>
 }
 
-export type SubjectUpsertWithoutHandbooksInput = {
-  update: Prisma.XOR<Prisma.SubjectUpdateWithoutHandbooksInput, Prisma.SubjectUncheckedUpdateWithoutHandbooksInput>
-  create: Prisma.XOR<Prisma.SubjectCreateWithoutHandbooksInput, Prisma.SubjectUncheckedCreateWithoutHandbooksInput>
+export type SubjectUpsertWithoutHandbookTopicsInput = {
+  update: Prisma.XOR<Prisma.SubjectUpdateWithoutHandbookTopicsInput, Prisma.SubjectUncheckedUpdateWithoutHandbookTopicsInput>
+  create: Prisma.XOR<Prisma.SubjectCreateWithoutHandbookTopicsInput, Prisma.SubjectUncheckedCreateWithoutHandbookTopicsInput>
   where?: Prisma.SubjectWhereInput
 }
 
-export type SubjectUpdateToOneWithWhereWithoutHandbooksInput = {
+export type SubjectUpdateToOneWithWhereWithoutHandbookTopicsInput = {
   where?: Prisma.SubjectWhereInput
-  data: Prisma.XOR<Prisma.SubjectUpdateWithoutHandbooksInput, Prisma.SubjectUncheckedUpdateWithoutHandbooksInput>
+  data: Prisma.XOR<Prisma.SubjectUpdateWithoutHandbookTopicsInput, Prisma.SubjectUncheckedUpdateWithoutHandbookTopicsInput>
 }
 
-export type SubjectUpdateWithoutHandbooksInput = {
+export type SubjectUpdateWithoutHandbookTopicsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   intro?: Prisma.StringFieldUpdateOperationsInput | string
@@ -591,12 +537,10 @@ export type SubjectUpdateWithoutHandbooksInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   report_to_subject?: Prisma.ReportToSubjectUpdateManyWithoutSubjectNestedInput
-  textbooks?: Prisma.TextbookUpdateManyWithoutSubjectNestedInput
-  facultyNoteSummaries?: Prisma.FacultyNoteSummaryUpdateManyWithoutNoteNestedInput
-  nlsNoteSummaries?: Prisma.NlsNoteSummaryUpdateManyWithoutNoteNestedInput
+  summaryTopics?: Prisma.SummaryTopicUpdateManyWithoutSubjectNestedInput
 }
 
-export type SubjectUncheckedUpdateWithoutHandbooksInput = {
+export type SubjectUncheckedUpdateWithoutHandbookTopicsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   intro?: Prisma.StringFieldUpdateOperationsInput | string
@@ -605,12 +549,10 @@ export type SubjectUncheckedUpdateWithoutHandbooksInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   report_to_subject?: Prisma.ReportToSubjectUncheckedUpdateManyWithoutSubjectNestedInput
-  textbooks?: Prisma.TextbookUncheckedUpdateManyWithoutSubjectNestedInput
-  facultyNoteSummaries?: Prisma.FacultyNoteSummaryUncheckedUpdateManyWithoutNoteNestedInput
-  nlsNoteSummaries?: Prisma.NlsNoteSummaryUncheckedUpdateManyWithoutNoteNestedInput
+  summaryTopics?: Prisma.SummaryTopicUncheckedUpdateManyWithoutSubjectNestedInput
 }
 
-export type SubjectCreateWithoutFacultyNoteSummariesInput = {
+export type SubjectCreateWithoutSummaryTopicsInput = {
   id?: string
   createdAt?: Date | string
   intro: string
@@ -619,12 +561,10 @@ export type SubjectCreateWithoutFacultyNoteSummariesInput = {
   updatedAt?: Date | string
   objectId?: string | null
   report_to_subject?: Prisma.ReportToSubjectCreateNestedManyWithoutSubjectInput
-  handbooks?: Prisma.HandbookCreateNestedManyWithoutSubjectInput
-  textbooks?: Prisma.TextbookCreateNestedManyWithoutSubjectInput
-  nlsNoteSummaries?: Prisma.NlsNoteSummaryCreateNestedManyWithoutNoteInput
+  handbookTopics?: Prisma.HandbookTopicCreateNestedManyWithoutSubjectInput
 }
 
-export type SubjectUncheckedCreateWithoutFacultyNoteSummariesInput = {
+export type SubjectUncheckedCreateWithoutSummaryTopicsInput = {
   id?: string
   createdAt?: Date | string
   intro: string
@@ -633,28 +573,26 @@ export type SubjectUncheckedCreateWithoutFacultyNoteSummariesInput = {
   updatedAt?: Date | string
   objectId?: string | null
   report_to_subject?: Prisma.ReportToSubjectUncheckedCreateNestedManyWithoutSubjectInput
-  handbooks?: Prisma.HandbookUncheckedCreateNestedManyWithoutSubjectInput
-  textbooks?: Prisma.TextbookUncheckedCreateNestedManyWithoutSubjectInput
-  nlsNoteSummaries?: Prisma.NlsNoteSummaryUncheckedCreateNestedManyWithoutNoteInput
+  handbookTopics?: Prisma.HandbookTopicUncheckedCreateNestedManyWithoutSubjectInput
 }
 
-export type SubjectCreateOrConnectWithoutFacultyNoteSummariesInput = {
+export type SubjectCreateOrConnectWithoutSummaryTopicsInput = {
   where: Prisma.SubjectWhereUniqueInput
-  create: Prisma.XOR<Prisma.SubjectCreateWithoutFacultyNoteSummariesInput, Prisma.SubjectUncheckedCreateWithoutFacultyNoteSummariesInput>
+  create: Prisma.XOR<Prisma.SubjectCreateWithoutSummaryTopicsInput, Prisma.SubjectUncheckedCreateWithoutSummaryTopicsInput>
 }
 
-export type SubjectUpsertWithoutFacultyNoteSummariesInput = {
-  update: Prisma.XOR<Prisma.SubjectUpdateWithoutFacultyNoteSummariesInput, Prisma.SubjectUncheckedUpdateWithoutFacultyNoteSummariesInput>
-  create: Prisma.XOR<Prisma.SubjectCreateWithoutFacultyNoteSummariesInput, Prisma.SubjectUncheckedCreateWithoutFacultyNoteSummariesInput>
+export type SubjectUpsertWithoutSummaryTopicsInput = {
+  update: Prisma.XOR<Prisma.SubjectUpdateWithoutSummaryTopicsInput, Prisma.SubjectUncheckedUpdateWithoutSummaryTopicsInput>
+  create: Prisma.XOR<Prisma.SubjectCreateWithoutSummaryTopicsInput, Prisma.SubjectUncheckedCreateWithoutSummaryTopicsInput>
   where?: Prisma.SubjectWhereInput
 }
 
-export type SubjectUpdateToOneWithWhereWithoutFacultyNoteSummariesInput = {
+export type SubjectUpdateToOneWithWhereWithoutSummaryTopicsInput = {
   where?: Prisma.SubjectWhereInput
-  data: Prisma.XOR<Prisma.SubjectUpdateWithoutFacultyNoteSummariesInput, Prisma.SubjectUncheckedUpdateWithoutFacultyNoteSummariesInput>
+  data: Prisma.XOR<Prisma.SubjectUpdateWithoutSummaryTopicsInput, Prisma.SubjectUncheckedUpdateWithoutSummaryTopicsInput>
 }
 
-export type SubjectUpdateWithoutFacultyNoteSummariesInput = {
+export type SubjectUpdateWithoutSummaryTopicsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   intro?: Prisma.StringFieldUpdateOperationsInput | string
@@ -663,12 +601,10 @@ export type SubjectUpdateWithoutFacultyNoteSummariesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   report_to_subject?: Prisma.ReportToSubjectUpdateManyWithoutSubjectNestedInput
-  handbooks?: Prisma.HandbookUpdateManyWithoutSubjectNestedInput
-  textbooks?: Prisma.TextbookUpdateManyWithoutSubjectNestedInput
-  nlsNoteSummaries?: Prisma.NlsNoteSummaryUpdateManyWithoutNoteNestedInput
+  handbookTopics?: Prisma.HandbookTopicUpdateManyWithoutSubjectNestedInput
 }
 
-export type SubjectUncheckedUpdateWithoutFacultyNoteSummariesInput = {
+export type SubjectUncheckedUpdateWithoutSummaryTopicsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   intro?: Prisma.StringFieldUpdateOperationsInput | string
@@ -677,153 +613,7 @@ export type SubjectUncheckedUpdateWithoutFacultyNoteSummariesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   report_to_subject?: Prisma.ReportToSubjectUncheckedUpdateManyWithoutSubjectNestedInput
-  handbooks?: Prisma.HandbookUncheckedUpdateManyWithoutSubjectNestedInput
-  textbooks?: Prisma.TextbookUncheckedUpdateManyWithoutSubjectNestedInput
-  nlsNoteSummaries?: Prisma.NlsNoteSummaryUncheckedUpdateManyWithoutNoteNestedInput
-}
-
-export type SubjectCreateWithoutNlsNoteSummariesInput = {
-  id?: string
-  createdAt?: Date | string
-  intro: string
-  name: string
-  slug: string
-  updatedAt?: Date | string
-  objectId?: string | null
-  report_to_subject?: Prisma.ReportToSubjectCreateNestedManyWithoutSubjectInput
-  handbooks?: Prisma.HandbookCreateNestedManyWithoutSubjectInput
-  textbooks?: Prisma.TextbookCreateNestedManyWithoutSubjectInput
-  facultyNoteSummaries?: Prisma.FacultyNoteSummaryCreateNestedManyWithoutNoteInput
-}
-
-export type SubjectUncheckedCreateWithoutNlsNoteSummariesInput = {
-  id?: string
-  createdAt?: Date | string
-  intro: string
-  name: string
-  slug: string
-  updatedAt?: Date | string
-  objectId?: string | null
-  report_to_subject?: Prisma.ReportToSubjectUncheckedCreateNestedManyWithoutSubjectInput
-  handbooks?: Prisma.HandbookUncheckedCreateNestedManyWithoutSubjectInput
-  textbooks?: Prisma.TextbookUncheckedCreateNestedManyWithoutSubjectInput
-  facultyNoteSummaries?: Prisma.FacultyNoteSummaryUncheckedCreateNestedManyWithoutNoteInput
-}
-
-export type SubjectCreateOrConnectWithoutNlsNoteSummariesInput = {
-  where: Prisma.SubjectWhereUniqueInput
-  create: Prisma.XOR<Prisma.SubjectCreateWithoutNlsNoteSummariesInput, Prisma.SubjectUncheckedCreateWithoutNlsNoteSummariesInput>
-}
-
-export type SubjectUpsertWithoutNlsNoteSummariesInput = {
-  update: Prisma.XOR<Prisma.SubjectUpdateWithoutNlsNoteSummariesInput, Prisma.SubjectUncheckedUpdateWithoutNlsNoteSummariesInput>
-  create: Prisma.XOR<Prisma.SubjectCreateWithoutNlsNoteSummariesInput, Prisma.SubjectUncheckedCreateWithoutNlsNoteSummariesInput>
-  where?: Prisma.SubjectWhereInput
-}
-
-export type SubjectUpdateToOneWithWhereWithoutNlsNoteSummariesInput = {
-  where?: Prisma.SubjectWhereInput
-  data: Prisma.XOR<Prisma.SubjectUpdateWithoutNlsNoteSummariesInput, Prisma.SubjectUncheckedUpdateWithoutNlsNoteSummariesInput>
-}
-
-export type SubjectUpdateWithoutNlsNoteSummariesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  intro?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  report_to_subject?: Prisma.ReportToSubjectUpdateManyWithoutSubjectNestedInput
-  handbooks?: Prisma.HandbookUpdateManyWithoutSubjectNestedInput
-  textbooks?: Prisma.TextbookUpdateManyWithoutSubjectNestedInput
-  facultyNoteSummaries?: Prisma.FacultyNoteSummaryUpdateManyWithoutNoteNestedInput
-}
-
-export type SubjectUncheckedUpdateWithoutNlsNoteSummariesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  intro?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  report_to_subject?: Prisma.ReportToSubjectUncheckedUpdateManyWithoutSubjectNestedInput
-  handbooks?: Prisma.HandbookUncheckedUpdateManyWithoutSubjectNestedInput
-  textbooks?: Prisma.TextbookUncheckedUpdateManyWithoutSubjectNestedInput
-  facultyNoteSummaries?: Prisma.FacultyNoteSummaryUncheckedUpdateManyWithoutNoteNestedInput
-}
-
-export type SubjectCreateWithoutTextbooksInput = {
-  id?: string
-  createdAt?: Date | string
-  intro: string
-  name: string
-  slug: string
-  updatedAt?: Date | string
-  objectId?: string | null
-  report_to_subject?: Prisma.ReportToSubjectCreateNestedManyWithoutSubjectInput
-  handbooks?: Prisma.HandbookCreateNestedManyWithoutSubjectInput
-  facultyNoteSummaries?: Prisma.FacultyNoteSummaryCreateNestedManyWithoutNoteInput
-  nlsNoteSummaries?: Prisma.NlsNoteSummaryCreateNestedManyWithoutNoteInput
-}
-
-export type SubjectUncheckedCreateWithoutTextbooksInput = {
-  id?: string
-  createdAt?: Date | string
-  intro: string
-  name: string
-  slug: string
-  updatedAt?: Date | string
-  objectId?: string | null
-  report_to_subject?: Prisma.ReportToSubjectUncheckedCreateNestedManyWithoutSubjectInput
-  handbooks?: Prisma.HandbookUncheckedCreateNestedManyWithoutSubjectInput
-  facultyNoteSummaries?: Prisma.FacultyNoteSummaryUncheckedCreateNestedManyWithoutNoteInput
-  nlsNoteSummaries?: Prisma.NlsNoteSummaryUncheckedCreateNestedManyWithoutNoteInput
-}
-
-export type SubjectCreateOrConnectWithoutTextbooksInput = {
-  where: Prisma.SubjectWhereUniqueInput
-  create: Prisma.XOR<Prisma.SubjectCreateWithoutTextbooksInput, Prisma.SubjectUncheckedCreateWithoutTextbooksInput>
-}
-
-export type SubjectUpsertWithoutTextbooksInput = {
-  update: Prisma.XOR<Prisma.SubjectUpdateWithoutTextbooksInput, Prisma.SubjectUncheckedUpdateWithoutTextbooksInput>
-  create: Prisma.XOR<Prisma.SubjectCreateWithoutTextbooksInput, Prisma.SubjectUncheckedCreateWithoutTextbooksInput>
-  where?: Prisma.SubjectWhereInput
-}
-
-export type SubjectUpdateToOneWithWhereWithoutTextbooksInput = {
-  where?: Prisma.SubjectWhereInput
-  data: Prisma.XOR<Prisma.SubjectUpdateWithoutTextbooksInput, Prisma.SubjectUncheckedUpdateWithoutTextbooksInput>
-}
-
-export type SubjectUpdateWithoutTextbooksInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  intro?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  report_to_subject?: Prisma.ReportToSubjectUpdateManyWithoutSubjectNestedInput
-  handbooks?: Prisma.HandbookUpdateManyWithoutSubjectNestedInput
-  facultyNoteSummaries?: Prisma.FacultyNoteSummaryUpdateManyWithoutNoteNestedInput
-  nlsNoteSummaries?: Prisma.NlsNoteSummaryUpdateManyWithoutNoteNestedInput
-}
-
-export type SubjectUncheckedUpdateWithoutTextbooksInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  intro?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  report_to_subject?: Prisma.ReportToSubjectUncheckedUpdateManyWithoutSubjectNestedInput
-  handbooks?: Prisma.HandbookUncheckedUpdateManyWithoutSubjectNestedInput
-  facultyNoteSummaries?: Prisma.FacultyNoteSummaryUncheckedUpdateManyWithoutNoteNestedInput
-  nlsNoteSummaries?: Prisma.NlsNoteSummaryUncheckedUpdateManyWithoutNoteNestedInput
+  handbookTopics?: Prisma.HandbookTopicUncheckedUpdateManyWithoutSubjectNestedInput
 }
 
 
@@ -833,18 +623,14 @@ export type SubjectUncheckedUpdateWithoutTextbooksInput = {
 
 export type SubjectCountOutputType = {
   report_to_subject: number
-  handbooks: number
-  textbooks: number
-  facultyNoteSummaries: number
-  nlsNoteSummaries: number
+  handbookTopics: number
+  summaryTopics: number
 }
 
 export type SubjectCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   report_to_subject?: boolean | SubjectCountOutputTypeCountReport_to_subjectArgs
-  handbooks?: boolean | SubjectCountOutputTypeCountHandbooksArgs
-  textbooks?: boolean | SubjectCountOutputTypeCountTextbooksArgs
-  facultyNoteSummaries?: boolean | SubjectCountOutputTypeCountFacultyNoteSummariesArgs
-  nlsNoteSummaries?: boolean | SubjectCountOutputTypeCountNlsNoteSummariesArgs
+  handbookTopics?: boolean | SubjectCountOutputTypeCountHandbookTopicsArgs
+  summaryTopics?: boolean | SubjectCountOutputTypeCountSummaryTopicsArgs
 }
 
 /**
@@ -867,29 +653,15 @@ export type SubjectCountOutputTypeCountReport_to_subjectArgs<ExtArgs extends run
 /**
  * SubjectCountOutputType without action
  */
-export type SubjectCountOutputTypeCountHandbooksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.HandbookWhereInput
+export type SubjectCountOutputTypeCountHandbookTopicsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.HandbookTopicWhereInput
 }
 
 /**
  * SubjectCountOutputType without action
  */
-export type SubjectCountOutputTypeCountTextbooksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.TextbookWhereInput
-}
-
-/**
- * SubjectCountOutputType without action
- */
-export type SubjectCountOutputTypeCountFacultyNoteSummariesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.FacultyNoteSummaryWhereInput
-}
-
-/**
- * SubjectCountOutputType without action
- */
-export type SubjectCountOutputTypeCountNlsNoteSummariesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.NlsNoteSummaryWhereInput
+export type SubjectCountOutputTypeCountSummaryTopicsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SummaryTopicWhereInput
 }
 
 
@@ -902,10 +674,8 @@ export type SubjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   updatedAt?: boolean
   objectId?: boolean
   report_to_subject?: boolean | Prisma.Subject$report_to_subjectArgs<ExtArgs>
-  handbooks?: boolean | Prisma.Subject$handbooksArgs<ExtArgs>
-  textbooks?: boolean | Prisma.Subject$textbooksArgs<ExtArgs>
-  facultyNoteSummaries?: boolean | Prisma.Subject$facultyNoteSummariesArgs<ExtArgs>
-  nlsNoteSummaries?: boolean | Prisma.Subject$nlsNoteSummariesArgs<ExtArgs>
+  handbookTopics?: boolean | Prisma.Subject$handbookTopicsArgs<ExtArgs>
+  summaryTopics?: boolean | Prisma.Subject$summaryTopicsArgs<ExtArgs>
   _count?: boolean | Prisma.SubjectCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["subject"]>
 
@@ -942,10 +712,8 @@ export type SubjectSelectScalar = {
 export type SubjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "intro" | "name" | "slug" | "updatedAt" | "objectId", ExtArgs["result"]["subject"]>
 export type SubjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   report_to_subject?: boolean | Prisma.Subject$report_to_subjectArgs<ExtArgs>
-  handbooks?: boolean | Prisma.Subject$handbooksArgs<ExtArgs>
-  textbooks?: boolean | Prisma.Subject$textbooksArgs<ExtArgs>
-  facultyNoteSummaries?: boolean | Prisma.Subject$facultyNoteSummariesArgs<ExtArgs>
-  nlsNoteSummaries?: boolean | Prisma.Subject$nlsNoteSummariesArgs<ExtArgs>
+  handbookTopics?: boolean | Prisma.Subject$handbookTopicsArgs<ExtArgs>
+  summaryTopics?: boolean | Prisma.Subject$summaryTopicsArgs<ExtArgs>
   _count?: boolean | Prisma.SubjectCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SubjectIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -955,10 +723,8 @@ export type $SubjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   name: "Subject"
   objects: {
     report_to_subject: Prisma.$ReportToSubjectPayload<ExtArgs>[]
-    handbooks: Prisma.$HandbookPayload<ExtArgs>[]
-    textbooks: Prisma.$TextbookPayload<ExtArgs>[]
-    facultyNoteSummaries: Prisma.$FacultyNoteSummaryPayload<ExtArgs>[]
-    nlsNoteSummaries: Prisma.$NlsNoteSummaryPayload<ExtArgs>[]
+    handbookTopics: Prisma.$HandbookTopicPayload<ExtArgs>[]
+    summaryTopics: Prisma.$SummaryTopicPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1363,10 +1129,8 @@ readonly fields: SubjectFieldRefs;
 export interface Prisma__SubjectClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   report_to_subject<T extends Prisma.Subject$report_to_subjectArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Subject$report_to_subjectArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReportToSubjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  handbooks<T extends Prisma.Subject$handbooksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Subject$handbooksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HandbookPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  textbooks<T extends Prisma.Subject$textbooksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Subject$textbooksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TextbookPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  facultyNoteSummaries<T extends Prisma.Subject$facultyNoteSummariesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Subject$facultyNoteSummariesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FacultyNoteSummaryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  nlsNoteSummaries<T extends Prisma.Subject$nlsNoteSummariesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Subject$nlsNoteSummariesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NlsNoteSummaryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  handbookTopics<T extends Prisma.Subject$handbookTopicsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Subject$handbookTopicsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HandbookTopicPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  summaryTopics<T extends Prisma.Subject$summaryTopicsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Subject$summaryTopicsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SummaryTopicPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1815,99 +1579,51 @@ export type Subject$report_to_subjectArgs<ExtArgs extends runtime.Types.Extensio
 }
 
 /**
- * Subject.handbooks
+ * Subject.handbookTopics
  */
-export type Subject$handbooksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Subject$handbookTopicsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Handbook
+   * Select specific fields to fetch from the HandbookTopic
    */
-  select?: Prisma.HandbookSelect<ExtArgs> | null
+  select?: Prisma.HandbookTopicSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Handbook
+   * Omit specific fields from the HandbookTopic
    */
-  omit?: Prisma.HandbookOmit<ExtArgs> | null
+  omit?: Prisma.HandbookTopicOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.HandbookInclude<ExtArgs> | null
-  where?: Prisma.HandbookWhereInput
-  orderBy?: Prisma.HandbookOrderByWithRelationInput | Prisma.HandbookOrderByWithRelationInput[]
-  cursor?: Prisma.HandbookWhereUniqueInput
+  include?: Prisma.HandbookTopicInclude<ExtArgs> | null
+  where?: Prisma.HandbookTopicWhereInput
+  orderBy?: Prisma.HandbookTopicOrderByWithRelationInput | Prisma.HandbookTopicOrderByWithRelationInput[]
+  cursor?: Prisma.HandbookTopicWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.HandbookScalarFieldEnum | Prisma.HandbookScalarFieldEnum[]
+  distinct?: Prisma.HandbookTopicScalarFieldEnum | Prisma.HandbookTopicScalarFieldEnum[]
 }
 
 /**
- * Subject.textbooks
+ * Subject.summaryTopics
  */
-export type Subject$textbooksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Subject$summaryTopicsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Textbook
+   * Select specific fields to fetch from the SummaryTopic
    */
-  select?: Prisma.TextbookSelect<ExtArgs> | null
+  select?: Prisma.SummaryTopicSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Textbook
+   * Omit specific fields from the SummaryTopic
    */
-  omit?: Prisma.TextbookOmit<ExtArgs> | null
+  omit?: Prisma.SummaryTopicOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.TextbookInclude<ExtArgs> | null
-  where?: Prisma.TextbookWhereInput
-  orderBy?: Prisma.TextbookOrderByWithRelationInput | Prisma.TextbookOrderByWithRelationInput[]
-  cursor?: Prisma.TextbookWhereUniqueInput
+  include?: Prisma.SummaryTopicInclude<ExtArgs> | null
+  where?: Prisma.SummaryTopicWhereInput
+  orderBy?: Prisma.SummaryTopicOrderByWithRelationInput | Prisma.SummaryTopicOrderByWithRelationInput[]
+  cursor?: Prisma.SummaryTopicWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.TextbookScalarFieldEnum | Prisma.TextbookScalarFieldEnum[]
-}
-
-/**
- * Subject.facultyNoteSummaries
- */
-export type Subject$facultyNoteSummariesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the FacultyNoteSummary
-   */
-  select?: Prisma.FacultyNoteSummarySelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the FacultyNoteSummary
-   */
-  omit?: Prisma.FacultyNoteSummaryOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.FacultyNoteSummaryInclude<ExtArgs> | null
-  where?: Prisma.FacultyNoteSummaryWhereInput
-  orderBy?: Prisma.FacultyNoteSummaryOrderByWithRelationInput | Prisma.FacultyNoteSummaryOrderByWithRelationInput[]
-  cursor?: Prisma.FacultyNoteSummaryWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.FacultyNoteSummaryScalarFieldEnum | Prisma.FacultyNoteSummaryScalarFieldEnum[]
-}
-
-/**
- * Subject.nlsNoteSummaries
- */
-export type Subject$nlsNoteSummariesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the NlsNoteSummary
-   */
-  select?: Prisma.NlsNoteSummarySelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the NlsNoteSummary
-   */
-  omit?: Prisma.NlsNoteSummaryOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.NlsNoteSummaryInclude<ExtArgs> | null
-  where?: Prisma.NlsNoteSummaryWhereInput
-  orderBy?: Prisma.NlsNoteSummaryOrderByWithRelationInput | Prisma.NlsNoteSummaryOrderByWithRelationInput[]
-  cursor?: Prisma.NlsNoteSummaryWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.NlsNoteSummaryScalarFieldEnum | Prisma.NlsNoteSummaryScalarFieldEnum[]
+  distinct?: Prisma.SummaryTopicScalarFieldEnum | Prisma.SummaryTopicScalarFieldEnum[]
 }
 
 /**

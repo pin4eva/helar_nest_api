@@ -62,15 +62,12 @@ export const ModelName = {
   ReportTags: 'ReportTags',
   ReportVisits: 'ReportVisits',
   Bookmark: 'Bookmark',
-  HandbookCase: 'HandbookCase',
-  Handbook: 'Handbook',
-  NoteItem: 'NoteItem',
   Quote: 'Quote',
   Subject: 'Subject',
-  FacultyNoteSummary: 'FacultyNoteSummary',
-  NlsNoteSummary: 'NlsNoteSummary',
-  TextbookCase: 'TextbookCase',
-  Textbook: 'Textbook',
+  HandbookTopic: 'HandbookTopic',
+  HandbookCase: 'HandbookCase',
+  SummaryTopic: 'SummaryTopic',
+  SummaryCase: 'SummaryCase',
   School: 'School'
 } as const
 
@@ -242,52 +239,6 @@ export const BookmarkScalarFieldEnum = {
 export type BookmarkScalarFieldEnum = (typeof BookmarkScalarFieldEnum)[keyof typeof BookmarkScalarFieldEnum]
 
 
-export const HandbookCaseScalarFieldEnum = {
-  id: 'id',
-  body: 'body',
-  byline: 'byline',
-  citation: 'citation',
-  createdAt: 'createdAt',
-  handbookId: 'handbookId',
-  ref: 'ref',
-  slug: 'slug',
-  title: 'title',
-  updatedAt: 'updatedAt',
-  objectId: 'objectId'
-} as const
-
-export type HandbookCaseScalarFieldEnum = (typeof HandbookCaseScalarFieldEnum)[keyof typeof HandbookCaseScalarFieldEnum]
-
-
-export const HandbookScalarFieldEnum = {
-  id: 'id',
-  createdAt: 'createdAt',
-  slug: 'slug',
-  subjectId: 'subjectId',
-  topic: 'topic',
-  updatedAt: 'updatedAt',
-  objectId: 'objectId'
-} as const
-
-export type HandbookScalarFieldEnum = (typeof HandbookScalarFieldEnum)[keyof typeof HandbookScalarFieldEnum]
-
-
-export const NoteItemScalarFieldEnum = {
-  id: 'id',
-  createdAt: 'createdAt',
-  slug: 'slug',
-  updatedAt: 'updatedAt',
-  objectId: 'objectId',
-  ref: 'ref',
-  question: 'question',
-  answer: 'answer',
-  facultyNoteSummaryId: 'facultyNoteSummaryId',
-  nlsNoteSummaryId: 'nlsNoteSummaryId'
-} as const
-
-export type NoteItemScalarFieldEnum = (typeof NoteItemScalarFieldEnum)[keyof typeof NoteItemScalarFieldEnum]
-
-
 export const QuoteScalarFieldEnum = {
   id: 'id',
   text: 'text',
@@ -313,61 +264,63 @@ export const SubjectScalarFieldEnum = {
 export type SubjectScalarFieldEnum = (typeof SubjectScalarFieldEnum)[keyof typeof SubjectScalarFieldEnum]
 
 
-export const FacultyNoteSummaryScalarFieldEnum = {
+export const HandbookTopicScalarFieldEnum = {
   id: 'id',
-  slug: 'slug',
   title: 'title',
-  ref: 'ref',
+  slug: 'slug',
   subjectId: 'subjectId',
+  type: 'type',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  objectId: 'objectId'
+  updatedAt: 'updatedAt'
 } as const
 
-export type FacultyNoteSummaryScalarFieldEnum = (typeof FacultyNoteSummaryScalarFieldEnum)[keyof typeof FacultyNoteSummaryScalarFieldEnum]
+export type HandbookTopicScalarFieldEnum = (typeof HandbookTopicScalarFieldEnum)[keyof typeof HandbookTopicScalarFieldEnum]
 
 
-export const NlsNoteSummaryScalarFieldEnum = {
-  id: 'id',
-  slug: 'slug',
-  title: 'title',
-  ref: 'ref',
-  subjectId: 'subjectId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  objectId: 'objectId'
-} as const
-
-export type NlsNoteSummaryScalarFieldEnum = (typeof NlsNoteSummaryScalarFieldEnum)[keyof typeof NlsNoteSummaryScalarFieldEnum]
-
-
-export const TextbookCaseScalarFieldEnum = {
+export const HandbookCaseScalarFieldEnum = {
   id: 'id',
   body: 'body',
   byline: 'byline',
   citation: 'citation',
   createdAt: 'createdAt',
+  topicId: 'topicId',
   ref: 'ref',
   slug: 'slug',
   title: 'title',
   updatedAt: 'updatedAt',
-  textbookId: 'textbookId'
+  objectId: 'objectId',
+  handbookId: 'handbookId'
 } as const
 
-export type TextbookCaseScalarFieldEnum = (typeof TextbookCaseScalarFieldEnum)[keyof typeof TextbookCaseScalarFieldEnum]
+export type HandbookCaseScalarFieldEnum = (typeof HandbookCaseScalarFieldEnum)[keyof typeof HandbookCaseScalarFieldEnum]
 
 
-export const TextbookScalarFieldEnum = {
+export const SummaryTopicScalarFieldEnum = {
   id: 'id',
-  createdAt: 'createdAt',
+  title: 'title',
   slug: 'slug',
   subjectId: 'subjectId',
-  topic: 'topic',
+  type: 'type',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SummaryTopicScalarFieldEnum = (typeof SummaryTopicScalarFieldEnum)[keyof typeof SummaryTopicScalarFieldEnum]
+
+
+export const SummaryCaseScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  topicId: 'topicId',
+  slug: 'slug',
+  ref: 'ref',
+  question: 'question',
+  answer: 'answer',
   updatedAt: 'updatedAt',
   objectId: 'objectId'
 } as const
 
-export type TextbookScalarFieldEnum = (typeof TextbookScalarFieldEnum)[keyof typeof TextbookScalarFieldEnum]
+export type SummaryCaseScalarFieldEnum = (typeof SummaryCaseScalarFieldEnum)[keyof typeof SummaryCaseScalarFieldEnum]
 
 
 export const SchoolScalarFieldEnum = {
@@ -527,44 +480,6 @@ export const BookmarkOrderByRelevanceFieldEnum = {
 export type BookmarkOrderByRelevanceFieldEnum = (typeof BookmarkOrderByRelevanceFieldEnum)[keyof typeof BookmarkOrderByRelevanceFieldEnum]
 
 
-export const HandbookCaseOrderByRelevanceFieldEnum = {
-  id: 'id',
-  body: 'body',
-  byline: 'byline',
-  citation: 'citation',
-  handbookId: 'handbookId',
-  slug: 'slug',
-  title: 'title',
-  objectId: 'objectId'
-} as const
-
-export type HandbookCaseOrderByRelevanceFieldEnum = (typeof HandbookCaseOrderByRelevanceFieldEnum)[keyof typeof HandbookCaseOrderByRelevanceFieldEnum]
-
-
-export const HandbookOrderByRelevanceFieldEnum = {
-  id: 'id',
-  slug: 'slug',
-  subjectId: 'subjectId',
-  topic: 'topic',
-  objectId: 'objectId'
-} as const
-
-export type HandbookOrderByRelevanceFieldEnum = (typeof HandbookOrderByRelevanceFieldEnum)[keyof typeof HandbookOrderByRelevanceFieldEnum]
-
-
-export const NoteItemOrderByRelevanceFieldEnum = {
-  id: 'id',
-  slug: 'slug',
-  objectId: 'objectId',
-  question: 'question',
-  answer: 'answer',
-  facultyNoteSummaryId: 'facultyNoteSummaryId',
-  nlsNoteSummaryId: 'nlsNoteSummaryId'
-} as const
-
-export type NoteItemOrderByRelevanceFieldEnum = (typeof NoteItemOrderByRelevanceFieldEnum)[keyof typeof NoteItemOrderByRelevanceFieldEnum]
-
-
 export const QuoteOrderByRelevanceFieldEnum = {
   id: 'id',
   text: 'text',
@@ -586,50 +501,51 @@ export const SubjectOrderByRelevanceFieldEnum = {
 export type SubjectOrderByRelevanceFieldEnum = (typeof SubjectOrderByRelevanceFieldEnum)[keyof typeof SubjectOrderByRelevanceFieldEnum]
 
 
-export const FacultyNoteSummaryOrderByRelevanceFieldEnum = {
+export const HandbookTopicOrderByRelevanceFieldEnum = {
   id: 'id',
-  slug: 'slug',
   title: 'title',
-  subjectId: 'subjectId',
-  objectId: 'objectId'
+  slug: 'slug',
+  subjectId: 'subjectId'
 } as const
 
-export type FacultyNoteSummaryOrderByRelevanceFieldEnum = (typeof FacultyNoteSummaryOrderByRelevanceFieldEnum)[keyof typeof FacultyNoteSummaryOrderByRelevanceFieldEnum]
+export type HandbookTopicOrderByRelevanceFieldEnum = (typeof HandbookTopicOrderByRelevanceFieldEnum)[keyof typeof HandbookTopicOrderByRelevanceFieldEnum]
 
 
-export const NlsNoteSummaryOrderByRelevanceFieldEnum = {
-  id: 'id',
-  slug: 'slug',
-  title: 'title',
-  subjectId: 'subjectId',
-  objectId: 'objectId'
-} as const
-
-export type NlsNoteSummaryOrderByRelevanceFieldEnum = (typeof NlsNoteSummaryOrderByRelevanceFieldEnum)[keyof typeof NlsNoteSummaryOrderByRelevanceFieldEnum]
-
-
-export const TextbookCaseOrderByRelevanceFieldEnum = {
+export const HandbookCaseOrderByRelevanceFieldEnum = {
   id: 'id',
   body: 'body',
   byline: 'byline',
   citation: 'citation',
+  topicId: 'topicId',
   slug: 'slug',
   title: 'title',
-  textbookId: 'textbookId'
+  objectId: 'objectId',
+  handbookId: 'handbookId'
 } as const
 
-export type TextbookCaseOrderByRelevanceFieldEnum = (typeof TextbookCaseOrderByRelevanceFieldEnum)[keyof typeof TextbookCaseOrderByRelevanceFieldEnum]
+export type HandbookCaseOrderByRelevanceFieldEnum = (typeof HandbookCaseOrderByRelevanceFieldEnum)[keyof typeof HandbookCaseOrderByRelevanceFieldEnum]
 
 
-export const TextbookOrderByRelevanceFieldEnum = {
+export const SummaryTopicOrderByRelevanceFieldEnum = {
   id: 'id',
+  title: 'title',
   slug: 'slug',
-  subjectId: 'subjectId',
-  topic: 'topic',
+  subjectId: 'subjectId'
+} as const
+
+export type SummaryTopicOrderByRelevanceFieldEnum = (typeof SummaryTopicOrderByRelevanceFieldEnum)[keyof typeof SummaryTopicOrderByRelevanceFieldEnum]
+
+
+export const SummaryCaseOrderByRelevanceFieldEnum = {
+  id: 'id',
+  topicId: 'topicId',
+  slug: 'slug',
+  question: 'question',
+  answer: 'answer',
   objectId: 'objectId'
 } as const
 
-export type TextbookOrderByRelevanceFieldEnum = (typeof TextbookOrderByRelevanceFieldEnum)[keyof typeof TextbookOrderByRelevanceFieldEnum]
+export type SummaryCaseOrderByRelevanceFieldEnum = (typeof SummaryCaseOrderByRelevanceFieldEnum)[keyof typeof SummaryCaseOrderByRelevanceFieldEnum]
 
 
 export const SchoolOrderByRelevanceFieldEnum = {

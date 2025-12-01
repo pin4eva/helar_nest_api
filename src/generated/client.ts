@@ -93,21 +93,6 @@ export type ReportVisits = Prisma.ReportVisitsModel
  */
 export type Bookmark = Prisma.BookmarkModel
 /**
- * Model HandbookCase
- * 
- */
-export type HandbookCase = Prisma.HandbookCaseModel
-/**
- * Model Handbook
- * 
- */
-export type Handbook = Prisma.HandbookModel
-/**
- * Model NoteItem
- * 
- */
-export type NoteItem = Prisma.NoteItemModel
-/**
  * Model Quote
  * 
  */
@@ -118,25 +103,25 @@ export type Quote = Prisma.QuoteModel
  */
 export type Subject = Prisma.SubjectModel
 /**
- * Model FacultyNoteSummary
+ * Model HandbookTopic
  * 
  */
-export type FacultyNoteSummary = Prisma.FacultyNoteSummaryModel
+export type HandbookTopic = Prisma.HandbookTopicModel
 /**
- * Model NlsNoteSummary
+ * Model HandbookCase
  * 
  */
-export type NlsNoteSummary = Prisma.NlsNoteSummaryModel
+export type HandbookCase = Prisma.HandbookCaseModel
 /**
- * Model TextbookCase
+ * Model SummaryTopic
  * 
  */
-export type TextbookCase = Prisma.TextbookCaseModel
+export type SummaryTopic = Prisma.SummaryTopicModel
 /**
- * Model Textbook
+ * Model SummaryCase
  * 
  */
-export type Textbook = Prisma.TextbookModel
+export type SummaryCase = Prisma.SummaryCaseModel
 /**
  * Model School
  * 

@@ -13,6 +13,10 @@ import { MulterModule } from '@nestjs/platform-express';
 import { EmailModule } from './email/email.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { SubjectModule } from './subject/subject.module';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from './guards/roles.guard';
+import { HandbookModule } from './handbook/handbook.module';
+import { SummaryModule } from './summary/summary.module';
 
 @Module({
   imports: [
@@ -36,9 +40,17 @@ import { SubjectModule } from './subject/subject.module';
     EmailModule,
     PrismaModule,
     SubjectModule,
+    HandbookModule,
+    SummaryModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
+  ],
   exports: [],
 })
 export class AppModule {

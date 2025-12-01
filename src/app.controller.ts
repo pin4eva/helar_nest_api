@@ -21,9 +21,9 @@ export class AppController {
     return '1.0.0';
   }
 
-  @Post('/migrate/postgres')
-  @HttpCode(200)
-  async migratePostgres() {
-    return this.appService.migratePostgresData();
-  }
+  // @Post('/migrate/postgres')
+  // @HttpCode(200)
+  // async migratePostgres() {
+  //   return this.appService.migratePostgresData();
+  // }
 }
