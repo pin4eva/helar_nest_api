@@ -13,9 +13,14 @@ const devOrigins = [
   'http://localhost:3001',
   'http://localhost:8000',
   'https://*.vercel.app',
+  'https://dev-helar-nuxt.vercel.app',
 ];
 
-const prodOrigins = ['https://*.helar.law', 'https://*.vercel.app'];
+const prodOrigins = [
+  'https://*.helar.law',
+  'https://*.vercel.app',
+  'https://dev-helar-nuxt.vercel.app',
+];
 
 async function bootstrap() {
   if (cachedApp) {
