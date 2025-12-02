@@ -14,12 +14,17 @@ const devOrigins = [
   'http://localhost:8000',
   'https://dev-helar-nuxt.vercel.app',
   'https://helar-nuxt.vercel.app',
+  'https://helar-dev.ububa.org',
+  'https://helar.ububa.org',
 ];
 
 const prodOrigins = [
   'https://helar.law',
   'https://dev-helar-nuxt.vercel.app',
   'https://helar-nuxt.vercel.app',
+  // UBUBA hostnames used in production
+  'https://helar.ububa.org',
+  'https://helar-dev.ububa.org',
 ];
 
 async function bootstrap() {
@@ -43,10 +48,28 @@ async function bootstrap() {
     new Set(isProduction ? prodOrigins : [...prodOrigins, ...devOrigins]),
   );
 
+  // Log allowed origins to aid debugging on startup
+  Logger.debug('CORS allowed origins: ' + allowedOrigins.join(', '));
+
   app.enableCors({
-    origin: ['https://helar.ububa.org', 'http://localhost:3000'],
-    // credentials: true,
-    // methods: ['GET', 'HEAD', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    origin: (origin, callback) => {
+      // When the request is from a non-browser client (e.g. server-to-server, curl), origin is undefined
+      if (!origin) {
+        return callback(null, true);
+      }
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      // Allow exact subdomain match for helar.ububa.org if present in allowedOrigins
+      // (Optional) Add more flexible matching if needed in future
+      return callback(new Error(`Origin ${origin} not allowed by CORS`));
+    },
+    credentials: true,
+    allowedHeaders:
+      'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
   });
 
   const config = new DocumentBuilder()
