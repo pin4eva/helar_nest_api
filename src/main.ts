@@ -44,11 +44,14 @@ async function bootstrap() {
   );
 
   app.enableCors({
-    origin: [
-      'https://helar-nuxt.vercel.app',
-      'https://dev-helar-nuxt.vercel.app',
-      'http://localhost:3000',
-    ],
+    origin:
+      process.env.NODE_ENV === 'production'
+        ? [
+            'https://helar-nuxt.vercel.app',
+            'https://dev-helar-nuxt.vercel.app',
+            'http://localhost:3000',
+          ]
+        : true,
     credentials: true,
     methods: ['GET', 'HEAD', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   });
