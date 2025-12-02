@@ -45,8 +45,8 @@ async function bootstrap() {
 
   app.enableCors({
     origin: ['https://helar.ububa.org', 'http://localhost:3000'],
-    credentials: true,
-    methods: ['GET', 'HEAD', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    // credentials: true,
+    // methods: ['GET', 'HEAD', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   });
 
   const config = new DocumentBuilder()
