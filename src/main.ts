@@ -27,6 +27,28 @@ const prodOrigins = [
   'https://helar-dev.ububa.org',
 ];
 
+const normalizeOrigin = (origin: string) =>
+  origin.trim().replace(/\/$/, '').toLowerCase();
+
+const parseEnvOrigins = () =>
+  (process.env.CORS_ALLOWED_ORIGINS ?? '')
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+
+const wildcardDomains = ['ububa.org'];
+
+const matchesWildcardDomain = (origin: string) => {
+  try {
+    const hostname = new URL(origin).hostname.toLowerCase();
+    return wildcardDomains.some(
+      (domain) => hostname === domain || hostname.endsWith(`.${domain}`),
+    );
+  } catch {
+    return false;
+  }
+};
+
 async function bootstrap() {
   if (cachedApp) {
     return cachedApp;
@@ -45,8 +67,12 @@ async function bootstrap() {
 
   const isProduction = process.env.NODE_ENV === 'production';
   const allowedOrigins = Array.from(
-    new Set(isProduction ? prodOrigins : [...prodOrigins, ...devOrigins]),
+    new Set([
+      ...(isProduction ? prodOrigins : [...prodOrigins, ...devOrigins]),
+      ...parseEnvOrigins(),
+    ]),
   );
+  const normalizedAllowedOrigins = new Set(allowedOrigins.map(normalizeOrigin));
 
   // Log allowed origins to aid debugging on startup
   Logger.debug('CORS allowed origins: ' + allowedOrigins.join(', '));
@@ -58,18 +84,24 @@ async function bootstrap() {
         return callback(null, true);
       }
 
-      if (allowedOrigins.includes(origin)) {
+      const normalizedOrigin = normalizeOrigin(origin);
+      if (
+        normalizedAllowedOrigins.has(normalizedOrigin) ||
+        matchesWildcardDomain(origin)
+      ) {
         return callback(null, true);
       }
 
       // Allow exact subdomain match for helar.ububa.org if present in allowedOrigins
       // (Optional) Add more flexible matching if needed in future
+      Logger.warn(`Origin ${origin} blocked by CORS`);
       return callback(new Error(`Origin ${origin} not allowed by CORS`));
     },
     credentials: true,
     allowedHeaders:
       'Origin, X-Requested-With, Content-Type, Accept, Authorization',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    optionsSuccessStatus: 204,
   });
 
   const config = new DocumentBuilder()
