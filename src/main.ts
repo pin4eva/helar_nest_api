@@ -45,8 +45,8 @@ async function bootstrap() {
 
   app.enableCors({
     origin: [
-      'helar-dev.ububa.org',
-      'helar-nest-api.vercel.app',
+      'https://helar-dev.ububa.org',
+      'https://helar-nest-api.vercel.app',
       'http://localhost:3000',
     ],
     credentials: true,
