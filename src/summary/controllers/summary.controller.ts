@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Put,
   Query,
 } from '@nestjs/common';
 import { SummaryService } from '../services/summary.service';
@@ -73,7 +74,7 @@ export class SummaryController {
 
   @Get('topics/:topicId/cases')
   getCasesByTopic(@Param('topicId') topicId: string) {
-    return this.summaryService.getCasesByTopicId(topicId);
+    return this.summaryService.getCasesByTopicIdOrTopicSlug(topicId);
   }
 
   @Get('cases/:id')
@@ -86,9 +87,9 @@ export class SummaryController {
     return this.summaryService.createCase(input);
   }
 
-  @Patch('cases/:id')
-  updateCase(@Param('id') id: string, @Body() input: UpdateSummaryCaseDto) {
-    return this.summaryService.updateCase(id, input);
+  @Put('cases')
+  updateCase(@Body() input: UpdateSummaryCaseDto) {
+    return this.summaryService.updateCase(input);
   }
 
   @Delete('cases/:id')

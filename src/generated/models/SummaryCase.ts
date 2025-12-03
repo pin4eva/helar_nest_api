@@ -207,7 +207,7 @@ export type SummaryCaseGroupByOutputType = {
   id: string
   createdAt: Date
   topicId: string
-  slug: string
+  slug: string | null
   ref: number
   question: string
   answer: string
@@ -242,7 +242,7 @@ export type SummaryCaseWhereInput = {
   id?: Prisma.StringFilter<"SummaryCase"> | string
   createdAt?: Prisma.DateTimeFilter<"SummaryCase"> | Date | string
   topicId?: Prisma.StringFilter<"SummaryCase"> | string
-  slug?: Prisma.StringFilter<"SummaryCase"> | string
+  slug?: Prisma.StringNullableFilter<"SummaryCase"> | string | null
   ref?: Prisma.IntFilter<"SummaryCase"> | number
   question?: Prisma.StringFilter<"SummaryCase"> | string
   answer?: Prisma.StringFilter<"SummaryCase"> | string
@@ -255,7 +255,7 @@ export type SummaryCaseOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   topicId?: Prisma.SortOrder
-  slug?: Prisma.SortOrder
+  slug?: Prisma.SortOrderInput | Prisma.SortOrder
   ref?: Prisma.SortOrder
   question?: Prisma.SortOrder
   answer?: Prisma.SortOrder
@@ -267,25 +267,25 @@ export type SummaryCaseOrderByWithRelationInput = {
 
 export type SummaryCaseWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  slug?: string
   ref?: number
   AND?: Prisma.SummaryCaseWhereInput | Prisma.SummaryCaseWhereInput[]
   OR?: Prisma.SummaryCaseWhereInput[]
   NOT?: Prisma.SummaryCaseWhereInput | Prisma.SummaryCaseWhereInput[]
   createdAt?: Prisma.DateTimeFilter<"SummaryCase"> | Date | string
   topicId?: Prisma.StringFilter<"SummaryCase"> | string
+  slug?: Prisma.StringNullableFilter<"SummaryCase"> | string | null
   question?: Prisma.StringFilter<"SummaryCase"> | string
   answer?: Prisma.StringFilter<"SummaryCase"> | string
   updatedAt?: Prisma.DateTimeFilter<"SummaryCase"> | Date | string
   objectId?: Prisma.StringNullableFilter<"SummaryCase"> | string | null
   topic?: Prisma.XOR<Prisma.SummaryTopicNullableScalarRelationFilter, Prisma.SummaryTopicWhereInput> | null
-}, "id" | "slug" | "ref">
+}, "id" | "ref">
 
 export type SummaryCaseOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   topicId?: Prisma.SortOrder
-  slug?: Prisma.SortOrder
+  slug?: Prisma.SortOrderInput | Prisma.SortOrder
   ref?: Prisma.SortOrder
   question?: Prisma.SortOrder
   answer?: Prisma.SortOrder
@@ -305,7 +305,7 @@ export type SummaryCaseScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"SummaryCase"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"SummaryCase"> | Date | string
   topicId?: Prisma.StringWithAggregatesFilter<"SummaryCase"> | string
-  slug?: Prisma.StringWithAggregatesFilter<"SummaryCase"> | string
+  slug?: Prisma.StringNullableWithAggregatesFilter<"SummaryCase"> | string | null
   ref?: Prisma.IntWithAggregatesFilter<"SummaryCase"> | number
   question?: Prisma.StringWithAggregatesFilter<"SummaryCase"> | string
   answer?: Prisma.StringWithAggregatesFilter<"SummaryCase"> | string
@@ -316,7 +316,7 @@ export type SummaryCaseScalarWhereWithAggregatesInput = {
 export type SummaryCaseCreateInput = {
   id?: string
   createdAt?: Date | string
-  slug: string
+  slug?: string | null
   ref: number
   question: string
   answer: string
@@ -329,7 +329,7 @@ export type SummaryCaseUncheckedCreateInput = {
   id?: string
   createdAt?: Date | string
   topicId: string
-  slug: string
+  slug?: string | null
   ref: number
   question: string
   answer: string
@@ -340,7 +340,7 @@ export type SummaryCaseUncheckedCreateInput = {
 export type SummaryCaseUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ref?: Prisma.IntFieldUpdateOperationsInput | number
   question?: Prisma.StringFieldUpdateOperationsInput | string
   answer?: Prisma.StringFieldUpdateOperationsInput | string
@@ -353,7 +353,7 @@ export type SummaryCaseUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   topicId?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ref?: Prisma.IntFieldUpdateOperationsInput | number
   question?: Prisma.StringFieldUpdateOperationsInput | string
   answer?: Prisma.StringFieldUpdateOperationsInput | string
@@ -365,7 +365,7 @@ export type SummaryCaseCreateManyInput = {
   id?: string
   createdAt?: Date | string
   topicId: string
-  slug: string
+  slug?: string | null
   ref: number
   question: string
   answer: string
@@ -376,7 +376,7 @@ export type SummaryCaseCreateManyInput = {
 export type SummaryCaseUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ref?: Prisma.IntFieldUpdateOperationsInput | number
   question?: Prisma.StringFieldUpdateOperationsInput | string
   answer?: Prisma.StringFieldUpdateOperationsInput | string
@@ -388,7 +388,7 @@ export type SummaryCaseUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   topicId?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ref?: Prisma.IntFieldUpdateOperationsInput | number
   question?: Prisma.StringFieldUpdateOperationsInput | string
   answer?: Prisma.StringFieldUpdateOperationsInput | string
@@ -501,7 +501,7 @@ export type SummaryCaseUncheckedUpdateManyWithoutTopicNestedInput = {
 export type SummaryCaseCreateWithoutTopicInput = {
   id?: string
   createdAt?: Date | string
-  slug: string
+  slug?: string | null
   ref: number
   question: string
   answer: string
@@ -512,7 +512,7 @@ export type SummaryCaseCreateWithoutTopicInput = {
 export type SummaryCaseUncheckedCreateWithoutTopicInput = {
   id?: string
   createdAt?: Date | string
-  slug: string
+  slug?: string | null
   ref: number
   question: string
   answer: string
@@ -553,7 +553,7 @@ export type SummaryCaseScalarWhereInput = {
   id?: Prisma.StringFilter<"SummaryCase"> | string
   createdAt?: Prisma.DateTimeFilter<"SummaryCase"> | Date | string
   topicId?: Prisma.StringFilter<"SummaryCase"> | string
-  slug?: Prisma.StringFilter<"SummaryCase"> | string
+  slug?: Prisma.StringNullableFilter<"SummaryCase"> | string | null
   ref?: Prisma.IntFilter<"SummaryCase"> | number
   question?: Prisma.StringFilter<"SummaryCase"> | string
   answer?: Prisma.StringFilter<"SummaryCase"> | string
@@ -564,7 +564,7 @@ export type SummaryCaseScalarWhereInput = {
 export type SummaryCaseCreateManyTopicInput = {
   id?: string
   createdAt?: Date | string
-  slug: string
+  slug?: string | null
   ref: number
   question: string
   answer: string
@@ -575,7 +575,7 @@ export type SummaryCaseCreateManyTopicInput = {
 export type SummaryCaseUpdateWithoutTopicInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ref?: Prisma.IntFieldUpdateOperationsInput | number
   question?: Prisma.StringFieldUpdateOperationsInput | string
   answer?: Prisma.StringFieldUpdateOperationsInput | string
@@ -586,7 +586,7 @@ export type SummaryCaseUpdateWithoutTopicInput = {
 export type SummaryCaseUncheckedUpdateWithoutTopicInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ref?: Prisma.IntFieldUpdateOperationsInput | number
   question?: Prisma.StringFieldUpdateOperationsInput | string
   answer?: Prisma.StringFieldUpdateOperationsInput | string
@@ -597,7 +597,7 @@ export type SummaryCaseUncheckedUpdateWithoutTopicInput = {
 export type SummaryCaseUncheckedUpdateManyWithoutTopicInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ref?: Prisma.IntFieldUpdateOperationsInput | number
   question?: Prisma.StringFieldUpdateOperationsInput | string
   answer?: Prisma.StringFieldUpdateOperationsInput | string
@@ -678,7 +678,7 @@ export type $SummaryCasePayload<ExtArgs extends runtime.Types.Extensions.Interna
     id: string
     createdAt: Date
     topicId: string
-    slug: string
+    slug: string | null
     ref: number
     question: string
     answer: string

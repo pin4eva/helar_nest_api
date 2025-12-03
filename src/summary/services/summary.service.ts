@@ -1,17 +1,21 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { Prisma, Subject } from 'src/generated/client';
+import { SummaryTypeEnum } from 'src/generated/enums';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { slugify } from 'src/utils/helpers';
-import { SummaryTypeEnum } from 'src/generated/enums';
-import { Prisma, Subject } from 'src/generated/client';
+import {
+  CreateSummaryCaseDto,
+  UpdateSummaryCaseDto,
+} from '../dto/summary-case.dto';
 import {
   CreateSummaryTopicDto,
   SummaryTopicsQueryDto,
   UpdateSummaryTopicDto,
 } from '../dto/summary-topic.dto';
-import {
-  CreateSummaryCaseDto,
-  UpdateSummaryCaseDto,
-} from '../dto/summary-case.dto';
 
 @Injectable()
 export class SummaryService {
@@ -115,16 +119,31 @@ export class SummaryService {
     }
   }
 
-  createTopic(input: CreateSummaryTopicDto) {
-    const slug = slugify(input.title);
-    return this.prisma.summaryTopic.create({
-      data: {
-        title: input.title,
-        subjectId: input.subjectId,
-        slug,
-        type: input.type ?? SummaryTypeEnum.Faculty_Summary,
-      },
-    });
+  async createTopic(input: CreateSummaryTopicDto) {
+    try {
+      const slug = slugify(input.title);
+      const existingTopic = await this.prisma.summaryTopic.findFirst({
+        where: {
+          OR: [{ title: input.title, subjectId: input.subjectId }, { slug }],
+        },
+      });
+      if (existingTopic) {
+        throw new BadRequestException(
+          'A topic with the same title already exists for this subject.',
+        );
+      }
+      const topic = await this.prisma.summaryTopic.create({
+        data: {
+          title: input.title,
+          subjectId: input.subjectId,
+          slug,
+          type: input?.type ?? SummaryTypeEnum.Faculty_Summary,
+        },
+      });
+      return topic;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async updateTopic(id: string, input: UpdateSummaryTopicDto) {
@@ -164,45 +183,96 @@ export class SummaryService {
     return summaryCase;
   }
 
-  async getCasesByTopicId(topicId: string) {
-    return this.prisma.summaryCase.findMany({
-      where: { topicId },
-      include: {
-        topic: {
-          include: { subject: true },
+  async getCasesByTopicIdOrTopicSlug(topicId: string) {
+    try {
+      const whereClause: Prisma.SummaryTopicWhereInput = {};
+      if (!topicId.includes('-')) {
+        whereClause.id = topicId;
+      } else {
+        whereClause.slug = topicId;
+      }
+      const topic = await this.prisma.summaryTopic.findFirst({
+        where: whereClause,
+        include: {
+          subject: true,
         },
-      },
-      orderBy: { ref: 'asc' },
-    });
+      });
+      if (!topic) {
+        throw new NotFoundException(`Summary topic ${topicId} not found`);
+      }
+      const cases = await this.prisma.summaryCase.findMany({
+        where: { topicId },
+
+        orderBy: { ref: 'asc' },
+      });
+
+      return {
+        ...topic,
+        cases,
+      };
+    } catch (error) {
+      throw error;
+    }
   }
 
-  createCase(input: CreateSummaryCaseDto) {
-    const slug =
-      input.slug?.trim() || slugify(`${input.question}-${input.ref}`);
-    return this.prisma.summaryCase.create({
+  async createCase(input: CreateSummaryCaseDto) {
+    try {
+      const { topicId, question, answer } = input;
+      const slug = slugify(question);
+
+      const existingCase = await this.prisma.summaryCase.findFirst({
+        where: { topicId, question },
+      });
+      if (existingCase) {
+        throw new BadRequestException(
+          'A case with the same question already exists for this topic.',
+        );
+      }
+
+      const lastReference = await this.prisma.summaryCase.findFirst({
+        orderBy: { ref: 'desc' },
+      });
+      const nextRef = lastReference ? lastReference.ref + 1 : 1;
+
+      const created = await this.prisma.summaryCase.create({
+        data: {
+          topicId,
+          question,
+          answer,
+          ref: nextRef,
+          slug,
+        },
+      });
+
+      return created;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async updateCase(input: UpdateSummaryCaseDto) {
+    const { id } = input;
+
+    const existingCase = await this.prisma.summaryCase.findUnique({
+      where: { id },
+    });
+    if (!existingCase) {
+      throw new NotFoundException(`Summary case ${id} not found`);
+    }
+    let slug = existingCase.slug;
+    if (input.question && input.question !== existingCase.question) {
+      slug = slugify(input.question);
+    }
+    const updatedCase = await this.prisma.summaryCase.update({
+      where: { id },
       data: {
-        topicId: input.topicId,
-        question: input.question,
         answer: input.answer,
-        ref: input.ref,
+        question: input.question,
         slug,
       },
     });
-  }
 
-  async updateCase(id: string, input: UpdateSummaryCaseDto) {
-    await this.ensureCaseExists(id);
-    const slug = input.question
-      ? slugify(`${input.question}-${input.ref ?? ''}`)
-      : undefined;
-
-    return this.prisma.summaryCase.update({
-      where: { id },
-      data: {
-        ...input,
-        ...(slug ? { slug } : {}),
-      },
-    });
+    return updatedCase;
   }
 
   async deleteCase(id: string) {

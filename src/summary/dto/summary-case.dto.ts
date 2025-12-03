@@ -14,16 +14,10 @@ export class CreateSummaryCaseDto {
   @ApiProperty()
   @IsString()
   answer!: string;
-
-  @ApiProperty()
-  @Type(() => Number)
-  @IsNumber()
-  ref!: number;
-
-  @ApiProperty({ required: false })
-  @IsOptional()
-  @IsString()
-  slug?: string;
 }
 
-export class UpdateSummaryCaseDto extends PartialType(CreateSummaryCaseDto) {}
+export class UpdateSummaryCaseDto extends PartialType(CreateSummaryCaseDto) {
+  @ApiProperty()
+  @IsString()
+  id: string;
+}

@@ -287,9 +287,7 @@ export const HandbookCaseScalarFieldEnum = {
   ref: 'ref',
   slug: 'slug',
   title: 'title',
-  updatedAt: 'updatedAt',
-  objectId: 'objectId',
-  handbookId: 'handbookId'
+  updatedAt: 'updatedAt'
 } as const
 
 export type HandbookCaseScalarFieldEnum = (typeof HandbookCaseScalarFieldEnum)[keyof typeof HandbookCaseScalarFieldEnum]
@@ -518,9 +516,7 @@ export const HandbookCaseOrderByRelevanceFieldEnum = {
   citation: 'citation',
   topicId: 'topicId',
   slug: 'slug',
-  title: 'title',
-  objectId: 'objectId',
-  handbookId: 'handbookId'
+  title: 'title'
 } as const
 
 export type HandbookCaseOrderByRelevanceFieldEnum = (typeof HandbookCaseOrderByRelevanceFieldEnum)[keyof typeof HandbookCaseOrderByRelevanceFieldEnum]

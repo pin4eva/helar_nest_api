@@ -434,6 +434,7 @@ enum TopicTypeEnum {
 }
 
 enum SummaryTypeEnum {
-  Faculty_Summary @map("Faculty Summary")
-  NLS_Summary     @map("NLS Summary")
+  Faculty_Summary   @map("Faculty Summary")
+  NLS_Summary       @map("NLS Summary")
+  Final_Bar_Exam_QA @map("Final Bar Exam Questions and Answers")
 }

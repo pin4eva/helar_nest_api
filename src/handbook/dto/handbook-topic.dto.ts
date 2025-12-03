@@ -1,5 +1,5 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { IsEnum, IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsIn, IsOptional, IsString } from 'class-validator';
 import { TopicTypeEnum } from 'src/generated/enums';
 
 export class CreateHandbookTopicDto {
@@ -37,6 +37,6 @@ export class HandbookTopicsQueryDto {
 
   @ApiProperty({ required: false, enum: TopicTypeEnum })
   @IsOptional()
-  @IsEnum(TopicTypeEnum)
+  @IsIn(Object.keys(TopicTypeEnum))
   type?: TopicTypeEnum;
 }

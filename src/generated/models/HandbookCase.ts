@@ -45,8 +45,6 @@ export type HandbookCaseMinAggregateOutputType = {
   slug: string | null
   title: string | null
   updatedAt: Date | null
-  objectId: string | null
-  handbookId: string | null
 }
 
 export type HandbookCaseMaxAggregateOutputType = {
@@ -60,8 +58,6 @@ export type HandbookCaseMaxAggregateOutputType = {
   slug: string | null
   title: string | null
   updatedAt: Date | null
-  objectId: string | null
-  handbookId: string | null
 }
 
 export type HandbookCaseCountAggregateOutputType = {
@@ -75,8 +71,6 @@ export type HandbookCaseCountAggregateOutputType = {
   slug: number
   title: number
   updatedAt: number
-  objectId: number
-  handbookId: number
   _all: number
 }
 
@@ -100,8 +94,6 @@ export type HandbookCaseMinAggregateInputType = {
   slug?: true
   title?: true
   updatedAt?: true
-  objectId?: true
-  handbookId?: true
 }
 
 export type HandbookCaseMaxAggregateInputType = {
@@ -115,8 +107,6 @@ export type HandbookCaseMaxAggregateInputType = {
   slug?: true
   title?: true
   updatedAt?: true
-  objectId?: true
-  handbookId?: true
 }
 
 export type HandbookCaseCountAggregateInputType = {
@@ -130,8 +120,6 @@ export type HandbookCaseCountAggregateInputType = {
   slug?: true
   title?: true
   updatedAt?: true
-  objectId?: true
-  handbookId?: true
   _all?: true
 }
 
@@ -229,11 +217,9 @@ export type HandbookCaseGroupByOutputType = {
   createdAt: Date
   topicId: string
   ref: number
-  slug: string
+  slug: string | null
   title: string
   updatedAt: Date
-  objectId: string | null
-  handbookId: string | null
   _count: HandbookCaseCountAggregateOutputType | null
   _avg: HandbookCaseAvgAggregateOutputType | null
   _sum: HandbookCaseSumAggregateOutputType | null
@@ -267,11 +253,9 @@ export type HandbookCaseWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"HandbookCase"> | Date | string
   topicId?: Prisma.StringFilter<"HandbookCase"> | string
   ref?: Prisma.IntFilter<"HandbookCase"> | number
-  slug?: Prisma.StringFilter<"HandbookCase"> | string
+  slug?: Prisma.StringNullableFilter<"HandbookCase"> | string | null
   title?: Prisma.StringFilter<"HandbookCase"> | string
   updatedAt?: Prisma.DateTimeFilter<"HandbookCase"> | Date | string
-  objectId?: Prisma.StringNullableFilter<"HandbookCase"> | string | null
-  handbookId?: Prisma.StringNullableFilter<"HandbookCase"> | string | null
   topic?: Prisma.XOR<Prisma.HandbookTopicNullableScalarRelationFilter, Prisma.HandbookTopicWhereInput> | null
 }
 
@@ -283,11 +267,9 @@ export type HandbookCaseOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   topicId?: Prisma.SortOrder
   ref?: Prisma.SortOrder
-  slug?: Prisma.SortOrder
+  slug?: Prisma.SortOrderInput | Prisma.SortOrder
   title?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  objectId?: Prisma.SortOrderInput | Prisma.SortOrder
-  handbookId?: Prisma.SortOrderInput | Prisma.SortOrder
   topic?: Prisma.HandbookTopicOrderByWithRelationInput
   _relevance?: Prisma.HandbookCaseOrderByRelevanceInput
 }
@@ -295,7 +277,6 @@ export type HandbookCaseOrderByWithRelationInput = {
 export type HandbookCaseWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   ref?: number
-  slug?: string
   AND?: Prisma.HandbookCaseWhereInput | Prisma.HandbookCaseWhereInput[]
   OR?: Prisma.HandbookCaseWhereInput[]
   NOT?: Prisma.HandbookCaseWhereInput | Prisma.HandbookCaseWhereInput[]
@@ -304,12 +285,11 @@ export type HandbookCaseWhereUniqueInput = Prisma.AtLeast<{
   citation?: Prisma.StringFilter<"HandbookCase"> | string
   createdAt?: Prisma.DateTimeFilter<"HandbookCase"> | Date | string
   topicId?: Prisma.StringFilter<"HandbookCase"> | string
+  slug?: Prisma.StringNullableFilter<"HandbookCase"> | string | null
   title?: Prisma.StringFilter<"HandbookCase"> | string
   updatedAt?: Prisma.DateTimeFilter<"HandbookCase"> | Date | string
-  objectId?: Prisma.StringNullableFilter<"HandbookCase"> | string | null
-  handbookId?: Prisma.StringNullableFilter<"HandbookCase"> | string | null
   topic?: Prisma.XOR<Prisma.HandbookTopicNullableScalarRelationFilter, Prisma.HandbookTopicWhereInput> | null
-}, "id" | "ref" | "slug">
+}, "id" | "ref">
 
 export type HandbookCaseOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -319,11 +299,9 @@ export type HandbookCaseOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   topicId?: Prisma.SortOrder
   ref?: Prisma.SortOrder
-  slug?: Prisma.SortOrder
+  slug?: Prisma.SortOrderInput | Prisma.SortOrder
   title?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  objectId?: Prisma.SortOrderInput | Prisma.SortOrder
-  handbookId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.HandbookCaseCountOrderByAggregateInput
   _avg?: Prisma.HandbookCaseAvgOrderByAggregateInput
   _max?: Prisma.HandbookCaseMaxOrderByAggregateInput
@@ -342,11 +320,9 @@ export type HandbookCaseScalarWhereWithAggregatesInput = {
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"HandbookCase"> | Date | string
   topicId?: Prisma.StringWithAggregatesFilter<"HandbookCase"> | string
   ref?: Prisma.IntWithAggregatesFilter<"HandbookCase"> | number
-  slug?: Prisma.StringWithAggregatesFilter<"HandbookCase"> | string
+  slug?: Prisma.StringNullableWithAggregatesFilter<"HandbookCase"> | string | null
   title?: Prisma.StringWithAggregatesFilter<"HandbookCase"> | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"HandbookCase"> | Date | string
-  objectId?: Prisma.StringNullableWithAggregatesFilter<"HandbookCase"> | string | null
-  handbookId?: Prisma.StringNullableWithAggregatesFilter<"HandbookCase"> | string | null
 }
 
 export type HandbookCaseCreateInput = {
@@ -356,11 +332,9 @@ export type HandbookCaseCreateInput = {
   citation: string
   createdAt?: Date | string
   ref: number
-  slug: string
+  slug?: string | null
   title: string
   updatedAt?: Date | string
-  objectId?: string | null
-  handbookId?: string | null
   topic?: Prisma.HandbookTopicCreateNestedOneWithoutCasesInput
 }
 
@@ -372,11 +346,9 @@ export type HandbookCaseUncheckedCreateInput = {
   createdAt?: Date | string
   topicId: string
   ref: number
-  slug: string
+  slug?: string | null
   title: string
   updatedAt?: Date | string
-  objectId?: string | null
-  handbookId?: string | null
 }
 
 export type HandbookCaseUpdateInput = {
@@ -386,11 +358,9 @@ export type HandbookCaseUpdateInput = {
   citation?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ref?: Prisma.IntFieldUpdateOperationsInput | number
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  handbookId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   topic?: Prisma.HandbookTopicUpdateOneWithoutCasesNestedInput
 }
 
@@ -402,11 +372,9 @@ export type HandbookCaseUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   topicId?: Prisma.StringFieldUpdateOperationsInput | string
   ref?: Prisma.IntFieldUpdateOperationsInput | number
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  handbookId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type HandbookCaseCreateManyInput = {
@@ -417,11 +385,9 @@ export type HandbookCaseCreateManyInput = {
   createdAt?: Date | string
   topicId: string
   ref: number
-  slug: string
+  slug?: string | null
   title: string
   updatedAt?: Date | string
-  objectId?: string | null
-  handbookId?: string | null
 }
 
 export type HandbookCaseUpdateManyMutationInput = {
@@ -431,11 +397,9 @@ export type HandbookCaseUpdateManyMutationInput = {
   citation?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ref?: Prisma.IntFieldUpdateOperationsInput | number
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  handbookId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type HandbookCaseUncheckedUpdateManyInput = {
@@ -446,11 +410,9 @@ export type HandbookCaseUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   topicId?: Prisma.StringFieldUpdateOperationsInput | string
   ref?: Prisma.IntFieldUpdateOperationsInput | number
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  handbookId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type HandbookCaseListRelationFilter = {
@@ -480,8 +442,6 @@ export type HandbookCaseCountOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   title?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  objectId?: Prisma.SortOrder
-  handbookId?: Prisma.SortOrder
 }
 
 export type HandbookCaseAvgOrderByAggregateInput = {
@@ -499,8 +459,6 @@ export type HandbookCaseMaxOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   title?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  objectId?: Prisma.SortOrder
-  handbookId?: Prisma.SortOrder
 }
 
 export type HandbookCaseMinOrderByAggregateInput = {
@@ -514,8 +472,6 @@ export type HandbookCaseMinOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   title?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  objectId?: Prisma.SortOrder
-  handbookId?: Prisma.SortOrder
 }
 
 export type HandbookCaseSumOrderByAggregateInput = {
@@ -571,11 +527,9 @@ export type HandbookCaseCreateWithoutTopicInput = {
   citation: string
   createdAt?: Date | string
   ref: number
-  slug: string
+  slug?: string | null
   title: string
   updatedAt?: Date | string
-  objectId?: string | null
-  handbookId?: string | null
 }
 
 export type HandbookCaseUncheckedCreateWithoutTopicInput = {
@@ -585,11 +539,9 @@ export type HandbookCaseUncheckedCreateWithoutTopicInput = {
   citation: string
   createdAt?: Date | string
   ref: number
-  slug: string
+  slug?: string | null
   title: string
   updatedAt?: Date | string
-  objectId?: string | null
-  handbookId?: string | null
 }
 
 export type HandbookCaseCreateOrConnectWithoutTopicInput = {
@@ -629,11 +581,9 @@ export type HandbookCaseScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"HandbookCase"> | Date | string
   topicId?: Prisma.StringFilter<"HandbookCase"> | string
   ref?: Prisma.IntFilter<"HandbookCase"> | number
-  slug?: Prisma.StringFilter<"HandbookCase"> | string
+  slug?: Prisma.StringNullableFilter<"HandbookCase"> | string | null
   title?: Prisma.StringFilter<"HandbookCase"> | string
   updatedAt?: Prisma.DateTimeFilter<"HandbookCase"> | Date | string
-  objectId?: Prisma.StringNullableFilter<"HandbookCase"> | string | null
-  handbookId?: Prisma.StringNullableFilter<"HandbookCase"> | string | null
 }
 
 export type HandbookCaseCreateManyTopicInput = {
@@ -643,11 +593,9 @@ export type HandbookCaseCreateManyTopicInput = {
   citation: string
   createdAt?: Date | string
   ref: number
-  slug: string
+  slug?: string | null
   title: string
   updatedAt?: Date | string
-  objectId?: string | null
-  handbookId?: string | null
 }
 
 export type HandbookCaseUpdateWithoutTopicInput = {
@@ -657,11 +605,9 @@ export type HandbookCaseUpdateWithoutTopicInput = {
   citation?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ref?: Prisma.IntFieldUpdateOperationsInput | number
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  handbookId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type HandbookCaseUncheckedUpdateWithoutTopicInput = {
@@ -671,11 +617,9 @@ export type HandbookCaseUncheckedUpdateWithoutTopicInput = {
   citation?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ref?: Prisma.IntFieldUpdateOperationsInput | number
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  handbookId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type HandbookCaseUncheckedUpdateManyWithoutTopicInput = {
@@ -685,11 +629,9 @@ export type HandbookCaseUncheckedUpdateManyWithoutTopicInput = {
   citation?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ref?: Prisma.IntFieldUpdateOperationsInput | number
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  handbookId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -705,8 +647,6 @@ export type HandbookCaseSelect<ExtArgs extends runtime.Types.Extensions.Internal
   slug?: boolean
   title?: boolean
   updatedAt?: boolean
-  objectId?: boolean
-  handbookId?: boolean
   topic?: boolean | Prisma.HandbookCase$topicArgs<ExtArgs>
 }, ExtArgs["result"]["handbookCase"]>
 
@@ -721,8 +661,6 @@ export type HandbookCaseSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   slug?: boolean
   title?: boolean
   updatedAt?: boolean
-  objectId?: boolean
-  handbookId?: boolean
   topic?: boolean | Prisma.HandbookCase$topicArgs<ExtArgs>
 }, ExtArgs["result"]["handbookCase"]>
 
@@ -737,8 +675,6 @@ export type HandbookCaseSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   slug?: boolean
   title?: boolean
   updatedAt?: boolean
-  objectId?: boolean
-  handbookId?: boolean
   topic?: boolean | Prisma.HandbookCase$topicArgs<ExtArgs>
 }, ExtArgs["result"]["handbookCase"]>
 
@@ -753,11 +689,9 @@ export type HandbookCaseSelectScalar = {
   slug?: boolean
   title?: boolean
   updatedAt?: boolean
-  objectId?: boolean
-  handbookId?: boolean
 }
 
-export type HandbookCaseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "body" | "byline" | "citation" | "createdAt" | "topicId" | "ref" | "slug" | "title" | "updatedAt" | "objectId" | "handbookId", ExtArgs["result"]["handbookCase"]>
+export type HandbookCaseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "body" | "byline" | "citation" | "createdAt" | "topicId" | "ref" | "slug" | "title" | "updatedAt", ExtArgs["result"]["handbookCase"]>
 export type HandbookCaseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   topic?: boolean | Prisma.HandbookCase$topicArgs<ExtArgs>
 }
@@ -781,11 +715,9 @@ export type $HandbookCasePayload<ExtArgs extends runtime.Types.Extensions.Intern
     createdAt: Date
     topicId: string
     ref: number
-    slug: string
+    slug: string | null
     title: string
     updatedAt: Date
-    objectId: string | null
-    handbookId: string | null
   }, ExtArgs["result"]["handbookCase"]>
   composites: {}
 }
@@ -1220,8 +1152,6 @@ export interface HandbookCaseFieldRefs {
   readonly slug: Prisma.FieldRef<"HandbookCase", 'String'>
   readonly title: Prisma.FieldRef<"HandbookCase", 'String'>
   readonly updatedAt: Prisma.FieldRef<"HandbookCase", 'DateTime'>
-  readonly objectId: Prisma.FieldRef<"HandbookCase", 'String'>
-  readonly handbookId: Prisma.FieldRef<"HandbookCase", 'String'>
 }
     
 

@@ -218,17 +218,17 @@ export type SummaryTopicOrderByWithRelationInput = {
 export type SummaryTopicWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   title?: string
-  slug?: string
   AND?: Prisma.SummaryTopicWhereInput | Prisma.SummaryTopicWhereInput[]
   OR?: Prisma.SummaryTopicWhereInput[]
   NOT?: Prisma.SummaryTopicWhereInput | Prisma.SummaryTopicWhereInput[]
+  slug?: Prisma.StringFilter<"SummaryTopic"> | string
   subjectId?: Prisma.StringFilter<"SummaryTopic"> | string
   type?: Prisma.EnumSummaryTypeEnumFilter<"SummaryTopic"> | $Enums.SummaryTypeEnum
   createdAt?: Prisma.DateTimeFilter<"SummaryTopic"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SummaryTopic"> | Date | string
   subject?: Prisma.XOR<Prisma.SubjectScalarRelationFilter, Prisma.SubjectWhereInput>
   cases?: Prisma.SummaryCaseListRelationFilter
-}, "id" | "title" | "slug">
+}, "id" | "title">
 
 export type SummaryTopicOrderByWithAggregationInput = {
   id?: Prisma.SortOrder

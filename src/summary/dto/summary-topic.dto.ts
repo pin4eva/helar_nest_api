@@ -1,5 +1,5 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { IsEnum, IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsIn, IsOptional, IsString } from 'class-validator';
 import { SummaryTypeEnum } from 'src/generated/enums';
 
 export class CreateSummaryTopicDto {
@@ -12,12 +12,9 @@ export class CreateSummaryTopicDto {
   subjectId!: string;
 
   @ApiProperty({
-    required: false,
-    enum: SummaryTypeEnum,
     default: SummaryTypeEnum.Faculty_Summary,
   })
-  @IsOptional()
-  @IsEnum(SummaryTypeEnum)
+  @IsIn(Object.keys(SummaryTypeEnum))
   type?: SummaryTypeEnum;
 }
 

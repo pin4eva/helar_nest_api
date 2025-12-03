@@ -162,7 +162,7 @@ export type HandbookTopicGroupByArgs<ExtArgs extends runtime.Types.Extensions.In
 export type HandbookTopicGroupByOutputType = {
   id: string
   title: string
-  slug: string
+  slug: string | null
   subjectId: string
   type: $Enums.TopicTypeEnum
   createdAt: Date
@@ -193,7 +193,7 @@ export type HandbookTopicWhereInput = {
   NOT?: Prisma.HandbookTopicWhereInput | Prisma.HandbookTopicWhereInput[]
   id?: Prisma.StringFilter<"HandbookTopic"> | string
   title?: Prisma.StringFilter<"HandbookTopic"> | string
-  slug?: Prisma.StringFilter<"HandbookTopic"> | string
+  slug?: Prisma.StringNullableFilter<"HandbookTopic"> | string | null
   subjectId?: Prisma.StringFilter<"HandbookTopic"> | string
   type?: Prisma.EnumTopicTypeEnumFilter<"HandbookTopic"> | $Enums.TopicTypeEnum
   createdAt?: Prisma.DateTimeFilter<"HandbookTopic"> | Date | string
@@ -205,7 +205,7 @@ export type HandbookTopicWhereInput = {
 export type HandbookTopicOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  slug?: Prisma.SortOrder
+  slug?: Prisma.SortOrderInput | Prisma.SortOrder
   subjectId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -218,22 +218,22 @@ export type HandbookTopicOrderByWithRelationInput = {
 export type HandbookTopicWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   title?: string
-  slug?: string
   AND?: Prisma.HandbookTopicWhereInput | Prisma.HandbookTopicWhereInput[]
   OR?: Prisma.HandbookTopicWhereInput[]
   NOT?: Prisma.HandbookTopicWhereInput | Prisma.HandbookTopicWhereInput[]
+  slug?: Prisma.StringNullableFilter<"HandbookTopic"> | string | null
   subjectId?: Prisma.StringFilter<"HandbookTopic"> | string
   type?: Prisma.EnumTopicTypeEnumFilter<"HandbookTopic"> | $Enums.TopicTypeEnum
   createdAt?: Prisma.DateTimeFilter<"HandbookTopic"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"HandbookTopic"> | Date | string
   subject?: Prisma.XOR<Prisma.SubjectScalarRelationFilter, Prisma.SubjectWhereInput>
   cases?: Prisma.HandbookCaseListRelationFilter
-}, "id" | "title" | "slug">
+}, "id" | "title">
 
 export type HandbookTopicOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  slug?: Prisma.SortOrder
+  slug?: Prisma.SortOrderInput | Prisma.SortOrder
   subjectId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -249,7 +249,7 @@ export type HandbookTopicScalarWhereWithAggregatesInput = {
   NOT?: Prisma.HandbookTopicScalarWhereWithAggregatesInput | Prisma.HandbookTopicScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"HandbookTopic"> | string
   title?: Prisma.StringWithAggregatesFilter<"HandbookTopic"> | string
-  slug?: Prisma.StringWithAggregatesFilter<"HandbookTopic"> | string
+  slug?: Prisma.StringNullableWithAggregatesFilter<"HandbookTopic"> | string | null
   subjectId?: Prisma.StringWithAggregatesFilter<"HandbookTopic"> | string
   type?: Prisma.EnumTopicTypeEnumWithAggregatesFilter<"HandbookTopic"> | $Enums.TopicTypeEnum
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"HandbookTopic"> | Date | string
@@ -259,7 +259,7 @@ export type HandbookTopicScalarWhereWithAggregatesInput = {
 export type HandbookTopicCreateInput = {
   id?: string
   title: string
-  slug: string
+  slug?: string | null
   type?: $Enums.TopicTypeEnum
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -270,7 +270,7 @@ export type HandbookTopicCreateInput = {
 export type HandbookTopicUncheckedCreateInput = {
   id?: string
   title: string
-  slug: string
+  slug?: string | null
   subjectId: string
   type?: $Enums.TopicTypeEnum
   createdAt?: Date | string
@@ -281,7 +281,7 @@ export type HandbookTopicUncheckedCreateInput = {
 export type HandbookTopicUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumTopicTypeEnumFieldUpdateOperationsInput | $Enums.TopicTypeEnum
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -292,7 +292,7 @@ export type HandbookTopicUpdateInput = {
 export type HandbookTopicUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subjectId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTopicTypeEnumFieldUpdateOperationsInput | $Enums.TopicTypeEnum
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -303,7 +303,7 @@ export type HandbookTopicUncheckedUpdateInput = {
 export type HandbookTopicCreateManyInput = {
   id?: string
   title: string
-  slug: string
+  slug?: string | null
   subjectId: string
   type?: $Enums.TopicTypeEnum
   createdAt?: Date | string
@@ -313,7 +313,7 @@ export type HandbookTopicCreateManyInput = {
 export type HandbookTopicUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumTopicTypeEnumFieldUpdateOperationsInput | $Enums.TopicTypeEnum
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -322,7 +322,7 @@ export type HandbookTopicUpdateManyMutationInput = {
 export type HandbookTopicUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subjectId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTopicTypeEnumFieldUpdateOperationsInput | $Enums.TopicTypeEnum
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -445,7 +445,7 @@ export type HandbookTopicUpdateOneWithoutCasesNestedInput = {
 export type HandbookTopicCreateWithoutSubjectInput = {
   id?: string
   title: string
-  slug: string
+  slug?: string | null
   type?: $Enums.TopicTypeEnum
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -455,7 +455,7 @@ export type HandbookTopicCreateWithoutSubjectInput = {
 export type HandbookTopicUncheckedCreateWithoutSubjectInput = {
   id?: string
   title: string
-  slug: string
+  slug?: string | null
   type?: $Enums.TopicTypeEnum
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -494,7 +494,7 @@ export type HandbookTopicScalarWhereInput = {
   NOT?: Prisma.HandbookTopicScalarWhereInput | Prisma.HandbookTopicScalarWhereInput[]
   id?: Prisma.StringFilter<"HandbookTopic"> | string
   title?: Prisma.StringFilter<"HandbookTopic"> | string
-  slug?: Prisma.StringFilter<"HandbookTopic"> | string
+  slug?: Prisma.StringNullableFilter<"HandbookTopic"> | string | null
   subjectId?: Prisma.StringFilter<"HandbookTopic"> | string
   type?: Prisma.EnumTopicTypeEnumFilter<"HandbookTopic"> | $Enums.TopicTypeEnum
   createdAt?: Prisma.DateTimeFilter<"HandbookTopic"> | Date | string
@@ -504,7 +504,7 @@ export type HandbookTopicScalarWhereInput = {
 export type HandbookTopicCreateWithoutCasesInput = {
   id?: string
   title: string
-  slug: string
+  slug?: string | null
   type?: $Enums.TopicTypeEnum
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -514,7 +514,7 @@ export type HandbookTopicCreateWithoutCasesInput = {
 export type HandbookTopicUncheckedCreateWithoutCasesInput = {
   id?: string
   title: string
-  slug: string
+  slug?: string | null
   subjectId: string
   type?: $Enums.TopicTypeEnum
   createdAt?: Date | string
@@ -540,7 +540,7 @@ export type HandbookTopicUpdateToOneWithWhereWithoutCasesInput = {
 export type HandbookTopicUpdateWithoutCasesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumTopicTypeEnumFieldUpdateOperationsInput | $Enums.TopicTypeEnum
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -550,7 +550,7 @@ export type HandbookTopicUpdateWithoutCasesInput = {
 export type HandbookTopicUncheckedUpdateWithoutCasesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subjectId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTopicTypeEnumFieldUpdateOperationsInput | $Enums.TopicTypeEnum
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -560,7 +560,7 @@ export type HandbookTopicUncheckedUpdateWithoutCasesInput = {
 export type HandbookTopicCreateManySubjectInput = {
   id?: string
   title: string
-  slug: string
+  slug?: string | null
   type?: $Enums.TopicTypeEnum
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -569,7 +569,7 @@ export type HandbookTopicCreateManySubjectInput = {
 export type HandbookTopicUpdateWithoutSubjectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumTopicTypeEnumFieldUpdateOperationsInput | $Enums.TopicTypeEnum
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -579,7 +579,7 @@ export type HandbookTopicUpdateWithoutSubjectInput = {
 export type HandbookTopicUncheckedUpdateWithoutSubjectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumTopicTypeEnumFieldUpdateOperationsInput | $Enums.TopicTypeEnum
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -589,7 +589,7 @@ export type HandbookTopicUncheckedUpdateWithoutSubjectInput = {
 export type HandbookTopicUncheckedUpdateManyWithoutSubjectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumTopicTypeEnumFieldUpdateOperationsInput | $Enums.TopicTypeEnum
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -693,7 +693,7 @@ export type $HandbookTopicPayload<ExtArgs extends runtime.Types.Extensions.Inter
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     title: string
-    slug: string
+    slug: string | null
     subjectId: string
     type: $Enums.TopicTypeEnum
     createdAt: Date
