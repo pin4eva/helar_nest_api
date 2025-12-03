@@ -85,26 +85,50 @@ export const buildTsHeadlineOptions = (): string => {
 };
 
 /**
- * Strip HTML tags and markdown formatting from text using marked parser
+ * Strip HTML tags and markdown formatting from text
  * Used to clean text before applying search highlighting
  */
 export const stripHtmlAndMarkdown = (text: string): string => {
   if (!text) return '';
 
-  const { marked } = require('marked');
-
   let cleaned = text;
 
-  try {
-    // First, parse markdown to HTML using marked
-    const html = marked.parse(text, { async: false }) as string;
-    cleaned = html;
-  } catch (error) {
-    // If marked fails, use the original text
-    cleaned = text;
-  }
+  // Remove markdown formatting patterns
+  // Headers: # ## ### etc.
+  cleaned = cleaned.replace(/^#{1,6}\s+/gm, '');
 
-  // Strip all HTML tags (including those from markdown conversion)
+  // Bold/Italic: **text** *text* __text__ _text_
+  cleaned = cleaned.replace(/(\*\*|__)(.*?)\1/g, '$2');
+  cleaned = cleaned.replace(/(\*|_)(.*?)\1/g, '$2');
+
+  // Strikethrough: ~~text~~
+  cleaned = cleaned.replace(/~~(.*?)~~/g, '$1');
+
+  // Inline code: `code`
+  cleaned = cleaned.replace(/`([^`]+)`/g, '$1');
+
+  // Code blocks: ```code```
+  cleaned = cleaned.replace(/```[\s\S]*?```/g, '');
+
+  // Links: [text](url) -> text
+  cleaned = cleaned.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
+
+  // Images: ![alt](url) -> alt
+  cleaned = cleaned.replace(/!\[([^\]]*)\]\([^)]+\)/g, '$1');
+
+  // Blockquotes: > text
+  cleaned = cleaned.replace(/^>\s+/gm, '');
+
+  // Horizontal rules: --- or ***
+  cleaned = cleaned.replace(/^[-*]{3,}$/gm, '');
+
+  // Unordered lists: - or * or +
+  cleaned = cleaned.replace(/^[\s]*[-*+]\s+/gm, '');
+
+  // Ordered lists: 1. 2. etc.
+  cleaned = cleaned.replace(/^[\s]*\d+\.\s+/gm, '');
+
+  // Strip all HTML tags
   cleaned = cleaned.replace(/<[^>]*>/g, '');
 
   // Decode HTML entities
