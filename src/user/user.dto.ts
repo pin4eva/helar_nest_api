@@ -1,13 +1,12 @@
+import { Optional } from '@nestjs/common';
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { IsEnum, IsMongoId, IsString } from 'class-validator';
+import { IsArray, IsEnum, IsString } from 'class-validator';
 import {
   GenderEnum,
   UserProfileTypeEnum,
   UserRoleEnum,
   UserStatusEnum,
 } from 'src/generated/enums';
-import { type User } from 'src/generated/client';
-import { Optional } from '@nestjs/common';
 
 export class GetUsersFilterInput {
   @ApiProperty({ required: false })
@@ -57,7 +56,7 @@ export class UpdateUserDTO extends PartialType(CreateUserDTO) {
 
 export class UpdateUserRoleDTO {
   @ApiProperty({ required: true })
-  @IsMongoId()
+  @IsString()
   id: string;
 
   @ApiProperty({ required: true })
@@ -67,7 +66,7 @@ export class UpdateUserRoleDTO {
 
 export class UpdateStatusDTO {
   @ApiProperty({ required: true })
-  @IsMongoId()
+  @IsString()
   id: string;
 
   @ApiProperty({ required: true })
@@ -77,7 +76,7 @@ export class UpdateStatusDTO {
 
 export class UpdateProfileTypeDTO {
   @ApiProperty({ required: true })
-  @IsMongoId()
+  @IsString()
   id: string;
 
   @ApiProperty({ required: true })
@@ -91,6 +90,18 @@ export class UploadImageDTO {
   image: string;
 
   @ApiProperty({ required: true })
-  @IsMongoId()
+  @IsString()
   userId: string;
+}
+
+// assign permissions DTO
+export class AssignPermissionsDTO {
+  @ApiProperty({ required: true })
+  @IsString()
+  userId: string;
+
+  @ApiProperty({ required: true, isArray: true, enum: String })
+  @IsArray()
+  @IsString({ each: true })
+  permissions: string[];
 }

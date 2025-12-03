@@ -68,7 +68,7 @@ export const ModelName = {
   HandbookCase: 'HandbookCase',
   SummaryTopic: 'SummaryTopic',
   SummaryCase: 'SummaryCase',
-  School: 'School'
+  Organization: 'Organization'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -115,6 +115,7 @@ export const UserScalarFieldEnum = {
   lastName: 'lastName',
   lastSeen: 'lastSeen',
   phone: 'phone',
+  permissions: 'permissions',
   profileType: 'profileType',
   role: 'role',
   state: 'state',
@@ -125,7 +126,7 @@ export const UserScalarFieldEnum = {
   gender: 'gender',
   emailToken: 'emailToken',
   isEmailVerified: 'isEmailVerified',
-  schoolId: 'schoolId',
+  organizationId: 'organizationId',
   currentSubscriptionId: 'currentSubscriptionId'
 } as const
 
@@ -321,14 +322,14 @@ export const SummaryCaseScalarFieldEnum = {
 export type SummaryCaseScalarFieldEnum = (typeof SummaryCaseScalarFieldEnum)[keyof typeof SummaryCaseScalarFieldEnum]
 
 
-export const SchoolScalarFieldEnum = {
+export const OrganizationScalarFieldEnum = {
   id: 'id',
   name: 'name',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
-export type SchoolScalarFieldEnum = (typeof SchoolScalarFieldEnum)[keyof typeof SchoolScalarFieldEnum]
+export type OrganizationScalarFieldEnum = (typeof OrganizationScalarFieldEnum)[keyof typeof OrganizationScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -376,11 +377,12 @@ export const UserOrderByRelevanceFieldEnum = {
   imagePublicId: 'imagePublicId',
   lastName: 'lastName',
   phone: 'phone',
+  permissions: 'permissions',
   state: 'state',
   objectId: 'objectId',
   passwordUpdateToken: 'passwordUpdateToken',
   emailToken: 'emailToken',
-  schoolId: 'schoolId',
+  organizationId: 'organizationId',
   currentSubscriptionId: 'currentSubscriptionId'
 } as const
 
@@ -544,10 +546,10 @@ export const SummaryCaseOrderByRelevanceFieldEnum = {
 export type SummaryCaseOrderByRelevanceFieldEnum = (typeof SummaryCaseOrderByRelevanceFieldEnum)[keyof typeof SummaryCaseOrderByRelevanceFieldEnum]
 
 
-export const SchoolOrderByRelevanceFieldEnum = {
+export const OrganizationOrderByRelevanceFieldEnum = {
   id: 'id',
   name: 'name'
 } as const
 
-export type SchoolOrderByRelevanceFieldEnum = (typeof SchoolOrderByRelevanceFieldEnum)[keyof typeof SchoolOrderByRelevanceFieldEnum]
+export type OrganizationOrderByRelevanceFieldEnum = (typeof OrganizationOrderByRelevanceFieldEnum)[keyof typeof OrganizationOrderByRelevanceFieldEnum]
 

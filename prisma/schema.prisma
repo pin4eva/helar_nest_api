@@ -43,6 +43,7 @@ model User {
   lastName            String
   lastSeen            DateTime            @default(now())
   phone               String?
+  permissions         String[]            @default([])
   profileType         UserProfileTypeEnum @default(Guest)
   role                UserRoleEnum        @default(User)
   state               String?
@@ -54,7 +55,7 @@ model User {
   gender              GenderEnum?         @default(Male)
   emailToken          String?
   isEmailVerified     Boolean             @default(false)
-  schoolId            String?
+  organizationId      String?
   bookmarks           Bookmark[]
   report_comments     ReportComment[]
   report_likes        ReportLike[]
@@ -65,6 +66,7 @@ model User {
   currentSubscriptionId String?             @unique
   currentSubscription   Subscription?       @relation("CurrentSubscription", fields: [currentSubscriptionId], references: [id], onDelete: SetNull, onUpdate: NoAction)
   ReportCommentLike     ReportCommentLike[]
+  organization          Organization?       @relation(fields: [organizationId], references: [id])
 
   @@map("users")
 }
@@ -381,11 +383,12 @@ model SummaryCase {
   @@map("summary_cases")
 }
 
-model School {
+model Organization {
   id        String   @id @default(cuid())
   name      String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  users     User[]
 
   @@map("schools")
 }
@@ -410,6 +413,7 @@ enum UserRoleEnum {
   Editor
   User
   Developer
+  SuperAdmin
 }
 
 enum UserStatusEnum {

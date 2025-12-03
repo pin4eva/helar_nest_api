@@ -123,7 +123,7 @@ export type SummaryTopic = Prisma.SummaryTopicModel
  */
 export type SummaryCase = Prisma.SummaryCaseModel
 /**
- * Model School
+ * Model Organization
  * 
  */
-export type School = Prisma.SchoolModel
+export type Organization = Prisma.OrganizationModel

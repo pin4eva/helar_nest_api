@@ -49,7 +49,7 @@ export type UserMinAggregateOutputType = {
   gender: $Enums.GenderEnum | null
   emailToken: string | null
   isEmailVerified: boolean | null
-  schoolId: string | null
+  organizationId: string | null
   currentSubscriptionId: string | null
 }
 
@@ -78,7 +78,7 @@ export type UserMaxAggregateOutputType = {
   gender: $Enums.GenderEnum | null
   emailToken: string | null
   isEmailVerified: boolean | null
-  schoolId: string | null
+  organizationId: string | null
   currentSubscriptionId: string | null
 }
 
@@ -97,6 +97,7 @@ export type UserCountAggregateOutputType = {
   lastName: number
   lastSeen: number
   phone: number
+  permissions: number
   profileType: number
   role: number
   state: number
@@ -107,7 +108,7 @@ export type UserCountAggregateOutputType = {
   gender: number
   emailToken: number
   isEmailVerified: number
-  schoolId: number
+  organizationId: number
   currentSubscriptionId: number
   _all: number
 }
@@ -138,7 +139,7 @@ export type UserMinAggregateInputType = {
   gender?: true
   emailToken?: true
   isEmailVerified?: true
-  schoolId?: true
+  organizationId?: true
   currentSubscriptionId?: true
 }
 
@@ -167,7 +168,7 @@ export type UserMaxAggregateInputType = {
   gender?: true
   emailToken?: true
   isEmailVerified?: true
-  schoolId?: true
+  organizationId?: true
   currentSubscriptionId?: true
 }
 
@@ -186,6 +187,7 @@ export type UserCountAggregateInputType = {
   lastName?: true
   lastSeen?: true
   phone?: true
+  permissions?: true
   profileType?: true
   role?: true
   state?: true
@@ -196,7 +198,7 @@ export type UserCountAggregateInputType = {
   gender?: true
   emailToken?: true
   isEmailVerified?: true
-  schoolId?: true
+  organizationId?: true
   currentSubscriptionId?: true
   _all?: true
 }
@@ -288,6 +290,7 @@ export type UserGroupByOutputType = {
   lastName: string
   lastSeen: Date
   phone: string | null
+  permissions: string[]
   profileType: $Enums.UserProfileTypeEnum
   role: $Enums.UserRoleEnum
   state: string | null
@@ -298,7 +301,7 @@ export type UserGroupByOutputType = {
   gender: $Enums.GenderEnum | null
   emailToken: string | null
   isEmailVerified: boolean
-  schoolId: string | null
+  organizationId: string | null
   currentSubscriptionId: string | null
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
@@ -338,6 +341,7 @@ export type UserWhereInput = {
   lastName?: Prisma.StringFilter<"User"> | string
   lastSeen?: Prisma.DateTimeFilter<"User"> | Date | string
   phone?: Prisma.StringNullableFilter<"User"> | string | null
+  permissions?: Prisma.StringNullableListFilter<"User">
   profileType?: Prisma.EnumUserProfileTypeEnumFilter<"User"> | $Enums.UserProfileTypeEnum
   role?: Prisma.EnumUserRoleEnumFilter<"User"> | $Enums.UserRoleEnum
   state?: Prisma.StringNullableFilter<"User"> | string | null
@@ -348,7 +352,7 @@ export type UserWhereInput = {
   gender?: Prisma.EnumGenderEnumNullableFilter<"User"> | $Enums.GenderEnum | null
   emailToken?: Prisma.StringNullableFilter<"User"> | string | null
   isEmailVerified?: Prisma.BoolFilter<"User"> | boolean
-  schoolId?: Prisma.StringNullableFilter<"User"> | string | null
+  organizationId?: Prisma.StringNullableFilter<"User"> | string | null
   currentSubscriptionId?: Prisma.StringNullableFilter<"User"> | string | null
   bookmarks?: Prisma.BookmarkListRelationFilter
   report_comments?: Prisma.ReportCommentListRelationFilter
@@ -358,6 +362,7 @@ export type UserWhereInput = {
   subscriptions?: Prisma.SubscriptionListRelationFilter
   currentSubscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
   ReportCommentLike?: Prisma.ReportCommentLikeListRelationFilter
+  organization?: Prisma.XOR<Prisma.OrganizationNullableScalarRelationFilter, Prisma.OrganizationWhereInput> | null
 }
 
 export type UserOrderByWithRelationInput = {
@@ -375,6 +380,7 @@ export type UserOrderByWithRelationInput = {
   lastName?: Prisma.SortOrder
   lastSeen?: Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
+  permissions?: Prisma.SortOrder
   profileType?: Prisma.SortOrder
   role?: Prisma.SortOrder
   state?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -385,7 +391,7 @@ export type UserOrderByWithRelationInput = {
   gender?: Prisma.SortOrderInput | Prisma.SortOrder
   emailToken?: Prisma.SortOrderInput | Prisma.SortOrder
   isEmailVerified?: Prisma.SortOrder
-  schoolId?: Prisma.SortOrderInput | Prisma.SortOrder
+  organizationId?: Prisma.SortOrderInput | Prisma.SortOrder
   currentSubscriptionId?: Prisma.SortOrderInput | Prisma.SortOrder
   bookmarks?: Prisma.BookmarkOrderByRelationAggregateInput
   report_comments?: Prisma.ReportCommentOrderByRelationAggregateInput
@@ -395,6 +401,7 @@ export type UserOrderByWithRelationInput = {
   subscriptions?: Prisma.SubscriptionOrderByRelationAggregateInput
   currentSubscription?: Prisma.SubscriptionOrderByWithRelationInput
   ReportCommentLike?: Prisma.ReportCommentLikeOrderByRelationAggregateInput
+  organization?: Prisma.OrganizationOrderByWithRelationInput
   _relevance?: Prisma.UserOrderByRelevanceInput
 }
 
@@ -417,6 +424,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   lastName?: Prisma.StringFilter<"User"> | string
   lastSeen?: Prisma.DateTimeFilter<"User"> | Date | string
   phone?: Prisma.StringNullableFilter<"User"> | string | null
+  permissions?: Prisma.StringNullableListFilter<"User">
   profileType?: Prisma.EnumUserProfileTypeEnumFilter<"User"> | $Enums.UserProfileTypeEnum
   role?: Prisma.EnumUserRoleEnumFilter<"User"> | $Enums.UserRoleEnum
   state?: Prisma.StringNullableFilter<"User"> | string | null
@@ -427,7 +435,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   gender?: Prisma.EnumGenderEnumNullableFilter<"User"> | $Enums.GenderEnum | null
   emailToken?: Prisma.StringNullableFilter<"User"> | string | null
   isEmailVerified?: Prisma.BoolFilter<"User"> | boolean
-  schoolId?: Prisma.StringNullableFilter<"User"> | string | null
+  organizationId?: Prisma.StringNullableFilter<"User"> | string | null
   bookmarks?: Prisma.BookmarkListRelationFilter
   report_comments?: Prisma.ReportCommentListRelationFilter
   report_likes?: Prisma.ReportLikeListRelationFilter
@@ -436,6 +444,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   subscriptions?: Prisma.SubscriptionListRelationFilter
   currentSubscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
   ReportCommentLike?: Prisma.ReportCommentLikeListRelationFilter
+  organization?: Prisma.XOR<Prisma.OrganizationNullableScalarRelationFilter, Prisma.OrganizationWhereInput> | null
 }, "id" | "email" | "currentSubscriptionId">
 
 export type UserOrderByWithAggregationInput = {
@@ -453,6 +462,7 @@ export type UserOrderByWithAggregationInput = {
   lastName?: Prisma.SortOrder
   lastSeen?: Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
+  permissions?: Prisma.SortOrder
   profileType?: Prisma.SortOrder
   role?: Prisma.SortOrder
   state?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -463,7 +473,7 @@ export type UserOrderByWithAggregationInput = {
   gender?: Prisma.SortOrderInput | Prisma.SortOrder
   emailToken?: Prisma.SortOrderInput | Prisma.SortOrder
   isEmailVerified?: Prisma.SortOrder
-  schoolId?: Prisma.SortOrderInput | Prisma.SortOrder
+  organizationId?: Prisma.SortOrderInput | Prisma.SortOrder
   currentSubscriptionId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -488,6 +498,7 @@ export type UserScalarWhereWithAggregatesInput = {
   lastName?: Prisma.StringWithAggregatesFilter<"User"> | string
   lastSeen?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   phone?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  permissions?: Prisma.StringNullableListFilter<"User">
   profileType?: Prisma.EnumUserProfileTypeEnumWithAggregatesFilter<"User"> | $Enums.UserProfileTypeEnum
   role?: Prisma.EnumUserRoleEnumWithAggregatesFilter<"User"> | $Enums.UserRoleEnum
   state?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
@@ -498,7 +509,7 @@ export type UserScalarWhereWithAggregatesInput = {
   gender?: Prisma.EnumGenderEnumNullableWithAggregatesFilter<"User"> | $Enums.GenderEnum | null
   emailToken?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   isEmailVerified?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
-  schoolId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  organizationId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   currentSubscriptionId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
 }
 
@@ -517,6 +528,7 @@ export type UserCreateInput = {
   lastName: string
   lastSeen?: Date | string
   phone?: string | null
+  permissions?: Prisma.UserCreatepermissionsInput | string[]
   profileType?: $Enums.UserProfileTypeEnum
   role?: $Enums.UserRoleEnum
   state?: string | null
@@ -527,7 +539,6 @@ export type UserCreateInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  schoolId?: string | null
   bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
   report_comments?: Prisma.ReportCommentCreateNestedManyWithoutUserInput
   report_likes?: Prisma.ReportLikeCreateNestedManyWithoutUserInput
@@ -536,6 +547,7 @@ export type UserCreateInput = {
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   currentSubscription?: Prisma.SubscriptionCreateNestedOneWithoutCurrentUserInput
   ReportCommentLike?: Prisma.ReportCommentLikeCreateNestedManyWithoutUserInput
+  organization?: Prisma.OrganizationCreateNestedOneWithoutUsersInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -553,6 +565,7 @@ export type UserUncheckedCreateInput = {
   lastName: string
   lastSeen?: Date | string
   phone?: string | null
+  permissions?: Prisma.UserCreatepermissionsInput | string[]
   profileType?: $Enums.UserProfileTypeEnum
   role?: $Enums.UserRoleEnum
   state?: string | null
@@ -563,7 +576,7 @@ export type UserUncheckedCreateInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  schoolId?: string | null
+  organizationId?: string | null
   currentSubscriptionId?: string | null
   bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
   report_comments?: Prisma.ReportCommentUncheckedCreateNestedManyWithoutUserInput
@@ -589,6 +602,7 @@ export type UserUpdateInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  permissions?: Prisma.UserUpdatepermissionsInput | string[]
   profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
   role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -599,7 +613,6 @@ export type UserUpdateInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
   report_comments?: Prisma.ReportCommentUpdateManyWithoutUserNestedInput
   report_likes?: Prisma.ReportLikeUpdateManyWithoutUserNestedInput
@@ -608,6 +621,7 @@ export type UserUpdateInput = {
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   currentSubscription?: Prisma.SubscriptionUpdateOneWithoutCurrentUserNestedInput
   ReportCommentLike?: Prisma.ReportCommentLikeUpdateManyWithoutUserNestedInput
+  organization?: Prisma.OrganizationUpdateOneWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -625,6 +639,7 @@ export type UserUncheckedUpdateInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  permissions?: Prisma.UserUpdatepermissionsInput | string[]
   profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
   role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -635,7 +650,7 @@ export type UserUncheckedUpdateInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  organizationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
   report_comments?: Prisma.ReportCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -661,6 +676,7 @@ export type UserCreateManyInput = {
   lastName: string
   lastSeen?: Date | string
   phone?: string | null
+  permissions?: Prisma.UserCreatepermissionsInput | string[]
   profileType?: $Enums.UserProfileTypeEnum
   role?: $Enums.UserRoleEnum
   state?: string | null
@@ -671,7 +687,7 @@ export type UserCreateManyInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  schoolId?: string | null
+  organizationId?: string | null
   currentSubscriptionId?: string | null
 }
 
@@ -690,6 +706,7 @@ export type UserUpdateManyMutationInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  permissions?: Prisma.UserUpdatepermissionsInput | string[]
   profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
   role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -700,7 +717,6 @@ export type UserUpdateManyMutationInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -718,6 +734,7 @@ export type UserUncheckedUpdateManyInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  permissions?: Prisma.UserUpdatepermissionsInput | string[]
   profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
   role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -728,8 +745,16 @@ export type UserUncheckedUpdateManyInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  organizationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type StringNullableListFilter<$PrismaModel = never> = {
+  equals?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel> | null
+  has?: string | Prisma.StringFieldRefInput<$PrismaModel> | null
+  hasEvery?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  hasSome?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  isEmpty?: boolean
 }
 
 export type UserOrderByRelevanceInput = {
@@ -753,6 +778,7 @@ export type UserCountOrderByAggregateInput = {
   lastName?: Prisma.SortOrder
   lastSeen?: Prisma.SortOrder
   phone?: Prisma.SortOrder
+  permissions?: Prisma.SortOrder
   profileType?: Prisma.SortOrder
   role?: Prisma.SortOrder
   state?: Prisma.SortOrder
@@ -763,7 +789,7 @@ export type UserCountOrderByAggregateInput = {
   gender?: Prisma.SortOrder
   emailToken?: Prisma.SortOrder
   isEmailVerified?: Prisma.SortOrder
-  schoolId?: Prisma.SortOrder
+  organizationId?: Prisma.SortOrder
   currentSubscriptionId?: Prisma.SortOrder
 }
 
@@ -792,7 +818,7 @@ export type UserMaxOrderByAggregateInput = {
   gender?: Prisma.SortOrder
   emailToken?: Prisma.SortOrder
   isEmailVerified?: Prisma.SortOrder
-  schoolId?: Prisma.SortOrder
+  organizationId?: Prisma.SortOrder
   currentSubscriptionId?: Prisma.SortOrder
 }
 
@@ -821,7 +847,7 @@ export type UserMinOrderByAggregateInput = {
   gender?: Prisma.SortOrder
   emailToken?: Prisma.SortOrder
   isEmailVerified?: Prisma.SortOrder
-  schoolId?: Prisma.SortOrder
+  organizationId?: Prisma.SortOrder
   currentSubscriptionId?: Prisma.SortOrder
 }
 
@@ -835,12 +861,31 @@ export type UserNullableScalarRelationFilter = {
   isNot?: Prisma.UserWhereInput | null
 }
 
+export type UserListRelationFilter = {
+  every?: Prisma.UserWhereInput
+  some?: Prisma.UserWhereInput
+  none?: Prisma.UserWhereInput
+}
+
+export type UserOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
+export type UserCreatepermissionsInput = {
+  set: string[]
+}
+
 export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
 }
 
 export type NullableBoolFieldUpdateOperationsInput = {
   set?: boolean | null
+}
+
+export type UserUpdatepermissionsInput = {
+  set?: string[]
+  push?: string | string[]
 }
 
 export type EnumUserProfileTypeEnumFieldUpdateOperationsInput = {
@@ -995,6 +1040,48 @@ export type UserUpdateOneRequiredWithoutBookmarksNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBookmarksInput, Prisma.UserUpdateWithoutBookmarksInput>, Prisma.UserUncheckedUpdateWithoutBookmarksInput>
 }
 
+export type UserCreateNestedManyWithoutOrganizationInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutOrganizationInput, Prisma.UserUncheckedCreateWithoutOrganizationInput> | Prisma.UserCreateWithoutOrganizationInput[] | Prisma.UserUncheckedCreateWithoutOrganizationInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutOrganizationInput | Prisma.UserCreateOrConnectWithoutOrganizationInput[]
+  createMany?: Prisma.UserCreateManyOrganizationInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUncheckedCreateNestedManyWithoutOrganizationInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutOrganizationInput, Prisma.UserUncheckedCreateWithoutOrganizationInput> | Prisma.UserCreateWithoutOrganizationInput[] | Prisma.UserUncheckedCreateWithoutOrganizationInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutOrganizationInput | Prisma.UserCreateOrConnectWithoutOrganizationInput[]
+  createMany?: Prisma.UserCreateManyOrganizationInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUpdateManyWithoutOrganizationNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutOrganizationInput, Prisma.UserUncheckedCreateWithoutOrganizationInput> | Prisma.UserCreateWithoutOrganizationInput[] | Prisma.UserUncheckedCreateWithoutOrganizationInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutOrganizationInput | Prisma.UserCreateOrConnectWithoutOrganizationInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutOrganizationInput | Prisma.UserUpsertWithWhereUniqueWithoutOrganizationInput[]
+  createMany?: Prisma.UserCreateManyOrganizationInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutOrganizationInput | Prisma.UserUpdateWithWhereUniqueWithoutOrganizationInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutOrganizationInput | Prisma.UserUpdateManyWithWhereWithoutOrganizationInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUncheckedUpdateManyWithoutOrganizationNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutOrganizationInput, Prisma.UserUncheckedCreateWithoutOrganizationInput> | Prisma.UserCreateWithoutOrganizationInput[] | Prisma.UserUncheckedCreateWithoutOrganizationInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutOrganizationInput | Prisma.UserCreateOrConnectWithoutOrganizationInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutOrganizationInput | Prisma.UserUpsertWithWhereUniqueWithoutOrganizationInput[]
+  createMany?: Prisma.UserCreateManyOrganizationInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutOrganizationInput | Prisma.UserUpdateWithWhereUniqueWithoutOrganizationInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutOrganizationInput | Prisma.UserUpdateManyWithWhereWithoutOrganizationInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
 export type UserCreateWithoutSubscriptionsInput = {
   id?: string
   bio?: string | null
@@ -1010,6 +1097,7 @@ export type UserCreateWithoutSubscriptionsInput = {
   lastName: string
   lastSeen?: Date | string
   phone?: string | null
+  permissions?: Prisma.UserCreatepermissionsInput | string[]
   profileType?: $Enums.UserProfileTypeEnum
   role?: $Enums.UserRoleEnum
   state?: string | null
@@ -1020,7 +1108,6 @@ export type UserCreateWithoutSubscriptionsInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  schoolId?: string | null
   bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
   report_comments?: Prisma.ReportCommentCreateNestedManyWithoutUserInput
   report_likes?: Prisma.ReportLikeCreateNestedManyWithoutUserInput
@@ -1028,6 +1115,7 @@ export type UserCreateWithoutSubscriptionsInput = {
   reports_updated?: Prisma.ReportCreateNestedManyWithoutUpdated_byInput
   currentSubscription?: Prisma.SubscriptionCreateNestedOneWithoutCurrentUserInput
   ReportCommentLike?: Prisma.ReportCommentLikeCreateNestedManyWithoutUserInput
+  organization?: Prisma.OrganizationCreateNestedOneWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutSubscriptionsInput = {
@@ -1045,6 +1133,7 @@ export type UserUncheckedCreateWithoutSubscriptionsInput = {
   lastName: string
   lastSeen?: Date | string
   phone?: string | null
+  permissions?: Prisma.UserCreatepermissionsInput | string[]
   profileType?: $Enums.UserProfileTypeEnum
   role?: $Enums.UserRoleEnum
   state?: string | null
@@ -1055,7 +1144,7 @@ export type UserUncheckedCreateWithoutSubscriptionsInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  schoolId?: string | null
+  organizationId?: string | null
   currentSubscriptionId?: string | null
   bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
   report_comments?: Prisma.ReportCommentUncheckedCreateNestedManyWithoutUserInput
@@ -1085,6 +1174,7 @@ export type UserCreateWithoutCurrentSubscriptionInput = {
   lastName: string
   lastSeen?: Date | string
   phone?: string | null
+  permissions?: Prisma.UserCreatepermissionsInput | string[]
   profileType?: $Enums.UserProfileTypeEnum
   role?: $Enums.UserRoleEnum
   state?: string | null
@@ -1095,7 +1185,6 @@ export type UserCreateWithoutCurrentSubscriptionInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  schoolId?: string | null
   bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
   report_comments?: Prisma.ReportCommentCreateNestedManyWithoutUserInput
   report_likes?: Prisma.ReportLikeCreateNestedManyWithoutUserInput
@@ -1103,6 +1192,7 @@ export type UserCreateWithoutCurrentSubscriptionInput = {
   reports_updated?: Prisma.ReportCreateNestedManyWithoutUpdated_byInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   ReportCommentLike?: Prisma.ReportCommentLikeCreateNestedManyWithoutUserInput
+  organization?: Prisma.OrganizationCreateNestedOneWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutCurrentSubscriptionInput = {
@@ -1120,6 +1210,7 @@ export type UserUncheckedCreateWithoutCurrentSubscriptionInput = {
   lastName: string
   lastSeen?: Date | string
   phone?: string | null
+  permissions?: Prisma.UserCreatepermissionsInput | string[]
   profileType?: $Enums.UserProfileTypeEnum
   role?: $Enums.UserRoleEnum
   state?: string | null
@@ -1130,7 +1221,7 @@ export type UserUncheckedCreateWithoutCurrentSubscriptionInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  schoolId?: string | null
+  organizationId?: string | null
   bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
   report_comments?: Prisma.ReportCommentUncheckedCreateNestedManyWithoutUserInput
   report_likes?: Prisma.ReportLikeUncheckedCreateNestedManyWithoutUserInput
@@ -1171,6 +1262,7 @@ export type UserUpdateWithoutSubscriptionsInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  permissions?: Prisma.UserUpdatepermissionsInput | string[]
   profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
   role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1181,7 +1273,6 @@ export type UserUpdateWithoutSubscriptionsInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
   report_comments?: Prisma.ReportCommentUpdateManyWithoutUserNestedInput
   report_likes?: Prisma.ReportLikeUpdateManyWithoutUserNestedInput
@@ -1189,6 +1280,7 @@ export type UserUpdateWithoutSubscriptionsInput = {
   reports_updated?: Prisma.ReportUpdateManyWithoutUpdated_byNestedInput
   currentSubscription?: Prisma.SubscriptionUpdateOneWithoutCurrentUserNestedInput
   ReportCommentLike?: Prisma.ReportCommentLikeUpdateManyWithoutUserNestedInput
+  organization?: Prisma.OrganizationUpdateOneWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSubscriptionsInput = {
@@ -1206,6 +1298,7 @@ export type UserUncheckedUpdateWithoutSubscriptionsInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  permissions?: Prisma.UserUpdatepermissionsInput | string[]
   profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
   role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1216,7 +1309,7 @@ export type UserUncheckedUpdateWithoutSubscriptionsInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  organizationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
   report_comments?: Prisma.ReportCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -1252,6 +1345,7 @@ export type UserUpdateWithoutCurrentSubscriptionInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  permissions?: Prisma.UserUpdatepermissionsInput | string[]
   profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
   role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1262,7 +1356,6 @@ export type UserUpdateWithoutCurrentSubscriptionInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
   report_comments?: Prisma.ReportCommentUpdateManyWithoutUserNestedInput
   report_likes?: Prisma.ReportLikeUpdateManyWithoutUserNestedInput
@@ -1270,6 +1363,7 @@ export type UserUpdateWithoutCurrentSubscriptionInput = {
   reports_updated?: Prisma.ReportUpdateManyWithoutUpdated_byNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   ReportCommentLike?: Prisma.ReportCommentLikeUpdateManyWithoutUserNestedInput
+  organization?: Prisma.OrganizationUpdateOneWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCurrentSubscriptionInput = {
@@ -1287,6 +1381,7 @@ export type UserUncheckedUpdateWithoutCurrentSubscriptionInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  permissions?: Prisma.UserUpdatepermissionsInput | string[]
   profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
   role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1297,7 +1392,7 @@ export type UserUncheckedUpdateWithoutCurrentSubscriptionInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  organizationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
   report_comments?: Prisma.ReportCommentUncheckedUpdateManyWithoutUserNestedInput
   report_likes?: Prisma.ReportLikeUncheckedUpdateManyWithoutUserNestedInput
@@ -1322,6 +1417,7 @@ export type UserCreateWithoutReports_addedInput = {
   lastName: string
   lastSeen?: Date | string
   phone?: string | null
+  permissions?: Prisma.UserCreatepermissionsInput | string[]
   profileType?: $Enums.UserProfileTypeEnum
   role?: $Enums.UserRoleEnum
   state?: string | null
@@ -1332,7 +1428,6 @@ export type UserCreateWithoutReports_addedInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  schoolId?: string | null
   bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
   report_comments?: Prisma.ReportCommentCreateNestedManyWithoutUserInput
   report_likes?: Prisma.ReportLikeCreateNestedManyWithoutUserInput
@@ -1340,6 +1435,7 @@ export type UserCreateWithoutReports_addedInput = {
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   currentSubscription?: Prisma.SubscriptionCreateNestedOneWithoutCurrentUserInput
   ReportCommentLike?: Prisma.ReportCommentLikeCreateNestedManyWithoutUserInput
+  organization?: Prisma.OrganizationCreateNestedOneWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutReports_addedInput = {
@@ -1357,6 +1453,7 @@ export type UserUncheckedCreateWithoutReports_addedInput = {
   lastName: string
   lastSeen?: Date | string
   phone?: string | null
+  permissions?: Prisma.UserCreatepermissionsInput | string[]
   profileType?: $Enums.UserProfileTypeEnum
   role?: $Enums.UserRoleEnum
   state?: string | null
@@ -1367,7 +1464,7 @@ export type UserUncheckedCreateWithoutReports_addedInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  schoolId?: string | null
+  organizationId?: string | null
   currentSubscriptionId?: string | null
   bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
   report_comments?: Prisma.ReportCommentUncheckedCreateNestedManyWithoutUserInput
@@ -1397,6 +1494,7 @@ export type UserCreateWithoutReports_updatedInput = {
   lastName: string
   lastSeen?: Date | string
   phone?: string | null
+  permissions?: Prisma.UserCreatepermissionsInput | string[]
   profileType?: $Enums.UserProfileTypeEnum
   role?: $Enums.UserRoleEnum
   state?: string | null
@@ -1407,7 +1505,6 @@ export type UserCreateWithoutReports_updatedInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  schoolId?: string | null
   bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
   report_comments?: Prisma.ReportCommentCreateNestedManyWithoutUserInput
   report_likes?: Prisma.ReportLikeCreateNestedManyWithoutUserInput
@@ -1415,6 +1512,7 @@ export type UserCreateWithoutReports_updatedInput = {
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   currentSubscription?: Prisma.SubscriptionCreateNestedOneWithoutCurrentUserInput
   ReportCommentLike?: Prisma.ReportCommentLikeCreateNestedManyWithoutUserInput
+  organization?: Prisma.OrganizationCreateNestedOneWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutReports_updatedInput = {
@@ -1432,6 +1530,7 @@ export type UserUncheckedCreateWithoutReports_updatedInput = {
   lastName: string
   lastSeen?: Date | string
   phone?: string | null
+  permissions?: Prisma.UserCreatepermissionsInput | string[]
   profileType?: $Enums.UserProfileTypeEnum
   role?: $Enums.UserRoleEnum
   state?: string | null
@@ -1442,7 +1541,7 @@ export type UserUncheckedCreateWithoutReports_updatedInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  schoolId?: string | null
+  organizationId?: string | null
   currentSubscriptionId?: string | null
   bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
   report_comments?: Prisma.ReportCommentUncheckedCreateNestedManyWithoutUserInput
@@ -1483,6 +1582,7 @@ export type UserUpdateWithoutReports_addedInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  permissions?: Prisma.UserUpdatepermissionsInput | string[]
   profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
   role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1493,7 +1593,6 @@ export type UserUpdateWithoutReports_addedInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
   report_comments?: Prisma.ReportCommentUpdateManyWithoutUserNestedInput
   report_likes?: Prisma.ReportLikeUpdateManyWithoutUserNestedInput
@@ -1501,6 +1600,7 @@ export type UserUpdateWithoutReports_addedInput = {
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   currentSubscription?: Prisma.SubscriptionUpdateOneWithoutCurrentUserNestedInput
   ReportCommentLike?: Prisma.ReportCommentLikeUpdateManyWithoutUserNestedInput
+  organization?: Prisma.OrganizationUpdateOneWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReports_addedInput = {
@@ -1518,6 +1618,7 @@ export type UserUncheckedUpdateWithoutReports_addedInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  permissions?: Prisma.UserUpdatepermissionsInput | string[]
   profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
   role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1528,7 +1629,7 @@ export type UserUncheckedUpdateWithoutReports_addedInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  organizationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
   report_comments?: Prisma.ReportCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -1564,6 +1665,7 @@ export type UserUpdateWithoutReports_updatedInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  permissions?: Prisma.UserUpdatepermissionsInput | string[]
   profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
   role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1574,7 +1676,6 @@ export type UserUpdateWithoutReports_updatedInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
   report_comments?: Prisma.ReportCommentUpdateManyWithoutUserNestedInput
   report_likes?: Prisma.ReportLikeUpdateManyWithoutUserNestedInput
@@ -1582,6 +1683,7 @@ export type UserUpdateWithoutReports_updatedInput = {
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   currentSubscription?: Prisma.SubscriptionUpdateOneWithoutCurrentUserNestedInput
   ReportCommentLike?: Prisma.ReportCommentLikeUpdateManyWithoutUserNestedInput
+  organization?: Prisma.OrganizationUpdateOneWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReports_updatedInput = {
@@ -1599,6 +1701,7 @@ export type UserUncheckedUpdateWithoutReports_updatedInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  permissions?: Prisma.UserUpdatepermissionsInput | string[]
   profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
   role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1609,7 +1712,7 @@ export type UserUncheckedUpdateWithoutReports_updatedInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  organizationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
   report_comments?: Prisma.ReportCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -1634,6 +1737,7 @@ export type UserCreateWithoutReport_commentsInput = {
   lastName: string
   lastSeen?: Date | string
   phone?: string | null
+  permissions?: Prisma.UserCreatepermissionsInput | string[]
   profileType?: $Enums.UserProfileTypeEnum
   role?: $Enums.UserRoleEnum
   state?: string | null
@@ -1644,7 +1748,6 @@ export type UserCreateWithoutReport_commentsInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  schoolId?: string | null
   bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
   report_likes?: Prisma.ReportLikeCreateNestedManyWithoutUserInput
   reports_added?: Prisma.ReportCreateNestedManyWithoutAdded_byInput
@@ -1652,6 +1755,7 @@ export type UserCreateWithoutReport_commentsInput = {
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   currentSubscription?: Prisma.SubscriptionCreateNestedOneWithoutCurrentUserInput
   ReportCommentLike?: Prisma.ReportCommentLikeCreateNestedManyWithoutUserInput
+  organization?: Prisma.OrganizationCreateNestedOneWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutReport_commentsInput = {
@@ -1669,6 +1773,7 @@ export type UserUncheckedCreateWithoutReport_commentsInput = {
   lastName: string
   lastSeen?: Date | string
   phone?: string | null
+  permissions?: Prisma.UserCreatepermissionsInput | string[]
   profileType?: $Enums.UserProfileTypeEnum
   role?: $Enums.UserRoleEnum
   state?: string | null
@@ -1679,7 +1784,7 @@ export type UserUncheckedCreateWithoutReport_commentsInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  schoolId?: string | null
+  organizationId?: string | null
   currentSubscriptionId?: string | null
   bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
   report_likes?: Prisma.ReportLikeUncheckedCreateNestedManyWithoutUserInput
@@ -1720,6 +1825,7 @@ export type UserUpdateWithoutReport_commentsInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  permissions?: Prisma.UserUpdatepermissionsInput | string[]
   profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
   role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1730,7 +1836,6 @@ export type UserUpdateWithoutReport_commentsInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
   report_likes?: Prisma.ReportLikeUpdateManyWithoutUserNestedInput
   reports_added?: Prisma.ReportUpdateManyWithoutAdded_byNestedInput
@@ -1738,6 +1843,7 @@ export type UserUpdateWithoutReport_commentsInput = {
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   currentSubscription?: Prisma.SubscriptionUpdateOneWithoutCurrentUserNestedInput
   ReportCommentLike?: Prisma.ReportCommentLikeUpdateManyWithoutUserNestedInput
+  organization?: Prisma.OrganizationUpdateOneWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReport_commentsInput = {
@@ -1755,6 +1861,7 @@ export type UserUncheckedUpdateWithoutReport_commentsInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  permissions?: Prisma.UserUpdatepermissionsInput | string[]
   profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
   role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1765,7 +1872,7 @@ export type UserUncheckedUpdateWithoutReport_commentsInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  organizationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
   report_likes?: Prisma.ReportLikeUncheckedUpdateManyWithoutUserNestedInput
@@ -1790,6 +1897,7 @@ export type UserCreateWithoutReportCommentLikeInput = {
   lastName: string
   lastSeen?: Date | string
   phone?: string | null
+  permissions?: Prisma.UserCreatepermissionsInput | string[]
   profileType?: $Enums.UserProfileTypeEnum
   role?: $Enums.UserRoleEnum
   state?: string | null
@@ -1800,7 +1908,6 @@ export type UserCreateWithoutReportCommentLikeInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  schoolId?: string | null
   bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
   report_comments?: Prisma.ReportCommentCreateNestedManyWithoutUserInput
   report_likes?: Prisma.ReportLikeCreateNestedManyWithoutUserInput
@@ -1808,6 +1915,7 @@ export type UserCreateWithoutReportCommentLikeInput = {
   reports_updated?: Prisma.ReportCreateNestedManyWithoutUpdated_byInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   currentSubscription?: Prisma.SubscriptionCreateNestedOneWithoutCurrentUserInput
+  organization?: Prisma.OrganizationCreateNestedOneWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutReportCommentLikeInput = {
@@ -1825,6 +1933,7 @@ export type UserUncheckedCreateWithoutReportCommentLikeInput = {
   lastName: string
   lastSeen?: Date | string
   phone?: string | null
+  permissions?: Prisma.UserCreatepermissionsInput | string[]
   profileType?: $Enums.UserProfileTypeEnum
   role?: $Enums.UserRoleEnum
   state?: string | null
@@ -1835,7 +1944,7 @@ export type UserUncheckedCreateWithoutReportCommentLikeInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  schoolId?: string | null
+  organizationId?: string | null
   currentSubscriptionId?: string | null
   bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
   report_comments?: Prisma.ReportCommentUncheckedCreateNestedManyWithoutUserInput
@@ -1876,6 +1985,7 @@ export type UserUpdateWithoutReportCommentLikeInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  permissions?: Prisma.UserUpdatepermissionsInput | string[]
   profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
   role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1886,7 +1996,6 @@ export type UserUpdateWithoutReportCommentLikeInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
   report_comments?: Prisma.ReportCommentUpdateManyWithoutUserNestedInput
   report_likes?: Prisma.ReportLikeUpdateManyWithoutUserNestedInput
@@ -1894,6 +2003,7 @@ export type UserUpdateWithoutReportCommentLikeInput = {
   reports_updated?: Prisma.ReportUpdateManyWithoutUpdated_byNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   currentSubscription?: Prisma.SubscriptionUpdateOneWithoutCurrentUserNestedInput
+  organization?: Prisma.OrganizationUpdateOneWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReportCommentLikeInput = {
@@ -1911,6 +2021,7 @@ export type UserUncheckedUpdateWithoutReportCommentLikeInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  permissions?: Prisma.UserUpdatepermissionsInput | string[]
   profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
   role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1921,7 +2032,7 @@ export type UserUncheckedUpdateWithoutReportCommentLikeInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  organizationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
   report_comments?: Prisma.ReportCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -1946,6 +2057,7 @@ export type UserCreateWithoutReport_likesInput = {
   lastName: string
   lastSeen?: Date | string
   phone?: string | null
+  permissions?: Prisma.UserCreatepermissionsInput | string[]
   profileType?: $Enums.UserProfileTypeEnum
   role?: $Enums.UserRoleEnum
   state?: string | null
@@ -1956,7 +2068,6 @@ export type UserCreateWithoutReport_likesInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  schoolId?: string | null
   bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
   report_comments?: Prisma.ReportCommentCreateNestedManyWithoutUserInput
   reports_added?: Prisma.ReportCreateNestedManyWithoutAdded_byInput
@@ -1964,6 +2075,7 @@ export type UserCreateWithoutReport_likesInput = {
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   currentSubscription?: Prisma.SubscriptionCreateNestedOneWithoutCurrentUserInput
   ReportCommentLike?: Prisma.ReportCommentLikeCreateNestedManyWithoutUserInput
+  organization?: Prisma.OrganizationCreateNestedOneWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutReport_likesInput = {
@@ -1981,6 +2093,7 @@ export type UserUncheckedCreateWithoutReport_likesInput = {
   lastName: string
   lastSeen?: Date | string
   phone?: string | null
+  permissions?: Prisma.UserCreatepermissionsInput | string[]
   profileType?: $Enums.UserProfileTypeEnum
   role?: $Enums.UserRoleEnum
   state?: string | null
@@ -1991,7 +2104,7 @@ export type UserUncheckedCreateWithoutReport_likesInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  schoolId?: string | null
+  organizationId?: string | null
   currentSubscriptionId?: string | null
   bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
   report_comments?: Prisma.ReportCommentUncheckedCreateNestedManyWithoutUserInput
@@ -2032,6 +2145,7 @@ export type UserUpdateWithoutReport_likesInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  permissions?: Prisma.UserUpdatepermissionsInput | string[]
   profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
   role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2042,7 +2156,6 @@ export type UserUpdateWithoutReport_likesInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
   report_comments?: Prisma.ReportCommentUpdateManyWithoutUserNestedInput
   reports_added?: Prisma.ReportUpdateManyWithoutAdded_byNestedInput
@@ -2050,6 +2163,7 @@ export type UserUpdateWithoutReport_likesInput = {
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   currentSubscription?: Prisma.SubscriptionUpdateOneWithoutCurrentUserNestedInput
   ReportCommentLike?: Prisma.ReportCommentLikeUpdateManyWithoutUserNestedInput
+  organization?: Prisma.OrganizationUpdateOneWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReport_likesInput = {
@@ -2067,6 +2181,7 @@ export type UserUncheckedUpdateWithoutReport_likesInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  permissions?: Prisma.UserUpdatepermissionsInput | string[]
   profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
   role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2077,7 +2192,7 @@ export type UserUncheckedUpdateWithoutReport_likesInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  organizationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
   report_comments?: Prisma.ReportCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -2102,6 +2217,7 @@ export type UserCreateWithoutBookmarksInput = {
   lastName: string
   lastSeen?: Date | string
   phone?: string | null
+  permissions?: Prisma.UserCreatepermissionsInput | string[]
   profileType?: $Enums.UserProfileTypeEnum
   role?: $Enums.UserRoleEnum
   state?: string | null
@@ -2112,7 +2228,6 @@ export type UserCreateWithoutBookmarksInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  schoolId?: string | null
   report_comments?: Prisma.ReportCommentCreateNestedManyWithoutUserInput
   report_likes?: Prisma.ReportLikeCreateNestedManyWithoutUserInput
   reports_added?: Prisma.ReportCreateNestedManyWithoutAdded_byInput
@@ -2120,6 +2235,7 @@ export type UserCreateWithoutBookmarksInput = {
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   currentSubscription?: Prisma.SubscriptionCreateNestedOneWithoutCurrentUserInput
   ReportCommentLike?: Prisma.ReportCommentLikeCreateNestedManyWithoutUserInput
+  organization?: Prisma.OrganizationCreateNestedOneWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutBookmarksInput = {
@@ -2137,6 +2253,7 @@ export type UserUncheckedCreateWithoutBookmarksInput = {
   lastName: string
   lastSeen?: Date | string
   phone?: string | null
+  permissions?: Prisma.UserCreatepermissionsInput | string[]
   profileType?: $Enums.UserProfileTypeEnum
   role?: $Enums.UserRoleEnum
   state?: string | null
@@ -2147,7 +2264,7 @@ export type UserUncheckedCreateWithoutBookmarksInput = {
   gender?: $Enums.GenderEnum | null
   emailToken?: string | null
   isEmailVerified?: boolean
-  schoolId?: string | null
+  organizationId?: string | null
   currentSubscriptionId?: string | null
   report_comments?: Prisma.ReportCommentUncheckedCreateNestedManyWithoutUserInput
   report_likes?: Prisma.ReportLikeUncheckedCreateNestedManyWithoutUserInput
@@ -2188,6 +2305,7 @@ export type UserUpdateWithoutBookmarksInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  permissions?: Prisma.UserUpdatepermissionsInput | string[]
   profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
   role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2198,7 +2316,6 @@ export type UserUpdateWithoutBookmarksInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   report_comments?: Prisma.ReportCommentUpdateManyWithoutUserNestedInput
   report_likes?: Prisma.ReportLikeUpdateManyWithoutUserNestedInput
   reports_added?: Prisma.ReportUpdateManyWithoutAdded_byNestedInput
@@ -2206,6 +2323,7 @@ export type UserUpdateWithoutBookmarksInput = {
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   currentSubscription?: Prisma.SubscriptionUpdateOneWithoutCurrentUserNestedInput
   ReportCommentLike?: Prisma.ReportCommentLikeUpdateManyWithoutUserNestedInput
+  organization?: Prisma.OrganizationUpdateOneWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBookmarksInput = {
@@ -2223,6 +2341,7 @@ export type UserUncheckedUpdateWithoutBookmarksInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  permissions?: Prisma.UserUpdatepermissionsInput | string[]
   profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
   role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2233,7 +2352,7 @@ export type UserUncheckedUpdateWithoutBookmarksInput = {
   gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
   emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  schoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  organizationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   report_comments?: Prisma.ReportCommentUncheckedUpdateManyWithoutUserNestedInput
   report_likes?: Prisma.ReportLikeUncheckedUpdateManyWithoutUserNestedInput
@@ -2241,6 +2360,267 @@ export type UserUncheckedUpdateWithoutBookmarksInput = {
   reports_updated?: Prisma.ReportUncheckedUpdateManyWithoutUpdated_byNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   ReportCommentLike?: Prisma.ReportCommentLikeUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutOrganizationInput = {
+  id?: string
+  bio?: string | null
+  city?: string | null
+  contact?: string | null
+  createdAt?: Date | string
+  email: string
+  firstName: string
+  image?: string | null
+  imagePublicId?: string | null
+  isContactPublic?: boolean | null
+  isPhonePublic?: boolean | null
+  lastName: string
+  lastSeen?: Date | string
+  phone?: string | null
+  permissions?: Prisma.UserCreatepermissionsInput | string[]
+  profileType?: $Enums.UserProfileTypeEnum
+  role?: $Enums.UserRoleEnum
+  state?: string | null
+  status?: $Enums.UserStatusEnum
+  updatedAt?: Date | string
+  objectId?: string | null
+  passwordUpdateToken?: string | null
+  gender?: $Enums.GenderEnum | null
+  emailToken?: string | null
+  isEmailVerified?: boolean
+  bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
+  report_comments?: Prisma.ReportCommentCreateNestedManyWithoutUserInput
+  report_likes?: Prisma.ReportLikeCreateNestedManyWithoutUserInput
+  reports_added?: Prisma.ReportCreateNestedManyWithoutAdded_byInput
+  reports_updated?: Prisma.ReportCreateNestedManyWithoutUpdated_byInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  currentSubscription?: Prisma.SubscriptionCreateNestedOneWithoutCurrentUserInput
+  ReportCommentLike?: Prisma.ReportCommentLikeCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutOrganizationInput = {
+  id?: string
+  bio?: string | null
+  city?: string | null
+  contact?: string | null
+  createdAt?: Date | string
+  email: string
+  firstName: string
+  image?: string | null
+  imagePublicId?: string | null
+  isContactPublic?: boolean | null
+  isPhonePublic?: boolean | null
+  lastName: string
+  lastSeen?: Date | string
+  phone?: string | null
+  permissions?: Prisma.UserCreatepermissionsInput | string[]
+  profileType?: $Enums.UserProfileTypeEnum
+  role?: $Enums.UserRoleEnum
+  state?: string | null
+  status?: $Enums.UserStatusEnum
+  updatedAt?: Date | string
+  objectId?: string | null
+  passwordUpdateToken?: string | null
+  gender?: $Enums.GenderEnum | null
+  emailToken?: string | null
+  isEmailVerified?: boolean
+  currentSubscriptionId?: string | null
+  bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
+  report_comments?: Prisma.ReportCommentUncheckedCreateNestedManyWithoutUserInput
+  report_likes?: Prisma.ReportLikeUncheckedCreateNestedManyWithoutUserInput
+  reports_added?: Prisma.ReportUncheckedCreateNestedManyWithoutAdded_byInput
+  reports_updated?: Prisma.ReportUncheckedCreateNestedManyWithoutUpdated_byInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  ReportCommentLike?: Prisma.ReportCommentLikeUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutOrganizationInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutOrganizationInput, Prisma.UserUncheckedCreateWithoutOrganizationInput>
+}
+
+export type UserCreateManyOrganizationInputEnvelope = {
+  data: Prisma.UserCreateManyOrganizationInput | Prisma.UserCreateManyOrganizationInput[]
+  skipDuplicates?: boolean
+}
+
+export type UserUpsertWithWhereUniqueWithoutOrganizationInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutOrganizationInput, Prisma.UserUncheckedUpdateWithoutOrganizationInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutOrganizationInput, Prisma.UserUncheckedCreateWithoutOrganizationInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutOrganizationInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutOrganizationInput, Prisma.UserUncheckedUpdateWithoutOrganizationInput>
+}
+
+export type UserUpdateManyWithWhereWithoutOrganizationInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutOrganizationInput>
+}
+
+export type UserScalarWhereInput = {
+  AND?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+  OR?: Prisma.UserScalarWhereInput[]
+  NOT?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+  id?: Prisma.StringFilter<"User"> | string
+  bio?: Prisma.StringNullableFilter<"User"> | string | null
+  city?: Prisma.StringNullableFilter<"User"> | string | null
+  contact?: Prisma.StringNullableFilter<"User"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  email?: Prisma.StringFilter<"User"> | string
+  firstName?: Prisma.StringFilter<"User"> | string
+  image?: Prisma.StringNullableFilter<"User"> | string | null
+  imagePublicId?: Prisma.StringNullableFilter<"User"> | string | null
+  isContactPublic?: Prisma.BoolNullableFilter<"User"> | boolean | null
+  isPhonePublic?: Prisma.BoolNullableFilter<"User"> | boolean | null
+  lastName?: Prisma.StringFilter<"User"> | string
+  lastSeen?: Prisma.DateTimeFilter<"User"> | Date | string
+  phone?: Prisma.StringNullableFilter<"User"> | string | null
+  permissions?: Prisma.StringNullableListFilter<"User">
+  profileType?: Prisma.EnumUserProfileTypeEnumFilter<"User"> | $Enums.UserProfileTypeEnum
+  role?: Prisma.EnumUserRoleEnumFilter<"User"> | $Enums.UserRoleEnum
+  state?: Prisma.StringNullableFilter<"User"> | string | null
+  status?: Prisma.EnumUserStatusEnumFilter<"User"> | $Enums.UserStatusEnum
+  updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  objectId?: Prisma.StringNullableFilter<"User"> | string | null
+  passwordUpdateToken?: Prisma.StringNullableFilter<"User"> | string | null
+  gender?: Prisma.EnumGenderEnumNullableFilter<"User"> | $Enums.GenderEnum | null
+  emailToken?: Prisma.StringNullableFilter<"User"> | string | null
+  isEmailVerified?: Prisma.BoolFilter<"User"> | boolean
+  organizationId?: Prisma.StringNullableFilter<"User"> | string | null
+  currentSubscriptionId?: Prisma.StringNullableFilter<"User"> | string | null
+}
+
+export type UserCreateManyOrganizationInput = {
+  id?: string
+  bio?: string | null
+  city?: string | null
+  contact?: string | null
+  createdAt?: Date | string
+  email: string
+  firstName: string
+  image?: string | null
+  imagePublicId?: string | null
+  isContactPublic?: boolean | null
+  isPhonePublic?: boolean | null
+  lastName: string
+  lastSeen?: Date | string
+  phone?: string | null
+  permissions?: Prisma.UserCreatepermissionsInput | string[]
+  profileType?: $Enums.UserProfileTypeEnum
+  role?: $Enums.UserRoleEnum
+  state?: string | null
+  status?: $Enums.UserStatusEnum
+  updatedAt?: Date | string
+  objectId?: string | null
+  passwordUpdateToken?: string | null
+  gender?: $Enums.GenderEnum | null
+  emailToken?: string | null
+  isEmailVerified?: boolean
+  currentSubscriptionId?: string | null
+}
+
+export type UserUpdateWithoutOrganizationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isContactPublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isPhonePublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  permissions?: Prisma.UserUpdatepermissionsInput | string[]
+  profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
+  role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordUpdateToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
+  emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
+  report_comments?: Prisma.ReportCommentUpdateManyWithoutUserNestedInput
+  report_likes?: Prisma.ReportLikeUpdateManyWithoutUserNestedInput
+  reports_added?: Prisma.ReportUpdateManyWithoutAdded_byNestedInput
+  reports_updated?: Prisma.ReportUpdateManyWithoutUpdated_byNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  currentSubscription?: Prisma.SubscriptionUpdateOneWithoutCurrentUserNestedInput
+  ReportCommentLike?: Prisma.ReportCommentLikeUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutOrganizationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isContactPublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isPhonePublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  permissions?: Prisma.UserUpdatepermissionsInput | string[]
+  profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
+  role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordUpdateToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
+  emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  currentSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
+  report_comments?: Prisma.ReportCommentUncheckedUpdateManyWithoutUserNestedInput
+  report_likes?: Prisma.ReportLikeUncheckedUpdateManyWithoutUserNestedInput
+  reports_added?: Prisma.ReportUncheckedUpdateManyWithoutAdded_byNestedInput
+  reports_updated?: Prisma.ReportUncheckedUpdateManyWithoutUpdated_byNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  ReportCommentLike?: Prisma.ReportCommentLikeUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutOrganizationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isContactPublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isPhonePublic?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastSeen?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  permissions?: Prisma.UserUpdatepermissionsInput | string[]
+  profileType?: Prisma.EnumUserProfileTypeEnumFieldUpdateOperationsInput | $Enums.UserProfileTypeEnum
+  role?: Prisma.EnumUserRoleEnumFieldUpdateOperationsInput | $Enums.UserRoleEnum
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusEnumFieldUpdateOperationsInput | $Enums.UserStatusEnum
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordUpdateToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum | null
+  emailToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  currentSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -2343,6 +2723,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   lastName?: boolean
   lastSeen?: boolean
   phone?: boolean
+  permissions?: boolean
   profileType?: boolean
   role?: boolean
   state?: boolean
@@ -2353,7 +2734,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   gender?: boolean
   emailToken?: boolean
   isEmailVerified?: boolean
-  schoolId?: boolean
+  organizationId?: boolean
   currentSubscriptionId?: boolean
   bookmarks?: boolean | Prisma.User$bookmarksArgs<ExtArgs>
   report_comments?: boolean | Prisma.User$report_commentsArgs<ExtArgs>
@@ -2363,6 +2744,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   subscriptions?: boolean | Prisma.User$subscriptionsArgs<ExtArgs>
   currentSubscription?: boolean | Prisma.User$currentSubscriptionArgs<ExtArgs>
   ReportCommentLike?: boolean | Prisma.User$ReportCommentLikeArgs<ExtArgs>
+  organization?: boolean | Prisma.User$organizationArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -2381,6 +2763,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   lastName?: boolean
   lastSeen?: boolean
   phone?: boolean
+  permissions?: boolean
   profileType?: boolean
   role?: boolean
   state?: boolean
@@ -2391,9 +2774,10 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   gender?: boolean
   emailToken?: boolean
   isEmailVerified?: boolean
-  schoolId?: boolean
+  organizationId?: boolean
   currentSubscriptionId?: boolean
   currentSubscription?: boolean | Prisma.User$currentSubscriptionArgs<ExtArgs>
+  organization?: boolean | Prisma.User$organizationArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -2411,6 +2795,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   lastName?: boolean
   lastSeen?: boolean
   phone?: boolean
+  permissions?: boolean
   profileType?: boolean
   role?: boolean
   state?: boolean
@@ -2421,9 +2806,10 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   gender?: boolean
   emailToken?: boolean
   isEmailVerified?: boolean
-  schoolId?: boolean
+  organizationId?: boolean
   currentSubscriptionId?: boolean
   currentSubscription?: boolean | Prisma.User$currentSubscriptionArgs<ExtArgs>
+  organization?: boolean | Prisma.User$organizationArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -2441,6 +2827,7 @@ export type UserSelectScalar = {
   lastName?: boolean
   lastSeen?: boolean
   phone?: boolean
+  permissions?: boolean
   profileType?: boolean
   role?: boolean
   state?: boolean
@@ -2451,11 +2838,11 @@ export type UserSelectScalar = {
   gender?: boolean
   emailToken?: boolean
   isEmailVerified?: boolean
-  schoolId?: boolean
+  organizationId?: boolean
   currentSubscriptionId?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "bio" | "city" | "contact" | "createdAt" | "email" | "firstName" | "image" | "imagePublicId" | "isContactPublic" | "isPhonePublic" | "lastName" | "lastSeen" | "phone" | "profileType" | "role" | "state" | "status" | "updatedAt" | "objectId" | "passwordUpdateToken" | "gender" | "emailToken" | "isEmailVerified" | "schoolId" | "currentSubscriptionId", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "bio" | "city" | "contact" | "createdAt" | "email" | "firstName" | "image" | "imagePublicId" | "isContactPublic" | "isPhonePublic" | "lastName" | "lastSeen" | "phone" | "permissions" | "profileType" | "role" | "state" | "status" | "updatedAt" | "objectId" | "passwordUpdateToken" | "gender" | "emailToken" | "isEmailVerified" | "organizationId" | "currentSubscriptionId", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   bookmarks?: boolean | Prisma.User$bookmarksArgs<ExtArgs>
   report_comments?: boolean | Prisma.User$report_commentsArgs<ExtArgs>
@@ -2465,13 +2852,16 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   subscriptions?: boolean | Prisma.User$subscriptionsArgs<ExtArgs>
   currentSubscription?: boolean | Prisma.User$currentSubscriptionArgs<ExtArgs>
   ReportCommentLike?: boolean | Prisma.User$ReportCommentLikeArgs<ExtArgs>
+  organization?: boolean | Prisma.User$organizationArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   currentSubscription?: boolean | Prisma.User$currentSubscriptionArgs<ExtArgs>
+  organization?: boolean | Prisma.User$organizationArgs<ExtArgs>
 }
 export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   currentSubscription?: boolean | Prisma.User$currentSubscriptionArgs<ExtArgs>
+  organization?: boolean | Prisma.User$organizationArgs<ExtArgs>
 }
 
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2485,6 +2875,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     subscriptions: Prisma.$SubscriptionPayload<ExtArgs>[]
     currentSubscription: Prisma.$SubscriptionPayload<ExtArgs> | null
     ReportCommentLike: Prisma.$ReportCommentLikePayload<ExtArgs>[]
+    organization: Prisma.$OrganizationPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2501,6 +2892,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     lastName: string
     lastSeen: Date
     phone: string | null
+    permissions: string[]
     profileType: $Enums.UserProfileTypeEnum
     role: $Enums.UserRoleEnum
     state: string | null
@@ -2511,7 +2903,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     gender: $Enums.GenderEnum | null
     emailToken: string | null
     isEmailVerified: boolean
-    schoolId: string | null
+    organizationId: string | null
     currentSubscriptionId: string | null
   }, ExtArgs["result"]["user"]>
   composites: {}
@@ -2915,6 +3307,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   subscriptions<T extends Prisma.User$subscriptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$subscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   currentSubscription<T extends Prisma.User$currentSubscriptionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$currentSubscriptionArgs<ExtArgs>>): Prisma.Prisma__SubscriptionClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   ReportCommentLike<T extends Prisma.User$ReportCommentLikeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ReportCommentLikeArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReportCommentLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  organization<T extends Prisma.User$organizationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$organizationArgs<ExtArgs>>): Prisma.Prisma__OrganizationClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2958,6 +3351,7 @@ export interface UserFieldRefs {
   readonly lastName: Prisma.FieldRef<"User", 'String'>
   readonly lastSeen: Prisma.FieldRef<"User", 'DateTime'>
   readonly phone: Prisma.FieldRef<"User", 'String'>
+  readonly permissions: Prisma.FieldRef<"User", 'String[]'>
   readonly profileType: Prisma.FieldRef<"User", 'UserProfileTypeEnum'>
   readonly role: Prisma.FieldRef<"User", 'UserRoleEnum'>
   readonly state: Prisma.FieldRef<"User", 'String'>
@@ -2968,7 +3362,7 @@ export interface UserFieldRefs {
   readonly gender: Prisma.FieldRef<"User", 'GenderEnum'>
   readonly emailToken: Prisma.FieldRef<"User", 'String'>
   readonly isEmailVerified: Prisma.FieldRef<"User", 'Boolean'>
-  readonly schoolId: Prisma.FieldRef<"User", 'String'>
+  readonly organizationId: Prisma.FieldRef<"User", 'String'>
   readonly currentSubscriptionId: Prisma.FieldRef<"User", 'String'>
 }
     
@@ -3550,6 +3944,25 @@ export type User$ReportCommentLikeArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.ReportCommentLikeScalarFieldEnum | Prisma.ReportCommentLikeScalarFieldEnum[]
+}
+
+/**
+ * User.organization
+ */
+export type User$organizationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Organization
+   */
+  select?: Prisma.OrganizationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Organization
+   */
+  omit?: Prisma.OrganizationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrganizationInclude<ExtArgs> | null
+  where?: Prisma.OrganizationWhereInput
 }
 
 /**

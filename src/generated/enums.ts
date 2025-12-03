@@ -32,7 +32,8 @@ export const UserRoleEnum = {
   Admin: 'Admin',
   Editor: 'Editor',
   User: 'User',
-  Developer: 'Developer'
+  Developer: 'Developer',
+  SuperAdmin: 'SuperAdmin'
 } as const
 
 export type UserRoleEnum = (typeof UserRoleEnum)[keyof typeof UserRoleEnum]

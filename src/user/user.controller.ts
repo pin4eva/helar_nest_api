@@ -11,6 +11,7 @@ import {
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { AuthGuard } from 'src/guards/auth.guard';
 import {
+  AssignPermissionsDTO,
   GetUsersFilterInput,
   UpdateProfileTypeDTO,
   UpdateStatusDTO,
@@ -19,6 +20,8 @@ import {
   UploadImageDTO,
 } from './user.dto';
 import { UserService } from './user.service';
+import { Roles } from 'src/decorators/roles.decorator';
+import { UserRoleEnum } from 'src/generated/enums';
 
 @ApiBearerAuth()
 @UseGuards(AuthGuard)
@@ -41,16 +44,22 @@ export class UserController {
     return this.userService.updateUser(input);
   }
 
+  @UseGuards(AuthGuard)
+  @Roles(UserRoleEnum.Admin, UserRoleEnum.Developer)
   @Patch('update-role')
   async updateUserRole(@Body() input: UpdateUserRoleDTO) {
     return this.userService.updateRole(input);
   }
 
+  @UseGuards(AuthGuard)
+  @Roles(UserRoleEnum.Admin, UserRoleEnum.Developer)
   @Patch('update-status')
   async updateUserStatus(@Body() input: UpdateStatusDTO) {
     return this.userService.updateStatus(input);
   }
 
+  @UseGuards(AuthGuard)
+  @Roles(UserRoleEnum.Admin, UserRoleEnum.Developer)
   @Patch('update-profile-type')
   async updateUserProfileType(@Body() input: UpdateProfileTypeDTO) {
     return this.userService.updateProfileType(input);
@@ -59,5 +68,11 @@ export class UserController {
   @Patch('upload-image')
   async uploadProfileImage(@Body() input: UploadImageDTO) {
     return this.userService.uploadProfileImage(input);
+  }
+
+  @Patch('assign-permissions')
+  @Roles(UserRoleEnum.Admin, UserRoleEnum.Developer)
+  async assignPermissions(@Body() input: AssignPermissionsDTO) {
+    return this.userService.assignPermissions(input);
   }
 }

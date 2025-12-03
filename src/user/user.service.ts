@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma } from '../generated/client';
 import { cloudinaryUpload, deleteImage } from '../utils/cloudinary';
 import {
+  AssignPermissionsDTO,
   GetUsersFilterInput,
   UpdateProfileTypeDTO,
   UpdateStatusDTO,
@@ -179,6 +180,30 @@ export class UserService {
         data: { image: result?.imageUrl, imagePublicId: result?.publicId },
       });
       return { data: result?.imageUrl };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // assign permissions to user
+  async assignPermissions(input: AssignPermissionsDTO) {
+    try {
+      const { userId, permissions } = input;
+      const user = await this.prisma.user.findUnique({
+        where: { id: userId },
+      });
+      if (!user) {
+        throw new NotFoundException(`User with id ${userId} not found`);
+      }
+      await this.prisma.user.update({
+        where: { id: userId },
+        data: {
+          permissions: {
+            set: Array.from(new Set(permissions)),
+          },
+        },
+      });
+      return { message: 'Permissions assigned successfully', success: true };
     } catch (error) {
       throw error;
     }
