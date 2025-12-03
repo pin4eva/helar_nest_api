@@ -34,6 +34,10 @@ export class RolesGuard implements CanActivate {
       return false;
     }
 
+    if (user.permissions.includes('SUPER')) {
+      return true;
+    }
+
     return requiredRoles.includes(user.role);
   }
 }

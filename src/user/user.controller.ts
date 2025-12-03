@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
@@ -10,8 +11,12 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { AuthGuard } from 'src/guards/auth.guard';
+import { PermissionsGuard } from 'src/guards/permissions.guard';
+import { RequirePermissions } from 'src/decorators/permissions.decorator';
+import { UserPermissionEnum } from './user-permission';
 import {
   AssignPermissionsDTO,
+  BulkDeleteUsersDTO,
   GetUsersFilterInput,
   UpdateProfileTypeDTO,
   UpdateStatusDTO,
@@ -20,7 +25,7 @@ import {
   UploadImageDTO,
 } from './user.dto';
 import { UserService } from './user.service';
-import { Roles } from 'src/decorators/roles.decorator';
+import { Roles } from '../decorators/roles.decorator';
 import { UserRoleEnum } from 'src/generated/enums';
 
 @ApiBearerAuth()
@@ -74,5 +79,12 @@ export class UserController {
   @Roles(UserRoleEnum.Admin, UserRoleEnum.Developer)
   async assignPermissions(@Body() input: AssignPermissionsDTO) {
     return this.userService.assignPermissions(input);
+  }
+
+  @Delete('bulk-delete')
+  @UseGuards(PermissionsGuard)
+  @RequirePermissions(UserPermissionEnum.SUPER)
+  async bulkDeleteUsers(@Body() input: BulkDeleteUsersDTO) {
+    return this.userService.bulkDeleteUsers(input.userIds);
   }
 }

@@ -18,7 +18,7 @@ export class UserService {
 
   // get users
   async getUsers(input?: GetUsersFilterInput) {
-    const { search, limit = 100 } = input || {};
+    const { search, limit } = input || {};
     const where: Prisma.UserWhereInput = search
       ? {
           OR: [
@@ -39,6 +39,8 @@ export class UserService {
         role: true,
         status: true,
         profileType: true,
+        createdAt: true,
+        updatedAt: true,
       },
       take: limit,
     });
@@ -93,6 +95,26 @@ export class UserService {
         where: { id },
       });
       return { data: 'User deleted successfully' };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // bulk delete users
+  async bulkDeleteUsers(userIds: string[]) {
+    try {
+      const result = await this.prisma.user.deleteMany({
+        where: {
+          id: {
+            in: userIds,
+          },
+        },
+      });
+      return {
+        message: `Successfully deleted ${result.count} user(s)`,
+        count: result.count,
+        success: true,
+      };
     } catch (error) {
       throw error;
     }

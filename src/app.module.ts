@@ -17,6 +17,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './guards/roles.guard';
 import { HandbookModule } from './handbook/handbook.module';
 import { SummaryModule } from './summary/summary.module';
+import { PermissionsGuard } from './guards/permissions.guard';
 
 @Module({
   imports: [
@@ -49,6 +50,10 @@ import { SummaryModule } from './summary/summary.module';
     {
       provide: APP_GUARD,
       useClass: RolesGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: PermissionsGuard,
     },
   ],
   exports: [],

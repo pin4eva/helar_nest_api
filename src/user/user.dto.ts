@@ -105,3 +105,11 @@ export class AssignPermissionsDTO {
   @IsString({ each: true })
   permissions: string[];
 }
+
+// bulk delete users DTO
+export class BulkDeleteUsersDTO {
+  @ApiProperty({ required: true, isArray: true })
+  @IsArray()
+  @IsString({ each: true })
+  userIds: string[];
+}
