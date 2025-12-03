@@ -19,11 +19,18 @@ import {
   CreateSummaryCaseDto,
   UpdateSummaryCaseDto,
 } from '../dto/summary-case.dto';
+import { SummarySearchQueryDto } from '../dto/summary-search.dto';
 import { SummaryTypeEnum } from 'src/generated/enums';
 
 @Controller('summary')
 export class SummaryController {
   constructor(private readonly summaryService: SummaryService) {}
+
+  // Search
+  @Get('search')
+  search(@Query() query: SummarySearchQueryDto) {
+    return this.summaryService.search(query);
+  }
 
   // Topics
   @Get('topics')

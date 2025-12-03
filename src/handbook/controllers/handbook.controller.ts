@@ -18,11 +18,18 @@ import {
   CreateHandbookCaseDto,
   UpdateHandbookCaseDto,
 } from '../dto/handbook-case.dto';
+import { HandbookSearchQueryDto } from '../dto/handbook-search.dto';
 import { TopicTypeEnum } from 'src/generated/client';
 
 @Controller('handbook')
 export class HandbookController {
   constructor(private readonly handbookService: HandbookService) {}
+
+  // Search
+  @Get('search')
+  search(@Query() query: HandbookSearchQueryDto) {
+    return this.handbookService.search(query);
+  }
 
   // Topics
   @Get('topics')

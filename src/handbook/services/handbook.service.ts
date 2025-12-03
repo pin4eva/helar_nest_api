@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { slugify } from 'src/utils/helpers';
+import { generateSimpleExcerpt, stripHtmlAndMarkdown } from 'src/utils/search';
 import {
   CreateHandbookTopicDto,
   HandbookTopicsQueryDto,
@@ -10,6 +11,12 @@ import {
   CreateHandbookCaseDto,
   UpdateHandbookCaseDto,
 } from '../dto/handbook-case.dto';
+import {
+  HandbookSearchQueryDto,
+  HandbookSearchResult,
+  HandbookTopicSearchResult,
+  HandbookCaseSearchResult,
+} from '../dto/handbook-search.dto';
 import { TopicTypeEnum } from 'src/generated/enums';
 import { Prisma, Subject } from 'src/generated/client';
 
@@ -261,5 +268,156 @@ export class HandbookService {
         data: { slug },
       });
     }
+  }
+
+  /**
+   * Search across handbook topics and cases
+   */
+  async search(query: HandbookSearchQueryDto): Promise<HandbookSearchResult> {
+    const { q, type, subjectSlug, limit = 20, offset = 0 } = query;
+
+    if (!q || q.trim().length < 2) {
+      return { topics: [], cases: [], totalTopics: 0, totalCases: 0 };
+    }
+
+    const searchTerm = q.trim();
+
+    // Build base where clause for filtering
+    const topicBaseWhere: Prisma.HandbookTopicWhereInput = {};
+    const caseBaseWhere: Prisma.HandbookCaseWhereInput = {};
+
+    if (type) {
+      topicBaseWhere.type = type;
+      caseBaseWhere.topic = { type };
+    }
+
+    if (subjectSlug) {
+      topicBaseWhere.subject = { slug: subjectSlug };
+      if (caseBaseWhere.topic) {
+        caseBaseWhere.topic.subject = { slug: subjectSlug };
+      }
+    }
+
+    // Search topics by title
+    const [topics, totalTopics] = await Promise.all([
+      this.prisma.handbookTopic.findMany({
+        where: {
+          ...topicBaseWhere,
+          title: { contains: searchTerm, mode: 'insensitive' },
+        },
+        include: {
+          subject: { select: { id: true, name: true, slug: true } },
+          _count: { select: { cases: true } },
+        },
+        take: Math.ceil(limit / 2),
+        skip: offset,
+        orderBy: { createdAt: 'desc' },
+      }),
+      this.prisma.handbookTopic.count({
+        where: {
+          ...topicBaseWhere,
+          title: { contains: searchTerm, mode: 'insensitive' },
+        },
+      }),
+    ]);
+
+    // Search cases by title, body, or citation
+    const [cases, totalCases] = await Promise.all([
+      this.prisma.handbookCase.findMany({
+        where: {
+          ...caseBaseWhere,
+          OR: [
+            { title: { contains: searchTerm, mode: 'insensitive' } },
+            { body: { contains: searchTerm, mode: 'insensitive' } },
+            { citation: { contains: searchTerm, mode: 'insensitive' } },
+          ],
+        },
+        include: {
+          topic: {
+            include: {
+              subject: { select: { id: true, name: true, slug: true } },
+            },
+          },
+        },
+        take: Math.ceil(limit / 2),
+        skip: offset,
+        orderBy: { createdAt: 'desc' },
+      }),
+      this.prisma.handbookCase.count({
+        where: {
+          ...caseBaseWhere,
+          OR: [
+            { title: { contains: searchTerm, mode: 'insensitive' } },
+            { body: { contains: searchTerm, mode: 'insensitive' } },
+            { citation: { contains: searchTerm, mode: 'insensitive' } },
+          ],
+        },
+      }),
+    ]);
+
+    // Transform topics
+    const topicResults: HandbookTopicSearchResult[] = topics.map((topic) => ({
+      id: topic.id,
+      title: topic.title,
+      slug: topic.slug,
+      type: topic.type as TopicTypeEnum,
+      subject: topic.subject,
+      caseCount: topic._count.cases,
+      matchType: 'title' as const,
+    }));
+
+    // Transform cases with excerpts
+    const caseResults: HandbookCaseSearchResult[] = cases.map((c) => {
+      const lowerSearch = searchTerm.toLowerCase();
+      const titleMatch = c.title.toLowerCase().includes(lowerSearch);
+      const bodyMatch = c.body.toLowerCase().includes(lowerSearch);
+      const citationMatch = c.citation.toLowerCase().includes(lowerSearch);
+
+      let matchType: 'title' | 'body' | 'citation' | 'multiple';
+      let excerptSource: string;
+
+      const matchCount = [titleMatch, bodyMatch, citationMatch].filter(
+        Boolean,
+      ).length;
+      if (matchCount > 1) {
+        matchType = 'multiple';
+        excerptSource = titleMatch ? c.title : stripHtmlAndMarkdown(c.body);
+      } else if (titleMatch) {
+        matchType = 'title';
+        excerptSource = c.title;
+      } else if (citationMatch) {
+        matchType = 'citation';
+        excerptSource = c.citation;
+      } else {
+        matchType = 'body';
+        excerptSource = stripHtmlAndMarkdown(c.body);
+      }
+
+      return {
+        id: c.id,
+        title: c.title,
+        body: c.body,
+        byline: c.byline,
+        citation: c.citation,
+        slug: c.slug as string,
+        ref: c.ref,
+        topic: {
+          id: c?.topic?.id as string,
+          title: c?.topic?.title as string,
+          slug: c?.topic?.slug as string,
+          type: c?.topic?.type as TopicTypeEnum,
+          subject: c?.topic?.subject as Subject,
+        },
+        matchType,
+        excerpt: generateSimpleExcerpt(excerptSource, searchTerm, 30),
+      };
+    });
+
+    return {
+      topics: topicResults,
+      cases: caseResults,
+      totalTopics,
+      totalCases,
+    };
   }
 }

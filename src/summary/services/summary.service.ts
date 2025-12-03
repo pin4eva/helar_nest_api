@@ -7,6 +7,7 @@ import { Prisma, Subject } from 'src/generated/client';
 import { SummaryTypeEnum } from 'src/generated/enums';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { slugify } from 'src/utils/helpers';
+import { generateSimpleExcerpt, stripHtmlAndMarkdown } from 'src/utils/search';
 import {
   CreateSummaryCaseDto,
   UpdateSummaryCaseDto,
@@ -16,6 +17,12 @@ import {
   SummaryTopicsQueryDto,
   UpdateSummaryTopicDto,
 } from '../dto/summary-topic.dto';
+import {
+  SummarySearchQueryDto,
+  SummarySearchResult,
+  SummaryTopicSearchResult,
+  SummaryCaseSearchResult,
+} from '../dto/summary-search.dto';
 
 @Injectable()
 export class SummaryService {
@@ -300,5 +307,148 @@ export class SummaryService {
         }
         return item;
       });
+  }
+
+  /**
+   * Search across summary topics and cases
+   */
+  async search(query: SummarySearchQueryDto): Promise<SummarySearchResult> {
+    const { q, type, subjectSlug, limit = 20, offset = 0 } = query;
+
+    if (!q || q.trim().length < 2) {
+      return { topics: [], cases: [], totalTopics: 0, totalCases: 0 };
+    }
+
+    const searchTerm = q.trim();
+
+    // Build base where clause for filtering
+    const topicBaseWhere: Prisma.SummaryTopicWhereInput = {};
+    const caseBaseWhere: Prisma.SummaryCaseWhereInput = {};
+
+    if (type) {
+      topicBaseWhere.type = type;
+      caseBaseWhere.topic = { type };
+    }
+
+    if (subjectSlug) {
+      topicBaseWhere.subject = { slug: subjectSlug };
+      if (caseBaseWhere.topic) {
+        caseBaseWhere.topic.subject = { slug: subjectSlug };
+      }
+    }
+
+    // Search topics by title
+    const [topics, totalTopics] = await Promise.all([
+      this.prisma.summaryTopic.findMany({
+        where: {
+          ...topicBaseWhere,
+          title: { contains: searchTerm, mode: 'insensitive' },
+        },
+        include: {
+          subject: { select: { id: true, name: true, slug: true } },
+          _count: { select: { cases: true } },
+        },
+        take: Math.ceil(limit / 2),
+        skip: offset,
+        orderBy: { createdAt: 'desc' },
+      }),
+      this.prisma.summaryTopic.count({
+        where: {
+          ...topicBaseWhere,
+          title: { contains: searchTerm, mode: 'insensitive' },
+        },
+      }),
+    ]);
+
+    // Search cases by question or answer
+    const [cases, totalCases] = await Promise.all([
+      this.prisma.summaryCase.findMany({
+        where: {
+          ...caseBaseWhere,
+          OR: [
+            { question: { contains: searchTerm, mode: 'insensitive' } },
+            { answer: { contains: searchTerm, mode: 'insensitive' } },
+          ],
+        },
+        include: {
+          topic: {
+            include: {
+              subject: { select: { id: true, name: true, slug: true } },
+            },
+          },
+        },
+        take: Math.ceil(limit / 2),
+        skip: offset,
+        orderBy: { createdAt: 'desc' },
+      }),
+      this.prisma.summaryCase.count({
+        where: {
+          ...caseBaseWhere,
+          OR: [
+            { question: { contains: searchTerm, mode: 'insensitive' } },
+            { answer: { contains: searchTerm, mode: 'insensitive' } },
+          ],
+        },
+      }),
+    ]);
+
+    // Transform topics
+    const topicResults: SummaryTopicSearchResult[] = topics.map((topic) => ({
+      id: topic.id,
+      title: topic.title,
+      slug: topic.slug,
+      type: topic.type as SummaryTypeEnum,
+      subject: topic.subject,
+      caseCount: topic._count.cases,
+      matchType: 'title' as const,
+    }));
+
+    // Transform cases with excerpts
+    const caseResults: SummaryCaseSearchResult[] = cases.map((c) => {
+      const questionMatch = c.question
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
+      const answerMatch = c.answer
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
+
+      let matchType: 'question' | 'answer' | 'both';
+      let excerptSource: string;
+
+      if (questionMatch && answerMatch) {
+        matchType = 'both';
+        excerptSource = c.question;
+      } else if (questionMatch) {
+        matchType = 'question';
+        excerptSource = c.question;
+      } else {
+        matchType = 'answer';
+        excerptSource = stripHtmlAndMarkdown(c.answer);
+      }
+
+      return {
+        id: c.id,
+        question: c.question,
+        answer: c.answer,
+        slug: c.slug,
+        ref: c.ref,
+        topic: {
+          id: c?.topic?.id as string,
+          title: c?.topic?.title as string,
+          slug: c?.topic?.slug as string,
+          type: c?.topic?.type as SummaryTypeEnum,
+          subject: c?.topic?.subject as Subject,
+        },
+        matchType,
+        excerpt: generateSimpleExcerpt(excerptSource, searchTerm, 30),
+      };
+    });
+
+    return {
+      topics: topicResults,
+      cases: caseResults,
+      totalTopics,
+      totalCases,
+    };
   }
 }
