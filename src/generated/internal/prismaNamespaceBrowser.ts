@@ -68,7 +68,9 @@ export const ModelName = {
   HandbookCase: 'HandbookCase',
   SummaryTopic: 'SummaryTopic',
   SummaryCase: 'SummaryCase',
-  Organization: 'Organization'
+  Organization: 'Organization',
+  PaymentTransaction: 'PaymentTransaction',
+  OrganizationSubscription: 'OrganizationSubscription'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -136,13 +138,27 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 export const SubscriptionScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
+  organizationId: 'organizationId',
   reference: 'reference',
   createdAt: 'createdAt',
+  startsAt: 'startsAt',
+  currentPeriodStart: 'currentPeriodStart',
+  currentPeriodEnd: 'currentPeriodEnd',
+  nextBillingAt: 'nextBillingAt',
+  trialEndsAt: 'trialEndsAt',
+  cancelledAt: 'cancelledAt',
+  canceledReason: 'canceledReason',
   expiresAt: 'expiresAt',
   amount: 'amount',
+  currency: 'currency',
   paymentId: 'paymentId',
+  provider: 'provider',
+  providerCustomerId: 'providerCustomerId',
+  providerSubscriptionId: 'providerSubscriptionId',
+  providerPlanId: 'providerPlanId',
   plan: 'plan',
-  status: 'status'
+  autoRenew: 'autoRenew',
+  meta: 'meta'
 } as const
 
 export type SubscriptionScalarFieldEnum = (typeof SubscriptionScalarFieldEnum)[keyof typeof SubscriptionScalarFieldEnum]
@@ -332,12 +348,52 @@ export const OrganizationScalarFieldEnum = {
 export type OrganizationScalarFieldEnum = (typeof OrganizationScalarFieldEnum)[keyof typeof OrganizationScalarFieldEnum]
 
 
+export const PaymentTransactionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  subscriptionId: 'subscriptionId',
+  organizationId: 'organizationId',
+  provider: 'provider',
+  providerTransactionId: 'providerTransactionId',
+  reference: 'reference',
+  amount: 'amount',
+  currency: 'currency',
+  status: 'status',
+  type: 'type',
+  response: 'response',
+  createdAt: 'createdAt'
+} as const
+
+export type PaymentTransactionScalarFieldEnum = (typeof PaymentTransactionScalarFieldEnum)[keyof typeof PaymentTransactionScalarFieldEnum]
+
+
+export const OrganizationSubscriptionScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  subscriptionId: 'subscriptionId',
+  seatsTotal: 'seatsTotal',
+  seatsAssigned: 'seatsAssigned',
+  createdAt: 'createdAt',
+  expiresAt: 'expiresAt'
+} as const
+
+export type OrganizationSubscriptionScalarFieldEnum = (typeof OrganizationSubscriptionScalarFieldEnum)[keyof typeof OrganizationSubscriptionScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const NullableJsonNullValueInput = {
+  DbNull: 'DbNull',
+  JsonNull: 'JsonNull'
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
 export const QueryMode = {
@@ -389,11 +445,27 @@ export const UserOrderByRelevanceFieldEnum = {
 export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
 
 
+export const JsonNullValueFilter = {
+  DbNull: 'DbNull',
+  JsonNull: 'JsonNull',
+  AnyNull: 'AnyNull'
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
+
+
 export const SubscriptionOrderByRelevanceFieldEnum = {
   id: 'id',
   userId: 'userId',
+  organizationId: 'organizationId',
   reference: 'reference',
-  paymentId: 'paymentId'
+  canceledReason: 'canceledReason',
+  currency: 'currency',
+  paymentId: 'paymentId',
+  provider: 'provider',
+  providerCustomerId: 'providerCustomerId',
+  providerSubscriptionId: 'providerSubscriptionId',
+  providerPlanId: 'providerPlanId'
 } as const
 
 export type SubscriptionOrderByRelevanceFieldEnum = (typeof SubscriptionOrderByRelevanceFieldEnum)[keyof typeof SubscriptionOrderByRelevanceFieldEnum]
@@ -552,4 +624,27 @@ export const OrganizationOrderByRelevanceFieldEnum = {
 } as const
 
 export type OrganizationOrderByRelevanceFieldEnum = (typeof OrganizationOrderByRelevanceFieldEnum)[keyof typeof OrganizationOrderByRelevanceFieldEnum]
+
+
+export const PaymentTransactionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  subscriptionId: 'subscriptionId',
+  organizationId: 'organizationId',
+  provider: 'provider',
+  providerTransactionId: 'providerTransactionId',
+  reference: 'reference',
+  currency: 'currency'
+} as const
+
+export type PaymentTransactionOrderByRelevanceFieldEnum = (typeof PaymentTransactionOrderByRelevanceFieldEnum)[keyof typeof PaymentTransactionOrderByRelevanceFieldEnum]
+
+
+export const OrganizationSubscriptionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  subscriptionId: 'subscriptionId'
+} as const
+
+export type OrganizationSubscriptionOrderByRelevanceFieldEnum = (typeof OrganizationSubscriptionOrderByRelevanceFieldEnum)[keyof typeof OrganizationSubscriptionOrderByRelevanceFieldEnum]
 

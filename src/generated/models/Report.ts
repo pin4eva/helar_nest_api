@@ -821,18 +821,6 @@ export type ReportUncheckedUpdateManyWithoutUpdated_byNestedInput = {
   deleteMany?: Prisma.ReportScalarWhereInput | Prisma.ReportScalarWhereInput[]
 }
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
-}
-
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type ReportCreateNestedOneWithoutLawSubjectsInput = {
   create?: Prisma.XOR<Prisma.ReportCreateWithoutLawSubjectsInput, Prisma.ReportUncheckedCreateWithoutLawSubjectsInput>
   connectOrCreate?: Prisma.ReportCreateOrConnectWithoutLawSubjectsInput

@@ -62,31 +62,53 @@ model User {
   reports_added       Report[]            @relation("reports_added")
   reports_updated     Report[]            @relation("reports_updated")
 
-  subscriptions         Subscription[]      @relation("UserSubscriptions")
-  currentSubscriptionId String?             @unique
-  currentSubscription   Subscription?       @relation("CurrentSubscription", fields: [currentSubscriptionId], references: [id], onDelete: SetNull, onUpdate: NoAction)
+  subscriptions         Subscription[]       @relation("UserSubscriptions")
+  payments              PaymentTransaction[]
+  currentSubscriptionId String?              @unique
+  currentSubscription   Subscription?        @relation("CurrentSubscription", fields: [currentSubscriptionId], references: [id], onDelete: SetNull, onUpdate: NoAction)
   ReportCommentLike     ReportCommentLike[]
-  organization          Organization?       @relation(fields: [organizationId], references: [id])
+  organization          Organization?        @relation(fields: [organizationId], references: [id])
 
   @@map("users")
 }
 
 model Subscription {
-  id          String                 @id @default(cuid())
-  userId      String
-  reference   String                 @unique
-  createdAt   DateTime               @default(now())
-  expiresAt   DateTime
-  amount      Int
-  paymentId   String                 @unique
-  plan        SubscriptionPlanEnum   @default(Monthly)
-  status      SubscriptionStatusEnum @default(Active)
-  user        User                   @relation("UserSubscriptions", fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  currentUser User?                  @relation("CurrentSubscription")
+  id                     String               @id @default(cuid())
+  userId                 String? // nullable for organization-owned subscriptions
+  organizationId         String?
+  reference              String               @unique
+  createdAt              DateTime             @default(now())
+  startsAt               DateTime?
+  currentPeriodStart     DateTime?
+  currentPeriodEnd       DateTime?
+  nextBillingAt          DateTime?
+  trialEndsAt            DateTime?
+  cancelledAt            DateTime?
+  canceledReason         String?
+  expiresAt              DateTime?
+  amount                 Int?
+  currency               String               @default("NGN")
+  paymentId              String?              @unique
+  provider               String?
+  providerCustomerId     String?
+  providerSubscriptionId String?              @unique
+  providerPlanId         String?
+  plan                   SubscriptionPlanEnum @default(Monthly)
+  // status                 SubscriptionStatusEnum @default(Pending)
+  autoRenew              Boolean              @default(true)
+  meta                   Json?
+
+  user                      User?                      @relation("UserSubscriptions", fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  organization              Organization?              @relation(fields: [organizationId], references: [id])
+  currentUser               User?                      @relation("CurrentSubscription")
+  payments                  PaymentTransaction[]
+  organizationSubscriptions OrganizationSubscription[]
 
   @@index([userId])
-  @@index([status])
+  @@index([organizationId])
+  // @@index([status])
   @@index([expiresAt])
+  @@index([nextBillingAt])
   @@map("subscriptions")
 }
 
@@ -201,37 +223,6 @@ model Bookmark {
   @@map("bookmarks")
 }
 
-// model Handbook {
-//   id           String         @id @default(cuid())
-//   createdAt    DateTime       @default(now())
-//   slug         String         @unique
-//   subjectId    String
-//   topic        String
-//   updatedAt    DateTime       @updatedAt
-//   objectId     String?
-//   handbookCase HandbookCase[]
-//   subject      Subject        @relation(fields: [subjectId], references: [id])
-
-//   @@map("handbooks")
-// }
-
-// model NoteItem {
-//   id                   String              @id @default(cuid())
-//   createdAt            DateTime            @default(now())
-//   slug                 String?             @unique
-//   updatedAt            DateTime            @updatedAt
-//   objectId             String?
-//   ref                  Int                 @unique
-//   question             String
-//   answer               String
-//   facultyNoteSummary   FacultyNoteSummary? @relation(fields: [facultyNoteSummaryId], references: [id])
-//   facultyNoteSummaryId String?
-//   nlsNoteSummary       NlsNoteSummary?     @relation(fields: [nlsNoteSummaryId], references: [id])
-//   nlsNoteSummaryId     String?
-
-//   @@map("note_items")
-// }
-
 model Quote {
   id        String   @id @default(cuid())
   text      String
@@ -252,77 +243,11 @@ model Subject {
   updatedAt         DateTime          @updatedAt
   objectId          String?
   report_to_subject ReportToSubject[]
-  // handbooks            Handbook[]
-  // textbooks            Textbook[]
-  // facultyNoteSummaries FacultyNoteSummary[]
-  // nlsNoteSummaries     NlsNoteSummary[]
   handbookTopics    HandbookTopic[]
   summaryTopics     SummaryTopic[]
 
   @@map("subjects")
 }
-
-// model FacultyNoteSummary {
-//   id        String     @id @default(cuid())
-//   slug      String     @unique
-//   title     String
-//   ref       Int
-//   subjectId String
-//   note      Subject    @relation(fields: [subjectId], references: [id])
-//   createdAt DateTime   @default(now())
-//   updatedAt DateTime   @updatedAt
-//   objectId  String?
-//   items     NoteItem[]
-
-//   @@index([subjectId])
-//   @@map("faculty_note_summaries")
-// }
-
-// model NlsNoteSummary {
-//   id        String     @id @default(cuid())
-//   slug      String     @unique
-//   title     String
-//   ref       Int
-//   subjectId String
-//   note      Subject    @relation(fields: [subjectId], references: [id])
-//   createdAt DateTime   @default(now())
-//   updatedAt DateTime   @updatedAt
-//   objectId  String?
-//   items     NoteItem[]
-
-//   @@index([subjectId])
-//   @@map("nls_note_summaries")
-// }
-
-// model TextbookCase {
-//   id         String   @id @default(cuid())
-//   body       String
-//   byline     String
-//   citation   String
-//   createdAt  DateTime @default(now())
-//   ref        Int      @unique
-//   slug       String   @unique
-//   title      String
-//   updatedAt  DateTime @updatedAt
-//   textbookId String
-//   textbooks  Textbook @relation(fields: [textbookId], references: [id])
-
-//   @@map("textbook_cases")
-// }
-
-// model Textbook {
-//   id           String         @id @default(cuid())
-//   createdAt    DateTime       @default(now())
-//   slug         String         @unique
-//   subjectId    String
-//   topic        String
-//   updatedAt    DateTime       @updatedAt
-//   objectId     String?
-//   textbookCase TextbookCase[]
-//   subject      Subject        @relation(fields: [subjectId], references: [id])
-
-//   @@map("textbooks")
-// }
 
 model HandbookTopic {
   id        String         @id @default(cuid())
@@ -384,13 +309,55 @@ model SummaryCase {
 }
 
 model Organization {
-  id        String   @id @default(cuid())
-  name      String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  users     User[]
+  id                        String                     @id @default(cuid())
+  name                      String                     @unique
+  createdAt                 DateTime                   @default(now())
+  updatedAt                 DateTime                   @updatedAt
+  users                     User[]
+  subscriptions             Subscription[]
+  payments                  PaymentTransaction[]
+  organizationSubscriptions OrganizationSubscription[]
 
   @@map("schools")
+}
+
+model PaymentTransaction {
+  id                    String            @id @default(cuid())
+  userId                String?
+  subscriptionId        String?
+  organizationId        String?
+  provider              String
+  providerTransactionId String?
+  reference             String?
+  amount                Int
+  currency              String            @default("NGN")
+  status                PaymentStatusEnum
+  type                  PaymentTypeEnum
+  response              Json?
+  createdAt             DateTime          @default(now())
+
+  user         User?         @relation(fields: [userId], references: [id])
+  subscription Subscription? @relation(fields: [subscriptionId], references: [id])
+  organization Organization? @relation(fields: [organizationId], references: [id])
+
+  @@index([userId])
+  @@index([subscriptionId])
+  @@map("payment_transactions")
+}
+
+model OrganizationSubscription {
+  id             String    @id @default(cuid())
+  organizationId String
+  subscriptionId String?
+  seatsTotal     Int
+  seatsAssigned  Int       @default(0)
+  createdAt      DateTime  @default(now())
+  expiresAt      DateTime?
+
+  subscription Subscription? @relation(fields: [subscriptionId], references: [id])
+  organization Organization  @relation(fields: [organizationId], references: [id])
+
+  @@map("organization_subscriptions")
 }
 
 enum GenderEnum {
@@ -428,8 +395,26 @@ enum SubscriptionPlanEnum {
 }
 
 enum SubscriptionStatusEnum {
+  Pending
+  Trialing
   Active
+  PastDue
+  Cancelled
   Expired
+  Paused
+}
+
+enum PaymentStatusEnum {
+  Pending
+  Paid
+  Failed
+  Refunded
+}
+
+enum PaymentTypeEnum {
+  Initial
+  Renewal
+  Refund
 }
 
 enum TopicTypeEnum {

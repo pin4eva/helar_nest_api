@@ -40,9 +40,7 @@ export class CreateUserDTO {
   @IsEnum(GenderEnum)
   gender: GenderEnum;
 
-  @ApiProperty({ required: false })
-  @Optional()
-  schoolId: string;
+  // schoolId removed — school/organization is now handled on Organization entity
 }
 export class UpdateUserDTO extends PartialType(CreateUserDTO) {
   @ApiProperty({ required: true })

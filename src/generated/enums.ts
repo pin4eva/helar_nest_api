@@ -57,11 +57,35 @@ export type SubscriptionPlanEnum = (typeof SubscriptionPlanEnum)[keyof typeof Su
 
 
 export const SubscriptionStatusEnum = {
+  Pending: 'Pending',
+  Trialing: 'Trialing',
   Active: 'Active',
-  Expired: 'Expired'
+  PastDue: 'PastDue',
+  Cancelled: 'Cancelled',
+  Expired: 'Expired',
+  Paused: 'Paused'
 } as const
 
 export type SubscriptionStatusEnum = (typeof SubscriptionStatusEnum)[keyof typeof SubscriptionStatusEnum]
+
+
+export const PaymentStatusEnum = {
+  Pending: 'Pending',
+  Paid: 'Paid',
+  Failed: 'Failed',
+  Refunded: 'Refunded'
+} as const
+
+export type PaymentStatusEnum = (typeof PaymentStatusEnum)[keyof typeof PaymentStatusEnum]
+
+
+export const PaymentTypeEnum = {
+  Initial: 'Initial',
+  Renewal: 'Renewal',
+  Refund: 'Refund'
+} as const
+
+export type PaymentTypeEnum = (typeof PaymentTypeEnum)[keyof typeof PaymentTypeEnum]
 
 
 export const TopicTypeEnum = {

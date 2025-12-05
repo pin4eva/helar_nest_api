@@ -127,3 +127,13 @@ export type SummaryCase = Prisma.SummaryCaseModel
  * 
  */
 export type Organization = Prisma.OrganizationModel
+/**
+ * Model PaymentTransaction
+ * 
+ */
+export type PaymentTransaction = Prisma.PaymentTransactionModel
+/**
+ * Model OrganizationSubscription
+ * 
+ */
+export type OrganizationSubscription = Prisma.OrganizationSubscriptionModel
