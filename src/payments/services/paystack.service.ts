@@ -57,6 +57,12 @@ export class PaystackService {
         throw new BadRequestException(error?.response?.data);
       });
 
+    if (!data.status) {
+      throw new BadRequestException(
+        'Enabling subscription auto-renewal failed',
+      );
+    }
+
     return data;
   }
 

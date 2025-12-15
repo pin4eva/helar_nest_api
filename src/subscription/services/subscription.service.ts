@@ -199,9 +199,41 @@ export class SubscriptionService {
     return this.prisma.subscription.update({ where: { id }, data });
   }
 
-  async cancel(id: string) {
+  async enableAutorenewal(id: string) {
     const sub = await this.prisma.subscription.findUnique({ where: { id } });
     if (!sub) return null;
+
+    const subscriptionCode = sub.providerSubscriptionId;
+    const emailToken = sub.emailToken;
+    if (subscriptionCode && emailToken) {
+      await this.paystackService.enableSubscriptionAutoRenewal(
+        subscriptionCode,
+        emailToken,
+      );
+    }
+
+    return this.prisma.subscription.update({
+      where: { id },
+      data: {
+        autoRenew: true,
+        cancelledAt: null,
+        meta: this.mergeStatus(sub.meta, 'Active'),
+      },
+    });
+  }
+
+  async disableAutorenewal(id: string) {
+    const sub = await this.prisma.subscription.findUnique({ where: { id } });
+    if (!sub) return null;
+
+    const subscriptionCode = sub.providerSubscriptionId;
+    const emailToken = sub.emailToken;
+    if (subscriptionCode && emailToken) {
+      await this.paystackService.disableSubscriptionAutoRenewal(
+        subscriptionCode,
+        emailToken,
+      );
+    }
 
     return this.prisma.subscription.update({
       where: { id },
