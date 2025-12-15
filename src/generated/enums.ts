@@ -9,6 +9,18 @@
 * 🟢 You can import this file directly.
 */
 
+export const PlanIntervalEnum = {
+  daily: 'daily',
+  weekly: 'weekly',
+  monthly: 'monthly',
+  quarterly: 'quarterly',
+  biannually: 'biannually',
+  annually: 'annually'
+} as const
+
+export type PlanIntervalEnum = (typeof PlanIntervalEnum)[keyof typeof PlanIntervalEnum]
+
+
 export const GenderEnum = {
   Male: 'Male',
   Female: 'Female'

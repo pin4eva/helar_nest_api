@@ -73,40 +73,44 @@ model User {
 }
 
 model Subscription {
-  id                     String               @id @default(cuid())
-  userId                 String? // nullable for organization-owned subscriptions
-  organizationId         String?
-  reference              String               @unique
-  createdAt              DateTime             @default(now())
-  startsAt               DateTime?
-  currentPeriodStart     DateTime?
-  currentPeriodEnd       DateTime?
-  nextBillingAt          DateTime?
-  trialEndsAt            DateTime?
-  cancelledAt            DateTime?
-  canceledReason         String?
-  expiresAt              DateTime?
-  amount                 Int?
-  currency               String               @default("NGN")
-  paymentId              String?              @unique
-  provider               String?
-  providerCustomerId     String?
-  providerSubscriptionId String?              @unique
-  providerPlanId         String?
-  plan                   SubscriptionPlanEnum @default(Monthly)
-  // status                 SubscriptionStatusEnum @default(Pending)
-  autoRenew              Boolean              @default(true)
-  meta                   Json?
-
+  id                        String                     @id @default(cuid())
+  userId                    String? // nullable for organization-owned subscriptions
+  organizationId            String?
+  reference                 String                     @unique
+  emailToken                String? //paystack email token
+  startsAt                  DateTime?
+  currentPeriodStart        DateTime?
+  currentPeriodEnd          DateTime?
+  nextBillingAt             DateTime?
+  trialEndsAt               DateTime?
+  cancelledAt               DateTime?
+  canceledReason            String?
+  expiresAt                 DateTime?
+  amount                    Int?
+  currency                  String                     @default("NGN")
+  paymentId                 String?                    @unique
+  provider                  String?
+  providerCustomerId        String?
+  providerSubscriptionId    String?                    @unique
+  providerPlanId            String?
+  plan                      PlanIntervalEnum           @default(monthly)
+  status                    SubscriptionStatusEnum     @default(Pending)
+  autoRenew                 Boolean                    @default(true)
+  meta                      Json?
+  planCode                  String?
   user                      User?                      @relation("UserSubscriptions", fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   organization              Organization?              @relation(fields: [organizationId], references: [id])
   currentUser               User?                      @relation("CurrentSubscription")
   payments                  PaymentTransaction[]
   organizationSubscriptions OrganizationSubscription[]
+  subscriptionPlan          SubscriptionPlan?          @relation(fields: [subscriptionPlanId], references: [id])
+  subscriptionPlanId        Int?
+  createdAt                 DateTime                   @default(now())
+  updatedAt                 DateTime?                  @updatedAt
 
   @@index([userId])
   @@index([organizationId])
-  // @@index([status])
+  @@index([status])
   @@index([expiresAt])
   @@index([nextBillingAt])
   @@map("subscriptions")
@@ -358,6 +362,33 @@ model OrganizationSubscription {
   organization Organization  @relation(fields: [organizationId], references: [id])
 
   @@map("organization_subscriptions")
+}
+
+model SubscriptionPlan {
+  id            Int              @id @default(autoincrement())
+  name          String           @unique
+  planCode      String           @unique
+  amount        Int
+  integration   Int
+  domain        String           @default("test")
+  currency      String           @default("NGN")
+  interval      PlanIntervalEnum @default(monthly)
+  description   String?
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+  isActive      Boolean          @default(true)
+  subscriptions Subscription[]
+
+  @@map("subscription_plans")
+}
+
+enum PlanIntervalEnum {
+  daily
+  weekly
+  monthly
+  quarterly
+  biannually
+  annually
 }
 
 enum GenderEnum {

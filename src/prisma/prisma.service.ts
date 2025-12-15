@@ -25,10 +25,10 @@ export class PrismaService
     // super({ accelerateUrl: connectionString });
     super({
       adapter,
-      log:
-        process.env.NODE_ENV === 'production'
-          ? ['warn', 'error']
-          : ['query', 'info', 'warn', 'error'],
+      // log:
+      //   process.env.NODE_ENV === 'production'
+      //     ? ['warn', 'error']
+      //     : ['query', 'info', 'warn', 'error'],
     });
   }
   async onModuleInit() {

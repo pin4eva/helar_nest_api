@@ -11,7 +11,11 @@ import * as jwt from 'jsonwebtoken';
 import { pbkdf2Sync, randomBytes, timingSafeEqual } from 'node:crypto';
 import { EmailService } from '../email/email.service';
 import { PrismaService } from '../prisma/prisma.service';
-import { User, UserProfileTypeEnum } from '../generated/client';
+import {
+  SubscriptionStatusEnum,
+  User,
+  UserProfileTypeEnum,
+} from '../generated/client';
 import { environments } from '../utils/environments';
 import { parseExpiry } from '../utils/helpers';
 import {
@@ -137,6 +141,29 @@ export class AuthService {
     } catch (error) {
       throw error;
     }
+  }
+
+  async getUserActiveSubscription(userId: string) {
+    const subscription = await this.prismaService.subscription.findFirst({
+      where: {
+        userId,
+        status: {
+          in: [SubscriptionStatusEnum.Active, SubscriptionStatusEnum.Trialing],
+        },
+      },
+      select: {
+        id: true,
+        planCode: true,
+        status: true,
+        startsAt: true,
+        currentPeriodStart: true,
+        currentPeriodEnd: true,
+        nextBillingAt: true,
+        trialEndsAt: true,
+        cancelledAt: true,
+      },
+    });
+    return subscription;
   }
 
   async resendVerificationEmail(email: string, request: Request) {
@@ -297,8 +324,9 @@ export class AuthService {
       if (!user) {
         throw new NotFoundException('User not found');
       }
+      const activeSubscription = await this.getUserActiveSubscription(userId);
 
-      return user;
+      return { ...user, activeSubscription };
     } catch (error) {
       throw error;
     }
@@ -409,6 +437,21 @@ export class AuthService {
       if (!session || !session?.user) {
         throw new UnauthorizedException('Session expired! login again.');
       }
+
+      // // Extend session TTL and issue a fresh access token with +15 minutes
+      // const extendSeconds = 15 * 60; // 15 minutes
+      // const refreshedPayload: JwtPayload = {
+      //   id: decoded.id,
+      //   tokenType: 'access',
+      //   sessionId: decoded.sessionId,
+      // };
+
+      // jwt.sign(refreshedPayload, environments.JWT_SECRETS, {
+      //   ...tokenOptions,
+      //   expiresIn: extendSeconds,
+      // });
+
+      // await this.cacheManager.set(decoded.sessionId, session, extendSeconds);
 
       return session.user;
     } catch (error) {

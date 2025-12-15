@@ -257,11 +257,18 @@ export type IntNullableFilter<$PrismaModel = never> = {
   not?: Prisma.NestedIntNullableFilter<$PrismaModel> | number | null
 }
 
-export type EnumSubscriptionPlanEnumFilter<$PrismaModel = never> = {
-  equals?: $Enums.SubscriptionPlanEnum | Prisma.EnumSubscriptionPlanEnumFieldRefInput<$PrismaModel>
-  in?: $Enums.SubscriptionPlanEnum[] | Prisma.ListEnumSubscriptionPlanEnumFieldRefInput<$PrismaModel>
-  notIn?: $Enums.SubscriptionPlanEnum[] | Prisma.ListEnumSubscriptionPlanEnumFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumSubscriptionPlanEnumFilter<$PrismaModel> | $Enums.SubscriptionPlanEnum
+export type EnumPlanIntervalEnumFilter<$PrismaModel = never> = {
+  equals?: $Enums.PlanIntervalEnum | Prisma.EnumPlanIntervalEnumFieldRefInput<$PrismaModel>
+  in?: $Enums.PlanIntervalEnum[] | Prisma.ListEnumPlanIntervalEnumFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PlanIntervalEnum[] | Prisma.ListEnumPlanIntervalEnumFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPlanIntervalEnumFilter<$PrismaModel> | $Enums.PlanIntervalEnum
+}
+
+export type EnumSubscriptionStatusEnumFilter<$PrismaModel = never> = {
+  equals?: $Enums.SubscriptionStatusEnum | Prisma.EnumSubscriptionStatusEnumFieldRefInput<$PrismaModel>
+  in?: $Enums.SubscriptionStatusEnum[] | Prisma.ListEnumSubscriptionStatusEnumFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SubscriptionStatusEnum[] | Prisma.ListEnumSubscriptionStatusEnumFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSubscriptionStatusEnumFilter<$PrismaModel> | $Enums.SubscriptionStatusEnum
 }
 
 export type JsonNullableFilter<$PrismaModel = never> =
@@ -318,14 +325,24 @@ export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedIntNullableFilter<$PrismaModel>
 }
 
-export type EnumSubscriptionPlanEnumWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.SubscriptionPlanEnum | Prisma.EnumSubscriptionPlanEnumFieldRefInput<$PrismaModel>
-  in?: $Enums.SubscriptionPlanEnum[] | Prisma.ListEnumSubscriptionPlanEnumFieldRefInput<$PrismaModel>
-  notIn?: $Enums.SubscriptionPlanEnum[] | Prisma.ListEnumSubscriptionPlanEnumFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumSubscriptionPlanEnumWithAggregatesFilter<$PrismaModel> | $Enums.SubscriptionPlanEnum
+export type EnumPlanIntervalEnumWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PlanIntervalEnum | Prisma.EnumPlanIntervalEnumFieldRefInput<$PrismaModel>
+  in?: $Enums.PlanIntervalEnum[] | Prisma.ListEnumPlanIntervalEnumFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PlanIntervalEnum[] | Prisma.ListEnumPlanIntervalEnumFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPlanIntervalEnumWithAggregatesFilter<$PrismaModel> | $Enums.PlanIntervalEnum
   _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumSubscriptionPlanEnumFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumSubscriptionPlanEnumFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPlanIntervalEnumFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPlanIntervalEnumFilter<$PrismaModel>
+}
+
+export type EnumSubscriptionStatusEnumWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SubscriptionStatusEnum | Prisma.EnumSubscriptionStatusEnumFieldRefInput<$PrismaModel>
+  in?: $Enums.SubscriptionStatusEnum[] | Prisma.ListEnumSubscriptionStatusEnumFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SubscriptionStatusEnum[] | Prisma.ListEnumSubscriptionStatusEnumFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSubscriptionStatusEnumWithAggregatesFilter<$PrismaModel> | $Enums.SubscriptionStatusEnum
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSubscriptionStatusEnumFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSubscriptionStatusEnumFilter<$PrismaModel>
 }
 
 export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
@@ -668,11 +685,18 @@ export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
   not?: Prisma.NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
 }
 
-export type NestedEnumSubscriptionPlanEnumFilter<$PrismaModel = never> = {
-  equals?: $Enums.SubscriptionPlanEnum | Prisma.EnumSubscriptionPlanEnumFieldRefInput<$PrismaModel>
-  in?: $Enums.SubscriptionPlanEnum[] | Prisma.ListEnumSubscriptionPlanEnumFieldRefInput<$PrismaModel>
-  notIn?: $Enums.SubscriptionPlanEnum[] | Prisma.ListEnumSubscriptionPlanEnumFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumSubscriptionPlanEnumFilter<$PrismaModel> | $Enums.SubscriptionPlanEnum
+export type NestedEnumPlanIntervalEnumFilter<$PrismaModel = never> = {
+  equals?: $Enums.PlanIntervalEnum | Prisma.EnumPlanIntervalEnumFieldRefInput<$PrismaModel>
+  in?: $Enums.PlanIntervalEnum[] | Prisma.ListEnumPlanIntervalEnumFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PlanIntervalEnum[] | Prisma.ListEnumPlanIntervalEnumFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPlanIntervalEnumFilter<$PrismaModel> | $Enums.PlanIntervalEnum
+}
+
+export type NestedEnumSubscriptionStatusEnumFilter<$PrismaModel = never> = {
+  equals?: $Enums.SubscriptionStatusEnum | Prisma.EnumSubscriptionStatusEnumFieldRefInput<$PrismaModel>
+  in?: $Enums.SubscriptionStatusEnum[] | Prisma.ListEnumSubscriptionStatusEnumFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SubscriptionStatusEnum[] | Prisma.ListEnumSubscriptionStatusEnumFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSubscriptionStatusEnumFilter<$PrismaModel> | $Enums.SubscriptionStatusEnum
 }
 
 export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -716,14 +740,24 @@ export type NestedFloatNullableFilter<$PrismaModel = never> = {
   not?: Prisma.NestedFloatNullableFilter<$PrismaModel> | number | null
 }
 
-export type NestedEnumSubscriptionPlanEnumWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.SubscriptionPlanEnum | Prisma.EnumSubscriptionPlanEnumFieldRefInput<$PrismaModel>
-  in?: $Enums.SubscriptionPlanEnum[] | Prisma.ListEnumSubscriptionPlanEnumFieldRefInput<$PrismaModel>
-  notIn?: $Enums.SubscriptionPlanEnum[] | Prisma.ListEnumSubscriptionPlanEnumFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumSubscriptionPlanEnumWithAggregatesFilter<$PrismaModel> | $Enums.SubscriptionPlanEnum
+export type NestedEnumPlanIntervalEnumWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PlanIntervalEnum | Prisma.EnumPlanIntervalEnumFieldRefInput<$PrismaModel>
+  in?: $Enums.PlanIntervalEnum[] | Prisma.ListEnumPlanIntervalEnumFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PlanIntervalEnum[] | Prisma.ListEnumPlanIntervalEnumFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPlanIntervalEnumWithAggregatesFilter<$PrismaModel> | $Enums.PlanIntervalEnum
   _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumSubscriptionPlanEnumFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumSubscriptionPlanEnumFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPlanIntervalEnumFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPlanIntervalEnumFilter<$PrismaModel>
+}
+
+export type NestedEnumSubscriptionStatusEnumWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SubscriptionStatusEnum | Prisma.EnumSubscriptionStatusEnumFieldRefInput<$PrismaModel>
+  in?: $Enums.SubscriptionStatusEnum[] | Prisma.ListEnumSubscriptionStatusEnumFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SubscriptionStatusEnum[] | Prisma.ListEnumSubscriptionStatusEnumFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSubscriptionStatusEnumWithAggregatesFilter<$PrismaModel> | $Enums.SubscriptionStatusEnum
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSubscriptionStatusEnumFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSubscriptionStatusEnumFilter<$PrismaModel>
 }
 
 export type NestedJsonNullableFilter<$PrismaModel = never> =

@@ -6,14 +6,17 @@ import {
   Patch,
   Post,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 
 import {
   SubscriptionQueryDto,
   CreateSubscriptionDto,
   UpdateSubscriptionDto,
+  PostSubscriptionPaymentDTO,
 } from '../dto/subscription.dto';
 import { SubscriptionService } from '../services/subscription.service';
+import { AuthGuard } from 'src/guards/auth.guard';
 
 @Controller('subscriptions')
 export class SubscriptionController {
@@ -22,6 +25,12 @@ export class SubscriptionController {
   @Post()
   create(@Body() input: CreateSubscriptionDto) {
     return this.service.create(input);
+  }
+
+  @UseGuards(AuthGuard)
+  @Post('post-payment')
+  postPayment(@Body() input: PostSubscriptionPaymentDTO) {
+    return this.service.postPayment(input);
   }
 
   @Get()

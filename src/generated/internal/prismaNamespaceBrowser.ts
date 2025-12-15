@@ -70,7 +70,8 @@ export const ModelName = {
   SummaryCase: 'SummaryCase',
   Organization: 'Organization',
   PaymentTransaction: 'PaymentTransaction',
-  OrganizationSubscription: 'OrganizationSubscription'
+  OrganizationSubscription: 'OrganizationSubscription',
+  SubscriptionPlan: 'SubscriptionPlan'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -140,7 +141,7 @@ export const SubscriptionScalarFieldEnum = {
   userId: 'userId',
   organizationId: 'organizationId',
   reference: 'reference',
-  createdAt: 'createdAt',
+  emailToken: 'emailToken',
   startsAt: 'startsAt',
   currentPeriodStart: 'currentPeriodStart',
   currentPeriodEnd: 'currentPeriodEnd',
@@ -157,8 +158,13 @@ export const SubscriptionScalarFieldEnum = {
   providerSubscriptionId: 'providerSubscriptionId',
   providerPlanId: 'providerPlanId',
   plan: 'plan',
+  status: 'status',
   autoRenew: 'autoRenew',
-  meta: 'meta'
+  meta: 'meta',
+  planCode: 'planCode',
+  subscriptionPlanId: 'subscriptionPlanId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type SubscriptionScalarFieldEnum = (typeof SubscriptionScalarFieldEnum)[keyof typeof SubscriptionScalarFieldEnum]
@@ -380,6 +386,24 @@ export const OrganizationSubscriptionScalarFieldEnum = {
 export type OrganizationSubscriptionScalarFieldEnum = (typeof OrganizationSubscriptionScalarFieldEnum)[keyof typeof OrganizationSubscriptionScalarFieldEnum]
 
 
+export const SubscriptionPlanScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  planCode: 'planCode',
+  amount: 'amount',
+  integration: 'integration',
+  domain: 'domain',
+  currency: 'currency',
+  interval: 'interval',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  isActive: 'isActive'
+} as const
+
+export type SubscriptionPlanScalarFieldEnum = (typeof SubscriptionPlanScalarFieldEnum)[keyof typeof SubscriptionPlanScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -459,13 +483,15 @@ export const SubscriptionOrderByRelevanceFieldEnum = {
   userId: 'userId',
   organizationId: 'organizationId',
   reference: 'reference',
+  emailToken: 'emailToken',
   canceledReason: 'canceledReason',
   currency: 'currency',
   paymentId: 'paymentId',
   provider: 'provider',
   providerCustomerId: 'providerCustomerId',
   providerSubscriptionId: 'providerSubscriptionId',
-  providerPlanId: 'providerPlanId'
+  providerPlanId: 'providerPlanId',
+  planCode: 'planCode'
 } as const
 
 export type SubscriptionOrderByRelevanceFieldEnum = (typeof SubscriptionOrderByRelevanceFieldEnum)[keyof typeof SubscriptionOrderByRelevanceFieldEnum]
@@ -647,4 +673,15 @@ export const OrganizationSubscriptionOrderByRelevanceFieldEnum = {
 } as const
 
 export type OrganizationSubscriptionOrderByRelevanceFieldEnum = (typeof OrganizationSubscriptionOrderByRelevanceFieldEnum)[keyof typeof OrganizationSubscriptionOrderByRelevanceFieldEnum]
+
+
+export const SubscriptionPlanOrderByRelevanceFieldEnum = {
+  name: 'name',
+  planCode: 'planCode',
+  domain: 'domain',
+  currency: 'currency',
+  description: 'description'
+} as const
+
+export type SubscriptionPlanOrderByRelevanceFieldEnum = (typeof SubscriptionPlanOrderByRelevanceFieldEnum)[keyof typeof SubscriptionPlanOrderByRelevanceFieldEnum]
 

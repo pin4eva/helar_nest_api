@@ -117,3 +117,8 @@ export type PaymentTransaction = Prisma.PaymentTransactionModel
  * 
  */
 export type OrganizationSubscription = Prisma.OrganizationSubscriptionModel
+/**
+ * Model SubscriptionPlan
+ * 
+ */
+export type SubscriptionPlan = Prisma.SubscriptionPlanModel

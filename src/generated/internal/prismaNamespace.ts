@@ -80,12 +80,12 @@ export type PrismaVersion = {
 }
 
 /**
- * Prisma Client JS version: 7.0.0
- * Query Engine version: 0c19ccc313cf9911a90d99d2ac2eb0280c76c513
+ * Prisma Client JS version: 7.1.0
+ * Query Engine version: ab635e6b9d606fa5c8fb8b1a7f909c3c3c1c98ba
  */
 export const prismaVersion: PrismaVersion = {
-  client: "7.0.0",
-  engine: "0c19ccc313cf9911a90d99d2ac2eb0280c76c513"
+  client: "7.1.0",
+  engine: "ab635e6b9d606fa5c8fb8b1a7f909c3c3c1c98ba"
 }
 
 /**
@@ -403,7 +403,8 @@ export const ModelName = {
   SummaryCase: 'SummaryCase',
   Organization: 'Organization',
   PaymentTransaction: 'PaymentTransaction',
-  OrganizationSubscription: 'OrganizationSubscription'
+  OrganizationSubscription: 'OrganizationSubscription',
+  SubscriptionPlan: 'SubscriptionPlan'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -419,7 +420,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "auth" | "user" | "subscription" | "report" | "reportToSubject" | "reportComment" | "reportCommentLike" | "reportLike" | "reportTags" | "reportVisits" | "bookmark" | "quote" | "subject" | "handbookTopic" | "handbookCase" | "summaryTopic" | "summaryCase" | "organization" | "paymentTransaction" | "organizationSubscription"
+    modelProps: "auth" | "user" | "subscription" | "report" | "reportToSubject" | "reportComment" | "reportCommentLike" | "reportLike" | "reportTags" | "reportVisits" | "bookmark" | "quote" | "subject" | "handbookTopic" | "handbookCase" | "summaryTopic" | "summaryCase" | "organization" | "paymentTransaction" | "organizationSubscription" | "subscriptionPlan"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1903,6 +1904,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SubscriptionPlan: {
+      payload: Prisma.$SubscriptionPlanPayload<ExtArgs>
+      fields: Prisma.SubscriptionPlanFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SubscriptionPlanFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPlanPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SubscriptionPlanFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPlanPayload>
+        }
+        findFirst: {
+          args: Prisma.SubscriptionPlanFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPlanPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SubscriptionPlanFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPlanPayload>
+        }
+        findMany: {
+          args: Prisma.SubscriptionPlanFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPlanPayload>[]
+        }
+        create: {
+          args: Prisma.SubscriptionPlanCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPlanPayload>
+        }
+        createMany: {
+          args: Prisma.SubscriptionPlanCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SubscriptionPlanCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPlanPayload>[]
+        }
+        delete: {
+          args: Prisma.SubscriptionPlanDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPlanPayload>
+        }
+        update: {
+          args: Prisma.SubscriptionPlanUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPlanPayload>
+        }
+        deleteMany: {
+          args: Prisma.SubscriptionPlanDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SubscriptionPlanUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SubscriptionPlanUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPlanPayload>[]
+        }
+        upsert: {
+          args: Prisma.SubscriptionPlanUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPlanPayload>
+        }
+        aggregate: {
+          args: Prisma.SubscriptionPlanAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSubscriptionPlan>
+        }
+        groupBy: {
+          args: Prisma.SubscriptionPlanGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SubscriptionPlanGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SubscriptionPlanCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SubscriptionPlanCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1993,7 +2068,7 @@ export const SubscriptionScalarFieldEnum = {
   userId: 'userId',
   organizationId: 'organizationId',
   reference: 'reference',
-  createdAt: 'createdAt',
+  emailToken: 'emailToken',
   startsAt: 'startsAt',
   currentPeriodStart: 'currentPeriodStart',
   currentPeriodEnd: 'currentPeriodEnd',
@@ -2010,8 +2085,13 @@ export const SubscriptionScalarFieldEnum = {
   providerSubscriptionId: 'providerSubscriptionId',
   providerPlanId: 'providerPlanId',
   plan: 'plan',
+  status: 'status',
   autoRenew: 'autoRenew',
-  meta: 'meta'
+  meta: 'meta',
+  planCode: 'planCode',
+  subscriptionPlanId: 'subscriptionPlanId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type SubscriptionScalarFieldEnum = (typeof SubscriptionScalarFieldEnum)[keyof typeof SubscriptionScalarFieldEnum]
@@ -2233,6 +2313,24 @@ export const OrganizationSubscriptionScalarFieldEnum = {
 export type OrganizationSubscriptionScalarFieldEnum = (typeof OrganizationSubscriptionScalarFieldEnum)[keyof typeof OrganizationSubscriptionScalarFieldEnum]
 
 
+export const SubscriptionPlanScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  planCode: 'planCode',
+  amount: 'amount',
+  integration: 'integration',
+  domain: 'domain',
+  currency: 'currency',
+  interval: 'interval',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  isActive: 'isActive'
+} as const
+
+export type SubscriptionPlanScalarFieldEnum = (typeof SubscriptionPlanScalarFieldEnum)[keyof typeof SubscriptionPlanScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -2312,13 +2410,15 @@ export const SubscriptionOrderByRelevanceFieldEnum = {
   userId: 'userId',
   organizationId: 'organizationId',
   reference: 'reference',
+  emailToken: 'emailToken',
   canceledReason: 'canceledReason',
   currency: 'currency',
   paymentId: 'paymentId',
   provider: 'provider',
   providerCustomerId: 'providerCustomerId',
   providerSubscriptionId: 'providerSubscriptionId',
-  providerPlanId: 'providerPlanId'
+  providerPlanId: 'providerPlanId',
+  planCode: 'planCode'
 } as const
 
 export type SubscriptionOrderByRelevanceFieldEnum = (typeof SubscriptionOrderByRelevanceFieldEnum)[keyof typeof SubscriptionOrderByRelevanceFieldEnum]
@@ -2502,6 +2602,17 @@ export const OrganizationSubscriptionOrderByRelevanceFieldEnum = {
 export type OrganizationSubscriptionOrderByRelevanceFieldEnum = (typeof OrganizationSubscriptionOrderByRelevanceFieldEnum)[keyof typeof OrganizationSubscriptionOrderByRelevanceFieldEnum]
 
 
+export const SubscriptionPlanOrderByRelevanceFieldEnum = {
+  name: 'name',
+  planCode: 'planCode',
+  domain: 'domain',
+  currency: 'currency',
+  description: 'description'
+} as const
+
+export type SubscriptionPlanOrderByRelevanceFieldEnum = (typeof SubscriptionPlanOrderByRelevanceFieldEnum)[keyof typeof SubscriptionPlanOrderByRelevanceFieldEnum]
+
+
 
 /**
  * Field references
@@ -2614,16 +2725,30 @@ export type ListEnumGenderEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$P
 
 
 /**
- * Reference to a field of type 'SubscriptionPlanEnum'
+ * Reference to a field of type 'PlanIntervalEnum'
  */
-export type EnumSubscriptionPlanEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SubscriptionPlanEnum'>
+export type EnumPlanIntervalEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PlanIntervalEnum'>
     
 
 
 /**
- * Reference to a field of type 'SubscriptionPlanEnum[]'
+ * Reference to a field of type 'PlanIntervalEnum[]'
  */
-export type ListEnumSubscriptionPlanEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SubscriptionPlanEnum[]'>
+export type ListEnumPlanIntervalEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PlanIntervalEnum[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SubscriptionStatusEnum'
+ */
+export type EnumSubscriptionStatusEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SubscriptionStatusEnum'>
+    
+
+
+/**
+ * Reference to a field of type 'SubscriptionStatusEnum[]'
+ */
+export type ListEnumSubscriptionStatusEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SubscriptionStatusEnum[]'>
     
 
 
@@ -2759,7 +2884,7 @@ export type PrismaClientOptions = ({
    *  { emit: 'stdout', level: 'error' }
    * 
    * ```
-   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/logging#the-log-option).
+   * Read more in our [docs](https://pris.ly/d/logging).
    */
   log?: (LogLevel | LogDefinition)[]
   /**
@@ -2787,6 +2912,22 @@ export type PrismaClientOptions = ({
    * ```
    */
   omit?: GlobalOmitConfig
+  /**
+   * SQL commenter plugins that add metadata to SQL queries as comments.
+   * Comments follow the sqlcommenter format: https://google.github.io/sqlcommenter/
+   * 
+   * @example
+   * ```
+   * const prisma = new PrismaClient({
+   *   adapter,
+   *   comments: [
+   *     traceContext(),
+   *     queryInsights(),
+   *   ],
+   * })
+   * ```
+   */
+  comments?: runtime.SqlCommenterPlugin[]
 }
 export type GlobalOmitConfig = {
   auth?: Prisma.AuthOmit
@@ -2809,6 +2950,7 @@ export type GlobalOmitConfig = {
   organization?: Prisma.OrganizationOmit
   paymentTransaction?: Prisma.PaymentTransactionOmit
   organizationSubscription?: Prisma.OrganizationSubscriptionOmit
+  subscriptionPlan?: Prisma.SubscriptionPlanOmit
 }
 
 /* Types for Logging */
