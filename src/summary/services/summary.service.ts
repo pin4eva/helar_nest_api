@@ -117,7 +117,7 @@ export class SummaryService {
             select: { cases: true },
           },
         },
-        orderBy: { createdAt: 'desc' },
+        orderBy: { createdAt: 'asc' }, // when I migrated the data, createdAt was not set correctly
       });
 
       return topics;
