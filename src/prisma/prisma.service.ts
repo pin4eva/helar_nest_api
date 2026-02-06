@@ -1,7 +1,6 @@
 import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
 
 import { PrismaPg } from '@prisma/adapter-pg';
-import { Pool } from 'pg';
 import { PrismaClient } from 'src/generated/client';
 import { environments } from 'src/utils/environments';
 // import { withAccelerate } from '@prisma/extension-accelerate';
@@ -29,9 +28,24 @@ export class PrismaService
       //     ? ['warn', 'error']
       //     : ['query', 'info', 'warn', 'error'],
     });
+
+    return this.$extends({
+      result: {
+        report: {
+          caseRef: {
+            needs: { date: true, reportId: true },
+            compute({ date, reportId }) {
+                const year = new Date(date).getFullYear();
+              return `helar-${year}-${reportId}`;
+            }
+          }
+        }
+      }
+    }) as this;
   }
   async onModuleInit() {
-    // this.$extends(withAccelerate());
+    // Establish connection to the database when the module initializes
+    await this.$connect();
   }
 
   async onModuleDestroy() {
