@@ -2,12 +2,14 @@ type ActivationEmailTemplateProps = {
   name: string;
   activationLink: string;
   supportEmail?: string;
+  origin?: string;
 };
 
 export const buildActivationEmail = ({
   name,
   activationLink,
   supportEmail = 'support@helar.law',
+  origin, // New parameter for origin is for dynamic logo rendering based on environment (e.g., staging vs production) if need be
 }: ActivationEmailTemplateProps) => `
   <!DOCTYPE html>
   <html lang="en">
@@ -31,6 +33,12 @@ export const buildActivationEmail = ({
           border-radius: 16px;
           box-shadow: 0 10px 30px rgba(18, 38, 63, 0.07);
         }
+          .content{
+  border-radius: 10px;
+  border-left: 10px solid #ffaf45;
+  padding: 1rem;
+}
+
         h1 {
           font-size: 24px;
           margin-bottom: 12px;
@@ -42,11 +50,12 @@ export const buildActivationEmail = ({
         }
         .cta {
           display: inline-block;
-          margin-top: 24px;
           padding: 14px 28px;
-          background-color: #1c4ed8;
-          color: #ffffff;
+          background-color: #ffaf45;
+          color: #000000;
           text-decoration: none;
+          text-align: center;
+          font-size: 16px;
           font-weight: 600;
           border-radius: 10px;
         }
@@ -59,16 +68,21 @@ export const buildActivationEmail = ({
     </head>
     <body>
       <div class="container">
+      
+       <div class="content">
         <h1>Welcome to Helar, ${name}!</h1>
         <p>
           You're just one step away from unlocking curated briefs, note summaries,
           and law-school tools built for you. Please confirm your email address to
           activate your account.
         </p>
-        <a class="cta" href="${activationLink}" target="_blank" rel="noopener">
+       </div>
+        <div style="text-align: center; margin-top: 24px;">
+        <a class="cta" href="${activationLink}" target="_blank" rel="noopener" style="color:#000;">
           Activate my account
         </a>
-        <p>
+        </div>
+        <p >
           If the button does not work, copy and paste this link into your browser:<br />
           <a href="${activationLink}" target="_blank" rel="noopener">${activationLink}</a>
         </p>

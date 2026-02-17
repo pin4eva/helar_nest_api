@@ -111,7 +111,7 @@ export class AuthService {
     const email = input.email.toLowerCase().trim();
     try {
       const existingUser = await this.prismaService.user.findUnique({
-        where: { email: input.email },
+        where: { email },
       });
 
       if (existingUser) {
@@ -132,6 +132,7 @@ export class AuthService {
         to: email,
         activationLink,
         name: input.firstName,
+        origin: origin,
       });
 
       return {

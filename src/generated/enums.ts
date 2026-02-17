@@ -109,9 +109,9 @@ export type TopicTypeEnum = (typeof TopicTypeEnum)[keyof typeof TopicTypeEnum]
 
 
 export const SummaryTypeEnum = {
-  Faculty_Summary: 'Faculty Summary',
-  NLS_Summary: 'NLS Summary',
-  Final_Bar_Exam_QA: 'Final Bar Exam Questions and Answers'
+  Faculty_Summary: 'Faculty_Summary',
+  NLS_Summary: 'NLS_Summary',
+  Final_Bar_Exam_QA: 'Final_Bar_Exam_QA'
 } as const
 
 export type SummaryTypeEnum = (typeof SummaryTypeEnum)[keyof typeof SummaryTypeEnum]
