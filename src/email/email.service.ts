@@ -39,7 +39,7 @@ export class EmailService {
       this.logger.log(`Email sent to ${payload.to}`);
     } catch (error) {
       this.logger.error(
-        `Failed to send email to ${payload.to}: ${error.message}`,
+        `Failed to send email to ${payload.to}: ${error?.['message']}`,
       );
       throw new BadRequestException('Failed to send email');
     }
