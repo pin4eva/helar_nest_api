@@ -50,15 +50,17 @@ export class EmailService {
     to,
     name,
     activationLink,
+    origin,
   }: {
     to: string;
     name: string;
     activationLink: string;
+    origin?: string;
   }) {
     return this.sendEmail({
       to,
       subject: 'Activate your Helar account',
-      htmlContent: buildActivationEmail({ name, activationLink }),
+      htmlContent: buildActivationEmail({ name, activationLink, origin }),
     });
   }
 
