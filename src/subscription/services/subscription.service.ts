@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import {
   PlanIntervalEnum,
   SubscriptionStatusEnum,
@@ -13,6 +17,8 @@ import type {
   PostSubscriptionPaymentDTO,
 } from '../dto/subscription.dto';
 import { PaystackService } from 'src/payments/services/paystack.service';
+import axios from 'axios';
+import { PaystackPlanListResponse } from '../dto/plan.dto';
 
 @Injectable()
 export class SubscriptionService {
@@ -26,6 +32,24 @@ export class SubscriptionService {
 
     let planCode = rest?.planCode;
     const status: SubscriptionStatusEnum = SubscriptionStatusEnum.Pending;
+    const { data: res } = await axios<PaystackPlanListResponse>(
+      `https://api.paystack.co/plan`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+
+    const foundPlan = res.data.find((plan) => plan.amount === rest.amount);
+    if (!foundPlan) {
+      throw new BadRequestException('Invalid plan code');
+    }
+
+    planCode = foundPlan.plan_code;
+    console.log(planCode);
 
     if (!planCode) {
       const plan = await this.prisma.subscriptionPlan.findFirst({
@@ -199,38 +223,85 @@ export class SubscriptionService {
     return this.prisma.subscription.update({ where: { id }, data });
   }
 
-  async enableAutorenewal(id: string) {
-    const sub = await this.prisma.subscription.findUnique({ where: { id } });
-    if (!sub) return null;
+  // async enableAutorenewal(id: string) {
+  //   const sub = await this.prisma.subscription.findUnique({ where: { id } });
+  //   if (!sub) return null;
 
-    const subscriptionCode = sub.providerSubscriptionId;
-    const emailToken = sub.emailToken;
-    if (subscriptionCode && emailToken) {
-      await this.paystackService.enableSubscriptionAutoRenewal(
-        subscriptionCode,
-        emailToken,
-      );
-    }
+  //   const subscriptionCode = sub.providerSubscriptionId;
+  //   const emailToken = sub.emailToken;
 
-    return this.prisma.subscription.update({
+  //   if (!subscriptionCode || !emailToken) {
+  //     throw new BadRequestException('Missing provider subscription data');
+  //   }
+  //   if (subscriptionCode && emailToken) {
+  //     await this.paystackService.enableSubscriptionAutoRenewal(
+  //       subscriptionCode,
+  //       emailToken,
+  //     );
+  //   }
+
+  //   return this.prisma.subscription.update({
+  //     where: { id },
+  //     data: {
+  //       autoRenew: true,
+  //       cancelledAt: null,
+  //       meta: this.mergeStatus(sub.meta, 'Active'),
+  //     },
+  //   });
+  // }
+
+  // async disableAutorenewal(id: string) {
+  //   const sub = await this.prisma.subscription.findUnique({ where: { id } });
+  //   if (!sub) return null;
+
+  //   const subscriptionCode = sub.providerSubscriptionId;
+  //   const emailToken = sub.emailToken;
+
+  //   if (!subscriptionCode || !emailToken) {
+  //     throw new BadRequestException('Missing provider subscription data');
+  //   }
+  //   if (subscriptionCode && emailToken) {
+  //     await this.paystackService.disableSubscriptionAutoRenewal(
+  //       subscriptionCode,
+  //       emailToken,
+  //     );
+  //   }
+
+  //   return this.prisma.subscription.update({
+  //     where: { id },
+  //     data: {
+  //       autoRenew: false,
+  //       cancelledAt: new Date(),
+  //       meta: this.mergeStatus(sub.meta, 'Cancelled'),
+  //     },
+  //   });
+  // }
+
+  async toggleAutorenewal(id: string) {
+    const sub = await this.prisma.subscription.findUnique({
       where: { id },
-      data: {
-        autoRenew: true,
-        cancelledAt: null,
-        meta: this.mergeStatus(sub.meta, 'Active'),
-      },
     });
-  }
 
-  async disableAutorenewal(id: string) {
-    const sub = await this.prisma.subscription.findUnique({ where: { id } });
-    if (!sub) return null;
+    if (!sub) {
+      throw new NotFoundException('Subscription not found');
+    }
 
-    const subscriptionCode = sub.providerSubscriptionId;
-    const emailToken = sub.emailToken;
-    if (subscriptionCode && emailToken) {
+    const { providerSubscriptionId, emailToken, autoRenew } = sub;
+
+    if (!providerSubscriptionId || !emailToken) {
+      throw new BadRequestException('Missing provider subscription data');
+    }
+
+    if (autoRenew) {
+      console.log('Disabling subscription...');
       await this.paystackService.disableSubscriptionAutoRenewal(
-        subscriptionCode,
+        providerSubscriptionId,
+        emailToken,
+      );
+    } else {
+      console.log('Enabling subscription...');
+      await this.paystackService.enableSubscriptionAutoRenewal(
+        providerSubscriptionId,
         emailToken,
       );
     }
@@ -238,9 +309,9 @@ export class SubscriptionService {
     return this.prisma.subscription.update({
       where: { id },
       data: {
-        autoRenew: false,
-        cancelledAt: new Date(),
-        meta: this.mergeStatus(sub.meta, 'Cancelled'),
+        autoRenew: !autoRenew,
+        cancelledAt: autoRenew ? null : new Date(),
+        meta: this.mergeStatus(sub.meta, autoRenew ? 'Active' : 'Cancelled'),
       },
     });
   }

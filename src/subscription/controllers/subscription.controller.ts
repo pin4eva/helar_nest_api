@@ -48,15 +48,15 @@ export class SubscriptionController {
     return this.service.update(id, input);
   }
 
-  @UseGuards(AuthGuard)
-  @Post(':id/disable-autorenewal')
-  disableAutorenewal(@Param('id') id: string) {
-    return this.service.disableAutorenewal(id);
+  // @UseGuards(AuthGuard
+  @Post(':id/toggle-autorenewal')
+  toggleAutorenewal(@Param('id') id: string) {
+    return this.service.toggleAutorenewal(id);
   }
 
-  @UseGuards(AuthGuard)
-  @Post(':id/enable-autorenewal')
-  enableAutorenewal(@Param('id') id: string) {
-    return this.service.enableAutorenewal(id);
-  }
+  // @UseGuards(AuthGuard)
+  // @Post(':id/enable-autorenewal')
+  // enableAutorenewal(@Param('id') id: string) {
+  //   return this.service.enableAutorenewal(id);
+  // }
 }
