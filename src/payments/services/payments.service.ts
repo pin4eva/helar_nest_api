@@ -5,6 +5,7 @@ import { PaymentStatusEnum, PaymentTypeEnum } from 'src/generated/enums';
 import { PrismaService } from 'src/prisma/prisma.service';
 import type { CreatePaymentDto } from '../dto/payment.dto';
 import type { PaystackInitDto } from '../dto/paystack.dto';
+import { environments } from 'src/utils/environments';
 
 @Injectable()
 export class PaymentsService {
@@ -200,7 +201,7 @@ export class PaymentsService {
 
   async handlePaystackWebhook(payload: unknown, signature?: string) {
     // Verify webhook signature using PAYSTACK_SECRET
-    const secret = process.env.PAYSTACK_SECRET_KEY;
+    const secret = environments.PAYSTACK_SECRET_KEY;
     if (!secret) {
       this.logger.warn('PAYSTACK_SECRET not set; webhook will not be verified');
     } else if (signature) {
@@ -364,7 +365,7 @@ export class PaymentsService {
   }
 
   private ensurePaystackSecret(): string {
-    const secret = process.env.PAYSTACK_SECRET_KEY;
+    const secret = environments.PAYSTACK_SECRET_KEY;
     if (!secret) throw new Error('PAYSTACK_SECRET_KEY not set');
     return secret;
   }

@@ -48,7 +48,7 @@ export class SubscriptionController {
     return this.service.update(id, input);
   }
 
-  // @UseGuards(AuthGuard
+  @UseGuards(AuthGuard)
   @Post(':id/toggle-autorenewal')
   toggleAutorenewal(@Param('id') id: string) {
     return this.service.toggleAutorenewal(id);

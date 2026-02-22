@@ -19,6 +19,7 @@ import type {
 import { PaystackService } from 'src/payments/services/paystack.service';
 import axios from 'axios';
 import { PaystackPlanListResponse } from '../dto/plan.dto';
+import { environments } from 'src/utils/environments';
 
 @Injectable()
 export class SubscriptionService {
@@ -33,11 +34,11 @@ export class SubscriptionService {
     let planCode = rest?.planCode;
     const status: SubscriptionStatusEnum = SubscriptionStatusEnum.Pending;
     const { data: res } = await axios<PaystackPlanListResponse>(
-      `https://api.paystack.co/plan`,
+      `${environments.PAYSTACK_BASE_URL}/plan`,
       {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
+          Authorization: `Bearer ${environments.PAYSTACK_SECRET_KEY}`,
           'Content-Type': 'application/json',
         },
       },
