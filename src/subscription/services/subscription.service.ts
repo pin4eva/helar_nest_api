@@ -309,6 +309,9 @@ export class SubscriptionService {
     return this.prisma.subscription.update({
       where: { id },
       data: {
+        status: autoRenew
+          ? SubscriptionStatusEnum.Active
+          : SubscriptionStatusEnum.Cancelled,
         autoRenew: !autoRenew,
         cancelledAt: autoRenew ? null : new Date(),
         meta: this.mergeStatus(sub.meta, autoRenew ? 'Active' : 'Cancelled'),
