@@ -122,3 +122,8 @@ export type OrganizationSubscription = Prisma.OrganizationSubscriptionModel
  * 
  */
 export type SubscriptionPlan = Prisma.SubscriptionPlanModel
+/**
+ * Model FinalBarExamQA
+ * 
+ */
+export type FinalBarExamQA = Prisma.FinalBarExamQAModel
