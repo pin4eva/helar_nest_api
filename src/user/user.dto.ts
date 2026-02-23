@@ -28,6 +28,14 @@ export class CreateUserDTO {
   @IsString()
   email: string;
 
+  @ApiProperty()
+  @IsString()
+  state: string;
+
+  @ApiProperty()
+  @IsString()
+  city: string;
+
   // @ApiProperty({ required: true })
   // @IsString()
   // password?: string;

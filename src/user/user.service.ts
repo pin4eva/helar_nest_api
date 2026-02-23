@@ -71,12 +71,12 @@ export class UserService {
       if (!user) {
         throw new NotFoundException(`User with id ${id} not found`);
       }
-      await this.prisma.user.update({
+      const updatedUser = await this.prisma.user.update({
         where: { id },
         data,
       });
 
-      return { data: 'User updated successfully' };
+      return updatedUser;
     } catch (error) {
       throw error;
     }

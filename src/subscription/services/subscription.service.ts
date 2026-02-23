@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import {
   PlanIntervalEnum,
+  Subscription,
   SubscriptionStatusEnum,
   type Prisma,
 } from 'src/generated/client';
@@ -279,6 +280,7 @@ export class SubscriptionService {
   // }
 
   async toggleAutorenewal(id: string) {
+    let subscriptionData = {} as Subscription;
     const sub = await this.prisma.subscription.findUnique({
       where: { id },
     });
@@ -294,30 +296,46 @@ export class SubscriptionService {
     }
 
     if (autoRenew) {
-      console.log('Disabling subscription...');
-      await this.paystackService.disableSubscriptionAutoRenewal(
-        providerSubscriptionId,
-        emailToken,
-      );
+      try {
+        console.log('Disabling subscription...');
+        await this.paystackService.disableSubscriptionAutoRenewal(
+          providerSubscriptionId,
+          emailToken,
+        );
+        subscriptionData = await this.prisma.subscription.update({
+          where: { id },
+          data: {
+            status: SubscriptionStatusEnum.Cancelled,
+            autoRenew: !autoRenew,
+            cancelledAt: autoRenew ? null : new Date(),
+            meta: this.mergeStatus(sub.meta, 'Cancelled'),
+          },
+        });
+      } catch (error) {
+        throw error;
+      }
     } else {
-      console.log('Enabling subscription...');
-      await this.paystackService.enableSubscriptionAutoRenewal(
-        providerSubscriptionId,
-        emailToken,
-      );
+      try {
+        console.log('Enabling subscription...');
+        await this.paystackService.enableSubscriptionAutoRenewal(
+          providerSubscriptionId,
+          emailToken,
+        );
+        subscriptionData = await this.prisma.subscription.update({
+          where: { id },
+          data: {
+            status: SubscriptionStatusEnum.Active,
+            autoRenew: !autoRenew,
+            cancelledAt: autoRenew ? null : new Date(),
+            meta: this.mergeStatus(sub.meta, 'Active'),
+          },
+        });
+      } catch (error) {
+        throw error;
+      }
     }
 
-    return this.prisma.subscription.update({
-      where: { id },
-      data: {
-        status: autoRenew
-          ? SubscriptionStatusEnum.Active
-          : SubscriptionStatusEnum.Cancelled,
-        autoRenew: !autoRenew,
-        cancelledAt: autoRenew ? null : new Date(),
-        meta: this.mergeStatus(sub.meta, autoRenew ? 'Active' : 'Cancelled'),
-      },
-    });
+    return subscriptionData;
   }
 
   private mergeStatus(
