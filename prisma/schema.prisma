@@ -249,6 +249,7 @@ model Subject {
   report_to_subject ReportToSubject[]
   handbookTopics    HandbookTopic[]
   summaryTopics     SummaryTopic[]
+  finalBarExamQAs   FinalBarExamQA[]
 
   @@map("subjects")
 }
@@ -380,6 +381,21 @@ model SubscriptionPlan {
   subscriptions Subscription[]
 
   @@map("subscription_plans")
+}
+
+// FINAL BAR EXAM QUESTIONS AND ANSWERS
+model FinalBarExamQA {
+  id        String   @id @default(cuid())
+  subjectId String
+  question  String
+  answer    String
+  createdBy String   @default("admin")
+  updatedBy String   @default("admin")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  subject   Subject  @relation(fields: [subjectId], references: [id])
+
+  @@map("final_bar_exam_qa")
 }
 
 enum PlanIntervalEnum {

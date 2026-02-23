@@ -20,6 +20,7 @@ import { SubscriptionModule } from './subscription/subscription.module';
 import { SummaryModule } from './summary/summary.module';
 import { UserModule } from './user/user.module';
 import { environments } from './utils/environments';
+import { FinalBarExamsModule } from './final_bar_exams/final_bar_exams.module';
 
 @Module({
   imports: [
@@ -47,6 +48,7 @@ import { environments } from './utils/environments';
     SummaryModule,
     SubscriptionModule,
     PaymentsModule,
+    FinalBarExamsModule,
   ],
   controllers: [AppController],
   providers: [

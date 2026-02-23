@@ -71,7 +71,8 @@ export const ModelName = {
   Organization: 'Organization',
   PaymentTransaction: 'PaymentTransaction',
   OrganizationSubscription: 'OrganizationSubscription',
-  SubscriptionPlan: 'SubscriptionPlan'
+  SubscriptionPlan: 'SubscriptionPlan',
+  FinalBarExamQA: 'FinalBarExamQA'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -404,6 +405,20 @@ export const SubscriptionPlanScalarFieldEnum = {
 export type SubscriptionPlanScalarFieldEnum = (typeof SubscriptionPlanScalarFieldEnum)[keyof typeof SubscriptionPlanScalarFieldEnum]
 
 
+export const FinalBarExamQAScalarFieldEnum = {
+  id: 'id',
+  subjectId: 'subjectId',
+  question: 'question',
+  answer: 'answer',
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FinalBarExamQAScalarFieldEnum = (typeof FinalBarExamQAScalarFieldEnum)[keyof typeof FinalBarExamQAScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -684,4 +699,16 @@ export const SubscriptionPlanOrderByRelevanceFieldEnum = {
 } as const
 
 export type SubscriptionPlanOrderByRelevanceFieldEnum = (typeof SubscriptionPlanOrderByRelevanceFieldEnum)[keyof typeof SubscriptionPlanOrderByRelevanceFieldEnum]
+
+
+export const FinalBarExamQAOrderByRelevanceFieldEnum = {
+  id: 'id',
+  subjectId: 'subjectId',
+  question: 'question',
+  answer: 'answer',
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy'
+} as const
+
+export type FinalBarExamQAOrderByRelevanceFieldEnum = (typeof FinalBarExamQAOrderByRelevanceFieldEnum)[keyof typeof FinalBarExamQAOrderByRelevanceFieldEnum]
 
