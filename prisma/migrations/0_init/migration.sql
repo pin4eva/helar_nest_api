@@ -1,11 +1,17 @@
+-- CreateSchema
+CREATE SCHEMA IF NOT EXISTS "public";
+
+-- CreateEnum
+CREATE TYPE "PlanIntervalEnum" AS ENUM ('daily', 'weekly', 'monthly', 'quarterly', 'biannually', 'annually');
+
 -- CreateEnum
 CREATE TYPE "GenderEnum" AS ENUM ('Male', 'Female');
 
 -- CreateEnum
-CREATE TYPE "UserProfileType" AS ENUM ('Student', 'Lawyer', 'Guest', 'Staff');
+CREATE TYPE "UserProfileType" AS ENUM ('Student', 'Lawyer', 'Guest', 'User', 'Staff');
 
 -- CreateEnum
-CREATE TYPE "UserRoleEnum" AS ENUM ('Admin', 'Editor', 'User', 'Developer');
+CREATE TYPE "UserRoleEnum" AS ENUM ('Admin', 'Editor', 'User', 'Developer', 'SuperAdmin');
 
 -- CreateEnum
 CREATE TYPE "UserStatusEnum" AS ENUM ('Active', 'Suspended', 'Banned');
@@ -14,7 +20,19 @@ CREATE TYPE "UserStatusEnum" AS ENUM ('Active', 'Suspended', 'Banned');
 CREATE TYPE "SubscriptionPlanEnum" AS ENUM ('Monthly', 'Yearly');
 
 -- CreateEnum
-CREATE TYPE "SubscriptionStatusEnum" AS ENUM ('Active', 'Expired');
+CREATE TYPE "SubscriptionStatusEnum" AS ENUM ('Pending', 'Trialing', 'Active', 'PastDue', 'Cancelled', 'Expired', 'Paused');
+
+-- CreateEnum
+CREATE TYPE "PaymentStatusEnum" AS ENUM ('Pending', 'Paid', 'Failed', 'Refunded');
+
+-- CreateEnum
+CREATE TYPE "PaymentTypeEnum" AS ENUM ('Initial', 'Renewal', 'Refund');
+
+-- CreateEnum
+CREATE TYPE "TopicTypeEnum" AS ENUM ('Textbook', 'Handbook');
+
+-- CreateEnum
+CREATE TYPE "SummaryTypeEnum" AS ENUM ('Faculty Summary', 'NLS Summary', 'Final Bar Exam Questions and Answers');
 
 -- CreateTable
 CREATE TABLE "auths" (
@@ -45,6 +63,7 @@ CREATE TABLE "users" (
     "lastName" TEXT NOT NULL,
     "lastSeen" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "phone" TEXT,
+    "permissions" TEXT[] DEFAULT ARRAY[]::TEXT[],
     "profileType" "UserProfileType" NOT NULL DEFAULT 'Guest',
     "role" "UserRoleEnum" NOT NULL DEFAULT 'User',
     "state" TEXT,
@@ -55,9 +74,7 @@ CREATE TABLE "users" (
     "gender" "GenderEnum" DEFAULT 'Male',
     "emailToken" TEXT,
     "isEmailVerified" BOOLEAN NOT NULL DEFAULT false,
-    "lawSchoolCampus" TEXT,
-    "townState" TEXT,
-    "universityCampus" TEXT,
+    "organizationId" TEXT,
     "currentSubscriptionId" TEXT,
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
@@ -66,14 +83,33 @@ CREATE TABLE "users" (
 -- CreateTable
 CREATE TABLE "subscriptions" (
     "id" TEXT NOT NULL,
-    "userId" TEXT NOT NULL,
+    "userId" TEXT,
+    "organizationId" TEXT,
     "reference" TEXT NOT NULL,
+    "emailToken" TEXT,
+    "startsAt" TIMESTAMP(3),
+    "currentPeriodStart" TIMESTAMP(3),
+    "currentPeriodEnd" TIMESTAMP(3),
+    "nextBillingAt" TIMESTAMP(3),
+    "trialEndsAt" TIMESTAMP(3),
+    "cancelledAt" TIMESTAMP(3),
+    "canceledReason" TEXT,
+    "expiresAt" TIMESTAMP(3),
+    "amount" INTEGER,
+    "currency" TEXT NOT NULL DEFAULT 'NGN',
+    "paymentId" TEXT,
+    "provider" TEXT,
+    "providerCustomerId" TEXT,
+    "providerSubscriptionId" TEXT,
+    "providerPlanId" TEXT,
+    "plan" "PlanIntervalEnum" NOT NULL DEFAULT 'monthly',
+    "status" "SubscriptionStatusEnum" NOT NULL DEFAULT 'Pending',
+    "autoRenew" BOOLEAN NOT NULL DEFAULT true,
+    "meta" JSONB,
+    "planCode" TEXT,
+    "subscriptionPlanId" INTEGER,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "expiresAt" TIMESTAMP(3) NOT NULL,
-    "amount" INTEGER NOT NULL,
-    "paymentId" TEXT NOT NULL,
-    "plan" "SubscriptionPlanEnum" NOT NULL DEFAULT 'Monthly',
-    "status" "SubscriptionStatusEnum" NOT NULL DEFAULT 'Active',
+    "updatedAt" TIMESTAMP(3),
 
     CONSTRAINT "subscriptions_pkey" PRIMARY KEY ("id")
 );
@@ -154,68 +190,16 @@ CREATE TABLE "_report_tags" (
 
 -- CreateTable
 CREATE TABLE "_report_visits" (
-    "id" TEXT NOT NULL,
     "reportId" TEXT NOT NULL,
-    "sessionId" TEXT NOT NULL,
-
-    CONSTRAINT "_report_visits_pkey" PRIMARY KEY ("id")
+    "sessionId" TEXT NOT NULL
 );
 
 -- CreateTable
 CREATE TABLE "bookmarks" (
-    "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "reportId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "bookmarks_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "handbook_cases" (
-    "id" TEXT NOT NULL,
-    "body" TEXT NOT NULL,
-    "byline" TEXT NOT NULL,
-    "citation" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "handbookId" TEXT NOT NULL,
-    "ref" INTEGER NOT NULL,
-    "slug" TEXT NOT NULL,
-    "title" TEXT NOT NULL,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-    "objectId" TEXT,
-
-    CONSTRAINT "handbook_cases_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "handbooks" (
-    "id" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "slug" TEXT NOT NULL,
-    "subjectId" TEXT NOT NULL,
-    "topic" TEXT NOT NULL,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-    "objectId" TEXT,
-
-    CONSTRAINT "handbooks_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "note_items" (
-    "id" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "slug" TEXT,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-    "objectId" TEXT,
-    "ref" INTEGER NOT NULL,
-    "question" TEXT NOT NULL,
-    "answer" TEXT NOT NULL,
-    "facultyNoteSummaryId" TEXT,
-    "nlsNoteSummaryId" TEXT,
-
-    CONSTRAINT "note_items_pkey" PRIMARY KEY ("id")
+    "updatedAt" TIMESTAMP(3) NOT NULL
 );
 
 -- CreateTable
@@ -244,61 +228,122 @@ CREATE TABLE "subjects" (
 );
 
 -- CreateTable
-CREATE TABLE "faculty_note_summaries" (
+CREATE TABLE "handbook_topics" (
     "id" TEXT NOT NULL,
-    "slug" TEXT NOT NULL,
     "title" TEXT NOT NULL,
-    "ref" INTEGER NOT NULL,
+    "slug" TEXT,
     "subjectId" TEXT NOT NULL,
+    "type" "TopicTypeEnum" NOT NULL DEFAULT 'Handbook',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "objectId" TEXT,
 
-    CONSTRAINT "faculty_note_summaries_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "handbook_topics_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "nls_note_summaries" (
-    "id" TEXT NOT NULL,
-    "slug" TEXT NOT NULL,
-    "title" TEXT NOT NULL,
-    "ref" INTEGER NOT NULL,
-    "subjectId" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-    "objectId" TEXT,
-
-    CONSTRAINT "nls_note_summaries_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "textbook_cases" (
+CREATE TABLE "handbook_cases" (
     "id" TEXT NOT NULL,
     "body" TEXT NOT NULL,
     "byline" TEXT NOT NULL,
     "citation" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "topicId" TEXT NOT NULL,
     "ref" INTEGER NOT NULL,
-    "slug" TEXT NOT NULL,
+    "slug" TEXT,
     "title" TEXT NOT NULL,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "textbookId" TEXT NOT NULL,
 
-    CONSTRAINT "textbook_cases_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "handbook_cases_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "textbooks" (
+CREATE TABLE "summary_topics" (
     "id" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "title" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
     "subjectId" TEXT NOT NULL,
-    "topic" TEXT NOT NULL,
+    "type" "SummaryTypeEnum" NOT NULL DEFAULT 'Faculty Summary',
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "summary_topics_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "summary_cases" (
+    "id" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "topicId" TEXT NOT NULL,
+    "slug" TEXT,
+    "ref" INTEGER NOT NULL,
+    "question" TEXT NOT NULL,
+    "answer" TEXT NOT NULL,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "objectId" TEXT,
 
-    CONSTRAINT "textbooks_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "summary_cases_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateTable
+CREATE TABLE "schools" (
+    "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "schools_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "payment_transactions" (
+    "id" TEXT NOT NULL,
+    "userId" TEXT,
+    "subscriptionId" TEXT,
+    "organizationId" TEXT,
+    "provider" TEXT NOT NULL,
+    "providerTransactionId" TEXT,
+    "reference" TEXT,
+    "amount" INTEGER NOT NULL,
+    "currency" TEXT NOT NULL DEFAULT 'NGN',
+    "status" "PaymentStatusEnum" NOT NULL,
+    "type" "PaymentTypeEnum" NOT NULL,
+    "response" JSONB,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "payment_transactions_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "organization_subscriptions" (
+    "id" TEXT NOT NULL,
+    "organizationId" TEXT NOT NULL,
+    "subscriptionId" TEXT,
+    "seatsTotal" INTEGER NOT NULL,
+    "seatsAssigned" INTEGER NOT NULL DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "expiresAt" TIMESTAMP(3),
+
+    CONSTRAINT "organization_subscriptions_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "subscription_plans" (
+    "id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
+    "planCode" TEXT NOT NULL,
+    "amount" INTEGER NOT NULL,
+    "integration" INTEGER NOT NULL,
+    "domain" TEXT NOT NULL DEFAULT 'test',
+    "currency" TEXT NOT NULL DEFAULT 'NGN',
+    "interval" "PlanIntervalEnum" NOT NULL DEFAULT 'monthly',
+    "description" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "isActive" BOOLEAN NOT NULL DEFAULT true,
+
+    CONSTRAINT "subscription_plans_pkey" PRIMARY KEY ("id")
+);
+
 
 -- CreateIndex
 CREATE UNIQUE INDEX "auths_userId_key" ON "auths"("userId");
@@ -316,13 +361,22 @@ CREATE UNIQUE INDEX "subscriptions_reference_key" ON "subscriptions"("reference"
 CREATE UNIQUE INDEX "subscriptions_paymentId_key" ON "subscriptions"("paymentId");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "subscriptions_providerSubscriptionId_key" ON "subscriptions"("providerSubscriptionId");
+
+-- CreateIndex
 CREATE INDEX "subscriptions_userId_idx" ON "subscriptions"("userId");
+
+-- CreateIndex
+CREATE INDEX "subscriptions_organizationId_idx" ON "subscriptions"("organizationId");
 
 -- CreateIndex
 CREATE INDEX "subscriptions_status_idx" ON "subscriptions"("status");
 
 -- CreateIndex
 CREATE INDEX "subscriptions_expiresAt_idx" ON "subscriptions"("expiresAt");
+
+-- CreateIndex
+CREATE INDEX "subscriptions_nextBillingAt_idx" ON "subscriptions"("nextBillingAt");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "reports_reportId_key" ON "reports"("reportId");
@@ -349,46 +403,49 @@ CREATE UNIQUE INDEX "_report_visits_reportId_sessionId_key" ON "_report_visits"(
 CREATE UNIQUE INDEX "bookmarks_userId_reportId_key" ON "bookmarks"("userId", "reportId");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "subjects_slug_key" ON "subjects"("slug");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "handbook_topics_title_key" ON "handbook_topics"("title");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "handbook_cases_ref_key" ON "handbook_cases"("ref");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "handbook_cases_slug_key" ON "handbook_cases"("slug");
+CREATE UNIQUE INDEX "summary_topics_title_key" ON "summary_topics"("title");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "handbooks_slug_key" ON "handbooks"("slug");
+CREATE UNIQUE INDEX "summary_cases_ref_key" ON "summary_cases"("ref");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "note_items_slug_key" ON "note_items"("slug");
+CREATE UNIQUE INDEX "schools_name_key" ON "schools"("name");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "note_items_ref_key" ON "note_items"("ref");
+CREATE INDEX "payment_transactions_userId_idx" ON "payment_transactions"("userId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "faculty_note_summaries_slug_key" ON "faculty_note_summaries"("slug");
+CREATE INDEX "payment_transactions_subscriptionId_idx" ON "payment_transactions"("subscriptionId");
 
 -- CreateIndex
-CREATE INDEX "faculty_note_summaries_subjectId_idx" ON "faculty_note_summaries"("subjectId");
+CREATE UNIQUE INDEX "subscription_plans_name_key" ON "subscription_plans"("name");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "nls_note_summaries_slug_key" ON "nls_note_summaries"("slug");
-
--- CreateIndex
-CREATE INDEX "nls_note_summaries_subjectId_idx" ON "nls_note_summaries"("subjectId");
-
--- CreateIndex
-CREATE UNIQUE INDEX "textbook_cases_ref_key" ON "textbook_cases"("ref");
-
--- CreateIndex
-CREATE UNIQUE INDEX "textbook_cases_slug_key" ON "textbook_cases"("slug");
-
--- CreateIndex
-CREATE UNIQUE INDEX "textbooks_slug_key" ON "textbooks"("slug");
+CREATE UNIQUE INDEX "subscription_plans_planCode_key" ON "subscription_plans"("planCode");
 
 -- AddForeignKey
 ALTER TABLE "users" ADD CONSTRAINT "users_currentSubscriptionId_fkey" FOREIGN KEY ("currentSubscriptionId") REFERENCES "subscriptions"("id") ON DELETE SET NULL ON UPDATE NO ACTION;
 
 -- AddForeignKey
+ALTER TABLE "users" ADD CONSTRAINT "users_organizationId_fkey" FOREIGN KEY ("organizationId") REFERENCES "schools"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "subscriptions" ADD CONSTRAINT "subscriptions_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- AddForeignKey
+ALTER TABLE "subscriptions" ADD CONSTRAINT "subscriptions_organizationId_fkey" FOREIGN KEY ("organizationId") REFERENCES "schools"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "subscriptions" ADD CONSTRAINT "subscriptions_subscriptionPlanId_fkey" FOREIGN KEY ("subscriptionPlanId") REFERENCES "subscription_plans"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "reports" ADD CONSTRAINT "reports_added_by_id_fkey" FOREIGN KEY ("added_by_id") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -433,25 +490,29 @@ ALTER TABLE "bookmarks" ADD CONSTRAINT "bookmarks_reportId_fkey" FOREIGN KEY ("r
 ALTER TABLE "bookmarks" ADD CONSTRAINT "bookmarks_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "handbook_cases" ADD CONSTRAINT "handbook_cases_handbookId_fkey" FOREIGN KEY ("handbookId") REFERENCES "handbooks"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "handbook_topics" ADD CONSTRAINT "handbook_topics_subjectId_fkey" FOREIGN KEY ("subjectId") REFERENCES "subjects"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "handbooks" ADD CONSTRAINT "handbooks_subjectId_fkey" FOREIGN KEY ("subjectId") REFERENCES "subjects"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "handbook_cases" ADD CONSTRAINT "handbook_cases_topicId_fkey" FOREIGN KEY ("topicId") REFERENCES "handbook_topics"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "note_items" ADD CONSTRAINT "note_items_facultyNoteSummaryId_fkey" FOREIGN KEY ("facultyNoteSummaryId") REFERENCES "faculty_note_summaries"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "summary_topics" ADD CONSTRAINT "summary_topics_subjectId_fkey" FOREIGN KEY ("subjectId") REFERENCES "subjects"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "note_items" ADD CONSTRAINT "note_items_nlsNoteSummaryId_fkey" FOREIGN KEY ("nlsNoteSummaryId") REFERENCES "nls_note_summaries"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "summary_cases" ADD CONSTRAINT "summary_cases_topicId_fkey" FOREIGN KEY ("topicId") REFERENCES "summary_topics"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "faculty_note_summaries" ADD CONSTRAINT "faculty_note_summaries_subjectId_fkey" FOREIGN KEY ("subjectId") REFERENCES "subjects"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "payment_transactions" ADD CONSTRAINT "payment_transactions_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "nls_note_summaries" ADD CONSTRAINT "nls_note_summaries_subjectId_fkey" FOREIGN KEY ("subjectId") REFERENCES "subjects"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "payment_transactions" ADD CONSTRAINT "payment_transactions_subscriptionId_fkey" FOREIGN KEY ("subscriptionId") REFERENCES "subscriptions"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "textbook_cases" ADD CONSTRAINT "textbook_cases_textbookId_fkey" FOREIGN KEY ("textbookId") REFERENCES "textbooks"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "payment_transactions" ADD CONSTRAINT "payment_transactions_organizationId_fkey" FOREIGN KEY ("organizationId") REFERENCES "schools"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "textbooks" ADD CONSTRAINT "textbooks_subjectId_fkey" FOREIGN KEY ("subjectId") REFERENCES "subjects"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "organization_subscriptions" ADD CONSTRAINT "organization_subscriptions_subscriptionId_fkey" FOREIGN KEY ("subscriptionId") REFERENCES "subscriptions"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "organization_subscriptions" ADD CONSTRAINT "organization_subscriptions_organizationId_fkey" FOREIGN KEY ("organizationId") REFERENCES "schools"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
