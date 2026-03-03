@@ -320,13 +320,29 @@ export class AuthService {
         omit: {
           passwordUpdateToken: true,
         },
+        include: {
+          subscriptions: {
+            select: {
+              id: true,
+              planCode: true,
+              status: true,
+              nextBillingAt: true,
+              createdAt: true,
+              amount: true,
+              plan: true,
+              providerSubscriptionId: true,
+            },
+          },
+        },
       });
 
       if (!user) {
         throw new NotFoundException('User not found');
       }
-      const activeSubscription = await this.getUserActiveSubscription(userId);
-
+      // const activeSubscription = await this.getUserActiveSubscription(userId);
+      const activeSubscription = user.subscriptions.find((sub) => {
+        return sub.status === SubscriptionStatusEnum.Active;
+      });
       return { ...user, activeSubscription };
     } catch (error) {
       throw error;
