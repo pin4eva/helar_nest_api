@@ -1,6 +1,14 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { FinalBarExamsService } from './final_bar_exams.service';
-import { CreateBarExamDto,  UpdateBarExamDto } from './final_bar_exams.dto';
+import { CreateBarExamDto, UpdateBarExamDto } from './final_bar_exams.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Public } from 'src/decorators/public.decorator';
 import { CurrentUser } from 'src/decorators/current-user.decorator';
@@ -10,7 +18,7 @@ import { User } from 'src/generated/client';
 @ApiBearerAuth()
 @Controller('final-bar-exams')
 export class FinalBarExamsController {
-  constructor(private readonly finalBarExamsService: FinalBarExamsService) { }
+  constructor(private readonly finalBarExamsService: FinalBarExamsService) {}
 
   @Public()
   @Get()
@@ -19,9 +27,15 @@ export class FinalBarExamsController {
   }
 
   @Public()
+  @Get('subjects')
+  async findAllSubjectsWithExam() {
+    return this.finalBarExamsService.findAllSubjectsWithQnA();
+  }
+
+  @Public()
   @Get(':id')
   async findOne(@Param('id') id: string) {
-   return this.finalBarExamsService.findOne(id);
+    return this.finalBarExamsService.findOne(id);
   }
 
   @Post()
@@ -34,7 +48,7 @@ export class FinalBarExamsController {
     return this.finalBarExamsService.update(input, user);
   }
 
-  @Delete(":id")
+  @Delete(':id')
   async delete(@Param('id') id: string) {
     return this.finalBarExamsService.delete(id);
   }
