@@ -1,4 +1,9 @@
-import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  Logger,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateBarExamDto, UpdateBarExamDto } from './final_bar_exams.dto';
 import { User } from 'src/generated/client';
@@ -6,15 +11,19 @@ import { User } from 'src/generated/client';
 @Injectable()
 export class FinalBarExamsService {
   private readonly logger = new Logger(FinalBarExamsService.name);
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   // Create a new final bar exam question and answer
   async create(input: CreateBarExamDto, user: User) {
     try {
       const { subjectId, question, answer } = input;
-      const existingSubject = await this.prisma.subject.findUnique({ where: { id: subjectId } });
+      const existingSubject = await this.prisma.subject.findUnique({
+        where: { id: subjectId },
+      });
       if (!existingSubject) {
-        throw new NotFoundException(`Subject with ID ${subjectId} does not exist`);
+        throw new NotFoundException(
+          `Subject with ID ${subjectId} does not exist`,
+        );
       }
 
       const existingQA = await this.prisma.finalBarExamQA.findFirst({
@@ -24,7 +33,9 @@ export class FinalBarExamsService {
         },
       });
       if (existingQA) {
-        throw new BadRequestException(`A question with the same text already exists for this subject`);
+        throw new BadRequestException(
+          `A question with the same text already exists for this subject`,
+        );
       }
 
       const newQA = await this.prisma.finalBarExamQA.create({
@@ -34,6 +45,7 @@ export class FinalBarExamsService {
           answer,
           createdBy: user?.firstName + ' ' + user?.lastName || 'admin',
         },
+        include: { subject: { select: { id: true, name: true } } },
       });
       return newQA;
     } catch (error) {
@@ -45,7 +57,9 @@ export class FinalBarExamsService {
   // Get all final bar exam questions and answers
   async findAll() {
     try {
-      const allQAs = await this.prisma.finalBarExamQA.findMany();
+      const allQAs = await this.prisma.finalBarExamQA.findMany({
+        include: { subject: { select: { id: true, name: true } } },
+      });
       return allQAs;
     } catch (error) {
       this.logger.error(error?.['message'] || error);
@@ -53,12 +67,45 @@ export class FinalBarExamsService {
     }
   }
 
+  async findAllSubjectsWithQnA() {
+    try {
+      const subjects = await this.prisma.subject.findMany({
+        where: {
+          finalBarExamQAs: {
+            some: {},
+          },
+        },
+        select: {
+          id: true,
+          name: true,
+          _count: {
+            select: {
+              finalBarExamQAs: true,
+            },
+          },
+        },
+      });
+
+      return subjects.map((subject) => ({
+        id: subject.id,
+        name: subject.name,
+        exams: subject._count.finalBarExamQAs,
+      }));
+    } catch (error) {
+      this.logger.error(error?.['message'] || error);
+      throw error;
+    }
+  }
   // Get a specific final bar exam question and answer by ID
   async findOne(id: string) {
     try {
-      const existingQA = await this.prisma.finalBarExamQA.findUnique({ where: { id } });
+      const existingQA = await this.prisma.finalBarExamQA.findUnique({
+        where: { id },
+      });
       if (!existingQA) {
-        throw new NotFoundException(`Final bar exam question and answer with ID ${id} does not exist`);
+        throw new NotFoundException(
+          `Final bar exam question and answer with ID ${id} does not exist`,
+        );
       }
       return existingQA;
     } catch (error) {
@@ -71,9 +118,13 @@ export class FinalBarExamsService {
   async update(input: UpdateBarExamDto, user: User) {
     try {
       const { id, subjectId, question, answer } = input;
-      const existingQA = await this.prisma.finalBarExamQA.findUnique({ where: { id } });
+      const existingQA = await this.prisma.finalBarExamQA.findUnique({
+        where: { id },
+      });
       if (!existingQA) {
-        throw new NotFoundException(`Final bar exam question and answer with ID ${id} does not exist`);
+        throw new NotFoundException(
+          `Final bar exam question and answer with ID ${id} does not exist`,
+        );
       }
 
       const updatedQA = await this.prisma.finalBarExamQA.update({
@@ -90,20 +141,26 @@ export class FinalBarExamsService {
       this.logger.error(error?.['message'] || error);
       throw error;
     }
-   }
+  }
 
   // Delete a specific final bar exam question and answer by ID
   async delete(id: string) {
     try {
-      const existingQA = await this.prisma.finalBarExamQA.findUnique({ where: { id } });
+      const existingQA = await this.prisma.finalBarExamQA.findUnique({
+        where: { id },
+      });
       if (!existingQA) {
-        throw new NotFoundException(`Final bar exam question and answer with ID ${id} does not exist`);
+        throw new NotFoundException(
+          `Final bar exam question and answer with ID ${id} does not exist`,
+        );
       }
       await this.prisma.finalBarExamQA.delete({ where: { id } });
-      return { message: `Final bar exam question and answer with ID ${id} has been deleted` };
+      return {
+        message: `Final bar exam question and answer with ID ${id} has been deleted`,
+      };
     } catch (error) {
       this.logger.error(error?.['message'] || error);
       throw error;
     }
-    }
+  }
 }
