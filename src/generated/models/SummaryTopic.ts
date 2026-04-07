@@ -198,8 +198,8 @@ export type SummaryTopicWhereInput = {
   type?: Prisma.EnumSummaryTypeEnumFilter<"SummaryTopic"> | $Enums.SummaryTypeEnum
   createdAt?: Prisma.DateTimeFilter<"SummaryTopic"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SummaryTopic"> | Date | string
-  subject?: Prisma.XOR<Prisma.SubjectScalarRelationFilter, Prisma.SubjectWhereInput>
   cases?: Prisma.SummaryCaseListRelationFilter
+  subject?: Prisma.XOR<Prisma.SubjectScalarRelationFilter, Prisma.SubjectWhereInput>
 }
 
 export type SummaryTopicOrderByWithRelationInput = {
@@ -210,8 +210,8 @@ export type SummaryTopicOrderByWithRelationInput = {
   type?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  subject?: Prisma.SubjectOrderByWithRelationInput
   cases?: Prisma.SummaryCaseOrderByRelationAggregateInput
+  subject?: Prisma.SubjectOrderByWithRelationInput
   _relevance?: Prisma.SummaryTopicOrderByRelevanceInput
 }
 
@@ -226,8 +226,8 @@ export type SummaryTopicWhereUniqueInput = Prisma.AtLeast<{
   type?: Prisma.EnumSummaryTypeEnumFilter<"SummaryTopic"> | $Enums.SummaryTypeEnum
   createdAt?: Prisma.DateTimeFilter<"SummaryTopic"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SummaryTopic"> | Date | string
-  subject?: Prisma.XOR<Prisma.SubjectScalarRelationFilter, Prisma.SubjectWhereInput>
   cases?: Prisma.SummaryCaseListRelationFilter
+  subject?: Prisma.XOR<Prisma.SubjectScalarRelationFilter, Prisma.SubjectWhereInput>
 }, "id" | "title">
 
 export type SummaryTopicOrderByWithAggregationInput = {
@@ -263,8 +263,8 @@ export type SummaryTopicCreateInput = {
   type?: $Enums.SummaryTypeEnum
   createdAt?: Date | string
   updatedAt?: Date | string
-  subject: Prisma.SubjectCreateNestedOneWithoutSummaryTopicsInput
   cases?: Prisma.SummaryCaseCreateNestedManyWithoutTopicInput
+  subject: Prisma.SubjectCreateNestedOneWithoutSummaryTopicsInput
 }
 
 export type SummaryTopicUncheckedCreateInput = {
@@ -285,8 +285,8 @@ export type SummaryTopicUpdateInput = {
   type?: Prisma.EnumSummaryTypeEnumFieldUpdateOperationsInput | $Enums.SummaryTypeEnum
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  subject?: Prisma.SubjectUpdateOneRequiredWithoutSummaryTopicsNestedInput
   cases?: Prisma.SummaryCaseUpdateManyWithoutTopicNestedInput
+  subject?: Prisma.SubjectUpdateOneRequiredWithoutSummaryTopicsNestedInput
 }
 
 export type SummaryTopicUncheckedUpdateInput = {
@@ -375,9 +375,9 @@ export type SummaryTopicMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
-export type SummaryTopicNullableScalarRelationFilter = {
-  is?: Prisma.SummaryTopicWhereInput | null
-  isNot?: Prisma.SummaryTopicWhereInput | null
+export type SummaryTopicScalarRelationFilter = {
+  is?: Prisma.SummaryTopicWhereInput
+  isNot?: Prisma.SummaryTopicWhereInput
 }
 
 export type SummaryTopicCreateNestedManyWithoutSubjectInput = {
@@ -432,12 +432,10 @@ export type SummaryTopicCreateNestedOneWithoutCasesInput = {
   connect?: Prisma.SummaryTopicWhereUniqueInput
 }
 
-export type SummaryTopicUpdateOneWithoutCasesNestedInput = {
+export type SummaryTopicUpdateOneRequiredWithoutCasesNestedInput = {
   create?: Prisma.XOR<Prisma.SummaryTopicCreateWithoutCasesInput, Prisma.SummaryTopicUncheckedCreateWithoutCasesInput>
   connectOrCreate?: Prisma.SummaryTopicCreateOrConnectWithoutCasesInput
   upsert?: Prisma.SummaryTopicUpsertWithoutCasesInput
-  disconnect?: Prisma.SummaryTopicWhereInput | boolean
-  delete?: Prisma.SummaryTopicWhereInput | boolean
   connect?: Prisma.SummaryTopicWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.SummaryTopicUpdateToOneWithWhereWithoutCasesInput, Prisma.SummaryTopicUpdateWithoutCasesInput>, Prisma.SummaryTopicUncheckedUpdateWithoutCasesInput>
 }
@@ -634,8 +632,8 @@ export type SummaryTopicSelect<ExtArgs extends runtime.Types.Extensions.Internal
   type?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  subject?: boolean | Prisma.SubjectDefaultArgs<ExtArgs>
   cases?: boolean | Prisma.SummaryTopic$casesArgs<ExtArgs>
+  subject?: boolean | Prisma.SubjectDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.SummaryTopicCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["summaryTopic"]>
 
@@ -673,8 +671,8 @@ export type SummaryTopicSelectScalar = {
 
 export type SummaryTopicOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "subjectId" | "type" | "createdAt" | "updatedAt", ExtArgs["result"]["summaryTopic"]>
 export type SummaryTopicInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  subject?: boolean | Prisma.SubjectDefaultArgs<ExtArgs>
   cases?: boolean | Prisma.SummaryTopic$casesArgs<ExtArgs>
+  subject?: boolean | Prisma.SubjectDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.SummaryTopicCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SummaryTopicIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -687,8 +685,8 @@ export type SummaryTopicIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types
 export type $SummaryTopicPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "SummaryTopic"
   objects: {
-    subject: Prisma.$SubjectPayload<ExtArgs>
     cases: Prisma.$SummaryCasePayload<ExtArgs>[]
+    subject: Prisma.$SubjectPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1092,8 +1090,8 @@ readonly fields: SummaryTopicFieldRefs;
  */
 export interface Prisma__SummaryTopicClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  subject<T extends Prisma.SubjectDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubjectDefaultArgs<ExtArgs>>): Prisma.Prisma__SubjectClient<runtime.Types.Result.GetResult<Prisma.$SubjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   cases<T extends Prisma.SummaryTopic$casesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SummaryTopic$casesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SummaryCasePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  subject<T extends Prisma.SubjectDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubjectDefaultArgs<ExtArgs>>): Prisma.Prisma__SubjectClient<runtime.Types.Result.GetResult<Prisma.$SubjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

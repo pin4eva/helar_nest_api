@@ -33,8 +33,8 @@ export const UserProfileTypeEnum = {
   Student: 'Student',
   Lawyer: 'Lawyer',
   Guest: 'Guest',
-  User: 'User',
-  Staff: 'Staff'
+  Staff: 'Staff',
+  User: 'User'
 } as const
 
 export type UserProfileTypeEnum = (typeof UserProfileTypeEnum)[keyof typeof UserProfileTypeEnum]
@@ -69,12 +69,12 @@ export type SubscriptionPlanEnum = (typeof SubscriptionPlanEnum)[keyof typeof Su
 
 
 export const SubscriptionStatusEnum = {
+  Active: 'Active',
+  Expired: 'Expired',
   Pending: 'Pending',
   Trialing: 'Trialing',
-  Active: 'Active',
   PastDue: 'PastDue',
   Cancelled: 'Cancelled',
-  Expired: 'Expired',
   Paused: 'Paused'
 } as const
 

@@ -37,7 +37,11 @@ export class FinalBarExamsController {
   async findOne(@Param('id') id: string) {
     return this.finalBarExamsService.findOne(id);
   }
-
+  @Public()
+  @Get('year/:year')
+  async findByYear(@Param('year') year: number) {
+    return this.finalBarExamsService.getBarExamQAsByYear(year);
+  }
   @Post()
   async create(@Body() input: CreateBarExamDto, @CurrentUser() user: User) {
     return this.finalBarExamsService.create(input, user);

@@ -236,8 +236,8 @@ export type OrganizationSubscriptionWhereInput = {
   seatsAssigned?: Prisma.IntFilter<"OrganizationSubscription"> | number
   createdAt?: Prisma.DateTimeFilter<"OrganizationSubscription"> | Date | string
   expiresAt?: Prisma.DateTimeNullableFilter<"OrganizationSubscription"> | Date | string | null
-  subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
+  subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
 }
 
 export type OrganizationSubscriptionOrderByWithRelationInput = {
@@ -248,8 +248,8 @@ export type OrganizationSubscriptionOrderByWithRelationInput = {
   seatsAssigned?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  subscription?: Prisma.SubscriptionOrderByWithRelationInput
   organization?: Prisma.OrganizationOrderByWithRelationInput
+  subscription?: Prisma.SubscriptionOrderByWithRelationInput
   _relevance?: Prisma.OrganizationSubscriptionOrderByRelevanceInput
 }
 
@@ -264,8 +264,8 @@ export type OrganizationSubscriptionWhereUniqueInput = Prisma.AtLeast<{
   seatsAssigned?: Prisma.IntFilter<"OrganizationSubscription"> | number
   createdAt?: Prisma.DateTimeFilter<"OrganizationSubscription"> | Date | string
   expiresAt?: Prisma.DateTimeNullableFilter<"OrganizationSubscription"> | Date | string | null
-  subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
+  subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
 }, "id">
 
 export type OrganizationSubscriptionOrderByWithAggregationInput = {
@@ -302,8 +302,8 @@ export type OrganizationSubscriptionCreateInput = {
   seatsAssigned?: number
   createdAt?: Date | string
   expiresAt?: Date | string | null
-  subscription?: Prisma.SubscriptionCreateNestedOneWithoutOrganizationSubscriptionsInput
   organization: Prisma.OrganizationCreateNestedOneWithoutOrganizationSubscriptionsInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutOrganizationSubscriptionsInput
 }
 
 export type OrganizationSubscriptionUncheckedCreateInput = {
@@ -322,8 +322,8 @@ export type OrganizationSubscriptionUpdateInput = {
   seatsAssigned?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  subscription?: Prisma.SubscriptionUpdateOneWithoutOrganizationSubscriptionsNestedInput
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutOrganizationSubscriptionsNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutOrganizationSubscriptionsNestedInput
 }
 
 export type OrganizationSubscriptionUncheckedUpdateInput = {
@@ -687,8 +687,8 @@ export type OrganizationSubscriptionSelect<ExtArgs extends runtime.Types.Extensi
   seatsAssigned?: boolean
   createdAt?: boolean
   expiresAt?: boolean
-  subscription?: boolean | Prisma.OrganizationSubscription$subscriptionArgs<ExtArgs>
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  subscription?: boolean | Prisma.OrganizationSubscription$subscriptionArgs<ExtArgs>
 }, ExtArgs["result"]["organizationSubscription"]>
 
 export type OrganizationSubscriptionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -699,8 +699,8 @@ export type OrganizationSubscriptionSelectCreateManyAndReturn<ExtArgs extends ru
   seatsAssigned?: boolean
   createdAt?: boolean
   expiresAt?: boolean
-  subscription?: boolean | Prisma.OrganizationSubscription$subscriptionArgs<ExtArgs>
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  subscription?: boolean | Prisma.OrganizationSubscription$subscriptionArgs<ExtArgs>
 }, ExtArgs["result"]["organizationSubscription"]>
 
 export type OrganizationSubscriptionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -711,8 +711,8 @@ export type OrganizationSubscriptionSelectUpdateManyAndReturn<ExtArgs extends ru
   seatsAssigned?: boolean
   createdAt?: boolean
   expiresAt?: boolean
-  subscription?: boolean | Prisma.OrganizationSubscription$subscriptionArgs<ExtArgs>
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  subscription?: boolean | Prisma.OrganizationSubscription$subscriptionArgs<ExtArgs>
 }, ExtArgs["result"]["organizationSubscription"]>
 
 export type OrganizationSubscriptionSelectScalar = {
@@ -727,23 +727,23 @@ export type OrganizationSubscriptionSelectScalar = {
 
 export type OrganizationSubscriptionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "subscriptionId" | "seatsTotal" | "seatsAssigned" | "createdAt" | "expiresAt", ExtArgs["result"]["organizationSubscription"]>
 export type OrganizationSubscriptionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  subscription?: boolean | Prisma.OrganizationSubscription$subscriptionArgs<ExtArgs>
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  subscription?: boolean | Prisma.OrganizationSubscription$subscriptionArgs<ExtArgs>
 }
 export type OrganizationSubscriptionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  subscription?: boolean | Prisma.OrganizationSubscription$subscriptionArgs<ExtArgs>
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  subscription?: boolean | Prisma.OrganizationSubscription$subscriptionArgs<ExtArgs>
 }
 export type OrganizationSubscriptionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  subscription?: boolean | Prisma.OrganizationSubscription$subscriptionArgs<ExtArgs>
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  subscription?: boolean | Prisma.OrganizationSubscription$subscriptionArgs<ExtArgs>
 }
 
 export type $OrganizationSubscriptionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "OrganizationSubscription"
   objects: {
-    subscription: Prisma.$SubscriptionPayload<ExtArgs> | null
     organization: Prisma.$OrganizationPayload<ExtArgs>
+    subscription: Prisma.$SubscriptionPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1147,8 +1147,8 @@ readonly fields: OrganizationSubscriptionFieldRefs;
  */
 export interface Prisma__OrganizationSubscriptionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  subscription<T extends Prisma.OrganizationSubscription$subscriptionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationSubscription$subscriptionArgs<ExtArgs>>): Prisma.Prisma__SubscriptionClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   organization<T extends Prisma.OrganizationDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationDefaultArgs<ExtArgs>>): Prisma.Prisma__OrganizationClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  subscription<T extends Prisma.OrganizationSubscription$subscriptionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationSubscription$subscriptionArgs<ExtArgs>>): Prisma.Prisma__SubscriptionClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

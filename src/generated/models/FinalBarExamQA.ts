@@ -20,8 +20,20 @@ export type FinalBarExamQAModel = runtime.Types.Result.DefaultSelection<Prisma.$
 
 export type AggregateFinalBarExamQA = {
   _count: FinalBarExamQACountAggregateOutputType | null
+  _avg: FinalBarExamQAAvgAggregateOutputType | null
+  _sum: FinalBarExamQASumAggregateOutputType | null
   _min: FinalBarExamQAMinAggregateOutputType | null
   _max: FinalBarExamQAMaxAggregateOutputType | null
+}
+
+export type FinalBarExamQAAvgAggregateOutputType = {
+  year: number | null
+  ref: number | null
+}
+
+export type FinalBarExamQASumAggregateOutputType = {
+  year: number | null
+  ref: number | null
 }
 
 export type FinalBarExamQAMinAggregateOutputType = {
@@ -29,6 +41,9 @@ export type FinalBarExamQAMinAggregateOutputType = {
   subjectId: string | null
   question: string | null
   answer: string | null
+  year: number | null
+  ref: number | null
+  slug: string | null
   createdBy: string | null
   updatedBy: string | null
   createdAt: Date | null
@@ -40,6 +55,9 @@ export type FinalBarExamQAMaxAggregateOutputType = {
   subjectId: string | null
   question: string | null
   answer: string | null
+  year: number | null
+  ref: number | null
+  slug: string | null
   createdBy: string | null
   updatedBy: string | null
   createdAt: Date | null
@@ -51,6 +69,9 @@ export type FinalBarExamQACountAggregateOutputType = {
   subjectId: number
   question: number
   answer: number
+  year: number
+  ref: number
+  slug: number
   createdBy: number
   updatedBy: number
   createdAt: number
@@ -59,11 +80,24 @@ export type FinalBarExamQACountAggregateOutputType = {
 }
 
 
+export type FinalBarExamQAAvgAggregateInputType = {
+  year?: true
+  ref?: true
+}
+
+export type FinalBarExamQASumAggregateInputType = {
+  year?: true
+  ref?: true
+}
+
 export type FinalBarExamQAMinAggregateInputType = {
   id?: true
   subjectId?: true
   question?: true
   answer?: true
+  year?: true
+  ref?: true
+  slug?: true
   createdBy?: true
   updatedBy?: true
   createdAt?: true
@@ -75,6 +109,9 @@ export type FinalBarExamQAMaxAggregateInputType = {
   subjectId?: true
   question?: true
   answer?: true
+  year?: true
+  ref?: true
+  slug?: true
   createdBy?: true
   updatedBy?: true
   createdAt?: true
@@ -86,6 +123,9 @@ export type FinalBarExamQACountAggregateInputType = {
   subjectId?: true
   question?: true
   answer?: true
+  year?: true
+  ref?: true
+  slug?: true
   createdBy?: true
   updatedBy?: true
   createdAt?: true
@@ -131,6 +171,18 @@ export type FinalBarExamQAAggregateArgs<ExtArgs extends runtime.Types.Extensions
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: FinalBarExamQAAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: FinalBarExamQASumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: FinalBarExamQAMinAggregateInputType
@@ -161,6 +213,8 @@ export type FinalBarExamQAGroupByArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   _count?: FinalBarExamQACountAggregateInputType | true
+  _avg?: FinalBarExamQAAvgAggregateInputType
+  _sum?: FinalBarExamQASumAggregateInputType
   _min?: FinalBarExamQAMinAggregateInputType
   _max?: FinalBarExamQAMaxAggregateInputType
 }
@@ -170,11 +224,16 @@ export type FinalBarExamQAGroupByOutputType = {
   subjectId: string
   question: string
   answer: string
+  year: number | null
+  ref: number | null
+  slug: string | null
   createdBy: string
   updatedBy: string
   createdAt: Date
   updatedAt: Date
   _count: FinalBarExamQACountAggregateOutputType | null
+  _avg: FinalBarExamQAAvgAggregateOutputType | null
+  _sum: FinalBarExamQASumAggregateOutputType | null
   _min: FinalBarExamQAMinAggregateOutputType | null
   _max: FinalBarExamQAMaxAggregateOutputType | null
 }
@@ -202,6 +261,9 @@ export type FinalBarExamQAWhereInput = {
   subjectId?: Prisma.StringFilter<"FinalBarExamQA"> | string
   question?: Prisma.StringFilter<"FinalBarExamQA"> | string
   answer?: Prisma.StringFilter<"FinalBarExamQA"> | string
+  year?: Prisma.IntNullableFilter<"FinalBarExamQA"> | number | null
+  ref?: Prisma.IntNullableFilter<"FinalBarExamQA"> | number | null
+  slug?: Prisma.StringNullableFilter<"FinalBarExamQA"> | string | null
   createdBy?: Prisma.StringFilter<"FinalBarExamQA"> | string
   updatedBy?: Prisma.StringFilter<"FinalBarExamQA"> | string
   createdAt?: Prisma.DateTimeFilter<"FinalBarExamQA"> | Date | string
@@ -214,6 +276,9 @@ export type FinalBarExamQAOrderByWithRelationInput = {
   subjectId?: Prisma.SortOrder
   question?: Prisma.SortOrder
   answer?: Prisma.SortOrder
+  year?: Prisma.SortOrderInput | Prisma.SortOrder
+  ref?: Prisma.SortOrderInput | Prisma.SortOrder
+  slug?: Prisma.SortOrderInput | Prisma.SortOrder
   createdBy?: Prisma.SortOrder
   updatedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -224,31 +289,39 @@ export type FinalBarExamQAOrderByWithRelationInput = {
 
 export type FinalBarExamQAWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  ref?: number
+  slug?: string
   AND?: Prisma.FinalBarExamQAWhereInput | Prisma.FinalBarExamQAWhereInput[]
   OR?: Prisma.FinalBarExamQAWhereInput[]
   NOT?: Prisma.FinalBarExamQAWhereInput | Prisma.FinalBarExamQAWhereInput[]
   subjectId?: Prisma.StringFilter<"FinalBarExamQA"> | string
   question?: Prisma.StringFilter<"FinalBarExamQA"> | string
   answer?: Prisma.StringFilter<"FinalBarExamQA"> | string
+  year?: Prisma.IntNullableFilter<"FinalBarExamQA"> | number | null
   createdBy?: Prisma.StringFilter<"FinalBarExamQA"> | string
   updatedBy?: Prisma.StringFilter<"FinalBarExamQA"> | string
   createdAt?: Prisma.DateTimeFilter<"FinalBarExamQA"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"FinalBarExamQA"> | Date | string
   subject?: Prisma.XOR<Prisma.SubjectScalarRelationFilter, Prisma.SubjectWhereInput>
-}, "id">
+}, "id" | "ref" | "slug">
 
 export type FinalBarExamQAOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   subjectId?: Prisma.SortOrder
   question?: Prisma.SortOrder
   answer?: Prisma.SortOrder
+  year?: Prisma.SortOrderInput | Prisma.SortOrder
+  ref?: Prisma.SortOrderInput | Prisma.SortOrder
+  slug?: Prisma.SortOrderInput | Prisma.SortOrder
   createdBy?: Prisma.SortOrder
   updatedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.FinalBarExamQACountOrderByAggregateInput
+  _avg?: Prisma.FinalBarExamQAAvgOrderByAggregateInput
   _max?: Prisma.FinalBarExamQAMaxOrderByAggregateInput
   _min?: Prisma.FinalBarExamQAMinOrderByAggregateInput
+  _sum?: Prisma.FinalBarExamQASumOrderByAggregateInput
 }
 
 export type FinalBarExamQAScalarWhereWithAggregatesInput = {
@@ -259,6 +332,9 @@ export type FinalBarExamQAScalarWhereWithAggregatesInput = {
   subjectId?: Prisma.StringWithAggregatesFilter<"FinalBarExamQA"> | string
   question?: Prisma.StringWithAggregatesFilter<"FinalBarExamQA"> | string
   answer?: Prisma.StringWithAggregatesFilter<"FinalBarExamQA"> | string
+  year?: Prisma.IntNullableWithAggregatesFilter<"FinalBarExamQA"> | number | null
+  ref?: Prisma.IntNullableWithAggregatesFilter<"FinalBarExamQA"> | number | null
+  slug?: Prisma.StringNullableWithAggregatesFilter<"FinalBarExamQA"> | string | null
   createdBy?: Prisma.StringWithAggregatesFilter<"FinalBarExamQA"> | string
   updatedBy?: Prisma.StringWithAggregatesFilter<"FinalBarExamQA"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"FinalBarExamQA"> | Date | string
@@ -269,6 +345,9 @@ export type FinalBarExamQACreateInput = {
   id?: string
   question: string
   answer: string
+  year?: number | null
+  ref?: number | null
+  slug?: string | null
   createdBy?: string
   updatedBy?: string
   createdAt?: Date | string
@@ -281,6 +360,9 @@ export type FinalBarExamQAUncheckedCreateInput = {
   subjectId: string
   question: string
   answer: string
+  year?: number | null
+  ref?: number | null
+  slug?: string | null
   createdBy?: string
   updatedBy?: string
   createdAt?: Date | string
@@ -291,6 +373,9 @@ export type FinalBarExamQAUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   question?: Prisma.StringFieldUpdateOperationsInput | string
   answer?: Prisma.StringFieldUpdateOperationsInput | string
+  year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ref?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdBy?: Prisma.StringFieldUpdateOperationsInput | string
   updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -303,6 +388,9 @@ export type FinalBarExamQAUncheckedUpdateInput = {
   subjectId?: Prisma.StringFieldUpdateOperationsInput | string
   question?: Prisma.StringFieldUpdateOperationsInput | string
   answer?: Prisma.StringFieldUpdateOperationsInput | string
+  year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ref?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdBy?: Prisma.StringFieldUpdateOperationsInput | string
   updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -314,6 +402,9 @@ export type FinalBarExamQACreateManyInput = {
   subjectId: string
   question: string
   answer: string
+  year?: number | null
+  ref?: number | null
+  slug?: string | null
   createdBy?: string
   updatedBy?: string
   createdAt?: Date | string
@@ -324,6 +415,9 @@ export type FinalBarExamQAUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   question?: Prisma.StringFieldUpdateOperationsInput | string
   answer?: Prisma.StringFieldUpdateOperationsInput | string
+  year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ref?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdBy?: Prisma.StringFieldUpdateOperationsInput | string
   updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -335,6 +429,9 @@ export type FinalBarExamQAUncheckedUpdateManyInput = {
   subjectId?: Prisma.StringFieldUpdateOperationsInput | string
   question?: Prisma.StringFieldUpdateOperationsInput | string
   answer?: Prisma.StringFieldUpdateOperationsInput | string
+  year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ref?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdBy?: Prisma.StringFieldUpdateOperationsInput | string
   updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -362,10 +459,18 @@ export type FinalBarExamQACountOrderByAggregateInput = {
   subjectId?: Prisma.SortOrder
   question?: Prisma.SortOrder
   answer?: Prisma.SortOrder
+  year?: Prisma.SortOrder
+  ref?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
   updatedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type FinalBarExamQAAvgOrderByAggregateInput = {
+  year?: Prisma.SortOrder
+  ref?: Prisma.SortOrder
 }
 
 export type FinalBarExamQAMaxOrderByAggregateInput = {
@@ -373,6 +478,9 @@ export type FinalBarExamQAMaxOrderByAggregateInput = {
   subjectId?: Prisma.SortOrder
   question?: Prisma.SortOrder
   answer?: Prisma.SortOrder
+  year?: Prisma.SortOrder
+  ref?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
   updatedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -384,10 +492,18 @@ export type FinalBarExamQAMinOrderByAggregateInput = {
   subjectId?: Prisma.SortOrder
   question?: Prisma.SortOrder
   answer?: Prisma.SortOrder
+  year?: Prisma.SortOrder
+  ref?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
   updatedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type FinalBarExamQASumOrderByAggregateInput = {
+  year?: Prisma.SortOrder
+  ref?: Prisma.SortOrder
 }
 
 export type FinalBarExamQACreateNestedManyWithoutSubjectInput = {
@@ -436,6 +552,9 @@ export type FinalBarExamQACreateWithoutSubjectInput = {
   id?: string
   question: string
   answer: string
+  year?: number | null
+  ref?: number | null
+  slug?: string | null
   createdBy?: string
   updatedBy?: string
   createdAt?: Date | string
@@ -446,6 +565,9 @@ export type FinalBarExamQAUncheckedCreateWithoutSubjectInput = {
   id?: string
   question: string
   answer: string
+  year?: number | null
+  ref?: number | null
+  slug?: string | null
   createdBy?: string
   updatedBy?: string
   createdAt?: Date | string
@@ -486,6 +608,9 @@ export type FinalBarExamQAScalarWhereInput = {
   subjectId?: Prisma.StringFilter<"FinalBarExamQA"> | string
   question?: Prisma.StringFilter<"FinalBarExamQA"> | string
   answer?: Prisma.StringFilter<"FinalBarExamQA"> | string
+  year?: Prisma.IntNullableFilter<"FinalBarExamQA"> | number | null
+  ref?: Prisma.IntNullableFilter<"FinalBarExamQA"> | number | null
+  slug?: Prisma.StringNullableFilter<"FinalBarExamQA"> | string | null
   createdBy?: Prisma.StringFilter<"FinalBarExamQA"> | string
   updatedBy?: Prisma.StringFilter<"FinalBarExamQA"> | string
   createdAt?: Prisma.DateTimeFilter<"FinalBarExamQA"> | Date | string
@@ -496,6 +621,9 @@ export type FinalBarExamQACreateManySubjectInput = {
   id?: string
   question: string
   answer: string
+  year?: number | null
+  ref?: number | null
+  slug?: string | null
   createdBy?: string
   updatedBy?: string
   createdAt?: Date | string
@@ -506,6 +634,9 @@ export type FinalBarExamQAUpdateWithoutSubjectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   question?: Prisma.StringFieldUpdateOperationsInput | string
   answer?: Prisma.StringFieldUpdateOperationsInput | string
+  year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ref?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdBy?: Prisma.StringFieldUpdateOperationsInput | string
   updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -516,6 +647,9 @@ export type FinalBarExamQAUncheckedUpdateWithoutSubjectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   question?: Prisma.StringFieldUpdateOperationsInput | string
   answer?: Prisma.StringFieldUpdateOperationsInput | string
+  year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ref?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdBy?: Prisma.StringFieldUpdateOperationsInput | string
   updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -526,6 +660,9 @@ export type FinalBarExamQAUncheckedUpdateManyWithoutSubjectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   question?: Prisma.StringFieldUpdateOperationsInput | string
   answer?: Prisma.StringFieldUpdateOperationsInput | string
+  year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ref?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdBy?: Prisma.StringFieldUpdateOperationsInput | string
   updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -539,6 +676,9 @@ export type FinalBarExamQASelect<ExtArgs extends runtime.Types.Extensions.Intern
   subjectId?: boolean
   question?: boolean
   answer?: boolean
+  year?: boolean
+  ref?: boolean
+  slug?: boolean
   createdBy?: boolean
   updatedBy?: boolean
   createdAt?: boolean
@@ -551,6 +691,9 @@ export type FinalBarExamQASelectCreateManyAndReturn<ExtArgs extends runtime.Type
   subjectId?: boolean
   question?: boolean
   answer?: boolean
+  year?: boolean
+  ref?: boolean
+  slug?: boolean
   createdBy?: boolean
   updatedBy?: boolean
   createdAt?: boolean
@@ -563,6 +706,9 @@ export type FinalBarExamQASelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   subjectId?: boolean
   question?: boolean
   answer?: boolean
+  year?: boolean
+  ref?: boolean
+  slug?: boolean
   createdBy?: boolean
   updatedBy?: boolean
   createdAt?: boolean
@@ -575,13 +721,16 @@ export type FinalBarExamQASelectScalar = {
   subjectId?: boolean
   question?: boolean
   answer?: boolean
+  year?: boolean
+  ref?: boolean
+  slug?: boolean
   createdBy?: boolean
   updatedBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type FinalBarExamQAOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "subjectId" | "question" | "answer" | "createdBy" | "updatedBy" | "createdAt" | "updatedAt", ExtArgs["result"]["finalBarExamQA"]>
+export type FinalBarExamQAOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "subjectId" | "question" | "answer" | "year" | "ref" | "slug" | "createdBy" | "updatedBy" | "createdAt" | "updatedAt", ExtArgs["result"]["finalBarExamQA"]>
 export type FinalBarExamQAInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   subject?: boolean | Prisma.SubjectDefaultArgs<ExtArgs>
 }
@@ -602,6 +751,9 @@ export type $FinalBarExamQAPayload<ExtArgs extends runtime.Types.Extensions.Inte
     subjectId: string
     question: string
     answer: string
+    year: number | null
+    ref: number | null
+    slug: string | null
     createdBy: string
     updatedBy: string
     createdAt: Date
@@ -1034,6 +1186,9 @@ export interface FinalBarExamQAFieldRefs {
   readonly subjectId: Prisma.FieldRef<"FinalBarExamQA", 'String'>
   readonly question: Prisma.FieldRef<"FinalBarExamQA", 'String'>
   readonly answer: Prisma.FieldRef<"FinalBarExamQA", 'String'>
+  readonly year: Prisma.FieldRef<"FinalBarExamQA", 'Int'>
+  readonly ref: Prisma.FieldRef<"FinalBarExamQA", 'Int'>
+  readonly slug: Prisma.FieldRef<"FinalBarExamQA", 'String'>
   readonly createdBy: Prisma.FieldRef<"FinalBarExamQA", 'String'>
   readonly updatedBy: Prisma.FieldRef<"FinalBarExamQA", 'String'>
   readonly createdAt: Prisma.FieldRef<"FinalBarExamQA", 'DateTime'>

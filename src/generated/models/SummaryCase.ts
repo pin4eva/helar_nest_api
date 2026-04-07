@@ -248,7 +248,7 @@ export type SummaryCaseWhereInput = {
   answer?: Prisma.StringFilter<"SummaryCase"> | string
   updatedAt?: Prisma.DateTimeFilter<"SummaryCase"> | Date | string
   objectId?: Prisma.StringNullableFilter<"SummaryCase"> | string | null
-  topic?: Prisma.XOR<Prisma.SummaryTopicNullableScalarRelationFilter, Prisma.SummaryTopicWhereInput> | null
+  topic?: Prisma.XOR<Prisma.SummaryTopicScalarRelationFilter, Prisma.SummaryTopicWhereInput>
 }
 
 export type SummaryCaseOrderByWithRelationInput = {
@@ -278,7 +278,7 @@ export type SummaryCaseWhereUniqueInput = Prisma.AtLeast<{
   answer?: Prisma.StringFilter<"SummaryCase"> | string
   updatedAt?: Prisma.DateTimeFilter<"SummaryCase"> | Date | string
   objectId?: Prisma.StringNullableFilter<"SummaryCase"> | string | null
-  topic?: Prisma.XOR<Prisma.SummaryTopicNullableScalarRelationFilter, Prisma.SummaryTopicWhereInput> | null
+  topic?: Prisma.XOR<Prisma.SummaryTopicScalarRelationFilter, Prisma.SummaryTopicWhereInput>
 }, "id" | "ref">
 
 export type SummaryCaseOrderByWithAggregationInput = {
@@ -322,7 +322,7 @@ export type SummaryCaseCreateInput = {
   answer: string
   updatedAt?: Date | string
   objectId?: string | null
-  topic?: Prisma.SummaryTopicCreateNestedOneWithoutCasesInput
+  topic: Prisma.SummaryTopicCreateNestedOneWithoutCasesInput
 }
 
 export type SummaryCaseUncheckedCreateInput = {
@@ -346,7 +346,7 @@ export type SummaryCaseUpdateInput = {
   answer?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  topic?: Prisma.SummaryTopicUpdateOneWithoutCasesNestedInput
+  topic?: Prisma.SummaryTopicUpdateOneRequiredWithoutCasesNestedInput
 }
 
 export type SummaryCaseUncheckedUpdateInput = {
@@ -617,7 +617,7 @@ export type SummaryCaseSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   answer?: boolean
   updatedAt?: boolean
   objectId?: boolean
-  topic?: boolean | Prisma.SummaryCase$topicArgs<ExtArgs>
+  topic?: boolean | Prisma.SummaryTopicDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["summaryCase"]>
 
 export type SummaryCaseSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -630,7 +630,7 @@ export type SummaryCaseSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   answer?: boolean
   updatedAt?: boolean
   objectId?: boolean
-  topic?: boolean | Prisma.SummaryCase$topicArgs<ExtArgs>
+  topic?: boolean | Prisma.SummaryTopicDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["summaryCase"]>
 
 export type SummaryCaseSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -643,7 +643,7 @@ export type SummaryCaseSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   answer?: boolean
   updatedAt?: boolean
   objectId?: boolean
-  topic?: boolean | Prisma.SummaryCase$topicArgs<ExtArgs>
+  topic?: boolean | Prisma.SummaryTopicDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["summaryCase"]>
 
 export type SummaryCaseSelectScalar = {
@@ -660,19 +660,19 @@ export type SummaryCaseSelectScalar = {
 
 export type SummaryCaseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "topicId" | "slug" | "ref" | "question" | "answer" | "updatedAt" | "objectId", ExtArgs["result"]["summaryCase"]>
 export type SummaryCaseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  topic?: boolean | Prisma.SummaryCase$topicArgs<ExtArgs>
+  topic?: boolean | Prisma.SummaryTopicDefaultArgs<ExtArgs>
 }
 export type SummaryCaseIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  topic?: boolean | Prisma.SummaryCase$topicArgs<ExtArgs>
+  topic?: boolean | Prisma.SummaryTopicDefaultArgs<ExtArgs>
 }
 export type SummaryCaseIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  topic?: boolean | Prisma.SummaryCase$topicArgs<ExtArgs>
+  topic?: boolean | Prisma.SummaryTopicDefaultArgs<ExtArgs>
 }
 
 export type $SummaryCasePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "SummaryCase"
   objects: {
-    topic: Prisma.$SummaryTopicPayload<ExtArgs> | null
+    topic: Prisma.$SummaryTopicPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1078,7 +1078,7 @@ readonly fields: SummaryCaseFieldRefs;
  */
 export interface Prisma__SummaryCaseClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  topic<T extends Prisma.SummaryCase$topicArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SummaryCase$topicArgs<ExtArgs>>): Prisma.Prisma__SummaryTopicClient<runtime.Types.Result.GetResult<Prisma.$SummaryTopicPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  topic<T extends Prisma.SummaryTopicDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SummaryTopicDefaultArgs<ExtArgs>>): Prisma.Prisma__SummaryTopicClient<runtime.Types.Result.GetResult<Prisma.$SummaryTopicPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1510,25 +1510,6 @@ export type SummaryCaseDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Limit how many SummaryCases to delete.
    */
   limit?: number
-}
-
-/**
- * SummaryCase.topic
- */
-export type SummaryCase$topicArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the SummaryTopic
-   */
-  select?: Prisma.SummaryTopicSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the SummaryTopic
-   */
-  omit?: Prisma.SummaryTopicOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.SummaryTopicInclude<ExtArgs> | null
-  where?: Prisma.SummaryTopicWhereInput
 }
 
 /**

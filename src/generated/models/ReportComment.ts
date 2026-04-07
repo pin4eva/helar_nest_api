@@ -198,9 +198,9 @@ export type ReportCommentWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"ReportComment"> | Date | string
   reportId?: Prisma.StringFilter<"ReportComment"> | string
   updatedAt?: Prisma.DateTimeFilter<"ReportComment"> | Date | string
+  likes?: Prisma.ReportCommentLikeListRelationFilter
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   report?: Prisma.XOR<Prisma.ReportScalarRelationFilter, Prisma.ReportWhereInput>
-  likes?: Prisma.ReportCommentLikeListRelationFilter
 }
 
 export type ReportCommentOrderByWithRelationInput = {
@@ -211,9 +211,9 @@ export type ReportCommentOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   reportId?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  likes?: Prisma.ReportCommentLikeOrderByRelationAggregateInput
   user?: Prisma.UserOrderByWithRelationInput
   report?: Prisma.ReportOrderByWithRelationInput
-  likes?: Prisma.ReportCommentLikeOrderByRelationAggregateInput
   _relevance?: Prisma.ReportCommentOrderByRelevanceInput
 }
 
@@ -228,9 +228,9 @@ export type ReportCommentWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"ReportComment"> | Date | string
   reportId?: Prisma.StringFilter<"ReportComment"> | string
   updatedAt?: Prisma.DateTimeFilter<"ReportComment"> | Date | string
+  likes?: Prisma.ReportCommentLikeListRelationFilter
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   report?: Prisma.XOR<Prisma.ReportScalarRelationFilter, Prisma.ReportWhereInput>
-  likes?: Prisma.ReportCommentLikeListRelationFilter
 }, "id">
 
 export type ReportCommentOrderByWithAggregationInput = {
@@ -265,9 +265,9 @@ export type ReportCommentCreateInput = {
   comment: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  likes?: Prisma.ReportCommentLikeCreateNestedManyWithoutReportCommentInput
   user: Prisma.UserCreateNestedOneWithoutReport_commentsInput
   report: Prisma.ReportCreateNestedOneWithoutCommentsInput
-  likes?: Prisma.ReportCommentLikeCreateNestedManyWithoutReportCommentInput
 }
 
 export type ReportCommentUncheckedCreateInput = {
@@ -287,9 +287,9 @@ export type ReportCommentUpdateInput = {
   comment?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  likes?: Prisma.ReportCommentLikeUpdateManyWithoutReportCommentNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutReport_commentsNestedInput
   report?: Prisma.ReportUpdateOneRequiredWithoutCommentsNestedInput
-  likes?: Prisma.ReportCommentLikeUpdateManyWithoutReportCommentNestedInput
 }
 
 export type ReportCommentUncheckedUpdateInput = {
@@ -486,8 +486,8 @@ export type ReportCommentCreateWithoutUserInput = {
   comment: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  report: Prisma.ReportCreateNestedOneWithoutCommentsInput
   likes?: Prisma.ReportCommentLikeCreateNestedManyWithoutReportCommentInput
+  report: Prisma.ReportCreateNestedOneWithoutCommentsInput
 }
 
 export type ReportCommentUncheckedCreateWithoutUserInput = {
@@ -545,8 +545,8 @@ export type ReportCommentCreateWithoutReportInput = {
   comment: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutReport_commentsInput
   likes?: Prisma.ReportCommentLikeCreateNestedManyWithoutReportCommentInput
+  user: Prisma.UserCreateNestedOneWithoutReport_commentsInput
 }
 
 export type ReportCommentUncheckedCreateWithoutReportInput = {
@@ -656,8 +656,8 @@ export type ReportCommentUpdateWithoutUserInput = {
   comment?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  report?: Prisma.ReportUpdateOneRequiredWithoutCommentsNestedInput
   likes?: Prisma.ReportCommentLikeUpdateManyWithoutReportCommentNestedInput
+  report?: Prisma.ReportUpdateOneRequiredWithoutCommentsNestedInput
 }
 
 export type ReportCommentUncheckedUpdateWithoutUserInput = {
@@ -694,8 +694,8 @@ export type ReportCommentUpdateWithoutReportInput = {
   comment?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutReport_commentsNestedInput
   likes?: Prisma.ReportCommentLikeUpdateManyWithoutReportCommentNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutReport_commentsNestedInput
 }
 
 export type ReportCommentUncheckedUpdateWithoutReportInput = {
@@ -756,9 +756,9 @@ export type ReportCommentSelect<ExtArgs extends runtime.Types.Extensions.Interna
   createdAt?: boolean
   reportId?: boolean
   updatedAt?: boolean
+  likes?: boolean | Prisma.ReportComment$likesArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   report?: boolean | Prisma.ReportDefaultArgs<ExtArgs>
-  likes?: boolean | Prisma.ReportComment$likesArgs<ExtArgs>
   _count?: boolean | Prisma.ReportCommentCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["reportComment"]>
 
@@ -798,9 +798,9 @@ export type ReportCommentSelectScalar = {
 
 export type ReportCommentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "authorId" | "objectId" | "comment" | "createdAt" | "reportId" | "updatedAt", ExtArgs["result"]["reportComment"]>
 export type ReportCommentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  likes?: boolean | Prisma.ReportComment$likesArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   report?: boolean | Prisma.ReportDefaultArgs<ExtArgs>
-  likes?: boolean | Prisma.ReportComment$likesArgs<ExtArgs>
   _count?: boolean | Prisma.ReportCommentCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ReportCommentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -815,9 +815,9 @@ export type ReportCommentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Type
 export type $ReportCommentPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ReportComment"
   objects: {
+    likes: Prisma.$ReportCommentLikePayload<ExtArgs>[]
     user: Prisma.$UserPayload<ExtArgs>
     report: Prisma.$ReportPayload<ExtArgs>
-    likes: Prisma.$ReportCommentLikePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1221,9 +1221,9 @@ readonly fields: ReportCommentFieldRefs;
  */
 export interface Prisma__ReportCommentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  likes<T extends Prisma.ReportComment$likesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ReportComment$likesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReportCommentLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   report<T extends Prisma.ReportDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ReportDefaultArgs<ExtArgs>>): Prisma.Prisma__ReportClient<runtime.Types.Result.GetResult<Prisma.$ReportPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  likes<T extends Prisma.ReportComment$likesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ReportComment$likesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReportCommentLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
