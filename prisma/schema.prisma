@@ -377,7 +377,7 @@ model FinalBarExamQA {
   subjectId    String
   question     String
   answer       String
-  year         Int?
+  year         Int      @default(1900)
   ref          Int?     @unique
   slug         String?  @unique
   questionType String?
