@@ -199,9 +199,9 @@ export type SubjectWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Subject"> | Date | string
   objectId?: Prisma.StringNullableFilter<"Subject"> | string | null
   report_to_subject?: Prisma.ReportToSubjectListRelationFilter
+  finalBarExamQAs?: Prisma.FinalBarExamQAListRelationFilter
   handbookTopics?: Prisma.HandbookTopicListRelationFilter
   summaryTopics?: Prisma.SummaryTopicListRelationFilter
-  finalBarExamQAs?: Prisma.FinalBarExamQAListRelationFilter
 }
 
 export type SubjectOrderByWithRelationInput = {
@@ -213,9 +213,9 @@ export type SubjectOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   objectId?: Prisma.SortOrderInput | Prisma.SortOrder
   report_to_subject?: Prisma.ReportToSubjectOrderByRelationAggregateInput
+  finalBarExamQAs?: Prisma.FinalBarExamQAOrderByRelationAggregateInput
   handbookTopics?: Prisma.HandbookTopicOrderByRelationAggregateInput
   summaryTopics?: Prisma.SummaryTopicOrderByRelationAggregateInput
-  finalBarExamQAs?: Prisma.FinalBarExamQAOrderByRelationAggregateInput
   _relevance?: Prisma.SubjectOrderByRelevanceInput
 }
 
@@ -231,9 +231,9 @@ export type SubjectWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Subject"> | Date | string
   objectId?: Prisma.StringNullableFilter<"Subject"> | string | null
   report_to_subject?: Prisma.ReportToSubjectListRelationFilter
+  finalBarExamQAs?: Prisma.FinalBarExamQAListRelationFilter
   handbookTopics?: Prisma.HandbookTopicListRelationFilter
   summaryTopics?: Prisma.SummaryTopicListRelationFilter
-  finalBarExamQAs?: Prisma.FinalBarExamQAListRelationFilter
 }, "id" | "slug">
 
 export type SubjectOrderByWithAggregationInput = {
@@ -271,9 +271,9 @@ export type SubjectCreateInput = {
   updatedAt?: Date | string
   objectId?: string | null
   report_to_subject?: Prisma.ReportToSubjectCreateNestedManyWithoutSubjectInput
+  finalBarExamQAs?: Prisma.FinalBarExamQACreateNestedManyWithoutSubjectInput
   handbookTopics?: Prisma.HandbookTopicCreateNestedManyWithoutSubjectInput
   summaryTopics?: Prisma.SummaryTopicCreateNestedManyWithoutSubjectInput
-  finalBarExamQAs?: Prisma.FinalBarExamQACreateNestedManyWithoutSubjectInput
 }
 
 export type SubjectUncheckedCreateInput = {
@@ -285,9 +285,9 @@ export type SubjectUncheckedCreateInput = {
   updatedAt?: Date | string
   objectId?: string | null
   report_to_subject?: Prisma.ReportToSubjectUncheckedCreateNestedManyWithoutSubjectInput
+  finalBarExamQAs?: Prisma.FinalBarExamQAUncheckedCreateNestedManyWithoutSubjectInput
   handbookTopics?: Prisma.HandbookTopicUncheckedCreateNestedManyWithoutSubjectInput
   summaryTopics?: Prisma.SummaryTopicUncheckedCreateNestedManyWithoutSubjectInput
-  finalBarExamQAs?: Prisma.FinalBarExamQAUncheckedCreateNestedManyWithoutSubjectInput
 }
 
 export type SubjectUpdateInput = {
@@ -299,9 +299,9 @@ export type SubjectUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   report_to_subject?: Prisma.ReportToSubjectUpdateManyWithoutSubjectNestedInput
+  finalBarExamQAs?: Prisma.FinalBarExamQAUpdateManyWithoutSubjectNestedInput
   handbookTopics?: Prisma.HandbookTopicUpdateManyWithoutSubjectNestedInput
   summaryTopics?: Prisma.SummaryTopicUpdateManyWithoutSubjectNestedInput
-  finalBarExamQAs?: Prisma.FinalBarExamQAUpdateManyWithoutSubjectNestedInput
 }
 
 export type SubjectUncheckedUpdateInput = {
@@ -313,9 +313,9 @@ export type SubjectUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   report_to_subject?: Prisma.ReportToSubjectUncheckedUpdateManyWithoutSubjectNestedInput
+  finalBarExamQAs?: Prisma.FinalBarExamQAUncheckedUpdateManyWithoutSubjectNestedInput
   handbookTopics?: Prisma.HandbookTopicUncheckedUpdateManyWithoutSubjectNestedInput
   summaryTopics?: Prisma.SummaryTopicUncheckedUpdateManyWithoutSubjectNestedInput
-  finalBarExamQAs?: Prisma.FinalBarExamQAUncheckedUpdateManyWithoutSubjectNestedInput
 }
 
 export type SubjectCreateManyInput = {
@@ -453,9 +453,9 @@ export type SubjectCreateWithoutReport_to_subjectInput = {
   slug: string
   updatedAt?: Date | string
   objectId?: string | null
+  finalBarExamQAs?: Prisma.FinalBarExamQACreateNestedManyWithoutSubjectInput
   handbookTopics?: Prisma.HandbookTopicCreateNestedManyWithoutSubjectInput
   summaryTopics?: Prisma.SummaryTopicCreateNestedManyWithoutSubjectInput
-  finalBarExamQAs?: Prisma.FinalBarExamQACreateNestedManyWithoutSubjectInput
 }
 
 export type SubjectUncheckedCreateWithoutReport_to_subjectInput = {
@@ -466,9 +466,9 @@ export type SubjectUncheckedCreateWithoutReport_to_subjectInput = {
   slug: string
   updatedAt?: Date | string
   objectId?: string | null
+  finalBarExamQAs?: Prisma.FinalBarExamQAUncheckedCreateNestedManyWithoutSubjectInput
   handbookTopics?: Prisma.HandbookTopicUncheckedCreateNestedManyWithoutSubjectInput
   summaryTopics?: Prisma.SummaryTopicUncheckedCreateNestedManyWithoutSubjectInput
-  finalBarExamQAs?: Prisma.FinalBarExamQAUncheckedCreateNestedManyWithoutSubjectInput
 }
 
 export type SubjectCreateOrConnectWithoutReport_to_subjectInput = {
@@ -495,9 +495,9 @@ export type SubjectUpdateWithoutReport_to_subjectInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  finalBarExamQAs?: Prisma.FinalBarExamQAUpdateManyWithoutSubjectNestedInput
   handbookTopics?: Prisma.HandbookTopicUpdateManyWithoutSubjectNestedInput
   summaryTopics?: Prisma.SummaryTopicUpdateManyWithoutSubjectNestedInput
-  finalBarExamQAs?: Prisma.FinalBarExamQAUpdateManyWithoutSubjectNestedInput
 }
 
 export type SubjectUncheckedUpdateWithoutReport_to_subjectInput = {
@@ -508,9 +508,9 @@ export type SubjectUncheckedUpdateWithoutReport_to_subjectInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  finalBarExamQAs?: Prisma.FinalBarExamQAUncheckedUpdateManyWithoutSubjectNestedInput
   handbookTopics?: Prisma.HandbookTopicUncheckedUpdateManyWithoutSubjectNestedInput
   summaryTopics?: Prisma.SummaryTopicUncheckedUpdateManyWithoutSubjectNestedInput
-  finalBarExamQAs?: Prisma.FinalBarExamQAUncheckedUpdateManyWithoutSubjectNestedInput
 }
 
 export type SubjectCreateWithoutHandbookTopicsInput = {
@@ -522,8 +522,8 @@ export type SubjectCreateWithoutHandbookTopicsInput = {
   updatedAt?: Date | string
   objectId?: string | null
   report_to_subject?: Prisma.ReportToSubjectCreateNestedManyWithoutSubjectInput
-  summaryTopics?: Prisma.SummaryTopicCreateNestedManyWithoutSubjectInput
   finalBarExamQAs?: Prisma.FinalBarExamQACreateNestedManyWithoutSubjectInput
+  summaryTopics?: Prisma.SummaryTopicCreateNestedManyWithoutSubjectInput
 }
 
 export type SubjectUncheckedCreateWithoutHandbookTopicsInput = {
@@ -535,8 +535,8 @@ export type SubjectUncheckedCreateWithoutHandbookTopicsInput = {
   updatedAt?: Date | string
   objectId?: string | null
   report_to_subject?: Prisma.ReportToSubjectUncheckedCreateNestedManyWithoutSubjectInput
-  summaryTopics?: Prisma.SummaryTopicUncheckedCreateNestedManyWithoutSubjectInput
   finalBarExamQAs?: Prisma.FinalBarExamQAUncheckedCreateNestedManyWithoutSubjectInput
+  summaryTopics?: Prisma.SummaryTopicUncheckedCreateNestedManyWithoutSubjectInput
 }
 
 export type SubjectCreateOrConnectWithoutHandbookTopicsInput = {
@@ -564,8 +564,8 @@ export type SubjectUpdateWithoutHandbookTopicsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   report_to_subject?: Prisma.ReportToSubjectUpdateManyWithoutSubjectNestedInput
-  summaryTopics?: Prisma.SummaryTopicUpdateManyWithoutSubjectNestedInput
   finalBarExamQAs?: Prisma.FinalBarExamQAUpdateManyWithoutSubjectNestedInput
+  summaryTopics?: Prisma.SummaryTopicUpdateManyWithoutSubjectNestedInput
 }
 
 export type SubjectUncheckedUpdateWithoutHandbookTopicsInput = {
@@ -577,8 +577,8 @@ export type SubjectUncheckedUpdateWithoutHandbookTopicsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   report_to_subject?: Prisma.ReportToSubjectUncheckedUpdateManyWithoutSubjectNestedInput
-  summaryTopics?: Prisma.SummaryTopicUncheckedUpdateManyWithoutSubjectNestedInput
   finalBarExamQAs?: Prisma.FinalBarExamQAUncheckedUpdateManyWithoutSubjectNestedInput
+  summaryTopics?: Prisma.SummaryTopicUncheckedUpdateManyWithoutSubjectNestedInput
 }
 
 export type SubjectCreateWithoutSummaryTopicsInput = {
@@ -590,8 +590,8 @@ export type SubjectCreateWithoutSummaryTopicsInput = {
   updatedAt?: Date | string
   objectId?: string | null
   report_to_subject?: Prisma.ReportToSubjectCreateNestedManyWithoutSubjectInput
-  handbookTopics?: Prisma.HandbookTopicCreateNestedManyWithoutSubjectInput
   finalBarExamQAs?: Prisma.FinalBarExamQACreateNestedManyWithoutSubjectInput
+  handbookTopics?: Prisma.HandbookTopicCreateNestedManyWithoutSubjectInput
 }
 
 export type SubjectUncheckedCreateWithoutSummaryTopicsInput = {
@@ -603,8 +603,8 @@ export type SubjectUncheckedCreateWithoutSummaryTopicsInput = {
   updatedAt?: Date | string
   objectId?: string | null
   report_to_subject?: Prisma.ReportToSubjectUncheckedCreateNestedManyWithoutSubjectInput
-  handbookTopics?: Prisma.HandbookTopicUncheckedCreateNestedManyWithoutSubjectInput
   finalBarExamQAs?: Prisma.FinalBarExamQAUncheckedCreateNestedManyWithoutSubjectInput
+  handbookTopics?: Prisma.HandbookTopicUncheckedCreateNestedManyWithoutSubjectInput
 }
 
 export type SubjectCreateOrConnectWithoutSummaryTopicsInput = {
@@ -632,8 +632,8 @@ export type SubjectUpdateWithoutSummaryTopicsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   report_to_subject?: Prisma.ReportToSubjectUpdateManyWithoutSubjectNestedInput
-  handbookTopics?: Prisma.HandbookTopicUpdateManyWithoutSubjectNestedInput
   finalBarExamQAs?: Prisma.FinalBarExamQAUpdateManyWithoutSubjectNestedInput
+  handbookTopics?: Prisma.HandbookTopicUpdateManyWithoutSubjectNestedInput
 }
 
 export type SubjectUncheckedUpdateWithoutSummaryTopicsInput = {
@@ -645,8 +645,8 @@ export type SubjectUncheckedUpdateWithoutSummaryTopicsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   objectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   report_to_subject?: Prisma.ReportToSubjectUncheckedUpdateManyWithoutSubjectNestedInput
-  handbookTopics?: Prisma.HandbookTopicUncheckedUpdateManyWithoutSubjectNestedInput
   finalBarExamQAs?: Prisma.FinalBarExamQAUncheckedUpdateManyWithoutSubjectNestedInput
+  handbookTopics?: Prisma.HandbookTopicUncheckedUpdateManyWithoutSubjectNestedInput
 }
 
 export type SubjectCreateWithoutFinalBarExamQAsInput = {
@@ -724,16 +724,16 @@ export type SubjectUncheckedUpdateWithoutFinalBarExamQAsInput = {
 
 export type SubjectCountOutputType = {
   report_to_subject: number
+  finalBarExamQAs: number
   handbookTopics: number
   summaryTopics: number
-  finalBarExamQAs: number
 }
 
 export type SubjectCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   report_to_subject?: boolean | SubjectCountOutputTypeCountReport_to_subjectArgs
+  finalBarExamQAs?: boolean | SubjectCountOutputTypeCountFinalBarExamQAsArgs
   handbookTopics?: boolean | SubjectCountOutputTypeCountHandbookTopicsArgs
   summaryTopics?: boolean | SubjectCountOutputTypeCountSummaryTopicsArgs
-  finalBarExamQAs?: boolean | SubjectCountOutputTypeCountFinalBarExamQAsArgs
 }
 
 /**
@@ -756,6 +756,13 @@ export type SubjectCountOutputTypeCountReport_to_subjectArgs<ExtArgs extends run
 /**
  * SubjectCountOutputType without action
  */
+export type SubjectCountOutputTypeCountFinalBarExamQAsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FinalBarExamQAWhereInput
+}
+
+/**
+ * SubjectCountOutputType without action
+ */
 export type SubjectCountOutputTypeCountHandbookTopicsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.HandbookTopicWhereInput
 }
@@ -765,13 +772,6 @@ export type SubjectCountOutputTypeCountHandbookTopicsArgs<ExtArgs extends runtim
  */
 export type SubjectCountOutputTypeCountSummaryTopicsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.SummaryTopicWhereInput
-}
-
-/**
- * SubjectCountOutputType without action
- */
-export type SubjectCountOutputTypeCountFinalBarExamQAsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.FinalBarExamQAWhereInput
 }
 
 
@@ -784,9 +784,9 @@ export type SubjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   updatedAt?: boolean
   objectId?: boolean
   report_to_subject?: boolean | Prisma.Subject$report_to_subjectArgs<ExtArgs>
+  finalBarExamQAs?: boolean | Prisma.Subject$finalBarExamQAsArgs<ExtArgs>
   handbookTopics?: boolean | Prisma.Subject$handbookTopicsArgs<ExtArgs>
   summaryTopics?: boolean | Prisma.Subject$summaryTopicsArgs<ExtArgs>
-  finalBarExamQAs?: boolean | Prisma.Subject$finalBarExamQAsArgs<ExtArgs>
   _count?: boolean | Prisma.SubjectCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["subject"]>
 
@@ -823,9 +823,9 @@ export type SubjectSelectScalar = {
 export type SubjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "intro" | "name" | "slug" | "updatedAt" | "objectId", ExtArgs["result"]["subject"]>
 export type SubjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   report_to_subject?: boolean | Prisma.Subject$report_to_subjectArgs<ExtArgs>
+  finalBarExamQAs?: boolean | Prisma.Subject$finalBarExamQAsArgs<ExtArgs>
   handbookTopics?: boolean | Prisma.Subject$handbookTopicsArgs<ExtArgs>
   summaryTopics?: boolean | Prisma.Subject$summaryTopicsArgs<ExtArgs>
-  finalBarExamQAs?: boolean | Prisma.Subject$finalBarExamQAsArgs<ExtArgs>
   _count?: boolean | Prisma.SubjectCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SubjectIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -835,9 +835,9 @@ export type $SubjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   name: "Subject"
   objects: {
     report_to_subject: Prisma.$ReportToSubjectPayload<ExtArgs>[]
+    finalBarExamQAs: Prisma.$FinalBarExamQAPayload<ExtArgs>[]
     handbookTopics: Prisma.$HandbookTopicPayload<ExtArgs>[]
     summaryTopics: Prisma.$SummaryTopicPayload<ExtArgs>[]
-    finalBarExamQAs: Prisma.$FinalBarExamQAPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1242,9 +1242,9 @@ readonly fields: SubjectFieldRefs;
 export interface Prisma__SubjectClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   report_to_subject<T extends Prisma.Subject$report_to_subjectArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Subject$report_to_subjectArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReportToSubjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  finalBarExamQAs<T extends Prisma.Subject$finalBarExamQAsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Subject$finalBarExamQAsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FinalBarExamQAPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   handbookTopics<T extends Prisma.Subject$handbookTopicsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Subject$handbookTopicsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HandbookTopicPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   summaryTopics<T extends Prisma.Subject$summaryTopicsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Subject$summaryTopicsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SummaryTopicPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  finalBarExamQAs<T extends Prisma.Subject$finalBarExamQAsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Subject$finalBarExamQAsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FinalBarExamQAPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1693,6 +1693,30 @@ export type Subject$report_to_subjectArgs<ExtArgs extends runtime.Types.Extensio
 }
 
 /**
+ * Subject.finalBarExamQAs
+ */
+export type Subject$finalBarExamQAsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FinalBarExamQA
+   */
+  select?: Prisma.FinalBarExamQASelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FinalBarExamQA
+   */
+  omit?: Prisma.FinalBarExamQAOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FinalBarExamQAInclude<ExtArgs> | null
+  where?: Prisma.FinalBarExamQAWhereInput
+  orderBy?: Prisma.FinalBarExamQAOrderByWithRelationInput | Prisma.FinalBarExamQAOrderByWithRelationInput[]
+  cursor?: Prisma.FinalBarExamQAWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FinalBarExamQAScalarFieldEnum | Prisma.FinalBarExamQAScalarFieldEnum[]
+}
+
+/**
  * Subject.handbookTopics
  */
 export type Subject$handbookTopicsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1738,30 +1762,6 @@ export type Subject$summaryTopicsArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.SummaryTopicScalarFieldEnum | Prisma.SummaryTopicScalarFieldEnum[]
-}
-
-/**
- * Subject.finalBarExamQAs
- */
-export type Subject$finalBarExamQAsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the FinalBarExamQA
-   */
-  select?: Prisma.FinalBarExamQASelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the FinalBarExamQA
-   */
-  omit?: Prisma.FinalBarExamQAOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.FinalBarExamQAInclude<ExtArgs> | null
-  where?: Prisma.FinalBarExamQAWhereInput
-  orderBy?: Prisma.FinalBarExamQAOrderByWithRelationInput | Prisma.FinalBarExamQAOrderByWithRelationInput[]
-  cursor?: Prisma.FinalBarExamQAWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.FinalBarExamQAScalarFieldEnum | Prisma.FinalBarExamQAScalarFieldEnum[]
 }
 
 /**

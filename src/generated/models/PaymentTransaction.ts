@@ -276,9 +276,9 @@ export type PaymentTransactionWhereInput = {
   type?: Prisma.EnumPaymentTypeEnumFilter<"PaymentTransaction"> | $Enums.PaymentTypeEnum
   response?: Prisma.JsonNullableFilter<"PaymentTransaction">
   createdAt?: Prisma.DateTimeFilter<"PaymentTransaction"> | Date | string
-  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
   organization?: Prisma.XOR<Prisma.OrganizationNullableScalarRelationFilter, Prisma.OrganizationWhereInput> | null
+  subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
+  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type PaymentTransactionOrderByWithRelationInput = {
@@ -295,9 +295,9 @@ export type PaymentTransactionOrderByWithRelationInput = {
   type?: Prisma.SortOrder
   response?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  user?: Prisma.UserOrderByWithRelationInput
-  subscription?: Prisma.SubscriptionOrderByWithRelationInput
   organization?: Prisma.OrganizationOrderByWithRelationInput
+  subscription?: Prisma.SubscriptionOrderByWithRelationInput
+  user?: Prisma.UserOrderByWithRelationInput
   _relevance?: Prisma.PaymentTransactionOrderByRelevanceInput
 }
 
@@ -318,9 +318,9 @@ export type PaymentTransactionWhereUniqueInput = Prisma.AtLeast<{
   type?: Prisma.EnumPaymentTypeEnumFilter<"PaymentTransaction"> | $Enums.PaymentTypeEnum
   response?: Prisma.JsonNullableFilter<"PaymentTransaction">
   createdAt?: Prisma.DateTimeFilter<"PaymentTransaction"> | Date | string
-  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
   organization?: Prisma.XOR<Prisma.OrganizationNullableScalarRelationFilter, Prisma.OrganizationWhereInput> | null
+  subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
+  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id">
 
 export type PaymentTransactionOrderByWithAggregationInput = {
@@ -374,9 +374,9 @@ export type PaymentTransactionCreateInput = {
   type: $Enums.PaymentTypeEnum
   response?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
-  user?: Prisma.UserCreateNestedOneWithoutPaymentsInput
-  subscription?: Prisma.SubscriptionCreateNestedOneWithoutPaymentsInput
   organization?: Prisma.OrganizationCreateNestedOneWithoutPaymentsInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutPaymentsInput
+  user?: Prisma.UserCreateNestedOneWithoutPaymentsInput
 }
 
 export type PaymentTransactionUncheckedCreateInput = {
@@ -406,9 +406,9 @@ export type PaymentTransactionUpdateInput = {
   type?: Prisma.EnumPaymentTypeEnumFieldUpdateOperationsInput | $Enums.PaymentTypeEnum
   response?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneWithoutPaymentsNestedInput
-  subscription?: Prisma.SubscriptionUpdateOneWithoutPaymentsNestedInput
   organization?: Prisma.OrganizationUpdateOneWithoutPaymentsNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutPaymentsNestedInput
+  user?: Prisma.UserUpdateOneWithoutPaymentsNestedInput
 }
 
 export type PaymentTransactionUncheckedUpdateInput = {
@@ -687,8 +687,8 @@ export type PaymentTransactionCreateWithoutUserInput = {
   type: $Enums.PaymentTypeEnum
   response?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
-  subscription?: Prisma.SubscriptionCreateNestedOneWithoutPaymentsInput
   organization?: Prisma.OrganizationCreateNestedOneWithoutPaymentsInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutPaymentsInput
 }
 
 export type PaymentTransactionUncheckedCreateWithoutUserInput = {
@@ -762,8 +762,8 @@ export type PaymentTransactionCreateWithoutSubscriptionInput = {
   type: $Enums.PaymentTypeEnum
   response?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
-  user?: Prisma.UserCreateNestedOneWithoutPaymentsInput
   organization?: Prisma.OrganizationCreateNestedOneWithoutPaymentsInput
+  user?: Prisma.UserCreateNestedOneWithoutPaymentsInput
 }
 
 export type PaymentTransactionUncheckedCreateWithoutSubscriptionInput = {
@@ -818,8 +818,8 @@ export type PaymentTransactionCreateWithoutOrganizationInput = {
   type: $Enums.PaymentTypeEnum
   response?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
-  user?: Prisma.UserCreateNestedOneWithoutPaymentsInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutPaymentsInput
+  user?: Prisma.UserCreateNestedOneWithoutPaymentsInput
 }
 
 export type PaymentTransactionUncheckedCreateWithoutOrganizationInput = {
@@ -889,8 +889,8 @@ export type PaymentTransactionUpdateWithoutUserInput = {
   type?: Prisma.EnumPaymentTypeEnumFieldUpdateOperationsInput | $Enums.PaymentTypeEnum
   response?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  subscription?: Prisma.SubscriptionUpdateOneWithoutPaymentsNestedInput
   organization?: Prisma.OrganizationUpdateOneWithoutPaymentsNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutPaymentsNestedInput
 }
 
 export type PaymentTransactionUncheckedUpdateWithoutUserInput = {
@@ -949,8 +949,8 @@ export type PaymentTransactionUpdateWithoutSubscriptionInput = {
   type?: Prisma.EnumPaymentTypeEnumFieldUpdateOperationsInput | $Enums.PaymentTypeEnum
   response?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneWithoutPaymentsNestedInput
   organization?: Prisma.OrganizationUpdateOneWithoutPaymentsNestedInput
+  user?: Prisma.UserUpdateOneWithoutPaymentsNestedInput
 }
 
 export type PaymentTransactionUncheckedUpdateWithoutSubscriptionInput = {
@@ -1009,8 +1009,8 @@ export type PaymentTransactionUpdateWithoutOrganizationInput = {
   type?: Prisma.EnumPaymentTypeEnumFieldUpdateOperationsInput | $Enums.PaymentTypeEnum
   response?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneWithoutPaymentsNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutPaymentsNestedInput
+  user?: Prisma.UserUpdateOneWithoutPaymentsNestedInput
 }
 
 export type PaymentTransactionUncheckedUpdateWithoutOrganizationInput = {
@@ -1059,9 +1059,9 @@ export type PaymentTransactionSelect<ExtArgs extends runtime.Types.Extensions.In
   type?: boolean
   response?: boolean
   createdAt?: boolean
-  user?: boolean | Prisma.PaymentTransaction$userArgs<ExtArgs>
-  subscription?: boolean | Prisma.PaymentTransaction$subscriptionArgs<ExtArgs>
   organization?: boolean | Prisma.PaymentTransaction$organizationArgs<ExtArgs>
+  subscription?: boolean | Prisma.PaymentTransaction$subscriptionArgs<ExtArgs>
+  user?: boolean | Prisma.PaymentTransaction$userArgs<ExtArgs>
 }, ExtArgs["result"]["paymentTransaction"]>
 
 export type PaymentTransactionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1078,9 +1078,9 @@ export type PaymentTransactionSelectCreateManyAndReturn<ExtArgs extends runtime.
   type?: boolean
   response?: boolean
   createdAt?: boolean
-  user?: boolean | Prisma.PaymentTransaction$userArgs<ExtArgs>
-  subscription?: boolean | Prisma.PaymentTransaction$subscriptionArgs<ExtArgs>
   organization?: boolean | Prisma.PaymentTransaction$organizationArgs<ExtArgs>
+  subscription?: boolean | Prisma.PaymentTransaction$subscriptionArgs<ExtArgs>
+  user?: boolean | Prisma.PaymentTransaction$userArgs<ExtArgs>
 }, ExtArgs["result"]["paymentTransaction"]>
 
 export type PaymentTransactionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1097,9 +1097,9 @@ export type PaymentTransactionSelectUpdateManyAndReturn<ExtArgs extends runtime.
   type?: boolean
   response?: boolean
   createdAt?: boolean
-  user?: boolean | Prisma.PaymentTransaction$userArgs<ExtArgs>
-  subscription?: boolean | Prisma.PaymentTransaction$subscriptionArgs<ExtArgs>
   organization?: boolean | Prisma.PaymentTransaction$organizationArgs<ExtArgs>
+  subscription?: boolean | Prisma.PaymentTransaction$subscriptionArgs<ExtArgs>
+  user?: boolean | Prisma.PaymentTransaction$userArgs<ExtArgs>
 }, ExtArgs["result"]["paymentTransaction"]>
 
 export type PaymentTransactionSelectScalar = {
@@ -1120,27 +1120,27 @@ export type PaymentTransactionSelectScalar = {
 
 export type PaymentTransactionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "subscriptionId" | "organizationId" | "provider" | "providerTransactionId" | "reference" | "amount" | "currency" | "status" | "type" | "response" | "createdAt", ExtArgs["result"]["paymentTransaction"]>
 export type PaymentTransactionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.PaymentTransaction$userArgs<ExtArgs>
-  subscription?: boolean | Prisma.PaymentTransaction$subscriptionArgs<ExtArgs>
   organization?: boolean | Prisma.PaymentTransaction$organizationArgs<ExtArgs>
+  subscription?: boolean | Prisma.PaymentTransaction$subscriptionArgs<ExtArgs>
+  user?: boolean | Prisma.PaymentTransaction$userArgs<ExtArgs>
 }
 export type PaymentTransactionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.PaymentTransaction$userArgs<ExtArgs>
-  subscription?: boolean | Prisma.PaymentTransaction$subscriptionArgs<ExtArgs>
   organization?: boolean | Prisma.PaymentTransaction$organizationArgs<ExtArgs>
+  subscription?: boolean | Prisma.PaymentTransaction$subscriptionArgs<ExtArgs>
+  user?: boolean | Prisma.PaymentTransaction$userArgs<ExtArgs>
 }
 export type PaymentTransactionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.PaymentTransaction$userArgs<ExtArgs>
-  subscription?: boolean | Prisma.PaymentTransaction$subscriptionArgs<ExtArgs>
   organization?: boolean | Prisma.PaymentTransaction$organizationArgs<ExtArgs>
+  subscription?: boolean | Prisma.PaymentTransaction$subscriptionArgs<ExtArgs>
+  user?: boolean | Prisma.PaymentTransaction$userArgs<ExtArgs>
 }
 
 export type $PaymentTransactionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "PaymentTransaction"
   objects: {
-    user: Prisma.$UserPayload<ExtArgs> | null
-    subscription: Prisma.$SubscriptionPayload<ExtArgs> | null
     organization: Prisma.$OrganizationPayload<ExtArgs> | null
+    subscription: Prisma.$SubscriptionPayload<ExtArgs> | null
+    user: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1550,9 +1550,9 @@ readonly fields: PaymentTransactionFieldRefs;
  */
 export interface Prisma__PaymentTransactionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.PaymentTransaction$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PaymentTransaction$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  subscription<T extends Prisma.PaymentTransaction$subscriptionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PaymentTransaction$subscriptionArgs<ExtArgs>>): Prisma.Prisma__SubscriptionClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   organization<T extends Prisma.PaymentTransaction$organizationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PaymentTransaction$organizationArgs<ExtArgs>>): Prisma.Prisma__OrganizationClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  subscription<T extends Prisma.PaymentTransaction$subscriptionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PaymentTransaction$subscriptionArgs<ExtArgs>>): Prisma.Prisma__SubscriptionClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.PaymentTransaction$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PaymentTransaction$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1991,22 +1991,22 @@ export type PaymentTransactionDeleteManyArgs<ExtArgs extends runtime.Types.Exten
 }
 
 /**
- * PaymentTransaction.user
+ * PaymentTransaction.organization
  */
-export type PaymentTransaction$userArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type PaymentTransaction$organizationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the User
+   * Select specific fields to fetch from the Organization
    */
-  select?: Prisma.UserSelect<ExtArgs> | null
+  select?: Prisma.OrganizationSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the User
+   * Omit specific fields from the Organization
    */
-  omit?: Prisma.UserOmit<ExtArgs> | null
+  omit?: Prisma.OrganizationOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.UserInclude<ExtArgs> | null
-  where?: Prisma.UserWhereInput
+  include?: Prisma.OrganizationInclude<ExtArgs> | null
+  where?: Prisma.OrganizationWhereInput
 }
 
 /**
@@ -2029,22 +2029,22 @@ export type PaymentTransaction$subscriptionArgs<ExtArgs extends runtime.Types.Ex
 }
 
 /**
- * PaymentTransaction.organization
+ * PaymentTransaction.user
  */
-export type PaymentTransaction$organizationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type PaymentTransaction$userArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Organization
+   * Select specific fields to fetch from the User
    */
-  select?: Prisma.OrganizationSelect<ExtArgs> | null
+  select?: Prisma.UserSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Organization
+   * Omit specific fields from the User
    */
-  omit?: Prisma.OrganizationOmit<ExtArgs> | null
+  omit?: Prisma.UserOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.OrganizationInclude<ExtArgs> | null
-  where?: Prisma.OrganizationWhereInput
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

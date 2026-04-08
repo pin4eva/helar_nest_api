@@ -1,19 +1,12 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider        = "prisma-client"
   output          = "../src/generated"
-  target          = "bun"
   previewFeatures = ["fullTextSearchPostgres"]
+  target          = "bun"
 }
 
 datasource db {
   provider = "postgresql"
-  // url      = env("DATABASE_URL")
 }
 
 model Auth {
@@ -29,44 +22,42 @@ model Auth {
 }
 
 model User {
-  id                  String              @id @default(cuid())
-  bio                 String?
-  city                String?
-  contact             String?
-  createdAt           DateTime            @default(now())
-  email               String              @unique
-  firstName           String
-  image               String?
-  imagePublicId       String?
-  isContactPublic     Boolean?
-  isPhonePublic       Boolean?
-  lastName            String
-  lastSeen            DateTime            @default(now())
-  phone               String?
-  permissions         String[]            @default([])
-  profileType         UserProfileTypeEnum @default(Guest)
-  role                UserRoleEnum        @default(User)
-  state               String?
-  status              UserStatusEnum      @default(Active)
-  updatedAt           DateTime            @updatedAt
-  objectId            String?
-  passwordUpdateToken String?
-  // password         String
-  gender              GenderEnum?         @default(Male)
-  emailToken          String?
-  isEmailVerified     Boolean             @default(false)
-  organizationId      String?
-  bookmarks           Bookmark[]
-  report_comments     ReportComment[]
-  report_likes        ReportLike[]
-  reports_added       Report[]            @relation("reports_added")
-  reports_updated     Report[]            @relation("reports_updated")
-
-  subscriptions         Subscription[]       @relation("UserSubscriptions")
-  payments              PaymentTransaction[]
+  id                    String               @id @default(cuid())
+  bio                   String?
+  city                  String?
+  contact               String?
+  createdAt             DateTime             @default(now())
+  email                 String               @unique
+  firstName             String
+  image                 String?
+  imagePublicId         String?
+  isContactPublic       Boolean?
+  isPhonePublic         Boolean?
+  lastName              String
+  lastSeen              DateTime             @default(now())
+  phone                 String?
+  profileType           UserProfileTypeEnum  @default(Guest)
+  role                  UserRoleEnum         @default(User)
+  state                 String?
+  status                UserStatusEnum       @default(Active)
+  updatedAt             DateTime             @updatedAt
+  objectId              String?
+  passwordUpdateToken   String?
+  gender                GenderEnum?          @default(Male)
+  emailToken            String?
+  isEmailVerified       Boolean              @default(false)
   currentSubscriptionId String?              @unique
-  currentSubscription   Subscription?        @relation("CurrentSubscription", fields: [currentSubscriptionId], references: [id], onDelete: SetNull, onUpdate: NoAction)
+  organizationId        String?
+  permissions           String[]             @default([])
+  bookmarks             Bookmark[]
+  payments              PaymentTransaction[]
   ReportCommentLike     ReportCommentLike[]
+  report_comments       ReportComment[]
+  report_likes          ReportLike[]
+  reports_added         Report[]             @relation("reports_added")
+  reports_updated       Report[]             @relation("reports_updated")
+  subscriptions         Subscription[]       @relation("UserSubscriptions")
+  currentSubscription   Subscription?        @relation("CurrentSubscription", fields: [currentSubscriptionId], references: [id], onUpdate: NoAction)
   organization          Organization?        @relation(fields: [organizationId], references: [id])
 
   @@map("users")
@@ -74,39 +65,39 @@ model User {
 
 model Subscription {
   id                        String                     @id @default(cuid())
-  userId                    String? // nullable for organization-owned subscriptions
-  organizationId            String?
+  userId                    String?
   reference                 String                     @unique
-  emailToken                String? //paystack email token
-  startsAt                  DateTime?
-  currentPeriodStart        DateTime?
-  currentPeriodEnd          DateTime?
-  nextBillingAt             DateTime?
-  trialEndsAt               DateTime?
-  cancelledAt               DateTime?
-  canceledReason            String?
+  createdAt                 DateTime                   @default(now())
   expiresAt                 DateTime?
   amount                    Int?
-  currency                  String                     @default("NGN")
   paymentId                 String?                    @unique
+  autoRenew                 Boolean                    @default(true)
+  canceledReason            String?
+  cancelledAt               DateTime?
+  currency                  String                     @default("NGN")
+  currentPeriodEnd          DateTime?
+  currentPeriodStart        DateTime?
+  meta                      Json?
+  nextBillingAt             DateTime?
+  organizationId            String?
   provider                  String?
   providerCustomerId        String?
-  providerSubscriptionId    String?                    @unique
   providerPlanId            String?
-  plan                      PlanIntervalEnum           @default(monthly)
+  providerSubscriptionId    String?                    @unique
+  startsAt                  DateTime?
+  trialEndsAt               DateTime?
   status                    SubscriptionStatusEnum     @default(Pending)
-  autoRenew                 Boolean                    @default(true)
-  meta                      Json?
+  plan                      PlanIntervalEnum           @default(monthly)
   planCode                  String?
-  user                      User?                      @relation("UserSubscriptions", fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  organization              Organization?              @relation(fields: [organizationId], references: [id])
-  currentUser               User?                      @relation("CurrentSubscription")
-  payments                  PaymentTransaction[]
-  organizationSubscriptions OrganizationSubscription[]
-  subscriptionPlan          SubscriptionPlan?          @relation(fields: [subscriptionPlanId], references: [id])
   subscriptionPlanId        Int?
-  createdAt                 DateTime                   @default(now())
+  emailToken                String?
   updatedAt                 DateTime?                  @updatedAt
+  organizationSubscriptions OrganizationSubscription[]
+  payments                  PaymentTransaction[]
+  organization              Organization?              @relation(fields: [organizationId], references: [id])
+  subscriptionPlan          SubscriptionPlan?          @relation(fields: [subscriptionPlanId], references: [id])
+  user                      User?                      @relation("UserSubscriptions", fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  currentUser               User?                      @relation("CurrentSubscription")
 
   @@index([userId])
   @@index([organizationId])
@@ -167,9 +158,9 @@ model ReportComment {
   createdAt DateTime            @default(now())
   reportId  String
   updatedAt DateTime            @updatedAt
+  likes     ReportCommentLike[]
   user      User                @relation(fields: [authorId], references: [id])
   report    Report              @relation(fields: [reportId], references: [id])
-  likes     ReportCommentLike[]
 
   @@map("report_comments")
 }
@@ -247,9 +238,9 @@ model Subject {
   updatedAt         DateTime          @updatedAt
   objectId          String?
   report_to_subject ReportToSubject[]
+  finalBarExamQAs   FinalBarExamQA[]
   handbookTopics    HandbookTopic[]
   summaryTopics     SummaryTopic[]
-  finalBarExamQAs   FinalBarExamQA[]
 
   @@map("subjects")
 }
@@ -259,27 +250,27 @@ model HandbookTopic {
   title     String         @unique
   slug      String?
   subjectId String
-  type      TopicTypeEnum  @default(Handbook)
-  subject   Subject        @relation(fields: [subjectId], references: [id])
   createdAt DateTime       @default(now())
   updatedAt DateTime       @updatedAt
+  type      TopicTypeEnum  @default(Handbook)
   cases     HandbookCase[]
+  subject   Subject        @relation(fields: [subjectId], references: [id])
 
   @@map("handbook_topics")
 }
 
 model HandbookCase {
-  id        String         @id @default(cuid())
+  id        String        @id @default(cuid())
   body      String
   byline    String
   citation  String
-  createdAt DateTime       @default(now())
-  topicId   String
-  ref       Int            @unique
+  createdAt DateTime      @default(now())
+  ref       Int           @unique
   slug      String?
   title     String
-  updatedAt DateTime       @updatedAt
-  topic     HandbookTopic? @relation(fields: [topicId], references: [id])
+  updatedAt DateTime      @updatedAt
+  topicId   String
+  topic     HandbookTopic @relation(fields: [topicId], references: [id])
 
   @@map("handbook_cases")
 }
@@ -290,25 +281,25 @@ model SummaryTopic {
   slug      String
   subjectId String
   type      SummaryTypeEnum @default(Faculty_Summary)
-  subject   Subject         @relation(fields: [subjectId], references: [id])
   createdAt DateTime        @default(now())
   updatedAt DateTime        @updatedAt
   cases     SummaryCase[]
+  subject   Subject         @relation(fields: [subjectId], references: [id])
 
   @@map("summary_topics")
 }
 
 model SummaryCase {
-  id        String        @id @default(cuid())
-  createdAt DateTime      @default(now())
+  id        String       @id @default(cuid())
+  createdAt DateTime     @default(now())
   topicId   String
   slug      String?
-  ref       Int           @unique
+  ref       Int          @unique
   question  String
   answer    String
-  updatedAt DateTime      @updatedAt
+  updatedAt DateTime     @updatedAt
   objectId  String?
-  topic     SummaryTopic? @relation(fields: [topicId], references: [id])
+  topic     SummaryTopic @relation(fields: [topicId], references: [id])
 
   @@map("summary_cases")
 }
@@ -318,10 +309,10 @@ model Organization {
   name                      String                     @unique
   createdAt                 DateTime                   @default(now())
   updatedAt                 DateTime                   @updatedAt
-  users                     User[]
-  subscriptions             Subscription[]
-  payments                  PaymentTransaction[]
   organizationSubscriptions OrganizationSubscription[]
+  payments                  PaymentTransaction[]
+  subscriptions             Subscription[]
+  users                     User[]
 
   @@map("schools")
 }
@@ -340,10 +331,9 @@ model PaymentTransaction {
   type                  PaymentTypeEnum
   response              Json?
   createdAt             DateTime          @default(now())
-
-  user         User?         @relation(fields: [userId], references: [id])
-  subscription Subscription? @relation(fields: [subscriptionId], references: [id])
-  organization Organization? @relation(fields: [organizationId], references: [id])
+  organization          Organization?     @relation(fields: [organizationId], references: [id])
+  subscription          Subscription?     @relation(fields: [subscriptionId], references: [id])
+  user                  User?             @relation(fields: [userId], references: [id])
 
   @@index([userId])
   @@index([subscriptionId])
@@ -351,16 +341,15 @@ model PaymentTransaction {
 }
 
 model OrganizationSubscription {
-  id             String    @id @default(cuid())
+  id             String        @id @default(cuid())
   organizationId String
   subscriptionId String?
   seatsTotal     Int
-  seatsAssigned  Int       @default(0)
-  createdAt      DateTime  @default(now())
+  seatsAssigned  Int           @default(0)
+  createdAt      DateTime      @default(now())
   expiresAt      DateTime?
-
-  subscription Subscription? @relation(fields: [subscriptionId], references: [id])
-  organization Organization  @relation(fields: [organizationId], references: [id])
+  organization   Organization  @relation(fields: [organizationId], references: [id])
+  subscription   Subscription? @relation(fields: [subscriptionId], references: [id])
 
   @@map("organization_subscriptions")
 }
@@ -383,17 +372,20 @@ model SubscriptionPlan {
   @@map("subscription_plans")
 }
 
-// FINAL BAR EXAM QUESTIONS AND ANSWERS
 model FinalBarExamQA {
-  id        String   @id @default(cuid())
-  subjectId String
-  question  String
-  answer    String
-  createdBy String   @default("admin")
-  updatedBy String   @default("admin")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  subject   Subject  @relation(fields: [subjectId], references: [id])
+  id           String   @id @default(cuid())
+  subjectId    String
+  question     String
+  answer       String
+  year         Int?
+  ref          Int?     @unique
+  slug         String?  @unique
+  questionType String?
+  createdBy    String   @default("admin")
+  updatedBy    String   @default("admin")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  subject      Subject  @relation(fields: [subjectId], references: [id])
 
   @@map("final_bar_exam_qa")
 }
@@ -416,8 +408,8 @@ enum UserProfileTypeEnum {
   Student
   Lawyer
   Guest
-  User
   Staff
+  User
 
   @@map("UserProfileType")
 }
@@ -442,12 +434,12 @@ enum SubscriptionPlanEnum {
 }
 
 enum SubscriptionStatusEnum {
+  Active
+  Expired
   Pending
   Trialing
-  Active
   PastDue
   Cancelled
-  Expired
   Paused
 }
 

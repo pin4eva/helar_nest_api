@@ -119,7 +119,6 @@ export const UserScalarFieldEnum = {
   lastName: 'lastName',
   lastSeen: 'lastSeen',
   phone: 'phone',
-  permissions: 'permissions',
   profileType: 'profileType',
   role: 'role',
   state: 'state',
@@ -130,8 +129,9 @@ export const UserScalarFieldEnum = {
   gender: 'gender',
   emailToken: 'emailToken',
   isEmailVerified: 'isEmailVerified',
+  currentSubscriptionId: 'currentSubscriptionId',
   organizationId: 'organizationId',
-  currentSubscriptionId: 'currentSubscriptionId'
+  permissions: 'permissions'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -140,31 +140,31 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 export const SubscriptionScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  organizationId: 'organizationId',
   reference: 'reference',
-  emailToken: 'emailToken',
-  startsAt: 'startsAt',
-  currentPeriodStart: 'currentPeriodStart',
-  currentPeriodEnd: 'currentPeriodEnd',
-  nextBillingAt: 'nextBillingAt',
-  trialEndsAt: 'trialEndsAt',
-  cancelledAt: 'cancelledAt',
-  canceledReason: 'canceledReason',
+  createdAt: 'createdAt',
   expiresAt: 'expiresAt',
   amount: 'amount',
-  currency: 'currency',
   paymentId: 'paymentId',
+  autoRenew: 'autoRenew',
+  canceledReason: 'canceledReason',
+  cancelledAt: 'cancelledAt',
+  currency: 'currency',
+  currentPeriodEnd: 'currentPeriodEnd',
+  currentPeriodStart: 'currentPeriodStart',
+  meta: 'meta',
+  nextBillingAt: 'nextBillingAt',
+  organizationId: 'organizationId',
   provider: 'provider',
   providerCustomerId: 'providerCustomerId',
-  providerSubscriptionId: 'providerSubscriptionId',
   providerPlanId: 'providerPlanId',
-  plan: 'plan',
+  providerSubscriptionId: 'providerSubscriptionId',
+  startsAt: 'startsAt',
+  trialEndsAt: 'trialEndsAt',
   status: 'status',
-  autoRenew: 'autoRenew',
-  meta: 'meta',
+  plan: 'plan',
   planCode: 'planCode',
   subscriptionPlanId: 'subscriptionPlanId',
-  createdAt: 'createdAt',
+  emailToken: 'emailToken',
   updatedAt: 'updatedAt'
 } as const
 
@@ -293,9 +293,9 @@ export const HandbookTopicScalarFieldEnum = {
   title: 'title',
   slug: 'slug',
   subjectId: 'subjectId',
-  type: 'type',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  type: 'type'
 } as const
 
 export type HandbookTopicScalarFieldEnum = (typeof HandbookTopicScalarFieldEnum)[keyof typeof HandbookTopicScalarFieldEnum]
@@ -307,11 +307,11 @@ export const HandbookCaseScalarFieldEnum = {
   byline: 'byline',
   citation: 'citation',
   createdAt: 'createdAt',
-  topicId: 'topicId',
   ref: 'ref',
   slug: 'slug',
   title: 'title',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  topicId: 'topicId'
 } as const
 
 export type HandbookCaseScalarFieldEnum = (typeof HandbookCaseScalarFieldEnum)[keyof typeof HandbookCaseScalarFieldEnum]
@@ -410,6 +410,10 @@ export const FinalBarExamQAScalarFieldEnum = {
   subjectId: 'subjectId',
   question: 'question',
   answer: 'answer',
+  year: 'year',
+  ref: 'ref',
+  slug: 'slug',
+  questionType: 'questionType',
   createdBy: 'createdBy',
   updatedBy: 'updatedBy',
   createdAt: 'createdAt',
@@ -472,13 +476,13 @@ export const UserOrderByRelevanceFieldEnum = {
   imagePublicId: 'imagePublicId',
   lastName: 'lastName',
   phone: 'phone',
-  permissions: 'permissions',
   state: 'state',
   objectId: 'objectId',
   passwordUpdateToken: 'passwordUpdateToken',
   emailToken: 'emailToken',
+  currentSubscriptionId: 'currentSubscriptionId',
   organizationId: 'organizationId',
-  currentSubscriptionId: 'currentSubscriptionId'
+  permissions: 'permissions'
 } as const
 
 export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
@@ -496,17 +500,17 @@ export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof Json
 export const SubscriptionOrderByRelevanceFieldEnum = {
   id: 'id',
   userId: 'userId',
-  organizationId: 'organizationId',
   reference: 'reference',
-  emailToken: 'emailToken',
+  paymentId: 'paymentId',
   canceledReason: 'canceledReason',
   currency: 'currency',
-  paymentId: 'paymentId',
+  organizationId: 'organizationId',
   provider: 'provider',
   providerCustomerId: 'providerCustomerId',
-  providerSubscriptionId: 'providerSubscriptionId',
   providerPlanId: 'providerPlanId',
-  planCode: 'planCode'
+  providerSubscriptionId: 'providerSubscriptionId',
+  planCode: 'planCode',
+  emailToken: 'emailToken'
 } as const
 
 export type SubscriptionOrderByRelevanceFieldEnum = (typeof SubscriptionOrderByRelevanceFieldEnum)[keyof typeof SubscriptionOrderByRelevanceFieldEnum]
@@ -629,9 +633,9 @@ export const HandbookCaseOrderByRelevanceFieldEnum = {
   body: 'body',
   byline: 'byline',
   citation: 'citation',
-  topicId: 'topicId',
   slug: 'slug',
-  title: 'title'
+  title: 'title',
+  topicId: 'topicId'
 } as const
 
 export type HandbookCaseOrderByRelevanceFieldEnum = (typeof HandbookCaseOrderByRelevanceFieldEnum)[keyof typeof HandbookCaseOrderByRelevanceFieldEnum]
@@ -706,6 +710,8 @@ export const FinalBarExamQAOrderByRelevanceFieldEnum = {
   subjectId: 'subjectId',
   question: 'question',
   answer: 'answer',
+  slug: 'slug',
+  questionType: 'questionType',
   createdBy: 'createdBy',
   updatedBy: 'updatedBy'
 } as const
