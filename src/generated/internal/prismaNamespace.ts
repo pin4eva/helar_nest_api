@@ -2414,6 +2414,7 @@ export const FinalBarExamQAScalarFieldEnum = {
   year: 'year',
   ref: 'ref',
   slug: 'slug',
+  questionType: 'questionType',
   createdBy: 'createdBy',
   updatedBy: 'updatedBy',
   createdAt: 'createdAt',
@@ -2711,6 +2712,7 @@ export const FinalBarExamQAOrderByRelevanceFieldEnum = {
   question: 'question',
   answer: 'answer',
   slug: 'slug',
+  questionType: 'questionType',
   createdBy: 'createdBy',
   updatedBy: 'updatedBy'
 } as const

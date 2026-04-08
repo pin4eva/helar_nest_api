@@ -14,6 +14,9 @@ export class CreateBarExamDto {
   @ApiProperty()
   @IsNumber()
   year: number;
+  @ApiProperty()
+  @IsString()
+  questionType: string;
 }
 
 export class UpdateBarExamDto extends PartialType(CreateBarExamDto) {

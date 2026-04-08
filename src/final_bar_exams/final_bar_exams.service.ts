@@ -16,7 +16,7 @@ export class FinalBarExamsService {
   // Create a new final bar exam question and answer
   async create(input: CreateBarExamDto, user: User) {
     try {
-      const { subjectId, question, answer, year } = input;
+      const { subjectId, question, answer, year, questionType } = input;
       const existingSubject = await this.prisma.subject.findUnique({
         where: { id: subjectId },
       });
@@ -44,6 +44,7 @@ export class FinalBarExamsService {
           question,
           answer,
           year,
+          questionType,
           createdBy: user?.firstName + ' ' + user?.lastName || 'admin',
         },
         include: { subject: { select: { id: true, name: true } } },
@@ -60,7 +61,9 @@ export class FinalBarExamsService {
     try {
       const allQAs = await this.prisma.finalBarExamQA.findMany({
         include: { subject: { select: { id: true, name: true } } },
+        orderBy: { createdAt: 'desc' },
       });
+      console.log(allQAs);
       return allQAs;
     } catch (error) {
       this.logger.error(error?.['message'] || error);
@@ -131,7 +134,7 @@ export class FinalBarExamsService {
   // Update a specific final bar exam question and answer by ID
   async update(input: UpdateBarExamDto, user: User) {
     try {
-      const { id, subjectId, question, answer, year } = input;
+      const { id, subjectId, question, answer, year, questionType } = input;
       const existingQA = await this.prisma.finalBarExamQA.findUnique({
         where: { id },
       });
@@ -147,6 +150,7 @@ export class FinalBarExamsService {
           subjectId: subjectId || existingQA.subjectId,
           question: question || existingQA.question,
           answer: answer || existingQA.answer,
+          questionType: questionType || existingQA.questionType,
           updatedBy: user?.firstName + ' ' + user?.lastName || 'admin',
           year: year || existingQA.year,
         },

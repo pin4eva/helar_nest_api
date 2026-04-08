@@ -373,18 +373,19 @@ model SubscriptionPlan {
 }
 
 model FinalBarExamQA {
-  id        String   @id @default(cuid())
-  subjectId String
-  question  String
-  answer    String
-  year      Int?
-  ref       Int?     @unique
-  slug      String?  @unique
-  createdBy String   @default("admin")
-  updatedBy String   @default("admin")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  subject   Subject  @relation(fields: [subjectId], references: [id])
+  id           String   @id @default(cuid())
+  subjectId    String
+  question     String
+  answer       String
+  year         Int?
+  ref          Int?     @unique
+  slug         String?  @unique
+  questionType String?
+  createdBy    String   @default("admin")
+  updatedBy    String   @default("admin")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  subject      Subject  @relation(fields: [subjectId], references: [id])
 
   @@map("final_bar_exam_qa")
 }
